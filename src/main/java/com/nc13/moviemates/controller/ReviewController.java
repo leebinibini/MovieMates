@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/api/reviews")
 public class ReviewController {
-
+    @Qualifier("reviewServiceImpl")
     private final ReviewService service;
 
     @GetMapping()
