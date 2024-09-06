@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/api/wishes")
 public class WishController {
-    @Qualifier("wishServiceImpl")
+
     private final WishService service;
 
     @GetMapping()

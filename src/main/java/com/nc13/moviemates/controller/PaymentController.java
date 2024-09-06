@@ -15,7 +15,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/api/payments")
 public class PaymentController {
-    @Qualifier("paymentServiceImpl")
     private final PaymentService service;
 
     @GetMapping()
