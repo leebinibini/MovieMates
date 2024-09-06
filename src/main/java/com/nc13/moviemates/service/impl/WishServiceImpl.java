@@ -1,8 +1,8 @@
 package com.nc13.moviemates.service.impl;
 
-import com.nc13.moviemates.model.entity.PaymentEntity;
-import com.nc13.moviemates.model.repository.PaymentRepository;
-import com.nc13.moviemates.service.PaymentService;
+import com.nc13.moviemates.model.entity.WishEntity;
+import com.nc13.moviemates.model.repository.WishRepository;
+import com.nc13.moviemates.service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +11,8 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class PaymentServiceImpl implements PaymentService {
-    private final PaymentRepository repository;
+public class WishServiceImpl implements WishService {
+    private final WishRepository repository;
 
     @Override
     public List<?> findAll() {
@@ -20,13 +20,13 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Optional<PaymentEntity> findById(Long id) {
+    public Optional<WishEntity> findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public Boolean save(PaymentEntity payment) {
-        PaymentEntity ent = repository.save(payment);
+    public Boolean save(WishEntity wishList) {
+        WishEntity ent = repository.save(wishList);
         Long id = ent.getId();
         return existsById(id);
     }
@@ -47,6 +47,3 @@ public class PaymentServiceImpl implements PaymentService {
         return repository.existsById(id);
     }
 }
-
-
-
