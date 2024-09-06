@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/api/reservations")
 public class ReservationController {
-    @Qualifier("reservationServiceImpl")
+
     private final ReservationService service;
 
     @GetMapping()

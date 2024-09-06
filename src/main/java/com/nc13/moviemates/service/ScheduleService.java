@@ -8,13 +8,13 @@ import java.util.Optional;
 public interface ScheduleService {
     List<ScheduleEntity> findAll();
 
-    ScheduleEntity save(ScheduleEntity email);
+    Boolean save(ScheduleEntity email);
 
     Optional<ScheduleEntity> findById(Long id);
 
-    boolean existsById(Long id);
+    Boolean existsById(Long id);
 
     Long count();
 
-    Integer deleteById(Long id);
+    Boolean deleteById(Long id);
 }

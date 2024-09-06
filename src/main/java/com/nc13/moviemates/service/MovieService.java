@@ -10,15 +10,15 @@ public interface MovieService {
 
     List<MovieEntity> findAll();
 
-    MovieEntity save(MovieEntity email);
+    Boolean save(MovieEntity email);
 
     Optional<MovieEntity> findById(Long id);
 
-    boolean existsById(Long id);
+    Boolean existsById(Long id);
 
     Long count();
 
-    Integer deleteById(Long id);
+    Boolean deleteById(Long id);
 
 
 }
