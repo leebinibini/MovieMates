@@ -1,7 +1,7 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.model.entity.ReservationEntity;
-import com.nc13.moviemates.service.ReservationService;
+import com.nc13.moviemates.model.entity.WishEntity;
+import com.nc13.moviemates.service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,10 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
-@RequestMapping("/api/reservations")
-public class ReservationController {
-    @Qualifier("reservationServiceImpl")
-    private final ReservationService service;
+@RequestMapping("/api/wishes")
+public class WishController {
+    @Qualifier("wishServiceImpl")
+    private final WishService service;
 
     @GetMapping()
     public ResponseEntity<List<?>> getList() {
@@ -24,13 +24,13 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<ReservationEntity>> getById(@PathVariable Long id) {
+    public ResponseEntity<Optional<WishEntity>> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping()
-    public ResponseEntity<Boolean> insert(@RequestBody ReservationEntity reservation) {
-        return ResponseEntity.ok(service.save(reservation));
+    public ResponseEntity<Boolean> insert(@RequestBody WishEntity wishList) {
+        return ResponseEntity.ok(service.save(wishList));
     }
 
     @DeleteMapping("/{id}")

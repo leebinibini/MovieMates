@@ -1,18 +1,18 @@
 package com.nc13.moviemates.service;
 
-import com.nc13.moviemates.model.entity.PaymentEntity;
+import com.nc13.moviemates.model.entity.WishEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public interface PaymentService {
+public interface WishService {
     List<?> findAll();
 
-    Optional<PaymentEntity> findById(Long id);
+    Optional<WishEntity> findById(Long id);
 
-    Boolean save(PaymentEntity payment);
+    Boolean save(WishEntity wishList);
 
     Boolean deleteById(Long id);
 
