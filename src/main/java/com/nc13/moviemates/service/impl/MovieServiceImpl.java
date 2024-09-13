@@ -44,7 +44,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Boolean deleteById(Long id) {
-       repository.deleteById(id);
+        repository.deleteById(id);
         return !existsById(id);
     }
 }
