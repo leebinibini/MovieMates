@@ -47,4 +47,9 @@ public class MovieServiceImpl implements MovieService {
        repository.deleteById(id);
         return !existsById(id);
     }
+
+    public List<MovieEntity> saveMoviesBatch(List<MovieEntity> movies){
+        List<MovieEntity> list = repository.saveAll(movies);
+        return list;
+    }
 }

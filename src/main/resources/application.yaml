@@ -1,10 +1,17 @@
-
 spring:
+  web:
+    resources:
+      static-locations: classpath:/static/
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
   datasource:
     url: jdbc:mysql://localhost:3306/moviemates
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+    spring:
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,8 +20,22 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
         use_sql_comments: true
-      show-sql: true
-
+        show-sql: true
+        jdbc:
+          batch_size: 50  # 한 번에 50개씩 배치 처리
+          order_inserts: true  # insert 문을 최적화된 순서로 실행
+          order_updates: true  # update 문을 최적화된 순서로 실행
+          generate_statistics: true  # 통계 출력 (선택 사항)
+          show-sql: true  # SQL 출력
+          datasource:
+            url: jdbc:mysql://localhost:3306/moviemates?rewriteBatchedStatements=true  # rewriteBatchedStatements 추가
+            driver-class-name: com.mysql.cj.jdbc.Driver  # MySQL JDBC 드라이버
+            username: root
+            password: 1234
     timezone: UTC
-    mysql:
-      init-mode: always
+  mysql:
+    init-mode: always
+
+  server:
+    port: 8080
+
