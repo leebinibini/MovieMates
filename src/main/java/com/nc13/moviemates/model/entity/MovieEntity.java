@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name= "movies")
 public class MovieEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String title;
     private String information;

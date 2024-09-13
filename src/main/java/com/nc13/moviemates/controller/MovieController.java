@@ -28,7 +28,7 @@ public class MovieController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<Boolean> insert (@RequestBody MovieEntity movie){
         return ResponseEntity.ok(service.save(movie));
     }
