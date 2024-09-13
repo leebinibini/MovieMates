@@ -11,11 +11,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MovieDomain {
+public class MovieModel {
     private Long id;
     private String title;
     private String information;
-    private Date relearseDate;
+    private Date releaseDate;
     private String genre;
     private int duration;
     private Long reviewId;

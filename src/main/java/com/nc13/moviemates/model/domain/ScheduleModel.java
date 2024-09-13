@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ScheduleDomain {
+public class ScheduleModel {
     private Long id;
     private Long theaterId;
     private Long movieId;

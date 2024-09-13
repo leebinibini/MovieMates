@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TheaterDomain {
+public class TheaterModel {
     private Long id;
     private String room;
     private String name;

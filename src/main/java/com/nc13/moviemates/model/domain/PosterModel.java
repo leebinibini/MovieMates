@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PosterDomain {
+public class PosterModel {
     private Long id;
     private Long movieId;
     private String filepath;
