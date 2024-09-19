@@ -3,7 +3,6 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.model.entity.WishEntity;
 import com.nc13.moviemates.service.WishService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +14,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/api/wishes")
 public class WishController {
-    @Qualifier("wishServiceImpl")
     private final WishService service;
 
     @GetMapping()

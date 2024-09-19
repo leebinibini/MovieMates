@@ -1,8 +1,6 @@
 package com.nc13.moviemates.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -10,10 +8,11 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@Table (name = "wishlists")
+@Table(name = "wishes")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WishEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
     private Long movieId;

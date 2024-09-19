@@ -10,7 +10,7 @@ import java.util.Date;
 public class ReservationModel {
     private Long id;
     private Long userId;
-    private Long ScheduleId;
+    private Long scheduleId;
     private Date reservaitonDate;
     private int seatNumber;
     private Long paymentId;

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,26 +24,26 @@ public class PosterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PosterEntity> getById(@PathVariable Long id){
-        return ResponseEntity.ok(service.findById(id).get());
+    public ResponseEntity<Optional<PosterEntity>> getById(@PathVariable Long id){
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<PosterEntity> insert (@RequestBody PosterEntity poster){
+    public ResponseEntity<Boolean> insert (@RequestBody PosterEntity poster){
         return ResponseEntity.ok(service.save(poster));
     }
 
     @PutMapping
-    public ResponseEntity<PosterEntity> update(@RequestBody PosterEntity poster){
+    public ResponseEntity<Boolean> update(@RequestBody PosterEntity poster){
         return ResponseEntity.ok(service.save(poster));
     }
 
     @DeleteMapping("/{id}")
-    public Integer deleteById(@PathVariable Long id){
+    public Boolean deleteById(@PathVariable Long id){
         return service.deleteById(id);
     }
 
-    public boolean existsById(Long id) {
+    public Boolean existsById(Long id) {
         return service.existsById(id);
     }
 

@@ -5,17 +5,16 @@ import com.nc13.moviemates.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
-@RestController
+@Controller
 @CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/api/payments")
 public class PaymentController {
-    @Qualifier("paymentServiceImpl")
     private final PaymentService service;
 
     @GetMapping()

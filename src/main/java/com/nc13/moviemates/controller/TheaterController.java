@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,26 +23,26 @@ public class TheaterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TheaterEntity> getById(@PathVariable Long id){
-        return ResponseEntity.ok(service.findById(id).get());
+    public ResponseEntity<Optional<TheaterEntity>> getById(@PathVariable Long id){
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<TheaterEntity> insert (@RequestBody TheaterEntity theater){
+    public ResponseEntity<Boolean> insert (@RequestBody TheaterEntity theater){
         return ResponseEntity.ok(service.save(theater));
     }
 
     @PutMapping
-    public ResponseEntity<TheaterEntity> update(@RequestBody TheaterEntity theater){
+    public ResponseEntity<Boolean> update(@RequestBody TheaterEntity theater){
         return ResponseEntity.ok(service.save(theater));
     }
 
     @DeleteMapping("/{id}")
-    public Integer deleteById(@PathVariable Long id){
+    public Boolean deleteById(@PathVariable Long id){
         return service.deleteById(id);
     }
 
-    public boolean existsById(Long id) {
+    public Boolean existsById(Long id) {
         return service.existsById(id);
     }
 
