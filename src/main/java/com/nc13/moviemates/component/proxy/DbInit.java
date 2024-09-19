@@ -28,7 +28,7 @@ public class DbInit {
         private final DbInit dbService;
         String url = "https://megabox.co.kr/movie-detail?rpstMovieNo=24045600";
 
-        public void crawling() {
+        public void crawling(String url) {
             try {
                 // Jsoup을 사용하여 웹 페이지 로드
                 Document doc = Jsoup.connect(url).get();
