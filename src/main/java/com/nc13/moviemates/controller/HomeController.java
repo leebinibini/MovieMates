@@ -9,4 +9,7 @@ public class HomeController {
     public String Home(){
         return "index";
     }
+
+    @GetMapping("details")
+    public String Details(){return  "details";}
 }

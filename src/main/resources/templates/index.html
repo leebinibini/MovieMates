@@ -51,12 +51,13 @@
 <a href="javascript:;" class="close-window"></a>
   <nav class="overlay-menu">
     <ul >
-        <li ><a href="/">Home</a></li>
-        <li><a th:href="~{single.html}"> class="details_btn></a>Details</li>
+        <li ><a th:href="@{/}">Home</a></li>
+        <li><a th:href="~{details.html}" class="details_btn">Details</a></li>
         <li><a th:href="~{order.html}" class="order_btn">Order</a></li>
     </ul>
   </nav>
-</div>            </div>
+</div>
+            </div>
         </div>
     </div>
 </header>
@@ -683,7 +684,7 @@
                 <i class="fa fa-search"></i>
             </button>
         </form>
-        <a href="javascript:" class="close-window"><i class="">
+        <a href="javascript:" class="close-window"><i class=""></i></a>
     </div>
     <!-- Include jQuery and Scripts -->
     <script th:type="@{text/javascript}" src="js/jquery.min.js"></script>

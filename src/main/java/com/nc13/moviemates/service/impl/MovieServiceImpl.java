@@ -1,5 +1,7 @@
 package com.nc13.moviemates.service.impl;
 
+import com.nc13.moviemates.Scraping.MovieSelenium;
+import com.nc13.moviemates.model.domain.MovieDomain;
 import com.nc13.moviemates.model.entity.MovieEntity;
 import com.nc13.moviemates.model.repository.MovieRepository;
 import com.nc13.moviemates.service.MovieService;
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository repository;
+    private final MovieSelenium movieSelenium;
 
     @Override
     public List<MovieEntity> findAll() {
@@ -48,8 +51,35 @@ public class MovieServiceImpl implements MovieService {
         return !existsById(id);
     }
 
+    @Override
+    public void saveMovie(MovieDomain movieDomain) {
+
+    }
+
+    /*@Override
+    public void saveMovie(MovieDomain movieDomain) {
+        MovieEntity movieEntity = new MovieEntity(
+                movieDomain.getTitle(),
+                movieDomain.getReleaseDate(),
+                movieDomain.getRunningTime(),
+                movieDomain.getInformation(),
+                movieDomain.getGenre(),
+                movieDomain.getDirector()
+        );
+
+        // 데이터베이스에 저장
+        repository.save(movieEntity);
+    }*/
+
     public List<MovieEntity> saveMoviesBatch(List<MovieEntity> movies){
         List<MovieEntity> list = repository.saveAll(movies);
         return list;
+    }
+
+    public void crawlAndSaveMovies(String url) {
+        List<MovieDomain> movies = movieSelenium.crawlMovies(url);
+        for (MovieDomain movie : movies) {
+            saveMovie(movie);
+        }
     }
 }
