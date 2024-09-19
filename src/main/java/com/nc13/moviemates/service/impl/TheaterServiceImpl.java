@@ -1,6 +1,7 @@
 package com.nc13.moviemates.service.impl;
 
 import com.nc13.moviemates.model.entity.TheaterEntity;
+import com.nc13.moviemates.model.repository.TheaterRepository;
 import com.nc13.moviemates.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,36 +12,39 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class TheaterServiceImpl implements TheaterService{
-    private final TheaterService service;
+    private final TheaterRepository repository;
 
     @Override
     public List<TheaterEntity> findAll() {
-        return service.findAll();
+        return repository.findAll();
     }
 
     @Override
-    public TheaterEntity save(TheaterEntity email) {
-        return service.save(email);
+    public Boolean save(TheaterEntity theater) {
+         TheaterEntity ent = repository.save(theater);
+         Long id =  ent.getId();
+        return existsById(id);
     }
 
     @Override
     public Optional<TheaterEntity> findById(Long id) {
-        return service.findById(id);
+        return repository.findById(id);
     }
 
     @Override
-    public boolean existsById(Long id) {
-        return service.existsById(id);
+    public Boolean existsById(Long id) {
+        return repository.existsById(id);
     }
 
     @Override
     public Long count() {
-        return service.count();
+        return repository.count();
     }
 
     @Override
-    public Integer deleteById(Long id) {
-        return service.deleteById(id);
+    public Boolean deleteById(Long id) {
+         repository.deleteById(id);
+        return !existsById(id);
     }
 
 }

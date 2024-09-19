@@ -2,48 +2,59 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.model.entity.UserEntity;
 import com.nc13.moviemates.service.UserService;
+import com.nc13.moviemates.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @CrossOrigin
 @RequiredArgsConstructor
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
-    @Qualifier("userServiceImpl")
-    private final UserService service;
+    private final UserServiceImpl service;
 
-    @GetMapping()
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/list")
     public ResponseEntity<List<?>> getList() {
         return ResponseEntity.ok(service.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/details/{id}")
     public ResponseEntity<Optional<UserEntity>> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping()
+    @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user) {
         return ResponseEntity.ok(service.save(user));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         return ResponseEntity.ok(service.deleteById(id));
     }
 
-    @GetMapping("/count")
+    @GetMapping("/quantity")
     public ResponseEntity<Long> count() {
         return ResponseEntity.ok(service.count());
     }
 
-    @GetMapping("/existsById/{id}")
+    @GetMapping("/presence/{id}")
     public ResponseEntity<Boolean> existsById(@PathVariable Long id) {
         return ResponseEntity.ok(service.existsById(id));
     }

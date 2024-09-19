@@ -1,6 +1,9 @@
 package com.nc13.moviemates.service.impl;
 
+import com.nc13.moviemates.Scraping.MovieSelenium;
+import com.nc13.moviemates.model.domain.MovieModel;
 import com.nc13.moviemates.model.entity.MovieEntity;
+import com.nc13.moviemates.model.repository.MovieRepository;
 import com.nc13.moviemates.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,35 +15,70 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
 
-    private final MovieService service;
+    private final MovieRepository repository;
+    private final MovieSelenium movieSelenium;
 
     @Override
     public List<MovieEntity> findAll() {
-        return service.findAll();
+        return repository.findAll();
     }
 
     @Override
-    public MovieEntity save(MovieEntity email) {
-        return service.save(email);
+    public Boolean save(MovieEntity movie) {
+       MovieEntity ent = repository.save(movie);
+       Long id = ent.getId();
+       return existsById(id);
     }
 
     @Override
     public Optional<MovieEntity> findById(Long id) {
-        return service.findById(id);
+        return repository.findById(id);
     }
 
     @Override
-    public boolean existsById(Long id) {
-        return service.existsById(id);
+    public Boolean existsById(Long id) {
+        return repository.existsById(id);
     }
 
     @Override
     public Long count() {
-        return service.count();
+        return repository.count();
     }
 
     @Override
-    public Integer deleteById(Long id) {
-        return service.deleteById(id);
+    public Boolean deleteById(Long id) {
+        repository.deleteById(id);
+        return !existsById(id);
+    }
+
+    public void saveMovie(MovieModel movieDomain) {
+
+    }
+
+    /*@Override
+    public void saveMovie(MovieDomain movieDomain) {
+        MovieEntity movieEntity = new MovieEntity(
+                movieDomain.getTitle(),
+                movieDomain.getReleaseDate(),
+                movieDomain.getRunningTime(),
+                movieDomain.getInformation(),
+                movieDomain.getGenre(),
+                movieDomain.getDirector()
+        );
+
+        // 데이터베이스에 저장
+        repository.save(movieEntity);
+    }*/
+
+    public List<MovieEntity> saveMoviesBatch(List<MovieEntity> movies){
+        List<MovieEntity> list = repository.saveAll(movies);
+        return list;
+    }
+
+    public void crawlAndSaveMovies(String url) {
+        List<MovieModel> movies = movieSelenium.crawlMovies(url);
+        for (MovieModel movie : movies) {
+            saveMovie(movie);
+        }
     }
 }
