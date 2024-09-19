@@ -43,10 +43,13 @@ dependencies {
 
 //	//Swagger
 //	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-    implementation 'org.jsoup:jsoup:1.15.4'
+    implementation 'org.jsoup:jsoup:1.15.3'
+    implementation 'mysql:mysql-connector-java:8.0.33'
 
-    // thymeleaf
+
+    //thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
 }
 
