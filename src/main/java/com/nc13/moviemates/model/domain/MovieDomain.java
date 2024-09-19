@@ -15,9 +15,12 @@ public class MovieDomain {
     private Long id;
     private String title;
     private String information;
-    private Date relearseDate;
+    private Date releaseDate;
     private String genre;
-    private int duration;
+    private int runningTime;
     private Long reviewId;
     private String director;
+
+    public MovieDomain(String title, Date releaseDate, String runningTime, String information, String genre, String director) {
+    }
 }

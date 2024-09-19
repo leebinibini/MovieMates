@@ -18,9 +18,9 @@ public class MovieEntity{
     private Long id;
     private String title;
     private String information;
-    private Date relearseDate;
+    private Date releaseDate;
     private String genre;
-    private int duration;
+    private int runningTime;
     private Long reviewId;
     private String director;
 }

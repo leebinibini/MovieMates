@@ -1,5 +1,6 @@
 package com.nc13.moviemates.service;
 
+import com.nc13.moviemates.model.domain.MovieDomain;
 import com.nc13.moviemates.model.entity.MovieEntity;
 import com.nc13.moviemates.model.entity.UserEntity;
 
@@ -21,4 +22,7 @@ public interface MovieService {
     Boolean deleteById(Long id);
 
 
+    void saveMovie(MovieDomain movieDomain);
+
+    void crawlAndSaveMovies(String url);
 }
