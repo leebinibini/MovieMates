@@ -8,13 +8,13 @@ import java.util.Optional;
 public interface PosterService {
     List<PosterEntity> findAll();
 
-    PosterEntity save(PosterEntity email);
+    Boolean save(PosterEntity email);
 
     Optional<PosterEntity> findById(Long id);
 
-    boolean existsById(Long id);
+    Boolean existsById(Long id);
 
     Long count();
 
-    Integer deleteById(Long id);
+    Boolean deleteById(Long id);
 }

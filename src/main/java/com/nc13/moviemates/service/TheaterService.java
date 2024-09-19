@@ -8,13 +8,13 @@ import java.util.Optional;
 public interface TheaterService {
     List<TheaterEntity> findAll();
 
-    TheaterEntity save(TheaterEntity email);
+    Boolean save(TheaterEntity email);
 
     Optional<TheaterEntity> findById(Long id);
 
-    boolean existsById(Long id);
+    Boolean existsById(Long id);
 
     Long count();
 
-    Integer deleteById(Long id);
+    Boolean deleteById(Long id);
 }
