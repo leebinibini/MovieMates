@@ -1,46 +1,49 @@
 package com.nc13.moviemates.service.impl;
 
-import com.nc13.moviemates.model.domain.UserDomain;
 import com.nc13.moviemates.model.entity.UserEntity;
+import com.nc13.moviemates.model.repository.UserRepository;
 import com.nc13.moviemates.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final UserService userService;
-    @Override
-    public List<UserEntity> findAll() {
-        return userService.findAll();
-    }
+    private final UserRepository repository;
 
     @Override
-    public UserEntity save(UserEntity email) {
-        return userService.save(email);
+    public List<?> findAll() {
+        return repository.findAll();
     }
 
     @Override
     public Optional<UserEntity> findById(Long id) {
-        return userService.findById(id);
+        return repository.findById(id);
     }
 
     @Override
-    public boolean existsById(Long id) {
-        return userService.existsById(id);
+    public Boolean save(UserEntity user) {
+        UserEntity ent = repository.save(user);
+        Long id = ent.getId();
+        return existsById(id);
+    }
+
+    @Override
+    public Boolean deleteById(Long id) {
+        repository.deleteById(id);
+        return !existsById(id);
     }
 
     @Override
     public Long count() {
-        return userService.count();
+        return repository.count();
     }
 
     @Override
-    public Integer deleteById(Long id) {
-        return userService.deleteById(id);
+    public Boolean existsById(Long id) {
+        return repository.existsById(id);
     }
 }

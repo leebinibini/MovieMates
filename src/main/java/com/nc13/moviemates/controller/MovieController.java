@@ -2,11 +2,13 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.model.entity.MovieEntity;
 import com.nc13.moviemates.service.MovieService;
+import com.nc13.moviemates.service.impl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,28 +24,30 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieEntity> getById(@PathVariable Long id){
-        return ResponseEntity.ok(service.findById(id).get());
+    public ResponseEntity <Optional<MovieEntity>> getById(@PathVariable Long id){
+        return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping
-    public ResponseEntity<MovieEntity> insert (@RequestBody MovieEntity user){
-        return ResponseEntity.ok(service.save(user));
+    @PostMapping("")
+    public ResponseEntity<Boolean> insert (@RequestBody MovieEntity movie){
+        return ResponseEntity.ok(service.save(movie));
     }
 
     @PutMapping
-    public ResponseEntity<MovieEntity> update(@RequestBody MovieEntity user){
-        return ResponseEntity.ok(service.save(user));
+    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
+        return ResponseEntity.ok(service.save(movie));
     }
 
     @DeleteMapping("/{id}")
-    public Integer deleteById(@PathVariable Long id){
+    public Boolean deleteById(@PathVariable Long id){
         return service.deleteById(id);
     }
 
-    public boolean existsById(Long id) {
+    @GetMapping("/exists/{id}")
+    public Boolean existsById(Long id) {
         return service.existsById(id);
     }
+
 
     public long count() {
         return service.count();}
