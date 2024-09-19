@@ -1,5 +1,4 @@
 package com.nc13.moviemates.model.querydsl;
-
 import com.nc13.moviemates.model.entity.PaymentEntity;
 
 import java.util.List;

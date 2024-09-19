@@ -17,7 +17,10 @@ public class MovieModel {
     private String information;
     private Date releaseDate;
     private String genre;
-    private int duration;
+    private int runningTime;
     private Long reviewId;
     private String director;
+
+    public MovieModel(String title, Date releaseDate, String runningTime, String information, String genre, String director) {
+    }
 }

@@ -1,5 +1,6 @@
 package com.nc13.moviemates.controller;
 
+import org.springframework.stereotype.Controller;
 import org.jsoup.Jsoup;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +26,9 @@ public class HomeController {
         return "single";
     }
 
+    @GetMapping("details")
+    public String Details(){
+        return  "details";
+    }
 
 }

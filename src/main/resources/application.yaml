@@ -1,4 +1,3 @@
-
 spring:
   web:
     resources:
@@ -7,7 +6,6 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     cache: false
-
   datasource:
     url: jdbc:mysql://localhost:3306/moviemates
     username: root
@@ -22,7 +20,10 @@ spring:
         format_sql: true
         use_sql_comments: true
       show-sql: true
-
     timezone: UTC
     mysql:
       init-mode: always
+
+  server:
+    port: 8080
+

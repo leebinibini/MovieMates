@@ -14,13 +14,13 @@ import java.util.Date;
 @Table(name= "movies")
 public class MovieEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String title;
     private String information;
-    private Date relearseDate;
+    private Date releaseDate;
     private String genre;
-    private int duration;
+    private int runningTime;
     private Long reviewId;
     private String director;
 }
