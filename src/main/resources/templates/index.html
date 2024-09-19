@@ -24,43 +24,8 @@
     </div>
     <div class="wrapper">
 
+        <div> th:replace="~{fragments/header::headerFragment}"></div>
 
- <header id="header" class="menu-top-left">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-4">
-                <a href="../../../../../tenguu-cinema-movie-theater-html-template-2023-11-27-04-49-05-utc/html" id="logo" title="Tenguu" class="logo-image" data-bg-image="images/logo.png">Tenguu
-                </a>
-            </div>
-            <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
-                <div class="header_author">
-                    <a href="#">Amanda green</a>
-                    <img src="images/user.png" class="user" alt="user">
-                </div>
-                <div class="header_ticket">
-                    <a th:href="~{order.html}" class="order_btn">My tickets</a>
-                    <span>3</span>
-                </div>
-                <a href="javascript:;" id="header-search"></a>
-                <div class="button_container" id="toggle">
-    <span class="top"></span>
-    <span class="middle"></span>
-    <span class="bottom"></span>
-</div>
-<div class="overlay" id="overlay">
-<a href="javascript:;" class="close-window"></a>
-  <nav class="overlay-menu">
-    <ul >
-        <li ><a th:href="@{/}">Home</a></li>
-        <li><a th:href="~{details.html}" class="details_btn">Details</a></li>
-        <li><a th:href="~{order.html}" class="order_btn">Order</a></li>
-    </ul>
-  </nav>
-</div>
-            </div>
-        </div>
-    </div>
-</header>
 <div class="fullwidth-slider">
     <div id="headerslider" class="carousel slide">
         <ol class="carousel-indicators">
