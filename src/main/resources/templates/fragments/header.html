@@ -1,19 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-    <header id="header" class="menu-top-left">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <header th:fragment="headerFragment" id="header" class="menu-top-left">
+        <body class="sticky-menu">
+        <div id="loader">
+            <div class="loader-ring">
+                <div class="loader-ring-light"></div>
+                <div class="loader-ring-track"></div>
+            </div>
+        </div>
+        <div class="wrapper">
+        </div></body>
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-4">
-                    <a href="../../../../../../tenguu-cinema-movie-theater-html-template-2023-11-27-04-49-05-utc/html" id="logo" title="Tenguu" class="logo-image" data-bg-image="images/logo.png" style="background-image: url(&quot;images/logo.png&quot;);">Tenguu
-                    </a>
+                    <a href="/" id="logo" title="Tenguu" class="logo-image" th:data-bg-image="@{/images/logo.png}">Tenguu</a>
                 </div>
                 <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
                     <div class="header_author">
-                        <a href="#">Amanda green</a>
+                        <a th:href="@{/api/user/login}">Login</a>
                         <img src="images/user.png" class="user" alt="user">
                     </div>
+                    <div class="header_register">
+                        <a th:href="@{/single}">Register</a>
+                        <span>3</span>
+                    </div>
                     <div class="header_ticket">
-                        <a href="#order" class="order_btn">My tickets</a>
+                        <a href="#order" class="order_btn">Order</a>
                         <span>3</span>
                     </div>
                     <a href="javascript:;" id="header-search"></a>
@@ -26,9 +38,8 @@
                         <a href="javascript:;" class="close-window"></a>
                         <nav class="overlay-menu">
                             <ul>
-                                <li><a href="../../../../../../tenguu-cinema-movie-theater-html-template-2023-11-27-04-49-05-utc/html">Home</a></li>
-                                <li><a href="../blog.html">Blog</a></li>
-                                <li><a href="../../../../../tenguu-cinema-movie-theater-html-template-2023-11-27-04-49-05-utc/html/single.html">Single</a></li>
+                                <li><a href="./">Home</a></li>
+                                <li><a th:href="@{/single}">Register</a></li>
                                 <li><a href="#order" class="order_btn">Order</a></li>
                             </ul>
                         </nav>

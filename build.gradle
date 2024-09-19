@@ -29,7 +29,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly "org.springframework.boot:spring-boot-devtools"
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -66,6 +66,8 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.15.3'
     implementation 'mysql:mysql-connector-java:8.0.33'
 
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+    implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '3.3.3'
 
     //thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
