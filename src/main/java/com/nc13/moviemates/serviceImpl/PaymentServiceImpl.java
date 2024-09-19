@@ -1,6 +1,6 @@
 package com.nc13.moviemates.serviceImpl;
 
-import com.nc13.moviemates.model.entity.PaymentEntity;
+import com.nc13.moviemates.entity.PaymentEntity;
 import com.nc13.moviemates.repository.PaymentRepository;
 import com.nc13.moviemates.service.PaymentService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Optional<PaymentEntity> findById(Long id) {
+                public Optional<PaymentEntity> findById(Long id) {
         return repository.findById(id);
     }
 

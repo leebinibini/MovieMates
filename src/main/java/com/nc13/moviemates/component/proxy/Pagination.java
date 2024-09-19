@@ -1,7 +1,8 @@
 package com.nc13.moviemates.component.proxy;
 
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
-
+@NoArgsConstructor
 @Component
 public class Pagination {
     private int totalCount, startRow, endRow,
