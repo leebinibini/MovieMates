@@ -2,7 +2,6 @@ package com.nc13.moviemates.controller;
 
 import org.springframework.stereotype.Controller;
 import org.jsoup.Jsoup;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.jsoup.nodes.Document;
