@@ -42,6 +42,7 @@
   font-family: 'Montserrat-Light';
   font-weight: 100;
   src: url(../../templates/fonts/Montserrat-Light.otf);
+  src: url(../fonts/Montserrat-Light.otf);
 }
 /* Header Style
 ====================================*/
