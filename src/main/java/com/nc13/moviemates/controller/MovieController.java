@@ -1,8 +1,7 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.model.entity.MovieEntity;
+import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.service.MovieService;
-import com.nc13.moviemates.service.impl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

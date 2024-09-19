@@ -26,8 +26,8 @@ public class HomeController {
     }
 
     @GetMapping("details")
+
     public String Details(){
         return  "details";
     }
-
 }

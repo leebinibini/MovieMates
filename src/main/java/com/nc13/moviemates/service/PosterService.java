@@ -1,6 +1,6 @@
 package com.nc13.moviemates.service;
 
-import com.nc13.moviemates.model.entity.PosterEntity;
+import com.nc13.moviemates.entity.PosterEntity;
 
 import java.util.List;
 import java.util.Optional;
