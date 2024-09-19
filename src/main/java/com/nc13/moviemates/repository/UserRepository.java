@@ -1,7 +1,7 @@
-package com.nc13.moviemates.repository;
+package com.nc13.moviemates.model.repository;
 
-import com.nc13.moviemates.entity.UserEntity;
-import com.nc13.moviemates.queryDsl.UserQueryDSL;
+import com.nc13.moviemates.model.entity.UserEntity;
+import com.nc13.moviemates.model.querydsl.UserQueryDSL;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

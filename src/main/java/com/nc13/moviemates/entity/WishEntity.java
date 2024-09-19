@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@Table (name = "wishes")
+@Table(name = "wishes")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WishEntity {
     @Id
