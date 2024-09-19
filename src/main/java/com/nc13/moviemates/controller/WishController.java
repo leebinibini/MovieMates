@@ -1,6 +1,6 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.model.entity.WishEntity;
+import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;

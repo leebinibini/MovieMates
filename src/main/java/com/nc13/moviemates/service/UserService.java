@@ -1,6 +1,6 @@
 package com.nc13.moviemates.service;
 
-import com.nc13.moviemates.model.entity.UserEntity;
+import com.nc13.moviemates.entity.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

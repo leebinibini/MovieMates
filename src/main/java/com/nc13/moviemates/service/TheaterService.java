@@ -1,6 +1,6 @@
 package com.nc13.moviemates.service;
 
-import com.nc13.moviemates.model.entity.TheaterEntity;
+import com.nc13.moviemates.entity.TheaterEntity;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.nc13.moviemates.service;
 
-import com.nc13.moviemates.model.entity.PaymentEntity;
+import com.nc13.moviemates.entity.PaymentEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
