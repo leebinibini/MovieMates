@@ -1,6 +1,6 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.model.entity.TheaterEntity;
+import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

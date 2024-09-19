@@ -1,7 +1,7 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.model.entity.PosterEntity;
-import com.nc13.moviemates.model.entity.ScheduleEntity;
+import com.nc13.moviemates.entity.PosterEntity;
+import com.nc13.moviemates.entity.ScheduleEntity;
 import com.nc13.moviemates.service.PosterService;
 import com.nc13.moviemates.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
