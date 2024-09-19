@@ -1,6 +1,6 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.model.entity.ReservationEntity;
+import com.nc13.moviemates.entity.ReservationEntity;
 import com.nc13.moviemates.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;

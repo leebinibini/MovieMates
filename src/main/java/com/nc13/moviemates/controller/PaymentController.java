@@ -1,6 +1,6 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.model.entity.PaymentEntity;
+import com.nc13.moviemates.entity.PaymentEntity;
 import com.nc13.moviemates.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;

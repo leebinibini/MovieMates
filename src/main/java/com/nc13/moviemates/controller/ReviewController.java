@@ -1,6 +1,6 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.model.entity.ReviewEntity;
+import com.nc13.moviemates.entity.ReviewEntity;
 import com.nc13.moviemates.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
