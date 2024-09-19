@@ -2,7 +2,7 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.UserService;
-import com.nc13.moviemates.service.impl.UserServiceImpl;
+import com.nc13.moviemates.serviceImpl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
