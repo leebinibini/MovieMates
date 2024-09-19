@@ -1,17 +1,10 @@
 package com.nc13.moviemates;
 
-import com.nc13.moviemates.Scraping.DbService;
-import com.nc13.moviemates.Scraping.MovieJsoup;
 import com.nc13.moviemates.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
 
 @RequiredArgsConstructor
 @SpringBootApplication
