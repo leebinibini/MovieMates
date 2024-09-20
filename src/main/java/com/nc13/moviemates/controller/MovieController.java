@@ -50,6 +50,17 @@ public class MovieController {
 
     public long count() {
         return service.count();}
+
+    @GetMapping("/crawl")
+    public String crawlMovies() {
+        try {
+            service.crawlMovies();
+            return "Crawling complete!";
+        } catch (Exception e) {
+            return "Error occurred: " + e.getMessage();
+        }
+    }
 }
+
 
 
