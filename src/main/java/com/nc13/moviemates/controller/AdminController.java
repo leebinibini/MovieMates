@@ -35,6 +35,32 @@ public class AdminController {
         return "admin/register";
     }
 
+    @GetMapping("password")
+    public String adminpassword() {
+        return "admin/password";
+    }
+
+
+    @GetMapping("layout-static")
+    public String adminLayoutStatic() {
+        return "admin/layout-static";
+    }
+
+    @GetMapping("layout-sidenav-light")
+    public String adminLayoutsidenavStatic() {
+        return "admin/layout-sidenav-light";
+    }
+
+    @GetMapping("charts")
+    public String admincharts() {
+        return "admin/charts";
+    }
+
+    @GetMapping("tables")
+    public String admintables() {
+        return "admin/tables";
+    }
+
     @GetMapping("401")
     public String show401() {
         return"admin/401";
