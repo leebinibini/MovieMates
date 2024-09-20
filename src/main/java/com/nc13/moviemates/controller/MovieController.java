@@ -16,7 +16,6 @@ import java.util.Optional;
 public class MovieController {
     private final MovieService service;
 
-
     @GetMapping
     public ResponseEntity<List<MovieEntity>> getList(){
         return ResponseEntity.ok(service.findAll());
@@ -27,7 +26,7 @@ public class MovieController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping("")
+    @PostMapping("/register")
     public ResponseEntity<Boolean> insert (@RequestBody MovieEntity movie){
         return ResponseEntity.ok(service.save(movie));
     }
