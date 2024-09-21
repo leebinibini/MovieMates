@@ -61,6 +61,7 @@ public class AdminController {
         return "admin/layout-sidenav-light";
     }
 
+
     @GetMapping("charts")
     public String admincharts() {
         return "admin/charts";

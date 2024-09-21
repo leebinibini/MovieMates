@@ -1,22 +1,30 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.service.MovieService;
+import com.nc13.moviemates.serviceImpl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/api/movies")
+@RequestMapping("/api/movie")
 public class MovieController {
-    private final MovieService service;
+    private final MovieServiceImpl service;
 
-    @GetMapping
+    @GetMapping()
+    public String toMovieAdmin(){
+        return "admin/movie";
+    }
+
+    @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList(){
         return ResponseEntity.ok(service.findAll());
     }
@@ -27,14 +35,15 @@ public class MovieController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Boolean> insert (@RequestBody MovieEntity movie){
+    @ResponseBody
+    public ResponseEntity<Boolean> insert (@RequestBody MovieModel movie){
         return ResponseEntity.ok(service.save(movie));
     }
 
-    @PutMapping
-    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
-        return ResponseEntity.ok(service.save(movie));
-    }
+//    @PutMapping
+//    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
+//        return ResponseEntity.ok(service.save(movie));
+//    }
 
     @DeleteMapping("/{id}")
     public Boolean deleteById(@PathVariable Long id){
