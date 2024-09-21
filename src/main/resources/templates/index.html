@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/packages.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/default.css}">
+    <!-- axios 사용하려고 추가한 script jquery 바로 -->
+
 </head>
 <body class="sticky-menu">
     <div id="loader">
@@ -720,6 +722,11 @@
                     </div>
                 </div>
             </div>
+            <!-- Include jQuery and Scripts -->
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+            <script type="text/javascript" th:src="@{js/packages.min.js}"></script>
+            <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
         </footer>
     </div>
     <!-- Overlay Search -->
@@ -799,10 +806,25 @@
         </div>
     </div>
 
-    <!-- Include jQuery and Scripts -->
-    <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{js/packages.min.js}"></script>
-    <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
-    <!-- jQuery easing plugin -->
+    <div>
+        <button onclick="test()">TEST</button>
+        <p id="responseText"></p>
+        <!-- 응답값을 표시할 요소 -->
+    </div>
+
+    <script>
+        const test = () => {
+            axios({
+                method: "get",
+                url: "/test",
+            }).then(res => {
+                console.log("res", res.data)
+                document.getElementById("responseText").innerText = res.data.test;
+            }).catch(err => {
+                console.log("err", err);
+            });
+        }
+    </script>
+
 </body>
 </html>
