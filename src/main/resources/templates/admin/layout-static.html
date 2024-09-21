@@ -24,6 +24,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" th:href="@{/api/admin/layout-static}">Static Navigation</a>
                                     <a class="nav-link" th:href="@{/api/admin/layout-sidenav-light}">Light Sidenav</a>
+
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -103,7 +104,6 @@
                             <div class="text-muted">Copyright &copy; Your Website 2023</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
-                                &middot;
                                 <a href="#">Terms &amp; Conditions</a>
                             </div>
                         </div>
@@ -113,5 +113,27 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script th:src="@{/admin/js/scripts.js}"></script>
+        <script>
+            document.querySelector('#loginForm').addEventListener('submit', (event) => {
+                event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지
+
+                const email = document.getElementById('inputEmail').value;
+                const password = document.getElementById('inputPassword').value;
+
+                // jQuery 추가하면 다음을 사용할 수 있음
+                // const email = $('#inputEmail').val();
+                // const password = $('#inputPassword').val();
+
+                axios.post("/api/admin/login", {
+                    email: email,
+                    password: password
+                }).then(res => {
+                    console.log('Login successful:', res.data);
+
+                }).catch(err => {
+                    console.log("Login failed: ", err);
+                });
+            })
+        </script>
     </body>
 </html>
