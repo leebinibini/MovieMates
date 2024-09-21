@@ -1,12 +1,13 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.repository.UserRepository;
 import com.nc13.moviemates.serviceImpl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @CrossOrigin
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class AdminController {
     private final UserServiceImpl userService;
+    private final UserRepository userRepository;
 
     @GetMapping()
     public String showAdmin() {
@@ -22,8 +24,16 @@ public class AdminController {
 
     @GetMapping("/login")
     public String adminLogin() {
-        return "login";
+        return "admin/home";
     }
+
+//    @ResponseBody
+//    @PostMapping("/login")
+//    public Map<String, String> adminLogin(@RequestBody Map<String, String> loginTry) {
+//        System.out.println("컨트롤러진입!");
+//        System.out.println(loginTry);
+//    }
+
 
     @GetMapping("logout")
     public String adminLogout() {

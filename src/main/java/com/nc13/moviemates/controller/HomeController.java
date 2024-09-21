@@ -25,8 +25,6 @@ public class HomeController {
         return map;
     }
 
-
-
     @GetMapping("/single")
     public String toSingle() {
         return "single";
