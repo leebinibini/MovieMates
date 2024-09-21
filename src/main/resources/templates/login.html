@@ -12,7 +12,7 @@
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                             <div class="card-body">
-                                <form>
+                                <form id="loginForm">
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
                                         <label for="inputEmail">Email address</label>
@@ -28,6 +28,7 @@
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                         <a class="small" th:href="@{/api/admin/password}">Forgot Password?</a>
                                         <a class="btn btn-primary" th:href="@{/api/admin/login}">Login</a>
+<!--                                        <button type="submit">Login</button>-->
                                     </div>
                                 </form>
                             </div>
@@ -55,7 +56,30 @@
         </footer>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script th:src="@{/admin/js/scripts.js}"></script>
+<!--<script>-->
+<!--    document.querySelector('#loginForm').addEventListener('submit', (event) => {-->
+<!--        event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지-->
+
+<!--        const email = document.getElementById('inputEmail').value;-->
+<!--        const password = document.getElementById('inputPassword').value;-->
+
+<!--        // jQuery 추가하면 다음을 사용할 수 있음-->
+<!--        // const email = $('#inputEmail').val();-->
+<!--        // const password = $('#inputPassword').val();-->
+
+<!--        axios.post("/api/admin/login", {-->
+<!--            email: email,-->
+<!--            password: password-->
+<!--        }).then(res => {-->
+<!--            console.log('Login successful:', res.data);-->
+
+<!--        }).catch(err => {-->
+<!--            console.log("Login failed: ", err);-->
+<!--        });-->
+<!--    })-->
+<!--</script>-->
 </body>
 </html>
