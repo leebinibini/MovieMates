@@ -69,8 +69,11 @@
             if (response.status === 200 && response.data === true) {
                 console.log("Movie saved successfully");
                 document.getElementById("responseText").innerText = response.status;
+                alert("영화 정보 저장 성공!")
+                window.location.href = "/api/admin";
             } else {
                 console.log("Failed to save the movie");
+                alert("영화 정보 저장 실패!")
             }
             console.log('영화 등록 결과: ', response.status);
         }).catch(error => {
