@@ -2,20 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/admin/head :: headContent}">
 </head>
-<body class="sb-nav-fixed">
-<div th:replace="~{/admin/navbar-dark :: navbar}"></div>
-<div id="layoutSidenav">
-    <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
-                <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Core</div>
-                    <a class="nav-link" th:href="@{/api/admin}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+    <body class="sb-nav-fixed">
+        <div th:replace="~{/admin/navbar-dark :: navbar}"></div>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" th:href="@{/api/admin}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
-                    </a>
-                    <
-                    <div class="sb-sidenav-menu-heading">Interface</div>
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Interface</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Layouts

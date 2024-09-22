@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 @ToString
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name= "schedules")
 public class ScheduleEntity {

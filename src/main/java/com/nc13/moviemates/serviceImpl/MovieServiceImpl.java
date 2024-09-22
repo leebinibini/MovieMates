@@ -25,12 +25,10 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Boolean save(MovieModel movie) {
-        MovieEntity ent = Optional.of(new MovieEntity())
-                .map(e -> {
-                    e.setTitle(movie.getTitle());
-                    e.setInformation(movie.getInformation());
-                    return e;
-                }).orElseThrow();
+        MovieEntity ent = MovieEntity.builder()
+                .title(movie.getTitle())
+                .information(movie.getInformation())
+                .build();
 
         MovieEntity savedEntity = repository.save(ent);
 

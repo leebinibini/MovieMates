@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name= "posters")
 public class PosterEntity {
