@@ -1,8 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/admin/head :: headContent}">
+<head th:insert="~{/admin/head :: headContent}">
+  <title>Login</title>
+  <style>
+    .google-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: #444;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .google-btn:hover {
+      background-color: #f5f5f5;
+    }
+
+    .google-btn img {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .google-btn span {
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body style="background-color: #000;"> <!-- 배경색을 검정색으로 설정 -->
+  <a th:href="@{/}" class="google-btn">
+  <img th:src="@{https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg}" alt="Google logo" />
+  <span>Google로 로그인</span>
+</a>
 <div id="layoutAuthentication">
     <div id="layoutAuthentication_content">
         <main>
@@ -81,5 +118,47 @@
 <!--        });-->
 <!--    })-->
 <!--</script>-->
+
+
+  <title>Login</title>
+  <style>
+    .google-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: #444;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .google-btn:hover {
+      background-color: #f5f5f5;
+    }
+
+    .google-btn img {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .google-btn span {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+<h2>로그인</h2>
+<a th:href="@{/}" class="google-btn">
+  <img th:src="@{https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg}" alt="Google logo" />
+  <span>Google로 로그인</span>
+</a>
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.nc13.moviemates.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,12 +17,16 @@ public class MovieEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
-    private String information;
-    private Date releaseDate;
     private String genre;
-    private int runningTime;
-    private Long reviewId;
     private String director;
     private String filepath;
+    private String actors;
+    private double rate;
+    private String plot;
+    private String releaseDate;
+    private int runningTime;
+    private String posterUrl;
+    private String ageClass;
 }

@@ -20,7 +20,19 @@ spring:
         format_sql: true
         use_sql_comments: true
       show-sql: true
-
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 57356930204-dusjt6grmleqhi0tk8lsaeo0d3plglh3.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: https://localhost:8080
+            scope:
+              - profile
+              - email
+  profiles:
+    include: oauth2
     timezone: UTC
     mysql:
       init-mode: always
