@@ -21,7 +21,5 @@ public interface MovieService {
     Boolean deleteById(Long id);
 
 
-
-
     void crawlAndSaveMovies(String url);
 }

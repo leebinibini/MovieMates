@@ -23,4 +23,5 @@ public class MovieEntity{
     private int runningTime;
     private Long reviewId;
     private String director;
+    private String filepath;
 }

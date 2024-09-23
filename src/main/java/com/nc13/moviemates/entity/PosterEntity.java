@@ -18,4 +18,9 @@ public class PosterEntity {
     private Long movieId;
     private String filepath;
     private String filename;
+
+    public PosterEntity(String posterPath, String uploadName) {
+        this.filepath = posterPath;
+        this.filename = uploadName;
+    }
 }
