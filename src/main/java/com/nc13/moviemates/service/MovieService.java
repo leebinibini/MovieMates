@@ -24,6 +24,8 @@ public interface MovieService {
 
     Boolean deleteById(Long id);
 
-   // void crawlMovies() throws IOException;
+    MovieEntity findEntityById(Long id);
+
+    // void crawlMovies() throws IOException;
 
 }
