@@ -28,6 +28,7 @@ public class MovieServiceImpl implements MovieService {
         MovieEntity ent = MovieEntity.builder()
                 .title(movie.getTitle())
                 .information(movie.getInformation())
+                .filepath(movie.getFilepath())
                 .build();
 
         MovieEntity savedEntity = repository.save(ent);
