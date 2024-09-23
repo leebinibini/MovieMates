@@ -91,6 +91,8 @@ dependencies {
     //oauth2
    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.300'
+
 }
 
 dependencyManagement {

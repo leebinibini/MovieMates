@@ -76,6 +76,12 @@ public class MovieServiceImpl implements MovieService {
         return !existsById(id);
     }
 
+    @Override
+    public MovieEntity findEntityById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Movie not Found with id: " +id));
+    }
+
    /* @Override
     public void crawlMovies() throws IOException {
 
