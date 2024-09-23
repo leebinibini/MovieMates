@@ -2,12 +2,15 @@ package com.nc13.moviemates.service;
 
 import com.nc13.moviemates.entity.MovieEntity;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 public interface MovieService {
 
     List<MovieEntity> findAll();
+
+    List<String> getNowPlayingList();
 
     Boolean save(MovieEntity email);
 
@@ -19,8 +22,6 @@ public interface MovieService {
 
     Boolean deleteById(Long id);
 
+   // void crawlMovies() throws IOException;
 
-
-
-    void crawlAndSaveMovies(String url);
 }
