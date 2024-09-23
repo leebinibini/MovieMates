@@ -77,19 +77,20 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Tables</h1>
+                        <h1 class="mt-4">Movies</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a th:href="@{/api/admin}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Tables</li>
+                            <li class="breadcrumb-item active">Movies</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
+                                여기에 특정 테이블의 정보리스트가 들어가게
                                 DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
                                 <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
                                 .
                             </div>
                         </div>
-                        <div th:replace="~{/admin/datatable-example :: datatable}"></div>
+                        <div th:replace="~{admin/datatable-example :: datatable}"></div>
                     </div>
                 </main>
                 <div th:insert="~{admin/footer :: footerFragment}"></div>
