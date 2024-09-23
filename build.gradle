@@ -73,7 +73,7 @@ dependencies {
     // thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    //implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 
 
     //implementation 'org.jsoup:jsoup:1.15.3'
@@ -87,6 +87,9 @@ dependencies {
     //thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+    //oauth2
+   // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 }
 

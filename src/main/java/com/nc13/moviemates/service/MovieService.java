@@ -10,6 +10,8 @@ public interface MovieService {
 
     List<MovieEntity> findAll();
 
+    List<String> getNowPlayingList();
+
     Boolean save(MovieEntity email);
 
     Optional<MovieEntity> findById(Long id);
@@ -20,6 +22,6 @@ public interface MovieService {
 
     Boolean deleteById(Long id);
 
-    void crawlMovies() throws IOException;
+   // void crawlMovies() throws IOException;
 
 }
