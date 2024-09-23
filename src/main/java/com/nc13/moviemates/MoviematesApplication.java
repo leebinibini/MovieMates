@@ -16,7 +16,7 @@ public class MoviematesApplication {
     }
 
     // CommandLineRunner로 크롤링 작업 자동 실행
-    @Component
+    /*@Component
     @RequiredArgsConstructor
     class MovieCrawlerRunner implements CommandLineRunner {
 
@@ -27,6 +27,6 @@ public class MoviematesApplication {
 
             movieService.crawlMovies();  // 크롤링 실행
         }
-    }
+    }*/
 }
 

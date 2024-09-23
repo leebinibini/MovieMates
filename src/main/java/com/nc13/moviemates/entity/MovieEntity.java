@@ -24,7 +24,8 @@ public class MovieEntity{
     private String actors;
     private double rate;
     private String plot;
-    private Date releaseDate;
+    private String releaseDate;
     private int runningTime;
     private String posterUrl;
+    private String ageClass;
 }

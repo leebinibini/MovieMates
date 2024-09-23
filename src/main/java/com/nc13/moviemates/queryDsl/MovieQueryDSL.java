@@ -9,4 +9,5 @@ public interface MovieQueryDSL {
     MovieEntity getById(Long id);
     Boolean exists(Long id);
     Long getRowCount();
+    List<String> getNowPlayingList();
 }

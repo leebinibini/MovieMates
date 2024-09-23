@@ -4,6 +4,7 @@ import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.QMovieEntity;
 import com.nc13.moviemates.queryDsl.MovieQueryDSL;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -34,4 +35,14 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
     public Boolean exists(Long id) {
         return jpaQueryFactory.selectFrom(qMovie).where(qMovie.id.eq(id)).fetchCount()>0;
     }
+
+
+    public List<String> getNowPlayingList() {
+        QMovieEntity movie = QMovieEntity.movieEntity;
+        return jpaQueryFactory
+                .select(movie.title)
+                .from(movie)
+                .fetch();
+    }
+
 }

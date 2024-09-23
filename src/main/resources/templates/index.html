@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head.html::headFragment}"></head>
+
 <body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <div id="header" th:replace="~{fragments/header.html ::headerFragment}"></div>
     <div id="fullwidth-slider" th:replace="~{fragments/fullwidth-slider.html}"></div>
     <div id="container-fluid" th:replace="~{fragments/container-fluid.html}"></div>
@@ -9,74 +12,7 @@
     <div id="section-content-service" th:replace="~{fragments/section-content-service.html}"></div>
     <div id="fullscreen-section-pvb0" th:replace="~{fragments/fullscreen-section-pvb0.html}"></div>
     <div id="map" th:replace="~{fragments/map.html}"></div>
-    <footer id="footer">
-        <div class="container footer-container">
-            <div class="row">
-                <div class="col-md-2 col-sm-6">
-                    <div class="widget">
-                        <h5 class="widget-title">Menu</h5>
-                        <ul class="menu">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Coming soon</a></li>
-                            <li><a href="#">Order</a></li>
-                            <li><a href="#">Terms of service</a></li>
-                            <li><a href="#">Pricing</a></li>
-                        </ul>
-                    </div>
-                    <div class="widget">
-                        <div class="social-links">
-                            <a href="javascript:;"><i class="fa fa-facebook"></i></a>
-                            <a href="javascript:;"><i class="fa fa-twitter"></i></a>
-                            <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="widget">
-                        <h5 class="widget-title">Address information</h5>
-                        <p>
-                            California. AMC Dine-In Theatres Marina,
-                            Street 26, Distritc 543 #108
-                        </p>
-                        <p>
-                            <i class="fa fa-mail"></i>Example@mail.com<br>
-                            <i class="fa fa-phone"></i> + 123 456 7890
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-6">
-                    <div class="widget">
-                        <h5 class="widget-title">Leave a message</h5>
-                        <form class="contact_form transparent">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <input type="text" class="inputValidation" name="name" placeholder="Name *">
-                                </div>
-                                <div class="col-sm-12">
-                                    <input type="text" class="inputValidation" name="email" placeholder="Email *">
-                                </div>
-                                <div class="col-sm-12 ">
-                                    <textarea class="inputValidation" placeholder="Message *"></textarea>
-                                    <button type="submit" class="button fill rectangle">Send to us</button>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="errorMessage"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="sub-footer">
-            <div class="container">
-                <div class="row copyright-text">
-                    <div class="col-sm-12 text-center">
-                        <p class="mv3 mvt0">© Copyrights 2017 Tenguu. All rights reserved</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 
     <!-- Overlay Search -->
     <div id="overlay-search">
@@ -153,6 +89,93 @@
             </div>
         </div>
     </div>
+    <footer id="footer">
+        <div class="container footer-container">
+            <div class="row">
+                <div class="col-md-2 col-sm-6">
+                    <div class="widget">
+                        <h5 class="widget-title">Menu</h5>
+                        <ul class="menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Coming soon</a></li>
+                            <li><a href="#">Order</a></li>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget">
+                        <div class="social-links">
+                            <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                            <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                            <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h5 class="widget-title">Address information</h5>
+                        <p>
+                            California. AMC Dine-In Theatres Marina,
+                            Street 26, Distritc 543 #108
+                        </p>
+                        <p>
+                            <i class="fa fa-mail"></i>Example@mail.com<br>
+                            <i class="fa fa-phone"></i> + 123 456 7890
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
+                    <div class="widget">
+                        <h5 class="widget-title">Leave a message</h5>
+                        <form class="contact_form transparent">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="text" class="inputValidation" name="name" placeholder="Name *">
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" class="inputValidation" name="email" placeholder="Email *">
+                                </div>
+                                <div class="col-sm-12 ">
+                                    <textarea class="inputValidation" placeholder="Message *"></textarea>
+                                    <button type="submit" class="button fill rectangle">Send to us</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="errorMessage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sub-footer">
+            <div class="container">
+                <div class="row copyright-text">
+                    <div class="col-sm-12 text-center">
+                        <p class="mv3 mvt0">© Copyrights 2017 Tenguu. All rights reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div>
+        <button onclick="test()">TEST</button>
+        <p id="responseText"></p>
+        <!-- 응답값을 표시할 요소 -->
+    </div>
+
+    <script>
+        const test = () => {
+            axios({
+                method: "get",
+                url: "/test",
+            }).then(res => {
+                console.log("res", res.data)
+                document.getElementById("responseText").innerText = res.data.test;
+            }).catch(err => {
+                console.log("err", err);
+            });
+        }
+    </script>
 
     <!-- Include jQuery and Scripts -->
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -161,6 +184,29 @@
     <!-- jQuery easing plugin -->
 
 
+    <script>
+        // 영화 이름을 가져오는 함수
+        async function getNowPlayingList() {
+            try {
+                const response = await axios.get('/movies/title');
+                const movieTitles = response.data;
+
+                // 영화 이름을 HTML에 뿌리기
+                const movieList = document.getElementById('movie-list');
+                movieList.innerHTML = ''; // 기존 목록 초기화
+                movieNames.forEach(name => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = name;
+                    movieList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('영화 목록을 가져오는 데 오류가 발생했습니다:', error);
+            }
+        }
+
+        // 페이지가 로드될 때 영화 이름을 가져옴
+        window.onload = fetchMovieNames;
+    </script>
 
 <!-- Overlay Search -->
 
@@ -169,5 +215,7 @@
     <script type="text/javascript" th:src="@{js/packages.min.js}"></script>
     <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
 <!-- jQuery easing plugin -->
+
+
 </body>
 </html>
