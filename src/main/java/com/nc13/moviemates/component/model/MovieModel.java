@@ -20,7 +20,6 @@ public class MovieModel {
     private int runningTime;
     private Long reviewId;
     private String director;
-
-    public MovieModel(String title, Date releaseDate, String runningTime, String information, String genre, String director) {
-    }
+    private String filepath;
+    
 }

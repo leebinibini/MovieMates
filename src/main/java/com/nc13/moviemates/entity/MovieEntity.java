@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter @Setter
 @ToString
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name= "movies")
 public class MovieEntity{
@@ -21,6 +21,7 @@ public class MovieEntity{
     private String title;
     private String genre;
     private String director;
+    private String filepath;
     private String actors;
     private double rate;
     private String plot;

@@ -38,6 +38,18 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+
+    public Boolean save(MovieModel movie) {
+        MovieEntity ent = MovieEntity.builder()
+                .title(movie.getTitle())
+                .information(movie.getInformation())
+                .filepath(movie.getFilepath())
+                .build();
+
+        MovieEntity savedEntity = repository.save(ent);
+
+        return existsById(savedEntity.getId());
+
     public List<String> getNowPlayingList() {
         return repository.getNowPlayingList();
     }
@@ -47,6 +59,7 @@ public class MovieServiceImpl implements MovieService {
        MovieEntity ent = repository.save(movie);
        Long id = ent.getId();
        return existsById(id);
+
     }
 
     @Override
