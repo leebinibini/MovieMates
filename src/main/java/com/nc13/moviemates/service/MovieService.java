@@ -15,8 +15,6 @@ public interface MovieService {
 
     List<String> getNowPlayingList();
 
-    Boolean save(MovieEntity email);
-
 
     Optional<MovieEntity> findById(Long id);
 
