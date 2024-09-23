@@ -42,24 +42,17 @@ public class MovieServiceImpl implements MovieService {
     public Boolean save(MovieModel movie) {
         MovieEntity ent = MovieEntity.builder()
                 .title(movie.getTitle())
-                .information(movie.getInformation())
+                .plot(movie.getInformation())
                 .filepath(movie.getFilepath())
                 .build();
 
         MovieEntity savedEntity = repository.save(ent);
 
         return existsById(savedEntity.getId());
+    }
 
     public List<String> getNowPlayingList() {
         return repository.getNowPlayingList();
-    }
-
-    @Override
-    public Boolean save(MovieEntity movie) {
-       MovieEntity ent = repository.save(movie);
-       Long id = ent.getId();
-       return existsById(id);
-
     }
 
     @Override

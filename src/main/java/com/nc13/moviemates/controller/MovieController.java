@@ -29,8 +29,10 @@ public class MovieController {
 
 
     @GetMapping("/list")
-    public ResponseEntity<List<MovieEntity>> getList(){
+    public ResponseEntity<List<MovieEntity>> getList() {
         return ResponseEntity.ok(service.findAll());
+    }
+
 
     @GetMapping("/names")
     public ResponseEntity<List<String>> getNowPlayingList() {
@@ -38,7 +40,6 @@ public class MovieController {
         return ResponseEntity.ok(title);
 
     }
-
 
 
     @GetMapping("/{id}")
