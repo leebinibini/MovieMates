@@ -1,6 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/admin/head :: headContent}">
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Login - SB Admin</title>
+    <link th:href="@{/admin/css/styles.css}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-primary">
 <div id="layoutAuthentication">
@@ -26,13 +34,13 @@
                                         <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" th:href="@{/api/admin/password}">Forgot Password?</a>
-                                        <a class="btn btn-primary" th:href="@{/api/admin/login}">Login</a>
+                                        <a class="small" href="password.html">Forgot Password?</a>
+                                        <a class="btn btn-primary" href="index.html">Login</a>
                                     </div>
                                 </form>
                             </div>
                             <div class="card-footer text-center py-3">
-                                <div class="small"><a th:href="@{/api/admin/register}">Need an account? Sign up!</a></div>
+                                <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
                             </div>
                         </div>
                     </div>

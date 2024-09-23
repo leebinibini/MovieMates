@@ -15,9 +15,4 @@ public class PosterModel {
     private Long movieId;
     private String filepath;
     private String filename;
-
-    public PosterModel(String posterPath, String uploadName) {
-        this.filepath = posterPath;
-        this.filename = uploadName;
-    }
 }

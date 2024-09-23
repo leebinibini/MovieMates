@@ -1,7 +1,6 @@
 package com.nc13.moviemates.component.proxy;
 
 import com.nc13.moviemates.component.model.MovieModel;
-import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Service
-@RequiredArgsConstructor
 public class MovieSelenium {
 
     public List<MovieModel> crawlMovies(String url) {
@@ -49,7 +47,7 @@ public class MovieSelenium {
                 e.printStackTrace();
             }
             // MovieDomain 객체 생성
-            MovieModel movieModel = new MovieModel();
+            MovieModel movieModel = new MovieModel(title, releaseDate, runningTime, information, genre, director);
             movies.add(movieModel);
 
             driver.navigate().back();
