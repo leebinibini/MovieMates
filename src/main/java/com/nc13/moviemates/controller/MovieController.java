@@ -3,6 +3,7 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.service.MovieService;
+import com.nc13.moviemates.service.PosterService;
 import com.nc13.moviemates.serviceImpl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,7 @@ public class MovieController {
     @PostMapping("/register")
     @ResponseBody
     public ResponseEntity<Boolean> insert (@RequestBody MovieModel movie){
+        System.out.println("영화등록 화면에서 넘어온 값 : "+ movie);
         return ResponseEntity.ok(service.save(movie));
     }
 
