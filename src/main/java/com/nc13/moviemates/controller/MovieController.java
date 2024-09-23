@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -25,10 +27,19 @@ public class MovieController {
         return "admin/movie";
     }
 
+
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList(){
         return ResponseEntity.ok(service.findAll());
+
+    @GetMapping("/names")
+    public ResponseEntity<List<String>> getNowPlayingList() {
+        List<String> title = service.getNowPlayingList();
+        return ResponseEntity.ok(title);
+
     }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity <Optional<MovieEntity>> getById(@PathVariable Long id){
@@ -60,6 +71,18 @@ public class MovieController {
 
     public long count() {
         return service.count();}
+
+
+    /*@GetMapping("/crawl")
+    public String crawlMovies() {
+        try {
+            service.crawlMovies();
+            return "Crawling complete!";
+        } catch (Exception e) {
+            return "Error occurred: " + e.getMessage();
+        }
+    }*/
 }
+
 
 
