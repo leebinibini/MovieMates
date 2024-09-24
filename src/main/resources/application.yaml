@@ -4,7 +4,7 @@ spring:
       static-locations: classpath:/static/
   thymeleaf:
     prefix: classpath:/templates/
-    suffix: .html;
+    suffix: .html
     cache: false
   datasource:
     url: jdbc:mysql://localhost:3306/moviemates
