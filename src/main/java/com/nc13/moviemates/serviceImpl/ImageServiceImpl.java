@@ -5,12 +5,10 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.nc13.moviemates.component.model.ImageModel;
-import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.ImageEntity;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.repository.ImageRepository;
 import com.nc13.moviemates.service.ImageService;
-import com.nc13.moviemates.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,7 @@ public class ImageServiceImpl implements ImageService {
     private final ImageRepository repository;
     private final MovieServiceImpl movieService;
     private final AmazonS3 amazonS3;
-
+    String uploadPath = "uploads/movies";
     // 버킷경로 가져오기
     @Value("moviemates-storage")
     private String bucketName;
@@ -40,7 +38,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<ImageModel> uploadFiles(List<MultipartFile> multipartFiles, String uploadPath, Long movieId) {
+    public Boolean uploadFiles(long movieId, List<MultipartFile> multipartFiles) {
         // 파일 저장 공간을 리스트 형태로 만들겠다!
         List<ImageModel> s3files = new ArrayList<>();
 
@@ -96,7 +94,7 @@ public class ImageServiceImpl implements ImageService {
             imageModel.setId(savedEntity.getId());
             s3files.add(imageModel);
         }
-        return s3files;
+        return !s3files.isEmpty() ? true : false;
     }
 
     private ImageEntity convertToEntity(ImageModel model) {

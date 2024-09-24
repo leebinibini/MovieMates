@@ -23,10 +23,12 @@ public class ImageController {
         return ResponseEntity.ok(service.getFileName(fileName));
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<List<ImageModel>> uploadFiles(@RequestParam("files") List<MultipartFile> multipartFiles,
-                                                        @RequestParam String uploadPath,
-                                                        @RequestParam Long movieId) {
-        return ResponseEntity.ok(service.uploadFiles(multipartFiles, uploadPath, movieId));
+    @PostMapping("/upload/{movieId}")
+    public ResponseEntity<Boolean> uploadFiles(
+            @PathVariable long movieId, @RequestPart("multipartFiles") List<MultipartFile> multipartFiles) {
+        System.out.println("이미지 컨트롤러 진입!");
+        System.out.println("movieId");
+        return ResponseEntity.ok(service.uploadFiles(movieId, multipartFiles));
+
     }
 }

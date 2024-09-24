@@ -11,7 +11,7 @@ public interface MovieService {
 
     List<MovieEntity> findAll();
 
-    Boolean save(MovieModel movie);
+    Long save(MovieModel movie);
 
     List<String> getNowPlayingList();
 

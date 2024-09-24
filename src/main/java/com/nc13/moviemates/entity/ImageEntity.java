@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Table(name= "movies")
+@Table(name= "images")
 public class ImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +19,8 @@ public class ImageEntity {
     private String extension;
     private String uploadPath;
     private String uploadURL;
+
+    private String movieId;
 
     public void setMovie(MovieEntity movieEntity) {
     }
