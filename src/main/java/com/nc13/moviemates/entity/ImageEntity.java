@@ -23,6 +23,7 @@ public class ImageEntity {
     private String movieId;
 
     public void setMovie(MovieEntity movieEntity) {
+        this.movieId = String.valueOf(movieEntity.getId());
     }
 
 //    @ManyToOne(fetch = FetchType.LAZY)
