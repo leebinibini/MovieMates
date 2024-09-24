@@ -19,7 +19,7 @@ public class ImageController {
     //filename
     //upload
     @GetMapping("/fileName")
-    public ResponseEntity<String> getFileName(@RequestParam String fileName) {
+    public ResponseEntity<String> getFileName(@RequestPart String fileName) {
         return ResponseEntity.ok(service.getFileName(fileName));
     }
 
