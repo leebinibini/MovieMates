@@ -45,7 +45,8 @@ dependencies {
    // implementation 'mysql:mysql-connector-java:8.0.32'
     implementation 'mysql:mysql-connector-java'
 
-
+    //ncloud
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.300'
     // QueryDsl
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
     annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"

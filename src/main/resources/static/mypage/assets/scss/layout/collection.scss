@@ -1,0 +1,41 @@
+/* Collection */
+.collection-item {
+    .bg-img img {
+        transition: all ease 0.8s;
+    }
+
+    &:hover {
+        .bg-img img {
+            transform: scale(1.08);
+        }
+    }
+
+    .collection-name {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+
+        &:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+    }
+}
+
+.collection-block.style-six .list-collection .swiper {
+    overflow: unset;
+}
+
+.trending-block {
+    .trending-item {
+        .bg-img img {
+            transition: all ease 0.5s;
+        }
+
+        &:hover {
+            .bg-img img {
+                transform: scale(1.1);
+            }
+        }
+    }
+}

@@ -34,6 +34,11 @@ public class UserController {
         return ResponseEntity.ok(service.findAll());
     }
 
+    @GetMapping("/mypage")
+    public String mypage() {
+        return "mypage";
+    }
+
     @GetMapping("/details/{id}")
     public ResponseEntity<Optional<UserEntity>> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));

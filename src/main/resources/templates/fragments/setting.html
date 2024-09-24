@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>setting</title>
+</head>
+<div class="filter-item text-content w-full p-7 border border-line rounded-xl" data-item="setting">
+    <form>
+        <div class="heading5 pb-4">Information</div>
+        <div class="upload_image col-span-full">
+            <label for="uploadImage">Upload Avatar: <span class="text-red">*</span></label>
+            <div class="flex flex-wrap items-center gap-5 mt-3">
+                <div class="bg_img flex-shrink-0 relative w-[7.5rem] h-[7.5rem] rounded-lg overflow-hidden bg-surface">
+                    <span class="ph ph-image text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-secondary"></span>
+                    <img th:src="@{/mypage/assets/images/avatar/1.png}" alt="avatar" class="upload_img relative z-[1] w-full h-full object-cover" />
+                </div>
+                <div>
+                    <strong class="text-button">Upload File:</strong>
+                    <p class="caption1 text-secondary mt-1">JPG 120x120px</p>
+                    <div class="upload_file flex items-center gap-3 w-[220px] mt-3 px-3 py-2 border border-line rounded">
+                        <label for="uploadImage" class="caption2 py-1 px-3 rounded bg-line whitespace-nowrap cursor-pointer">Choose File</label>
+                        <input type="file" name="uploadImage" id="uploadImage" accept="image/*" class="caption2 cursor-pointer" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-5">
+            <div class="first-name">
+                <label for="firstName" class="caption1 capitalize">First Name <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="firstName" type="text" value="Tony" placeholder="First name" required />
+            </div>
+            <div class="last-name">
+                <label for="lastName" class="caption1 capitalize">Last Name <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="lastName" type="text" value="Nguyen" placeholder="Last name" required />
+            </div>
+            <div class="phone-number">
+                <label for="phoneNumber" class="caption1 capitalize">Phone Number <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="phoneNumber" type="text" value="(+12) 345 678 910" placeholder="Phone number" required />
+            </div>
+            <div class="email">
+                <label for="email" class="caption1 capitalize">Email Address <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="email" type="email" value="hi.avitex@gmail.com" placeholder="Email address" required />
+            </div>
+            <div class="gender">
+                <label for="gender" class="caption1 capitalize">Gender <span class="text-red">*</span></label>
+                <div class="select-block mt-2">
+                    <select class="border border-line px-4 py-3 w-full rounded-lg" id="gender" name="gender" value="default">
+                        <option value="default" disabled>Choose Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span class="ph ph-caret-down arrow-down text-lg"></span>
+                </div>
+            </div>
+            <div class="birth">
+                <label for="birth" class="caption1">Day of Birth <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="birth" type="date" placeholder="Day of Birth" required />
+            </div>
+        </div>
+        <div class="heading5 pb-4 lg:mt-10 mt-6">Change Password</div>
+        <div class="pass">
+            <label for="password" class="caption1">Current password <span class="text-red">*</span></label>
+            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="password" type="password" placeholder="Password *" required />
+        </div>
+        <div class="new-pass mt-5">
+            <label for="newPassword" class="caption1">New password <span class="text-red">*</span></label>
+            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="newPassword" type="password" placeholder="New Password *" required />
+        </div>
+        <div class="confirm-pass mt-5">
+            <label for="confirmPassword" class="caption1">Confirm new password <span class="text-red">*</span></label>
+            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="confirmPassword" type="password" placeholder="Confirm Password *" required />
+        </div>
+        <div class="block-button lg:mt-10 mt-6">
+            <button class="button-main">Save Change</button>
+        </div>
+    </form>
+</div>
+
+</html>
