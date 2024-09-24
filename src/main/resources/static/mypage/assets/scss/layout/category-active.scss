@@ -1,0 +1,121 @@
+/* Category active */
+.menu-tab {
+    position: relative;
+
+    .tab-item {
+        white-space: nowrap;
+        cursor: pointer;
+
+        &.active {
+            color: var(--black);
+        }
+    }
+
+    .category-item {
+        &.hover\:bg-white.active {
+            background-color: var(--white);
+        }
+
+        &.hover\:text-black.active {
+            color: var(--black);
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        max-width: 100%;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    &.style-pet {
+        .tab-item {
+            &.active {
+                color: var(--white);
+            }
+        }
+    }
+}
+
+.tab-features-block {
+    &.style-underwear {
+        .menu-tab {
+            .tab-item {
+                border-radius: 16px;
+
+                &.active {
+                    background-color: var(--black);
+                    color: var(--white);
+                }
+            }
+        }
+    }
+
+    &.style-watch {
+        .menu-tab {
+            .tab-item {
+                border-radius: 16px;
+
+                &.active {
+                    background: var(--surface1);
+                    color: var(--white);
+                }
+            }
+        }
+    }
+}
+
+/* Video tutorial block */
+.video-tutorial-block {
+    .list-category {
+        overflow: hidden;
+
+        .category-item {
+            position: relative;
+            transform: translateX(-36px);
+            transition: all ease 0.4s;
+
+            &.active {
+                transform: translateX(0);
+            }
+        }
+    }
+}
+
+// my account
+.my-account-block {
+    .list-filter {
+        >.filter-item {
+            display: none;
+
+            &.active {
+                display: block;
+            }
+        }
+
+        .tab_order {
+            &.active {
+                .indicator {
+                    width: 20% !important;
+                }
+            }
+        }
+
+        .tab_address {
+            .tab_btn {
+                &.active {
+                    .ic_down {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
+            .form_address {
+                display: none;
+
+                &.active {
+                    display: block;
+                }
+            }
+        }
+    }
+}

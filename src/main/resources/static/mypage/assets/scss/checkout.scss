@@ -1,0 +1,75 @@
+/* Checkout page */
+.checkout-block {
+    .login {
+        .right {
+            i {
+                transition: all linear 0.4s;
+            }
+
+            i.up {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .form-login-block {
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        margin-top: 0;
+        overflow: hidden;
+        transition: all linear 0.4s;
+    }
+
+    .form-login-block.open {
+        opacity: 1;
+        visibility: visible;
+        max-height: 250px;
+        margin-top: 16px;
+    }
+
+    .payment-block {
+        .list-payment {
+            .type {
+                transition: all linear 0.4s;
+
+                .infor {
+                    overflow: hidden;
+                    opacity: 0;
+                    visibility: hidden;
+                    max-height: 0;
+                    transition: all linear 0.4s;
+
+                    .row>div {
+                        position: relative;
+                    }
+
+                    .bg-img {
+                        position: absolute;
+                        bottom: 16px;
+                        right: 32px;
+                    }
+                }
+
+                &.open {
+                    background-color: #EFF0F3;
+
+                    .infor {
+                        opacity: 1;
+                        visibility: visible;
+                        max-height: 450px;
+                    }
+                }
+            }
+        }
+    }
+
+    .deli_type {
+        .item {
+            &:has(input:checked) {
+                background: linear-gradient(238deg, #FAF8F1 0%, #F6F3EF 99.66%);
+                border-color: var(--black);
+            }
+        }
+    }
+}

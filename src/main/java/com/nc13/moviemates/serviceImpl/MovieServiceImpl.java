@@ -30,7 +30,7 @@ import java.util.Optional;
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository repository;
-    private final MovieSelenium movieSelenium;
+
 
     @Override
     public List<MovieEntity> findAll() {
@@ -68,6 +68,12 @@ public class MovieServiceImpl implements MovieService {
     public Boolean deleteById(Long id) {
         repository.deleteById(id);
         return !existsById(id);
+    }
+
+    @Override
+    public MovieEntity findEntityById(Long id){
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("not found id" + id));
     }
 
    /* @Override

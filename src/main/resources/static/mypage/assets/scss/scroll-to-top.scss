@@ -1,0 +1,42 @@
+/* Scroll to top */
+.scroll-to-top-btn {
+    background-color: var(--black);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0px;
+    right: 30px;
+    transition: all ease 0.3s;
+    box-shadow: 0px 5px 25px rgba(58, 64, 67, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
+    z-index: 100;
+
+    i {
+        color: var(--white);
+        transition: all ease 0.3s;
+    }
+
+    &:hover {
+        background-color: var(--green);
+
+        i {
+            color: var(--black);
+        }
+    }
+
+    &.active {
+        bottom: 30px;
+        opacity: 1;
+        visibility: visible;
+
+        @media (max-width: 639.98px) {
+            bottom: 100px;
+        }
+    }
+}

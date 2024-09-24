@@ -38,3 +38,8 @@ spring:
       init-mode: always
   server:
     port: 8080
+naver:
+  storage:
+    accessKey: D5C89E2205CAE7D4830F
+    secretKey: 77E98C140672BEF42A6BFED104A4550C6885C9CB
+    bucketName: moviemates.storage
