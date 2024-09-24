@@ -22,17 +22,18 @@ public class AdminController {
         return "admin/home";
     }
 
-    @GetMapping("/login")
-    public String adminLogin() {
+//    @GetMapping("/login")
+//    public String adminLogin() {
+//        return "admin/home";
+//    }
+
+    @ResponseBody
+    @PostMapping("/login")
+    public String adminAuth(@RequestBody Map<String, String> loginTry) {
+        System.out.println("컨트롤러진입!");
+        System.out.println(loginTry);
         return "admin/home";
     }
-
-//    @ResponseBody
-//    @PostMapping("/login")
-//    public Map<String, String> adminLogin(@RequestBody Map<String, String> loginTry) {
-//        System.out.println("컨트롤러진입!");
-//        System.out.println(loginTry);
-//    }
 
 
     @GetMapping("logout")

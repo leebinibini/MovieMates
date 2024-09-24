@@ -14,22 +14,22 @@
                             <div class="card-body">
                                 <form id="loginForm">
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                        <input class="form-control" id="inputEmail" type="email" name="email" placeholder="name@example.com" />
                                         <label for="inputEmail">Email address</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                        <input class="form-control" id="inputPassword" type="password" name="password" placeholder="Password" />
                                         <label for="inputPassword">Password</label>
                                     </div>
                                     <div class="form-check mb-3">
-                                        <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                        <input class="form-check-input" id="inputRememberPassword" type="checkbox" name="remember" />
                                         <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                         <a class="small" th:href="@{/api/admin/password}">Forgot Password?</a>
-                                        <a class="btn btn-primary" th:href="@{/api/admin/login}">Login</a>
-<!--                                        <button type="submit">Login</button>-->
+                                        <!-- a 태그를 버튼 대신 submit 동작으로 변경 -->
                                     </div>
+                                    <button class="btn btn-primary" type="button" onclick="submitForm()">Login</button>
                                 </form>
                             </div>
                             <div class="card-footer text-center py-3">
@@ -57,30 +57,28 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script th:src="@{/admin/js/scripts.js}"></script>
 <script>
-    document.querySelector('#loginForm').addEventListener('submit', (event) => {
-        event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지
+    function submitForm() {
+        const formData = {
+            email: document.getElementById('inputEmail').value,
+            password: document.getElementById('inputPassword').value,
+            remember: document.getElementById('inputRememberPassword').checked
+        };
 
-        const email = document.getElementById('inputEmail').value;
-        const password = document.getElementById('inputPassword').value;
-
-        // jQuery 추가하면 다음을 사용할 수 있음
-        // const email = $('#inputEmail').val();
-        // const password = $('#inputPassword').val();
-
-        axios.post("/api/admin/login", {
-            email: email,
-            password: password
-        }).then(res => {
-            console.log('Login successful:', res.data);
-            alert("이메일: " + email +"비밀번호: " + password);
-            window.location.href("localhost:8080/api/admin/home")
-        }).catch(err => {
-            console.log("Login failed: ", err);
-        });
-    })
+        fetch('/api/admin/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                window.location.href = "/api/admin";  // 로그인 성공 시 리디렉션
+            })
+            .catch(error => console.error('Error:', error));
+    }
 </script>
 </body>
 </html>
