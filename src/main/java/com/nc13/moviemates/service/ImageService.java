@@ -8,5 +8,5 @@ import java.util.List;
 public interface ImageService {
     String getFileName(String fileName);
 
-    List<ImageModel> uploadFiles(List<MultipartFile> multipartFiles, String uploadPath, Long movieId);
+    Boolean uploadFiles(long movieId, List<MultipartFile> multipartFiles);
 }

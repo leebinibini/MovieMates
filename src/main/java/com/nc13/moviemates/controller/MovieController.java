@@ -48,7 +48,7 @@ public class MovieController {
 
     @PostMapping("/register")
     @ResponseBody
-    public ResponseEntity<Boolean> insert (@RequestBody MovieModel movie){
+    public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
         System.out.println("영화등록 화면에서 넘어온 값 : "+ movie);
         return ResponseEntity.ok(service.save(movie));
     }

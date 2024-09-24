@@ -26,3 +26,11 @@ spring:
       init-mode: always
   server:
     port: 8080
+naver:
+  storage:
+    accessKey: 32C6E2545595B9B2A738
+    secretKey: 31568AFBC27617FD1700410F779DFC6967015A14
+    bucket: moviemates-storage
+    region: kr-standard
+    endPoint: https://kr.object.ncloudstorage.com  # 엔드포인트 URL
+    uploadPath: uploads/movies  # 파일 업로드 경로
