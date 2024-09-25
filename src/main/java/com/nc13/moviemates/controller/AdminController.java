@@ -30,11 +30,20 @@ public class AdminController {
     @ResponseBody
     @PostMapping("/login")
     public String adminAuth(@RequestBody Map<String, String> loginTry) {
-        System.out.println("컨트롤러진입!");
-        System.out.println(loginTry);
-        return "admin/home";
-    }
+        System.out.println("adminAuth 컨트롤러 진입!!!");
+        String email = loginTry.get("email");
+        String password = loginTry.get("password");
 
+        boolean isAuthenticated = userService.authenticate(email, password);
+
+        if (isAuthenticated) {
+            System.out.println("인증완료!");
+            return "true"; // 인증 성공 시 home 페이지로 이동
+        } else {
+            System.out.println("인증실패!");
+            return "false"; // 인증 실패 시 에러 메시지 반환
+        }
+    }
 
     @GetMapping("logout")
     public String adminLogout() {

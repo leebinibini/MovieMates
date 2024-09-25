@@ -13,6 +13,7 @@ public interface UserService {
 
     Optional<UserEntity> findById(Long id);
 
+
     Boolean save(UserEntity user);
 
     Boolean deleteById(Long id);
@@ -21,4 +22,5 @@ public interface UserService {
 
     Boolean existsById(Long id);
 
+    boolean authenticate(String email, String password);
 }

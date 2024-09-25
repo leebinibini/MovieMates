@@ -72,10 +72,14 @@
             },
             body: JSON.stringify(formData),
         })
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
                 console.log(data);
-                window.location.href = "/api/admin";  // 로그인 성공 시 리디렉션
+                if (data === true) {
+                    window.location.href = "/api/admin";
+                } else {
+                    alert("로그인 실패!")
+                }
             })
             .catch(error => console.error('Error:', error));
     }
