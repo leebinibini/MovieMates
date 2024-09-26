@@ -41,7 +41,7 @@ public class MovieServiceImpl implements MovieService {
     public Long save(MovieModel movie) {
         MovieEntity ent = MovieEntity.builder()
                 .title(movie.getTitle())
-                .plot(movie.getInformation())
+                .plot(movie.getPlot())
                 .build();
 
         MovieEntity savedEntity = repository.save(ent);

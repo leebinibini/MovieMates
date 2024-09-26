@@ -14,7 +14,7 @@ import java.util.Date;
 public class MovieModel {
     private Long id;
     private String title;
-    private String information;
+    private String Plot;
     private Date releaseDate;
     private String genre;
     private int runningTime;

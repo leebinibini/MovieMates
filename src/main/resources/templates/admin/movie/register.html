@@ -20,15 +20,15 @@
                                         <label for="inputTitle">Movie Title</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputInformation" type="text" placeholder="영화 내용을 입력하세요" />
-                                        <label for="inputInformation">Movie Information</label>
+                                        <input class="form-control" id="inputPlot" type="text" placeholder="영화 내용을 입력하세요" />
+                                        <label for="inputPlot">Movie Information</label>
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="inputPoster">영화 이미지 업로드</label>
                                         <input class="form-control" id="inputPoster" type="file" multiple accept="image/jpg,image/png,image/jpeg" />
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <button type="submit">영화 등록하기</button>
+                                        <button type="submit">영화 정보 등록하기</button>
                                     </div>
                                 </form>
                             </div>
@@ -62,7 +62,7 @@
         event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지
 
         const title = document.getElementById('inputTitle').value;
-        const information = document.getElementById('inputInformation').value;
+        const plot = document.getElementById('inputPlot').value;
         const selectImages = document.getElementById('inputPoster').files; // 파일 객체 가져오기
 
         let multipartFiles = new FormData(); // imageData를 밖에서 정의
@@ -80,7 +80,7 @@
 
         axios.post('/api/movie/register', {
             title: title,
-            information: information
+            plot: plot
         }).then(res => {
             if (res.status === 200) {
                 console.log("영화 정보 저장 성공: ", res);
@@ -99,7 +99,7 @@
                         console.log("이미지 저장 성공!");
                         alert("이미지 저장 성공!");
                         console.log("저장한 이미지 리스트: " + res.data);
-                        window.location.href = "/api/admin";
+                        window.location.href = "/api/admin/layout-static";
                     } else {
                         console.log("이미지 저장 실패!");
                         alert("이미지 저장 실패!");
