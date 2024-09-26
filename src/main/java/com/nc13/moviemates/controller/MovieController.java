@@ -2,17 +2,13 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
-import com.nc13.moviemates.service.MovieService;
-import com.nc13.moviemates.service.PosterService;
 import com.nc13.moviemates.serviceImpl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -53,14 +49,19 @@ public class MovieController {
         return ResponseEntity.ok(service.save(movie));
     }
 
+    @GetMapping("/update/{id}")
+    public String toMovieUpdate( ){
+        return "admin/movie/update";
+    }
+
 //    @PutMapping
 //    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
 //        return ResponseEntity.ok(service.save(movie));
 //    }
 
     @DeleteMapping("/{id}")
-    public Boolean deleteById(@PathVariable Long id){
-        return service.deleteById(id);
+    public ResponseEntity<Boolean> deleteById(@PathVariable Long id){
+        return ResponseEntity.ok(service.deleteById(id));
     }
 
     @GetMapping("/exists/{id}")

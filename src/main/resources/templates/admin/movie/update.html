@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/head :: headContent}">
+</head>
+<body style="background-color: #000;">
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header">
+                                <h3 class="text-center font-weight-light my-4">영화 정보 수정하기</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="movieEditForm" enctype="multipart/form-data">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="inputTitle" type="text" placeholder="영화 제목을 수정하세요" />
+                                        <label for="inputTitle">Movie Title</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="inputInformation" type="text" placeholder="영화 내용을 수정하세요" />
+                                        <label for="inputInformation">Movie Information</label>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="inputPoster">영화 이미지 수정하기</label>
+                                        <input class="form-control" id="inputPoster" type="file" multiple accept="image/jpg,image/png,image/jpeg" />
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                        <button type="submit">영화 정보 수정하기</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer text-center py-3">
+                                <div class="small"><p id="responseText">여기 입력될 것임</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="layoutAuthentication_footer">
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        &middot;
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // 영화 수정 로직
+    document.addEventListener('DOMContentLoaded', function () {
+        //const movieId = /* 영화 ID 가져오는 로직 (URL에서, 혹은 전역변수) */;
+
+        // 영화 정보 불러오기
+        axios.get(`/api/movie/${movieId}`).then(res => {
+            const movie = res.data;
+            document.getElementById('inputTitle').value = movie.title;
+            document.getElementById('inputInformation').value = movie.information;
+        });
+
+        document.querySelector('#movieEditForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const title = document.getElementById('inputTitle').value;
+            const information = document.getElementById('inputInformation').value;
+            const selectImages = document.getElementById('inputPoster').files;
+
+            let multipartFiles = new FormData();
+
+            if (selectImages.length > 0) {
+                for (let i = 0; i < selectImages.length; i++) {
+                    multipartFiles.append('multipartFiles', selectImages[i]);
+                }
+            }
+
+            axios.put(`/api/movie/edit/${movieId}`, {
+                title: title,
+                information: information
+            }).then(res => {
+                if (res.status === 200) {
+                    console.log("영화 정보 수정 성공: ", res);
+                    alert("영화 정보 수정 성공!");
+
+                    // 이미지 수정
+                    if (selectImages.length > 0) {
+                        axios.post(`/api/images/upload/${movieId}`, multipartFiles, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        }).then(res => {
+                            if (res.status === 200) {
+                                alert("이미지 수정 성공!");
+                                window.location.href = "/admin/movie/list";
+                            } else {
+                                alert("이미지 수정 실패!");
+                            }
+                        });
+                    } else {
+                        window.location.href = "/admin/movie/list";
+                    }
+                }
+            }).catch(err => {
+                console.log("영화 정보 수정 실패: ", err);
+            });
+        });
+    });
+</script>
+</body>
+</html>
