@@ -2,10 +2,12 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.serviceImpl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/api/movie")
 public class MovieController {
-    private final MovieServiceImpl service;
+    private final MovieService service;
 
     @GetMapping()
     public String toMovieAdmin(){

@@ -68,7 +68,7 @@
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" th:href="@{/api/admin/layout-static}">Movie</a>
                             <a class="nav-link" th:href="@{/api/admin/layout-sidenav-light}">Light Sidenav</a>
-                            <a class="nav-link" th:href="~{admin/movie/register}">영화정보 등록하기</a>
+                            <a class="nav-link" th:href="@{/api/admin/movie/register}">영화정보 등록하기</a>
                             <a class="nav-link" th:href="@{/api/movie/update}">영화정보 수정하기</a>
                         </nav>
                     </div>
@@ -141,7 +141,11 @@
                 <!-- Button and response area -->
                 <div>
                     <button onclick="test()">TEST</button>
+                    <button onclick="edit()">Edit</button>
+                    <button onclick="delete()">Delete</button>
+
                     <p id="responseText"></p>
+
                     <!-- 응답값을 표시할 요소 -->
                 </div>
 
@@ -169,6 +173,7 @@
                             ],
                             tableOverflow: true,  // 테이블이 div 크기에 맞도록 설정
                             tableHeight: '500px'  // 테이블의 높이를 500px로 설정
+
                         });
                     });
                 </script>
@@ -214,8 +219,7 @@
                     movie.plot || '',
                     movie.runningTime || 0,
                     movie.rate || 0,
-                    `<button class="edit-btn" data-id="${movie.id}">Edit</button>`,
-                    `<button class="delete-btn" data-id="${movie.id}">Delete</button>`
+
                 ]);
 
                 // jSpreadsheet로 데이터 표시
@@ -229,9 +233,9 @@
                         { type: 'text', title: 'Plot', width: 200 },
                         { type: 'text', title: 'Running Time', width: 100 },
                         { type: 'text', title: 'Rate', width: 50 },
-                        { type: 'html', title: 'Edit', width: 100, readOnly: true },
-                        { type: 'html', title: 'Delete', width: 100, readOnly: true }
+                        { type: 'checkbox', title: 'Delete', width: 100 }
                     ],
+                    search: true,
                     pagination: 10,   // 페이지당 10개의 영화 표시
                     freezeColumns: 1, // 첫 번째 열 고정
                     minDimensions: [8, 10], // 최소 차원 (열, 행)
@@ -239,16 +243,9 @@
                     tableHeight: '500px',  // 테이블 높이 설정
                     tableWidth: '100%',    // 테이블 너비 설정
 
+
                     // jSpreadsheet가 로드된 후 실행
                     onload: function () {
-                        // 모든 Edit 버튼에 클릭 이벤트 추가
-                        document.querySelectorAll('.edit-btn').forEach(button => {
-                            button.addEventListener('click', function () {
-                                const movieId = this.getAttribute('data-id');
-                                window.location.href = `/api/movie/update/${movieId}`;
-                            });
-                        });
-
                         document.querySelectorAll('.delete-btn').forEach(button => {
                             button.addEventListener('click', function () {
                                 const movieId = this.getAttribute('data-id');
