@@ -16,5 +16,7 @@ public interface TheaterService {
 
     Long count();
 
+    Long deleteMany(List<Long> theaterIdList);
+
     Boolean deleteById(Long id);
 }

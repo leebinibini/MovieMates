@@ -22,7 +22,7 @@ public class MovieController {
 
     @GetMapping()
     public String toMovieAdmin(){
-        return "admin/movie";
+        return "admin/movie/list";
     }
 
 
@@ -44,8 +44,13 @@ public class MovieController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping("/register")
+    @GetMapping("/register")
+    public String toMovieRegister(){
+        return "admin/movie/register";
+    }
+
     @ResponseBody
+    @PostMapping("/register")
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
         System.out.println("영화등록 화면에서 넘어온 값 : "+ movie);
         return ResponseEntity.ok(service.save(movie));
@@ -61,8 +66,8 @@ public class MovieController {
 //        return ResponseEntity.ok(service.save(movie));
 //    }
 
-
-    @PostMapping("/delete")
+    @ResponseBody
+    @PostMapping("/deleteMany")
     public ResponseEntity<Long> deleteMany(@RequestBody List<Long> movieIdList){
         return ResponseEntity.ok(service.deleteMany(movieIdList));
     }

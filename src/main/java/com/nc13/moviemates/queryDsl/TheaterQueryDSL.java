@@ -11,4 +11,6 @@ public interface TheaterQueryDSL {
 
     Boolean exists(Long id);
     Long getRowCount();
+
+    Long deleteMany(List<Long> theaterIdList);
 }

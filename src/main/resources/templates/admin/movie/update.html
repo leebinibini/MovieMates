@@ -75,7 +75,7 @@
         axios.get(`/api/movie/${movieId}`).then(res => {
             const movie = res.data;
             document.getElementById('inputTitle').value = movie.title;
-            document.getElementById('inputInformation').value = movie.information;
+            document.getElementById('inputPlot').value = movie.plot;
         });
 
         document.querySelector('#movieEditForm').addEventListener('submit', async (event) => {
