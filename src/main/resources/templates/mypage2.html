@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MyPage</title>
+    <link rel="shortcut icon" th:href="@{/profile/assets/images/fav.png}" type="image/x-icon"/>
+    <link rel="stylesheet" th:href="@{/profile/assets/css/swiper-bundle.min.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/assets/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/dist/output-scss.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/dist/output-tailwind.css}"/>
+</head>
+<body>
+<div class="my-account-block md:py-20 py-10">
+    <div class="container">
+        <div class="content-main lg:px-[60px] md:px-4 flex gap-y-8 max-md:flex-col w-full">
+            <div class="left md:w-1/3 w-full xl:pr-[3.125rem] lg:pr-[28px] md:pr-[16px]">
+                <div class="user-infor bg-surface md:px-8 px-5 md:py-10 py-6 md:rounded-[20px] rounded-xl">
+                    <div class="heading flex flex-col items-center justify-center">
+                        <div class="avatar">
+                            <img th:src="@{/profile/images/avatar/1.png}" alt="avatar" class="md:w-[140px] w-[120px] md:h-[140px] h-[120px] rounded-full" />
+                        </div>
+                        <div class="name heading6 mt-4 text-center">Tony Nguyen</div>
+                        <div class="mail heading6 font-normal normal-case text-secondary text-center mt-1">hi.avitex@gmail.com</div>
+                    </div>
+                    <div class="menu-tab list-category w-full max-w-none lg:mt-10 mt-6">
+                        <a th:href="@{#!}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active" data-item="dashboard">
+                            <span class="ph ph-house-line text-xl"></span>
+                            <strong class="heading6">Dashboard</strong>
+                        </a>
+                        <a th:href="@{#!}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" data-item="orders">
+                            <span class="ph ph-package text-xl"></span>
+                            <strong class="heading6">History Orders</strong>
+                        </a>
+                        <a th:href="@{#!}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" data-item="address">
+                            <span class="ph ph-tag text-xl"></span>
+                            <strong class="heading6">My Address</strong>
+                        </a>
+                        <a th:href="~{fragments/setting}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" data-item="setting">
+                            <span class="ph ph-gear-six text-xl"></span>
+                            <strong class="heading6">Setting</strong>
+                        </a>
+                        <a th:href="@{login.html}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5">
+                            <span class="ph ph-sign-out text-xl"></span>
+                            <strong class="heading6">Logout</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="right list-filter md:w-2/3 w-full pl-2.5">
+                <div class="filter-item text-content w-full p-7 border border-line rounded-xl" data-item="setting">
+                    <form>
+                        <div class="heading5 pb-4">Information</div>
+                        <div class="upload_image col-span-full">
+                            <label for="uploadImage">Upload Avatar: <span class="text-red">*</span></label>
+                            <div class="flex flex-wrap items-center gap-5 mt-3">
+                                <div class="bg_img flex-shrink-0 relative w-[7.5rem] h-[7.5rem] rounded-lg overflow-hidden bg-surface">
+                                    <span class="ph ph-image text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-secondary"></span>
+                                    <img th:src="@{/profile/assets/images/avatar/1.png}" alt="avatar" class="upload_img relative z-[1] w-full h-full object-cover" />
+                                </div>
+                                <div>
+                                    <strong class="text-button">Upload File:</strong>
+                                    <p class="caption1 text-secondary mt-1">JPG 120x120px</p>
+                                    <div class="upload_file flex items-center gap-3 w-[220px] mt-3 px-3 py-2 border border-line rounded">
+                                        <label for="uploadImage" class="caption2 py-1 px-3 rounded bg-line whitespace-nowrap cursor-pointer">Choose File</label>
+                                        <input type="file" name="uploadImage" id="uploadImage" accept="image/*" class="caption2 cursor-pointer" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-5">
+                            <div class="first-name">
+                                <label for="firstName" class="caption1 capitalize">First Name <span class="text-red">*</span></label>
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="firstName" type="text" value="Tony" placeholder="First name" required />
+                            </div>
+                            <div class="last-name">
+                                <label for="lastName" class="caption1 capitalize">Last Name <span class="text-red">*</span></label>
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="lastName" type="text" value="Nguyen" placeholder="Last name" required />
+                            </div>
+                            <div class="phone-number">
+                                <label for="phoneNumber" class="caption1 capitalize">Phone Number <span class="text-red">*</span></label>
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="phoneNumber" type="text" value="(+12) 345 678 910" placeholder="Phone number" required />
+                            </div>
+                            <div class="email">
+                                <label for="email" class="caption1 capitalize">Email Address <span class="text-red">*</span></label>
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="email" type="email" value="hi.avitex@gmail.com" placeholder="Email address" required />
+                            </div>
+                            <div class="gender">
+                                <label for="gender" class="caption1 capitalize">Gender <span class="text-red">*</span></label>
+                                <div class="select-block mt-2">
+                                    <select class="border border-line px-4 py-3 w-full rounded-lg" id="gender" name="gender" value="default">
+                                        <option value="default" disabled>Choose Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span class="ph ph-caret-down arrow-down text-lg"></span>
+                                </div>
+                            </div>
+                            <div class="birth">
+                                <label for="birth" class="caption1">Day of Birth <span class="text-red">*</span></label>
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="birth" type="date" placeholder="Day of Birth" required />
+                            </div>
+                        </div>
+                        <div class="heading5 pb-4 lg:mt-10 mt-6">Change Password</div>
+                        <div class="pass">
+                            <label for="password" class="caption1">Current password <span class="text-red">*</span></label>
+                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="password" type="password" placeholder="Password *" required />
+                        </div>
+                        <div class="new-pass mt-5">
+                            <label for="newPassword" class="caption1">New password <span class="text-red">*</span></label>
+                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="newPassword" type="password" placeholder="New Password *" required />
+                        </div>
+                        <div class="confirm-pass mt-5">
+                            <label for="confirmPassword" class="caption1">Confirm new password <span class="text-red">*</span></label>
+                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="confirmPassword" type="password" placeholder="Confirm Password *" required />
+                        </div>
+                        <div class="block-button lg:mt-10 mt-6">
+                            <button class="button-main">Save Change</button>
+                        </div>
+                    </form>
+                    <script type="text/javascript" th:src="@{/profile/assets/js}"></script>
+                    <script type="text/javascript" th:src="@{/profile/assets/js/phosphor-icons.js}"></script>
+                    <script type="text/javascript" th:src="@{/profile/assets/js/swiper-bundle.min.js}"></script>
+                    <script type="text/javascript" th:src="@{/profile/assets/js/main.js}"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
