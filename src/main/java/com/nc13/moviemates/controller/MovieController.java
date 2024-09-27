@@ -61,8 +61,14 @@ public class MovieController {
 //        return ResponseEntity.ok(service.save(movie));
 //    }
 
+
+    @PostMapping("/delete")
+    public ResponseEntity<Long> deleteMany(@RequestBody List<Long> movieIdList){
+        return ResponseEntity.ok(service.deleteMany(movieIdList));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteById(@PathVariable Long id){
+    public ResponseEntity<Boolean> deleteById(@PathVariable long id){
         return ResponseEntity.ok(service.deleteById(id));
     }
 

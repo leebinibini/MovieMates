@@ -10,4 +10,6 @@ public interface MovieQueryDSL {
     Boolean exists(Long id);
     Long getRowCount();
     List<String> getNowPlayingList();
+
+    Long deleteMany(List<Long> movieIdList);
 }

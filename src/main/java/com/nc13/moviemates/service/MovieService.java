@@ -17,12 +17,13 @@ public interface MovieService {
 
     List<String> getNowPlayingList();
 
-
     Optional<MovieEntity> findById(Long id);
 
     Boolean existsById(Long id);
 
     Long count();
+
+    Long deleteMany(List<Long> movieIdList);
 
     Boolean deleteById(Long id);
 
