@@ -27,6 +27,16 @@ public class TheaterQueryDSLImpl implements TheaterQueryDSL {
     }
 
     @Override
+    public Long deleteMany(List<Long> theaterIdList) {
+        long deletedCount = jpaQueryFactory
+                .delete(qTheater)
+                .where(qTheater.id.in(theaterIdList))
+                .execute();
+
+        return deletedCount;
+    }
+
+    @Override
     public Boolean exists(Long id) {
         return jpaQueryFactory.selectFrom(qTheater).where(qTheater.id.eq(id)).fetchCount()>0;
     }

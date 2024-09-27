@@ -28,7 +28,7 @@
                                         <input type="text" id="extraAddress" placeholder="참고항목">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <button type="submit">극장 정보 등록하기</button>
+                                        <button type="submit">극장 정보 수정하기</button>
                                     </div>
                                 </form>
                             </div>
@@ -108,7 +108,7 @@
     }
 </script>
 <script>
-    document.querySelector('#theaterRegisterForm').addEventListener('submit', async (event) => {
+    document.querySelector('#theaterUpdateForm').addEventListener('update', async (event) => {
         event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지
 
         const name = document.getElementById('inputName').value;

@@ -123,10 +123,10 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Movie</h1>
+                <h1 class="mt-4">Theater</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="@{/api/admin}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Movie</li>
+                    <li class="breadcrumb-item active">Theater</li>
                 </ol>
                 <div th:insert="~{admin/cards :: cards}"></div>
 
@@ -141,42 +141,12 @@
                 <!-- Button and response area -->
                 <div>
                     <button onclick="test()">TEST</button>
+                    <button><a class="nav-link" th:href="@{/api/theater/register}">Register</a></button>
                     <button onclick="update()">Edit</button>
                     <button class="delete-btn" id="delete-btn">Delete</button>
 
                     <p id="responseText"></p>
-
-                    <!-- 응답값을 표시할 요소 -->
                 </div>
-
-                <!-- Spreadsheet example -->
-                <div id="spreadsheet"></div>
-                <script>
-                    $(document).ready(function() {
-                        console.log("ready!");
-
-                        var data = [
-                            ['Jazz', 'Honda', '2019-02-12', '', true, '$ 2.000,00', '#777700'],
-                            ['Civic', 'Honda', '2018-07-11', '', true, '$ 4.000,01', '#007777'],
-                        ];
-
-                        jspreadsheet(document.getElementById('spreadsheet'), {
-                            data: data,
-                            columns: [
-                                { type: 'text', title: 'Car', width: 90 },
-                                { type: 'dropdown', title: 'Make', width: 120, source: ["Alfa Romeo", "Audi", "Bmw", "Chevrolet", "Chrystler"] },
-                                { type: 'calendar', title: 'Available', width: 120 },
-                                { type: 'image', title: 'Photo', width: 120 },
-                                { type: 'checkbox', title: 'Stock', width: 80 },
-                                { type: 'numeric', title: 'Price', mask: '$ #.##,00', width: 80, decimal: ',' },
-                                { type: 'color', width: 80, render: 'square' }
-                            ],
-                            tableOverflow: true,  // 테이블이 div 크기에 맞도록 설정
-                            tableHeight: '500px'  // 테이블의 높이를 500px로 설정
-
-                        });
-                    });
-                </script>
 
                 <div class="card mb-4">
                     <div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div>
@@ -204,41 +174,36 @@
 
 <script>
     const test = () => {
-        axios.get('/api/movie/list')
+        axios.get('/api/theater/list')
             .then(function (res) {
                 console.log(res.data);
 
-                const movies = res.data;
+                const theaters = res.data;
 
                 // 영화 데이터를 2차원 배열로 변환
-                const movieData = movies.map(movie => [
-                    movie.id,
-                    movie.title,
-                    movie.genre || '',
-                    movie.director || '',
-                    movie.plot || '',
-                    movie.runningTime || 0,
-                    movie.rate || 0,
-
+                const theaterData = theaters.map(theater => [
+                    theater.id,
+                    theater.name,
+                    theater.room,
+                    theater.capacity,
+                    theater.location
                 ]);
 
                 // jSpreadsheet로 데이터 표시
                 const table = jspreadsheet(document.getElementById('responseText'), {
-                    data: movieData,
+                    data: theaterData,
                     columns: [
                         {type: 'text', title: 'ID', width: 50},
-                        {type: 'text', title: 'Title', width: 150},
-                        {type: 'text', title: 'Genre', width: 100},
-                        {type: 'text', title: 'Director', width: 150},
-                        {type: 'text', title: 'Plot', width: 200},
-                        {type: 'text', title: 'Running Time', width: 100},
-                        {type: 'text', title: 'Rate', width: 50},
+                        {type: 'text', title: 'NAME', width: 150},
+                        {type: 'text', title: 'ROOM', width: 100},
+                        {type: 'text', title: 'CAPACITY', width: 150},
+                        {type: 'text', title: 'LOCATION', width: 200},
                         {type: 'checkbox', title: 'Delete', width: 100}
                     ],
                     search: true,
                     pagination: 10,   // 페이지당 10개의 영화 표시
                     freezeColumns: 1, // 첫 번째 열 고정
-                    minDimensions: [8, 10], // 최소 차원 (열, 행)
+                    minDimensions: [6, 10], // 최소 차원 (열, 행)
                     tableOverflow: true,   // 테이블이 div의 크기에 맞게 overflow 설정
                     tableHeight: '500px',  // 테이블 높이 설정
                     tableWidth: '100%',    // 테이블 너비 설정
@@ -255,11 +220,11 @@
                             // 각 행을 순회하여 체크박스가 선택된 경우 movieId 수집
                             // 각 행을 순회하여 체크박스가 선택된 경우 movieId 수집
                             data.forEach((row, index) => {
-                                const isChecked = table.getValueFromCoords(7, index); // 7번째 열이 체크박스라고 가정
-                                const movieId = table.getValueFromCoords(0, index);   // 1번째 열이 movieId라고 가정
+                                const isChecked = table.getValueFromCoords(5, index); // 7번째 열이 체크박스라고 가정
+                                const theaterId = table.getValueFromCoords(0, index);   // 1번째 열이 movieId라고 가정
 
                                 if (isChecked === true) { // 체크박스가 체크된 경우
-                                    checkedRows.push(movieId); // movieId를 배열에 추가
+                                    checkedRows.push(theaterId); // movieId를 배열에 추가
                                 }
                             });
 
@@ -267,7 +232,7 @@
 
                             if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
                                 // 선택된 movieId 리스트를 서버로 전송
-                                axios.post(`/api/movie/deleteMany`, checkedRows)
+                                axios.post(`/api/theater/deleteMany`, checkedRows)
                                     .then(res => {
                                         if (res.data !== 0) {
                                             alert('영화 정보 삭제 성공!');

@@ -5,6 +5,7 @@ import com.nc13.moviemates.repository.TheaterRepository;
 import com.nc13.moviemates.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,12 @@ public class TheaterServiceImpl implements TheaterService{
     @Override
     public Long count() {
         return repository.count();
+    }
+
+    @Override
+    @Transactional
+    public Long deleteMany(List<Long> theaterIdList) {
+        return repository.deleteMany(theaterIdList);
     }
 
     @Override
