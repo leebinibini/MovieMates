@@ -1,10 +1,13 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.entity.HistoryEntity;
 import com.nc13.moviemates.entity.ReservationEntity;
+import com.nc13.moviemates.service.HistoryService;
 import com.nc13.moviemates.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,8 @@ import java.util.Optional;
 public class ReservationController {
     @Qualifier("reservationServiceImpl")
     private final ReservationService service;
+
+
 
     @GetMapping()
     public ResponseEntity<List<?>> getList() {

@@ -4,12 +4,10 @@ import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +22,8 @@ public class MovieController {
         List<String> title = service.getNowPlayingList();
         return ResponseEntity.ok(title);
     }
+    // 홈페이지 화면 리스트 가져오기
+
 
 
 
