@@ -22,7 +22,7 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
 
     @Override
     public MovieEntity getById(Long id) {
-        throw new UnsupportedOperationException("UnImpleamentdeMethod'getById'");
+        throw new UnsupportedOperationException("UnImpleamentedMethod'getById'");
     }
 
 

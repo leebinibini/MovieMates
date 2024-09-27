@@ -58,6 +58,15 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    $(document).ready(function() {
+        console.log("ready!");
+
+        axios.get('https://localhost:8080/api/movie/${movieId}', {});
+
+    });
+</script>
+
+<script>
     // 영화 수정 로직
     document.addEventListener('DOMContentLoaded', function () {
         //const movieId = /* 영화 ID 가져오는 로직 (URL에서, 혹은 전역변수) */;

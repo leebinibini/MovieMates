@@ -28,7 +28,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
-
     private final MovieRepository repository;
     private final MovieSelenium movieSelenium;
 
