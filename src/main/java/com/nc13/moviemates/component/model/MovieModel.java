@@ -20,6 +20,7 @@ public class MovieModel {
     private int runningTime;
     private Long reviewId;
     private String director;
+    private int booking;
 
     public MovieModel(String title, Date releaseDate, String runningTime, String information, String genre, String director) {
     }

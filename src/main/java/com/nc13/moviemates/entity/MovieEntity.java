@@ -28,4 +28,5 @@ public class MovieEntity{
     private int runningTime;
     private String posterUrl;
     private String ageClass;
+    private int booking;
 }
