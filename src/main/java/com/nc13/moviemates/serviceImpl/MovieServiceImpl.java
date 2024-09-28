@@ -36,6 +36,14 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    @Transactional
+    public Boolean update(List<MovieModel> movieList) {
+        System.out.println("영화서비스 컨트롤러 진입 성공!");
+        movieList.forEach(movie -> repository.update(movie));
+        return true;
+    }
+
+    @Override
     public List<String> getNowPlayingList() {
         return repository.getNowPlayingList();
     }

@@ -60,6 +60,10 @@ public class AdminController {
         return "admin/password";
     }
 
+    @GetMapping("/movie")
+    public String adminToMovie() {
+        return "admin/movie/list";
+    }
 
     @GetMapping("layout-static")
     public String adminLayoutStatic() {

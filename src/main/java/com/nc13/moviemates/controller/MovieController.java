@@ -20,11 +20,6 @@ import java.util.Optional;
 public class MovieController {
     private final MovieService service;
 
-    @GetMapping()
-    public String toMovieAdmin(){
-        return "admin/movie/list";
-    }
-
 
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
@@ -56,15 +51,23 @@ public class MovieController {
         return ResponseEntity.ok(service.save(movie));
     }
 
-    @GetMapping("/update/{id}")
-    public String toMovieUpdate( ){
-        return "admin/movie/update";
-    }
+//    @GetMapping("/update/{id}")
+//    public String toMovieUpdate( ){
+//        return "admin/movie/update";
+//    }
 
 //    @PutMapping
-//    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
+//    public ResponseEntity<Boolean> update(@RequestBody MovieModel movie){
 //        return ResponseEntity.ok(service.save(movie));
 //    }
+
+
+    @PostMapping("/update")
+    public ResponseEntity<Boolean> update(@RequestBody List<MovieModel> movieList) {
+        System.out.println("영화 수정 컨트롤러 진입 성공!");
+        System.out.println("영화리스트" + movieList);
+        return ResponseEntity.ok(service.update(movieList));
+    }
 
     @ResponseBody
     @PostMapping("/deleteMany")
