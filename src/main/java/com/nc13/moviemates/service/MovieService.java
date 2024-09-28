@@ -1,6 +1,8 @@
 package com.nc13.moviemates.service;
 
 import com.nc13.moviemates.entity.MovieEntity;
+import com.querydsl.core.Tuple;
+
 import java.util.List;
 import java.util.Optional;
 public interface MovieService {
@@ -8,6 +10,8 @@ public interface MovieService {
     MovieEntity findEntityById(Long id);
 
     List<MovieEntity> findAll();
+
+    List<Tuple> findChart();
 
     List<String> getNowPlayingList();
 

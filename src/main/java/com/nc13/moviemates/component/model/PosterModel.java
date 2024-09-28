@@ -13,6 +13,5 @@ import org.springframework.stereotype.Component;
 public class PosterModel {
     private Long id;
     private Long movieId;
-    private String filepath;
-    private String filename;
+    private String url;
 }

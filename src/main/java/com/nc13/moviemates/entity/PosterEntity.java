@@ -16,6 +16,5 @@ public class PosterEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long movieId;
-    private String filepath;
-    private String filename;
+    private String url;
 }
