@@ -15,6 +15,8 @@ public interface MovieService {
 
     Long save(MovieModel movie);
 
+    Boolean update(List<MovieModel> movieList);
+
     List<String> getNowPlayingList();
 
     Optional<MovieEntity> findById(Long id);
