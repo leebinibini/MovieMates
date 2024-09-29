@@ -26,7 +26,8 @@ public class MovieEntity{
     private String plot;
     private String releaseDate;
     private int runningTime;
-    private String posterUrl;
+    private String WidthPosterUrl;
     private String ageClass;
     private int booking;
+    private String lengthPosterUrl;
 }

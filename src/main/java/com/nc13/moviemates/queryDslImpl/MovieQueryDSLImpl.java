@@ -47,17 +47,14 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
                 .fetch();
     }
 
-    public List<Tuple> findChart(){
+    public List<MovieEntity> findChart(){
         QMovieEntity movie = QMovieEntity.movieEntity;
-        QPosterEntity poster = QPosterEntity.posterEntity; // PosterEntity 추가
 
         return jpaQueryFactory
-                .select(movie, poster.url) // MovieEntity와 Poster URL을 함께 선택
-                .from(movie)
-                .leftJoin(poster).on(movie.id.eq(poster.movieId)) // MovieEntity의 id와 PosterEntity의 movieId로 조인
-                .orderBy(movie.booking.desc()) // 예매율(booking)로 내림차순 정렬
-                .limit(5) // 상위 5개만 가져오기
-                .fetch();
+                .selectFrom(movie)  // movie 엔티티 전체 선택
+                .orderBy(movie.booking.desc())  // 예매율로 내림차순 정렬
+                .limit(5)  // 상위 5개 데이터 가져오기
+                .fetch();  // 결과 목록 반환
     }
 
 }

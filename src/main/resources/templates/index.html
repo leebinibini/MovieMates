@@ -72,14 +72,14 @@
                 </ol>
                 <div class="carousel-inner" role="listbox" >
                     <div class="item active" th:each="movie: ${movies}" >
-                        <div class="fill"  th:data-bg-image="${movie.posterUrl}">
+                        <div class="fill"  th:data-bg-image="${movie.widthPosterUrl}">
                             <div class="bs-slider-overlay"></div>
                             <div class="container movie-slider-container">
                                 <div class="row">
                                     <div class="col-sm-12 movie-slider-content">
                                         <div class="slider-content">
                                             <ul class="subtitle"  data-animation="animated bounceInRight">
-                                                <li th:text="${genre}">Genre</li>
+                                                <li th:text="${movie.genre}">Genre</li>
                                             </ul>
 
                                             <div th:text="${movie.title}" class="title" data-animation="animated bounceInRight"><i>(2017)</i></div>
@@ -114,16 +114,14 @@
                         </div>
                     </div>
                     <div class="item" th:each="movie: ${movies}">
-                        <div class="fill" th:data-bg-image="${movie.posterUrl}">
+                        <div class="fill" th:data-bg-image="${movie.widthPosterUrl}">
                             <div class="bs-slider-overlay"></div>
                             <div class="container movie-slider-container">
                                 <div class="row">
                                     <div class="col-sm-12 movie-slider-content">
                                         <div class="slider-content">
                                             <ul class="subtitle"  data-animation="animated bounceInRight">
-                                                <li th:text="${genre}">Genre</li>
-                                                <li th:text="${genre}">Genre</li>
-                                                <li th:text="${genre}">Genre</li>
+                                                <li th:text="${movie.genre}">Genre</li>
                                             </ul>
                                             <div class="title" data-animation="animated bounceInRight" th:text="${movie.title}"> <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
@@ -157,14 +155,14 @@
                         </div>
                     </div>
                     <div class="item" th:each="movie: ${movies}">
-                        <div class="fill" th:data-bg-image="${movie.posterUrl}">
+                        <div class="fill" th:data-bg-image="${movie.widthPosterUrl}">
                             <div class="bs-slider-overlay"></div>
                             <div class="container movie-slider-container">
                                 <div class="row">
                                     <div class="col-sm-12 movie-slider-content">
                                         <div class="slider-content">
                                             <ul class="subtitle"  data-animation="animated bounceInRight">
-                                                <li th:text="${genre}">Genre</li>
+                                                <li th:text="${movie.genre}">Genre</li>
                                             </ul>
                                             <div class="title" data-animation="animated bounceInRight" th:text="${movie.title}">
                                               <i>(1967)</i></div>
@@ -243,8 +241,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="swiper-slide">
-                                        <div class="movie-image" th:data-bg-image="@{images/carousel/movie-2.jpg}">
+                                    <div class="swiper-slide" th:each="poster: ${posters}">
+                                        <div class="movie-image" th:data-bg-image="${poster.url}">
                                             <div class="entry-hover">
                                                 <div class="entry-actions">
                                                     <a href="https://vimeo.com/28177848"
@@ -461,68 +459,20 @@
                     <div class="row">
                         <div class="col-sm-7 col-xs-12">
                             <h3>box office</h3>
-                            <ul class="wpc-box-list" th:each="chart: ${chart}">
-                                <li class="wpc-box-item">
+                            <ul class="wpc-box-list" >
+                                <li class="wpc-box-item" th:each="chart: ${charts}">
+                                    <script> console.log([[${charts}]])</script>
                                     <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-1.jpg}" alt="thumb"></li>
+                                        <li class="bx-item-t"><img th:src="${chart.lengthPosterUrl}" alt="thumb" width="58" height="87"></li>
                                         <li class="bx-item-c">1</li>
                                         <li class="bx-item-title">
-                                            <h4>X-Men: Apocalypse</h4>
-                                            <span>Action, thriller</span>
+                                            <h4 th:text="${chart.title}"></h4>
+                                            <span th:text="${chart.genre}"></span>
                                         </li>
                                         <li class="bx-item-d">1 week</li>
                                         <li class="bx-item-m">1.1m</li>
                                     </ol>
                                 </li>
-                                <li class="wpc-box-item">
-                                    <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-2.jpg}" alt="thumb"></li>
-                                        <li class="bx-item-c">2</li>
-                                        <li class="bx-item-title">
-                                            <h4>Warcraft</h4>
-                                            <span>Action, thriller</span>
-                                        </li>
-                                        <li class="bx-item-d">2 week</li>
-                                        <li class="bx-item-m">1.2m</li>
-                                    </ol>
-                                </li>
-                                <li class="wpc-box-item">
-                                    <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-3.jpg}" alt="thumb"></li>
-                                        <li class="bx-item-c">3</li>
-                                        <li class="bx-item-title">
-                                            <h4>Hobbit: The battle</h4>
-                                            <span>Action, thriller</span>
-                                        </li>
-                                        <li class="bx-item-d">3 week</li>
-                                        <li class="bx-item-m">1.3m</li>
-                                    </ol>
-                                </li>
-                                <li class="wpc-box-item">
-                                    <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-4.jpg}" alt="thumb"></li>
-                                        <li class="bx-item-c">4</li>
-                                        <li class="bx-item-title">
-                                            <h4>James Bond: Spectre</h4>
-                                            <span>Action, thriller</span>
-                                        </li>
-                                        <li class="bx-item-d">4 week</li>
-                                        <li class="bx-item-m">1.4m</li>
-                                    </ol>
-                                </li>
-                                <li class="wpc-box-item">
-                                    <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-5.jpg}" alt="thumb"></li>
-                                        <li class="bx-item-c">5</li>
-                                        <li class="bx-item-title">
-                                            <h4>London has fallen</h4>
-                                            <span>Action, thriller</span>
-                                        </li>
-                                        <li class="bx-item-d">5 week</li>
-                                        <li class="bx-item-m">1.5m</li>
-                                    </ol>
-                                </li>
-
                             </ul>
                         </div>
                         <div class="col-sm-5 col-xs-12 ">

@@ -11,5 +11,5 @@ public interface MovieQueryDSL {
     Boolean exists(Long id);
     Long getRowCount();
     List<String> getNowPlayingList();
-    List<Tuple> findChart();
+    List<MovieEntity> findChart();
 }

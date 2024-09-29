@@ -15,5 +15,5 @@ public interface MovieRepository extends JpaRepository<MovieEntity, Long>, Movie
     List<String> getNowPlayingList();
 
 
-    List<Tuple> findChart();
+    List<MovieEntity> findChart();
 }

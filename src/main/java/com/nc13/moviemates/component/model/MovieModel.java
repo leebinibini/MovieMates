@@ -13,14 +13,19 @@ import java.util.Date;
 @Builder
 public class MovieModel {
     private Long id;
+
     private String title;
-    private String information;
-    private Date releaseDate;
     private String genre;
-    private int runningTime;
-    private Long reviewId;
     private String director;
+    private String actors;
+    private double rate;
+    private String plot;
+    private String releaseDate;
+    private int runningTime;
+    private String widthPosterUrl;
+    private String ageClass;
     private int booking;
+    private String lengthPosterUrl;
 
     public MovieModel(String title, Date releaseDate, String runningTime, String information, String genre, String director) {
     }
