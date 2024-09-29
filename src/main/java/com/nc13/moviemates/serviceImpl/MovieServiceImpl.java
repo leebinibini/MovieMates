@@ -3,7 +3,6 @@ package com.nc13.moviemates.serviceImpl;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.repository.MovieRepository;
 import com.nc13.moviemates.service.MovieService;
-import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Tuple> findChart() {
+    public List<MovieEntity> findChart() {
         return repository.findChart();
     }
 

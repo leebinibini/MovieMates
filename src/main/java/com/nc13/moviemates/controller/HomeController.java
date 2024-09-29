@@ -37,16 +37,15 @@ public class HomeController {
                 }
             }
             // 현재 상영중인 영화 세로 포스터
-            List<PosterEntity> poter = posterService.findAll();
+            List<PosterEntity> poster = posterService.findAll();
 
            //movie chart
-           List<Tuple> chart = movieService.findChart();
+            List<MovieEntity> chart = movieService.findChart();
             System.out.println(chart);
-            model.addAttribute("chart", chart);
-            model.addAttribute("posters", poter);
+            model.addAttribute("charts", chart);
+            model.addAttribute("posters", poster);
             model.addAttribute("movies", movie);
             model.addAttribute("genres", genreList);
-            System.out.println(genreList);
             return "index";
     }
 
