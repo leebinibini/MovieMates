@@ -1,5 +1,7 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.component.model.MovieModel;
+import com.nc13.moviemates.component.model.TheaterModel;
 import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.service.TheaterService;
 import lombok.RequiredArgsConstructor;
@@ -49,6 +51,13 @@ public class TheaterController {
     @PutMapping
     public ResponseEntity<Boolean> update(@RequestBody TheaterEntity theater){
         return ResponseEntity.ok(service.save(theater));
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<Boolean> update(@RequestBody List<TheaterModel> theaterList) {
+        System.out.println("극장 수정 컨트롤러 진입 성공!");
+        System.out.println("극장리스트" + theaterList);
+        return ResponseEntity.ok(service.update(theaterList));
     }
 
     @ResponseBody

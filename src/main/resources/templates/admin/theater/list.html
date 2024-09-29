@@ -66,10 +66,9 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" th:href="@{/api/admin/layout-static}">Movie</a>
+                            <a class="nav-link" th:href="@{/api/admin/movie}">Movie</a>
                             <a class="nav-link" th:href="@{/api/admin/layout-sidenav-light}">Light Sidenav</a>
-                            <a class="nav-link" th:href="@{/api/admin/movie/register}">영화정보 등록하기</a>
-                            <a class="nav-link" th:href="@{/api/movie/update}">영화정보 수정하기</a>
+                            <a class="nav-link" th:href="@{/api/theater}">Theater</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -141,8 +140,8 @@
                 <!-- Button and response area -->
                 <div>
                     <button onclick="test()">TEST</button>
-                    <button><a class="nav-link" th:href="@{/api/theater/register}">Register</a></button>
-                    <button onclick="update()">Edit</button>
+                    <button type="button" class="register-btn" id="register-btn" th:onclick="|location.href='@{/api/theater/register}'|">Register</button>
+                    <button class="save-btn" id="save-btn">Save</button>
                     <button class="delete-btn" id="delete-btn">Delete</button>
 
                     <p id="responseText"></p>
@@ -211,9 +210,36 @@
 
                     // jSpreadsheet가 로드된 후 실행
                     onload: function () {
-                        const button = document.getElementById('delete-btn');
+                        const saveBtn = document.getElementById('save-btn');
+                        const deleteBtn = document.getElementById('delete-btn');
 
-                        button.addEventListener('click', function () {
+                        // save 버튼 눌렀을 때
+                        saveBtn.addEventListener('click', function () {
+                            const data = table.getData();
+                            alert(data);
+
+                            // 2차원 배열 데이터를 TheaterModel 객체 배열로 변환
+                            const theaterData = data.map(row => {
+                                return {
+                                    id: row[0],
+                                    name: row[1],
+                                    room: row[2],
+                                    capacity: Number(row[3]),
+                                    location: row[4]
+                                };
+                            });
+
+                            console.log("극장 수정 정보 확인용: " +  theaterData);
+                            axios.post('/api/theater/update', theaterData)
+                                .then(res => {
+                                    console.log(res);
+                                    alert("저장 성공!!")
+                                })
+                                .catch(err => console.log("Error: " + err));
+                        })
+
+                        // 삭제 버튼 눌렀을 때
+                        deleteBtn.addEventListener('click', function () {
                             const checkedRows = [];
                             const data = table.getData();
 
