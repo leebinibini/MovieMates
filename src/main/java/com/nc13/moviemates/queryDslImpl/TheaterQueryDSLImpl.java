@@ -1,16 +1,24 @@
 package com.nc13.moviemates.queryDslImpl;
 
+import com.nc13.moviemates.component.model.TheaterModel;
+import com.nc13.moviemates.entity.QMovieEntity;
 import com.nc13.moviemates.entity.QTheaterEntity;
 import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.queryDsl.TheaterQueryDSL;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.querydsl.jpa.impl.JPAUpdateClause;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 @RequiredArgsConstructor
 public class TheaterQueryDSLImpl implements TheaterQueryDSL {
+    @PersistenceContext
+    private final EntityManager entityManager;
     private final JPAQueryFactory jpaQueryFactory;
     private final QTheaterEntity qTheater = QTheaterEntity.theaterEntity;
+
     @Override
     public List<TheaterEntity> getAll() {
         return jpaQueryFactory.selectFrom(qTheater).fetch();
@@ -34,6 +42,29 @@ public class TheaterQueryDSLImpl implements TheaterQueryDSL {
                 .execute();
 
         return deletedCount;
+    }
+
+    @Override
+    public void update(TheaterModel theater) {
+
+        if (theater.getId() == null) {
+            TheaterEntity ent = TheaterEntity.builder()
+                    .name(theater.getName())
+                    .room(theater.getRoom())
+                    .location(theater.getLocation())
+                    .capacity(theater.getCapacity())
+                    .build();
+            entityManager.persist(ent);
+        } else {
+            // ID가 존재하는 경우 업데이트 수행
+            JPAUpdateClause updateClause = new JPAUpdateClause(entityManager, qTheater);
+            updateClause
+                    .where(qTheater.id.eq(theater.getId()))
+                    .set(qTheater.name, theater.getName())
+                    .set(qTheater.room, theater.getRoom())
+                    .set(qTheater.location, theater.getLocation())
+                    .execute();
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.nc13.moviemates.queryDsl;
 
+import com.nc13.moviemates.component.model.TheaterModel;
 import com.nc13.moviemates.entity.TheaterEntity;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface TheaterQueryDSL {
     Long getRowCount();
 
     Long deleteMany(List<Long> theaterIdList);
+    void update(TheaterModel theaterModel);
 }

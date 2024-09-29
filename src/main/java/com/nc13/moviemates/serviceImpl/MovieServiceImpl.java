@@ -69,14 +69,6 @@ public class MovieServiceImpl implements MovieService {
         return repository.deleteMany(movieIdList);
     }
 
-//    @Override
-//    public Boolean delete(List<Long> movieIdList) {
-//        movieIdList.forEach(id -> repository.deleteById(id));
-//
-//        return movieIdList.stream().allMatch(id -> !repository.existsById(id));
-//    }
-
-
     @Override
     public Boolean deleteById(Long id) {
         repository.deleteById(id);

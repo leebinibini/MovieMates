@@ -51,10 +51,6 @@ public class MovieController {
         return ResponseEntity.ok(service.save(movie));
     }
 
-//    @GetMapping("/update/{id}")
-//    public String toMovieUpdate( ){
-//        return "admin/movie/update";
-//    }
 
 //    @PutMapping
 //    public ResponseEntity<Boolean> update(@RequestBody MovieModel movie){
