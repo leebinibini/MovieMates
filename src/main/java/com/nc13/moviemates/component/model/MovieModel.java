@@ -13,7 +13,6 @@ import java.util.Date;
 @Builder
 public class MovieModel {
     private Long id;
-
     private String title;
     private String genre;
     private String director;

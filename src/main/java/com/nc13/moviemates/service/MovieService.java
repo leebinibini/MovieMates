@@ -1,9 +1,11 @@
 package com.nc13.moviemates.service;
 
+import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
 
 import java.util.List;
 import java.util.Optional;
+
 public interface MovieService {
 
     MovieEntity findEntityById(Long id);
@@ -12,9 +14,10 @@ public interface MovieService {
 
     List<MovieEntity> findChart();
 
+    Long save(MovieModel movie);
+
     List<String> getNowPlayingList();
 
-    Boolean save(MovieEntity email);
 
     Optional<MovieEntity> findById(Long id);
 
