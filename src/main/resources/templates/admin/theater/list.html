@@ -3,23 +3,24 @@
 <head th:replace="~{/admin/head :: headContent}"></head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspreadsheet-ce/dist/jspreadsheet.min.css" type="text/css" />
 
+
 <!-- Custom CSS for table styling -->
 <style>
     /* 테이블 외곽 스타일 */
     #responseText {
         margin-top: 20px;
-        background-color: #f4f4f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 15px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 20px;
     }
 
     /* 셀 스타일링 */
     .jexcel td {
-        border: 1px solid #ccc;
-        padding: 8px;
+        border: 1px solid #ddd;
+        padding: 12px;
         font-size: 14px;
-        background-color: #f9f9f9;
+        background-color: #fff;
     }
 
     /* 헤더 스타일 */
@@ -32,7 +33,7 @@
 
     /* 행 hover 효과 */
     .jexcel tr:hover td {
-        background-color: #e6f7ff;
+        background-color: #e9f5ff;
     }
 
     /* 텍스트 중앙 정렬 */
@@ -44,6 +45,81 @@
     .jexcel {
         width: 100%;
         border-spacing: 0;
+    }
+
+    /* 버튼 스타일 */
+    .btn {
+        margin: 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    /* 페이지 레이아웃 */
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .content-header {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb {
+        background: none;
+        padding: 0;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: ">";
+    }
+
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    footer {
+        background-color: #f8f9fa;
+        padding: 15px 0;
+    }
+
+    footer a {
+        color: #6c757d;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    footer a:hover {
+        color: #343a40;
     }
 </style>
 <body class="sb-nav-fixed">
@@ -122,33 +198,32 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Theater</h1>
+                <h1 class="mt-4">Theater Management</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="@{/api/admin}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Theater</li>
                 </ol>
-                <div th:insert="~{admin/cards :: cards}"></div>
 
                 <div class="card mb-4">
                     <div class="card-body">
                         <p class="mb-0">
-                            This page is an example of using static navigation...
+                            Manage theaters and edit information easily through this table interface.
                         </p>
                     </div>
                 </div>
 
                 <!-- Button and response area -->
                 <div>
-                    <button onclick="test()">TEST</button>
-                    <button type="button" class="register-btn" id="register-btn" th:onclick="|location.href='@{/api/theater/register}'|">Register</button>
-                    <button class="save-btn" id="save-btn">Save</button>
-                    <button class="delete-btn" id="delete-btn">Delete</button>
+                    <button class="btn btn-primary" onclick="test()">TEST</button>
+                    <button class="btn btn-success" id="register-btn" th:onclick="|location.href='@{/api/theater/register}'|">Register</button>
+                    <button class="btn btn-primary" id="save-btn">Save</button>
+                    <button class="btn btn-danger" id="delete-btn">Delete</button>
 
-                    <p id="responseText"></p>
+                    <div id="responseText"></div>
                 </div>
 
                 <div class="card mb-4">
-                    <div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div>
+                    <div class="card-body">The static navigation remains fixed at the top even when scrolling.</div>
                 </div>
             </div>
         </main>
@@ -244,34 +319,33 @@
                             const data = table.getData();
 
                             // 각 행을 순회하여 체크박스가 선택된 경우 movieId 수집
-                            // 각 행을 순회하여 체크박스가 선택된 경우 movieId 수집
                             data.forEach((row, index) => {
-                                const isChecked = table.getValueFromCoords(5, index); // 7번째 열이 체크박스라고 가정
-                                const theaterId = table.getValueFromCoords(0, index);   // 1번째 열이 movieId라고 가정
+                                const isChecked = table.getValueFromCoords(5, index); // 체크박스 열의 값 가져오기
+                                const theaterId = table.getValueFromCoords(0, index);   // 첫 번째 열에서 theaterId 가져오기
 
                                 if (isChecked === true) { // 체크박스가 체크된 경우
-                                    checkedRows.push(theaterId); // movieId를 배열에 추가
+                                    checkedRows.push(theaterId); // theaterId를 배열에 추가
                                 }
                             });
 
-                            console.log(checkedRows); // 선택된 영화 ID 출력
+                            console.log(checkedRows); // 선택된 극장 ID 출력
 
                             if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
-                                // 선택된 movieId 리스트를 서버로 전송
+                                // 선택된 theaterId 리스트를 서버로 전송
                                 axios.post(`/api/theater/deleteMany`, checkedRows)
                                     .then(res => {
                                         if (res.data !== 0) {
-                                            alert('영화 정보 삭제 성공!');
+                                            alert('극장 정보 삭제 성공!');
                                             location.reload();
                                         } else {
-                                            alert('영화 정보 삭제 실패!');
+                                            alert('극장 정보 삭제 실패!');
                                         }
                                     })
                                     .catch(err => {
                                         console.log(err);
                                     });
                             } else {
-                                alert('삭제할 영화를 선택해주세요.');
+                                alert('삭제할 극장을 선택해주세요.');
                             }
 
                         })
