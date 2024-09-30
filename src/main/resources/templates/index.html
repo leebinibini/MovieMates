@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head.html::headFragment}"></head>
-<head>
+<head th:insert="~{fragments/head.html::headFragment}">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anvogue - My Account</title>
@@ -167,8 +166,8 @@
                                             <div class="title" data-animation="animated bounceInRight" th:text="${movie.title}">
                                               <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
-                                                <a href="javascript:;" class="btn-trailer">watch trailer</a> <a
-                                                    href="javascript:;" class="btn-ticket">buy ticket</a>
+                                                <a href="javascript:;" class="btn-trailers video-player" >watch trailer</a>
+                                                <a href="#order" class="btn-ticket order_btn">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -221,8 +220,8 @@
                                             <div class="entry-hover">
                                                 <div class="entry-actions">
                                                     <a href="https://vimeo.com/28177848"
-                                                        class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
+                                                        class="btn-trailers video-player" >watch trailer</a>
+                                                    <a href="#order" class="btn-ticket order_btn">buy ticket</a>
                                                 </div>
                                             </div>
                                             <div class="entry-desc">
@@ -247,7 +246,7 @@
                                                 <div class="entry-actions">
                                                     <a href="https://vimeo.com/28177848"
                                                         class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
+                                                    <a href="#order" class="btn-ticket order_btn " >buy ticket</a>
                                                 </div>
                                             </div>
                                             <div class="entry-desc">
@@ -277,10 +276,10 @@
                                     <div class="swiper-slide">
                                         <div class="movie-image" th:data-bg-image="@{images/carousel/movie-3.jpg}">
                                             <div class="entry-hover">
-                                                <div class="entry-actions">
+                                                <div class="entry-actions" th:each="poster: ${posters}">
                                                     <a href="https://vimeo.com/28177848"
                                                         class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
+                                                    <a href="#order" class="btn-ticket order_btn " >buy ticket</a>
                                                 </div>
                                             </div>
                                             <div class="entry-desc">
@@ -312,7 +311,7 @@
                                                 <div class="entry-actions">
                                                     <a href="https://vimeo.com/28177848"
                                                         class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
+                                                    <a href="#order" class="btn-ticket order_btn " >buy ticket</a>
                                                 </div>
                                             </div>
                                             <div class="entry-desc">
@@ -344,7 +343,7 @@
                                                 <div class="entry-actions">
                                                     <a href="https://vimeo.com/28177848"
                                                         class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
+                                                    <a href="#order" class="btn-ticket order_btn "  >buy ticket</a>
                                                 </div>
                                             </div>
                                             <div class="entry-desc">
@@ -373,10 +372,10 @@
                                     <div class="swiper-slide">
                                         <div class="movie-image" th:data-bg-image="@{images/carousel/movie-6.jpg}">
                                             <div class="entry-hover">
-                                                <div class="entry-actions">
+                                                <div class="entry-actions" th:each="poster: ${posters}">
                                                     <a href="https://vimeo.com/28177848"
                                                         class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
+                                                    <a href="#order" class="btn-ticket order_btn">buy ticket</a>
                                                 </div>
                                             </div>
                                             <div class="entry-desc">
@@ -680,17 +679,17 @@
                                 <div class="wpc-content">
                                     <h3>location</h3>
                                     <select name="location">
-                                        <option>Tenguu Cinema Tysons corner</option>
+                                        <option>gangnam</option>
                                         <option>Tenguu Cinema </option>
                                         <option>Tenguu Cinema corner</option>
                                         <option>Tenguu Cinema Tysons</option>
                                     </select>
-                                    <h3 class="mt3">Movie</h3>
-                                    <select>
-                                        <option>Dead pool</option>
-                                        <option>THE BATTLE OF ALGIERS (DI ALGERI)</option>
-                                        <option>LORD OF THE RINGS: THE RETURN OF THE KINGS</option>
-                                        <option>Tenguu Cinema Tysons corner</option>
+                                    <h3>Movie</h3>
+                                    <select id="movie-selection">
+                                        <option value="deadpool">Dead pool</option>
+                                        <option value="battle-of-algiers">THE BATTLE OF ALGIERS (DI ALGERI)</option>
+                                        <option value="lotr">LORD OF THE RINGS: THE RETURN OF THE KINGS</option>
+                                        <option value="cinema-tysons">Tenguu Cinema Tysons corner</option>
                                     </select>
                                     <h3 class="mt3">Date</h3>
                                     <input type='date' class="datetime" />
@@ -735,7 +734,43 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#movie-selection').on('change', function(event) {
+            event.preventDefault();
 
+            var movieId = $(this).val();
+            alert("영화번호:" +movieId);// 선택한 영화의 movieId를 가져옴
+            console.log("영화번호:" +movieId);
+            // 영화 ID로 영화관 및 상영 정보를 가져옴
+            axios.get(`/api/schedules/order/${movieId}`)
+                .then(function(res) {
+                    console.log(res.data);
+                    var cinemas = res.data.name; // 영화관 목록
+                    var schedules = res.data.show; // 상영 시간 목록
+
+                    // 영화관 선택 영역 업데이트
+                    var cinemaSelect = $('#cinema-selection');
+                    cinemaSelect.empty(); // 기존 옵션 초기화
+
+                    cinemas.forEach(function(cinema) {
+                        cinemaSelect.append(`<option value="${cinema.id}">${cinema.name}</option>`);
+                    });
+
+                    // 상영 시간 선택 영역 업데이트
+                    var scheduleList = $('#schedule-list');
+                    scheduleList.empty(); // 기존 상영 시간 초기화
+
+                    schedules.forEach(function(schedule) {
+                        scheduleList.append(`<li><a href="javascript:;"><i>${schedule.show_time}</i></a></li>`);
+                    });
+
+                })
+                .catch(function(err) {
+                    console.error('Error fetching schedules:', err);
+                });
+        });
+
+    </script>
     <div>
         <button onclick="test()">TEST</button>
         <p id="responseText"></p>
