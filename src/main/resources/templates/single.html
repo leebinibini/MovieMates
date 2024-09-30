@@ -29,16 +29,16 @@
     <div class="container">
         <div class="row">
            <div class="col-md-6 col-sm-6 col-xs-4">
-                <a href="./" id="logo" title="Tenguu" class="logo-image-white" data-bg-image="images/logo-white.png">Tenguu
+                <a th:href="@{/}" id="logo" title="Tenguu" class="logo-image-white" th:data-bg-image="@{images/logo-white.png}">Tenguu
                 </a>
             </div>
              <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
                 <div class="header_author">
                     <a href="#">Amanda green</a>
-                    <img src="images/user.png" class="user" alt="user">
+                    <img th:src="@{images/user.png}" class="user" alt="user">
                 </div>
                 <div class="header_ticket">
-                    <a href="#order" class="order_btn">My tickets</a>
+                    <a th:href="@{/order}" class="order_btn">My tickets</a>
                     <span>3</span>
                 </div>
                 <a href="javascript:;" id="header-search"></a>
@@ -52,51 +52,116 @@
   <nav class="overlay-menu">
     <ul >
         <li ><a href="./">Home</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="single.html">Single</a></li>
-        <li><a href="#order" class="order_btn">Order</a></li>
+        <li><a th:href="@{/single}">Single</a></li>
+        <li><a th:href="@{/order}" class="order_btn">Order</a></li>
     </ul>
   </nav>
 </div>            </div>
         </div>
     </div>
-</header><section class="section-content pv12 bg-cover" data-bg-image="images/blog/bg-single.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <article class="blog-item single" >
-                    <div class="col-md-4 col-sm12 post-image hover-dark" data-bg-image="images/blog/single_thumb.jpg">
-                        <a href="https://vimeo.com/28177848" class="video-player"><i class="fa fa-play"></i></a>
-                    </div>
-                    <div class="col-md-8 col-sm-12 col-xs-12 ph0">
-                        <div class="post-content bg-cover" data-bg-image="images/blog/post-single.jpg">
-                            <div class="content-meta"> 
-                                <h2 class="entry-title">Lord of the rings: The return 
-                                of the king
-                                <span>Synopsis</span>
-                                </h2>
-                                <div class="social-links">
-                                    <a href="javascript:;"><i class="fa fa-facebook"></i></a>
-                                    <a href="javascript:;"><i class="fa fa-twitter"></i></a>
-                                    <a href="javascript:;"><i class="fa fa-user"></i></a>
-                                </div>
-                            </div>
-                            
-                            <p class="entry-text">Continually aggregate cross-platform opportunities vis-a-vis high-quality intellectual capital. Efficiently aggregate seamless "outside the box" thinking for enterprise growth strategies. Assertively cultivate top-line ROI and timely relationships authoritatively matrix.</p>
-                            <div class="info-content">
-                                <ul class="item-info">
-                                    <li><span>Running Time:</span>  <p>1hr 48 min</p></li>
-                                    <li><span>Genre:</span>  <p>Action ,triller</p></li>
-                                    <li><span>Director:</span>  <p>Timothy Miller</p></li>
-                                    <li><span>Cast:</span>  <p>Monica Baccarin , Ryan Ray</p></li>
-                                    <li><span>Release Date:</span>  <p>Fabruary 12,2016</p></li>
-                                </ul>
-                                <div class="item-info-rate">
-                                    <div class="chart-cirle">
-                                        <div class="chart-circle-l">
-                                            <div class="circle-chart" data-circle-width="7" data-percent="64" data-text="6.4">
+</header>
+        <div class="section-content pvb0 bg-cover" th:data-bg-image="@{images/coming-bg.jpg}">
+            <div class="container pvt80">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="slider_coming" class="flexslider">
+                            <ul class="slides">
+                                <li>
+                                    <article class="product-item hover-dark">
+                                        <div class="featured-image bg-cover">
+                                            <img th:src="@{images/carousel/movie-1.jpg}" alt="image" />
+                                            <a href="https://vimeo.com/28177848" class="video-player"><i
+                                                    class="fa fa-play"></i></a>
+                                        </div>
+                                        <div class="entry-title">
+                                            <ul class="subtitle">
+                                                <li>Action</li>
+                                                <li>Science Fiction</li>
+                                                <li>Adventure</li>
+                                            </ul>
+                                            <a href="javascript:;" class="title">Lord of the rings: The return of
+                                                the kings </a>
+                                            <div class="entry-date"><span>5 May 2017</span></div>
+                                            <div class="social-links">
+                                                <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-instagram"></i></a>
                                             </div>
-                                            <span>AMDB Rating</span>
+                                        </div>
+
+                                        <div class="entry-desc">
+                                            <div class="row mh0">
+                                                <div class="col-md-2 col-sm-3 col-xs-12 comming_movie ph0">
+                                                    <img th:src="@{images/carousel/movie-1.jpg}" alt="movie">
+                                                </div>
+                                                <div class="col-md-8 col-sm-7 col-xs-12 entry-text phl3">
+                                                    <h3>synopsis</h3>
+                                                    <p>Authoritatively pontificate error-free deliverables and
+                                                        technically sound mindshare. Quickly build ong-term
+                                                        high-impact outsourcing vis-a-vis best-of-breed communities.
+                                                        Collaboratively disseminate prospective supply chains after
+                                                        corporate "outside the box" thinking. Rapidiously promote
+                                                        interactive metrics for ethical materials. Professionally
+                                                        repurpose market-driven applications with...</p>
+                                                    <a href="javascript:;" class="btn order">pre order</a>
+                                                    <a href="javascript:;" class="btn more mhl20">Read more</a>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                                    <div class="wpc-skills animated">
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="56" data-speed="500"> 5.5
+                                                            </h5>
+                                                            <h6> - Photoshop</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="56%"
+                                                                     style="width: 56%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                                <li>
+                                    <article class="product-item hover-dark">
+                                        <div class="featured-image bg-cover">
+                                            <img th:src="@{images/carousel/movie-2.jpg}" alt="image" />
+                                            <a href="https://vimeo.com/28177848" class="video-player"><i
+                                                    class="fa fa-play"></i></a>
+                                        </div>
+                                        <div class="entry-title">
+                                            <ul class="subtitle">
+                                                <li>Action</li>
+                                                <li>Science Fiction</li>
+                                                <li>Adventure</li>
+                                            </ul>
+                                            <a href="javascript:;" class="title">Lord of the rings: The return of
+                                                the kings </a>
+                                            <div class="entry-date"><span>5 May 2017</span></div>
+                                            <div class="social-links">
+                                                <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-instagram"></i></a>
+                                            </div>
                                         </div>
                                         <div class="chart-circle-r">
                                             <div class="circle-chart" data-circle-width="7" data-percent="84" data-text="8.4">
@@ -104,7 +169,7 @@
                                             <span>Rotten Rating</span>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="wpc-skills animated">
                                         <div class="skill-block">
                                             <span class="timer" data-to="70" data-speed="500">70 - Metacritic </span>
@@ -121,7 +186,7 @@
                                     </div>
                                 </div>
                             </div>
-                                <div class="content-footer"> 
+                                <div class="content-footer">
                                     <span>Available time:</span>
                                     <ul class="mdate">
                                         <li><a href="javascript:;"><i>16:40</i></a></li>
@@ -132,10 +197,10 @@
                                     <a href="#order" class="order_btn btn order text-right"> By ticket</a>
                                 </div>
                         </div>
-                        
+
                     </div>
-                </article>     
-            </div> 
+                </article>
+            </div>
         </div>
         <div class="row">
                 <div class="col-md-12 mt4">
@@ -164,7 +229,7 @@
                                                 </div>
                                                 <h3 class="entry-title">The Mountian</h3>
                                                 <ul class="entry-date">
-                                                    <li>5 May 2017</li>  
+                                                    <li>5 May 2017</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -191,7 +256,7 @@
                                                 </div>
                                                 <h3 class="entry-title">The Mountian</h3>
                                                 <ul class="entry-date">
-                                                    <li>5 May 2017</li>  
+                                                    <li>5 May 2017</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -218,7 +283,7 @@
                                                 </div>
                                                 <h3 class="entry-title">The Mountian</h3>
                                                 <ul class="entry-date">
-                                                    <li>5 May 2017</li>  
+                                                    <li>5 May 2017</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -245,7 +310,7 @@
                                                 </div>
                                                 <h3 class="entry-title">The Mountian</h3>
                                                 <ul class="entry-date">
-                                                    <li>5 May 2017</li>  
+                                                    <li>5 May 2017</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -272,7 +337,7 @@
                                                 </div>
                                                 <h3 class="entry-title">The Mountian</h3>
                                                 <ul class="entry-date">
-                                                    <li>5 May 2017</li>  
+                                                    <li>5 May 2017</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -299,7 +364,7 @@
                                                 </div>
                                                 <h3 class="entry-title">The Mountian</h3>
                                                 <ul class="entry-date">
-                                                    <li>5 May 2017</li>  
+                                                    <li>5 May 2017</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -311,7 +376,7 @@
                     </div>
                 </div>
         </div>
-    </div> 
+    </div>
 </section>
 <div class="section-content pvb0">
     <div class="container  pv8">
@@ -354,7 +419,7 @@
                         </ol>
                     </div>
                 </div>
-             </div>   
+             </div>
             <div class="col-sm-6">
                 <div id="respond" class="comment-respond">
                     <h3 id="reply-title" class="comment-reply-title">Leave a comment</h3>
@@ -372,10 +437,10 @@
                         </p>
                         <p class="form-submit">
                             <button type="submit" class="button fill rectangle">Send to us</button>
-                        </p>                    
+                        </p>
                     </form>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </div>
@@ -436,11 +501,11 @@
                         <p>
                             California. AMC Dine-In Theatres Marina,
                             Street 26, Distritc 543 #108
-                         </p> 
+                         </p>
                          <p>
                             <i class="fa fa-mail"></i>Example@mail.com<br>
                             <i class="fa fa-phone"></i> + 123 456 7890
-                         </p> 
+                         </p>
                     </div>
                 </div>
                 <div class="col-md-1"></div>
@@ -558,5 +623,514 @@
     <script type="text/javascript" src="js/packages.min.js"></script>
     <script type="text/javascript" src="js/scripts.min.js"></script>
 <!-- jQuery easing plugin -->
+
+                                        <div class="entry-desc">
+                                            <div class="row mh0">
+                                                <div class="col-md-2 col-sm-3 col-xs-12 comming_movie ph0">
+                                                    <img th:src="@{images/carousel/movie-2.jpg}" alt="movie">
+                                                </div>
+                                                <div class="col-md-8 col-sm-7 col-xs-12 entry-text phl3">
+                                                    <h3>synopsis</h3>
+                                                    <p>Authoritatively pontificate error-free deliverables and
+                                                        technically sound mindshare. Quickly build ong-term
+                                                        high-impact outsourcing vis-a-vis best-of-breed communities.
+                                                        Collaboratively disseminate prospective supply chains after
+                                                        corporate "outside the box" thinking. Rapidiously promote
+                                                        interactive metrics for ethical materials. Professionally
+                                                        repurpose market-driven applications with...</p>
+                                                    <a href="javascript:;" class="btn order">pre order</a>
+                                                    <a href="javascript:;" class="btn more mhl20">Read more</a>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                                    <div class="wpc-skills animated">
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="56" data-speed="500"> 5.5
+                                                            </h5>
+                                                            <h6> - Photoshop</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="56%"
+                                                                     style="width: 56%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                                <li>
+                                    <article class="product-item hover-dark">
+                                        <div class="featured-image bg-cover">
+                                            <img th:src="@{images/carousel/movie-3.jpg}" alt="image" />
+                                            <a href="https://vimeo.com/28177848" class="video-player"><i
+                                                    class="fa fa-play"></i></a>
+                                        </div>
+                                        <div class="entry-title">
+                                            <ul class="subtitle">
+                                                <li>Action</li>
+                                                <li>Science Fiction</li>
+                                                <li>Adventure</li>
+                                            </ul>
+                                            <a href="javascript:;" class="title">Lord of the rings: The return of
+                                                the kings </a>
+                                            <div class="entry-date"><span>5 May 2017</span></div>
+                                            <div class="social-links">
+                                                <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-instagram"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="entry-desc">
+                                            <div class="row mh0">
+                                                <div class="col-md-2 col-sm-3 col-xs-12 comming_movie ph0">
+                                                    <img th:src="@{static/images/carousel/movie-3.jpg}" alt="movie">
+                                                </div>
+                                                <div class="col-md-8 col-sm-7 col-xs-12 entry-text phl3">
+                                                    <h3>synopsis</h3>
+                                                    <p>Authoritatively pontificate error-free deliverables and
+                                                        technically sound mindshare. Quickly build ong-term
+                                                        high-impact outsourcing vis-a-vis best-of-breed communities.
+                                                        Collaboratively disseminate prospective supply chains after
+                                                        corporate "outside the box" thinking. Rapidiously promote
+                                                        interactive metrics for ethical materials. Professionally
+                                                        repurpose market-driven applications with...</p>
+                                                    <a href="javascript:;" class="btn order">pre order</a>
+                                                    <a href="javascript:;" class="btn more mhl20">Read more</a>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                                    <div class="wpc-skills animated">
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="56" data-speed="500"> 5.5
+                                                            </h5>
+                                                            <h6> - Photoshop</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="56%"
+                                                                     style="width: 56%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                                <li>
+                                    <article class="product-item hover-dark">
+                                        <div class="featured-image bg-cover">
+                                            <img th:src="@{static/images/carousel/movie-4.jpg}" alt="image" />
+                                            <a href="https://vimeo.com/28177848" class="video-player"><i
+                                                    class="fa fa-play"></i></a>
+                                        </div>
+                                        <div class="entry-title">
+                                            <ul class="subtitle">
+                                                <li>Action</li>
+                                                <li>Science Fiction</li>
+                                                <li>Adventure</li>
+                                            </ul>
+                                            <a href="javascript:;" class="title">Lord of the rings: The return of
+                                                the kings </a>
+                                            <div class="entry-date"><span>5 May 2017</span></div>
+                                            <div class="social-links">
+                                                <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-instagram"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="entry-desc">
+                                            <div class="row mh0">
+                                                <div class="col-md-2 col-sm-3 col-xs-12 comming_movie ph0">
+                                                    <img th:src="@{images/carousel/movie-4.jpg}" alt="movie">
+                                                </div>
+                                                <div class="col-md-8 col-sm-7 col-xs-12 entry-text phl3">
+                                                    <h3>synopsis</h3>
+                                                    <p>Authoritatively pontificate error-free deliverables and
+                                                        technically sound mindshare. Quickly build ong-term
+                                                        high-impact outsourcing vis-a-vis best-of-breed communities.
+                                                        Collaboratively disseminate prospective supply chains after
+                                                        corporate "outside the box" thinking. Rapidiously promote
+                                                        interactive metrics for ethical materials. Professionally
+                                                        repurpose market-driven applications with...</p>
+                                                    <a href="javascript:;" class="btn order">pre order</a>
+                                                    <a href="javascript:;" class="btn more mhl20">Read more</a>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                                    <div class="wpc-skills animated">
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="56" data-speed="500"> 5.5
+                                                            </h5>
+                                                            <h6> - Photoshop</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="56%"
+                                                                     style="width: 56%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                                <li>
+                                    <article class="product-item hover-dark">
+                                        <div class="featured-image bg-cover">
+                                            <img th:src="@{images/carousel/movie-5.jpg}" alt="image" />
+                                            <a href="https://vimeo.com/28177848" class="video-player"><i
+                                                    class="fa fa-play"></i></a>
+                                        </div>
+                                        <div class="entry-title">
+                                            <ul class="subtitle">
+                                                <li>Action</li>
+                                                <li>Science Fiction</li>
+                                                <li>Adventure</li>
+                                            </ul>
+                                            <a href="javascript:;" class="title">Lord of the rings: The return of
+                                                the kings </a>
+                                            <div class="entry-date"><span>5 May 2017</span></div>
+                                            <div class="social-links">
+                                                <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-instagram"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="entry-desc">
+                                            <div class="row mh0">
+                                                <div class="col-md-2 col-sm-3 col-xs-12 comming_movie ph0">
+                                                    <img th:src="@{images/carousel/movie-5.jpg}" alt="movie">
+                                                </div>
+                                                <div class="col-md-8 col-sm-7 col-xs-12 entry-text phl3">
+                                                    <h3>synopsis</h3>
+                                                    <p>Authoritatively pontificate error-free deliverables and
+                                                        technically sound mindshare. Quickly build ong-term
+                                                        high-impact outsourcing vis-a-vis best-of-breed communities.
+                                                        Collaboratively disseminate prospective supply chains after
+                                                        corporate "outside the box" thinking. Rapidiously promote
+                                                        interactive metrics for ethical materials. Professionally
+                                                        repurpose market-driven applications with...</p>
+                                                    <a href="javascript:;" class="btn order">pre order</a>
+                                                    <a href="javascript:;" class="btn more mhl20">Read more</a>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                                    <div class="wpc-skills animated">
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="56" data-speed="500"> 5.5
+                                                            </h5>
+                                                            <h6> - Photoshop</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="56%"
+                                                                     style="width: 56%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                                <li>
+                                    <article class="product-item hover-dark">
+                                        <div class="featured-image bg-cover">
+                                            <img th:src="@{images/carousel/movie-6.jpg}" alt="image" />
+                                            <a href="https://vimeo.com/28177848" class="video-player"><i
+                                                    class="fa fa-play"></i></a>
+                                        </div>
+                                        <div class="entry-title">
+                                            <ul class="subtitle">
+                                                <li>Action</li>
+                                                <li>Science Fiction</li>
+                                                <li>Adventure</li>
+                                            </ul>
+                                            <a href="javascript:;" class="title">Lord of the rings: The return of
+                                                the kings </a>
+                                            <div class="entry-date"><span>5 May 2017</span></div>
+                                            <div class="social-links">
+                                                <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                                                <a href="javascript:;"><i class="fa fa-instagram"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="entry-desc">
+                                            <div class="row mh0">
+                                                <div class="col-md-2 col-sm-3 col-xs-12 comming_movie ph0">
+                                                    <img th:src="@{images/carousel/movie-6.jpg}" alt="movie">
+                                                </div>
+                                                <div class="col-md-8 col-sm-7 col-xs-12 entry-text phl3">
+                                                    <h3>synopsis</h3>
+                                                    <p>Authoritatively pontificate error-free deliverables and
+                                                        technically sound mindshare. Quickly build ong-term
+                                                        high-impact outsourcing vis-a-vis best-of-breed communities.
+                                                        Collaboratively disseminate prospective supply chains after
+                                                        corporate "outside the box" thinking. Rapidiously promote
+                                                        interactive metrics for ethical materials. Professionally
+                                                        repurpose market-driven applications with...</p>
+                                                    <a href="javascript:;" class="btn order">pre order</a>
+                                                    <a href="javascript:;" class="btn more mhl20">Read more</a>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                                    <div class="wpc-skills animated">
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="56" data-speed="500"> 5.5
+                                                            </h5>
+                                                            <h6> - Photoshop</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="56%"
+                                                                     style="width: 56%;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="skill-block">
+                                                            <h5 class="timer" data-to="70" data-speed="500">6.4
+                                                            </h5>
+                                                            <h6> - Metacritic</h6>
+                                                            <div class="skill-line">
+                                                                <div class="line-fill" data-width-pb="70%"
+                                                                     style="width: 70%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="carousel_coming" class="flexslider">
+                    <ul class="slides">
+                        <li class="thumb_item bg-cover">
+                            <div class="movie-image">
+                                <a href="#" class="btn fill">Selected</a>
+                                <img th:src="@{images/carousel/movie-1.jpg}" class="wpc_img" alt="image" />
+                                <div class="entry-desc">
+                                    <div class="rating">
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                    </div>
+                                    <h3 class="entry-title">The Mountian</h3>
+                                    <ul class="entry-date">
+                                        <li>5 May 2017</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="thumb_item bg-cover">
+                            <div class="movie-image">
+                                <a href="#" class="btn fill">Selected</a>
+                                <img th:src="@{images/carousel/movie-2.jpg}" class="wpc_img" alt="image" />
+                                <div class="entry-desc">
+                                    <div class="rating">
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                    </div>
+                                    <h3 class="entry-title">The Mountian</h3>
+                                    <ul class="entry-date">
+                                        <li>5 May 2017</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="thumb_item bg-cover">
+                            <div class="movie-image">
+                                <a href="#" class="btn fill">Selected</a>
+                                <img th:src="@{images/carousel/movie-3.jpg}" class="wpc_img" alt="image" />
+                                <div class="entry-desc">
+                                    <div class="rating">
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                    </div>
+                                    <h3 class="entry-title">The Mountian</h3>
+                                    <ul class="entry-date">
+                                        <li>5 May 2017</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="thumb_item bg-cover">
+                            <div class="movie-image">
+                                <a href="#" class="btn fill">Selected</a>
+                                <img th:src="@{images/carousel/movie-4.jpg}" class="wpc_img" alt="image" />
+                                <div class="entry-desc">
+                                    <div class="rating">
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                    </div>
+                                    <h3 class="entry-title">The Mountian</h3>
+                                    <ul class="entry-date">
+                                        <li>5 May 2017</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="thumb_item bg-cover">
+                            <div class="movie-image">
+                                <a href="#" class="btn fill">Selected</a>
+                                <img th:src="@{images/carousel/movie-5.jpg}" class="wpc_img" alt="image" />
+                                <div class="entry-desc">
+                                    <div class="rating">
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                    </div>
+                                    <h3 class="entry-title">The Mountian</h3>
+                                    <ul class="entry-date">
+                                        <li>5 May 2017</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="thumb_item bg-cover">
+                            <div class="movie-image">
+                                <a href="#" class="btn fill">Selected</a>
+                                <img th:src="@{images/carousel/movie-6.jpg}" class="wpc_img" alt="image" />
+                                <div class="entry-desc">
+                                    <div class="rating">
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                        <input name="stars" type="radio">
+                                        <label>☆</label>
+                                    </div>
+                                    <h3 class="entry-title">The Mountian</h3>
+                                    <ul class="entry-date">
+                                        <li>5 May 2017</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

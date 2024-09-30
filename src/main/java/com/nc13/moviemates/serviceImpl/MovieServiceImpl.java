@@ -1,5 +1,6 @@
 package com.nc13.moviemates.serviceImpl;
 
+import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.repository.MovieRepository;
 import com.nc13.moviemates.service.MovieService;
@@ -27,16 +28,27 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public Long save(MovieModel movie) {
+        MovieEntity ent = MovieEntity.builder()
+                .title(movie.getTitle())
+                .plot(movie.getPlot())
+                .build();
+
+        MovieEntity savedEntity = repository.save(ent);
+        long id = savedEntity.getId();
+        return existsById(id)? id : 0;
+    }
+
     public List<String> getNowPlayingList() {
         return repository.getNowPlayingList();
     }
 
-    @Override
+    /*@Override
     public Boolean save(MovieEntity movie) {
        MovieEntity ent = repository.save(movie);
        Long id = ent.getId();
        return existsById(id);
-    }
+    }*/
 
     @Override
     public Optional<MovieEntity> findById(Long id) {

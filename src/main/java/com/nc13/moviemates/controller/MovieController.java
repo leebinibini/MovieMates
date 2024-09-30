@@ -1,10 +1,10 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -15,6 +15,17 @@ import java.util.*;
 @RequestMapping("/api/movie")
 public class MovieController {
     private final MovieService service;
+
+    @GetMapping()
+    public String toMovieAdmin(){
+        return "admin/movie";
+    }
+
+
+    @GetMapping("/list")
+    public ResponseEntity<List<MovieEntity>> getList() {
+        return ResponseEntity.ok(service.findAll());
+    }
 
 
     @GetMapping("/names")
@@ -27,20 +38,23 @@ public class MovieController {
 
 
 
+
     @GetMapping("/{id}")
     public ResponseEntity <Optional<MovieEntity>> getById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping("")
-    public ResponseEntity<Boolean> insert (@RequestBody MovieEntity movie){
+    @PostMapping("/register")
+    @ResponseBody
+    public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
+        System.out.println("영화등록 화면에서 넘어온 값 : "+ movie);
         return ResponseEntity.ok(service.save(movie));
     }
 
-    @PutMapping
-    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
-        return ResponseEntity.ok(service.save(movie));
-    }
+//    @PutMapping
+//    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
+//        return ResponseEntity.ok(service.save(movie));
+//    }
 
     @DeleteMapping("/{id}")
     public Boolean deleteById(@PathVariable Long id){

@@ -49,7 +49,7 @@ public class HomeController {
 
     @GetMapping("/single")
     public String toSingle() {
-        return "single2";
+        return "single";
     }
 
     @GetMapping("details")
