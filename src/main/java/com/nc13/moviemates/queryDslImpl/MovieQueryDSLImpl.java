@@ -49,7 +49,6 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
 
     public List<MovieEntity> findChart(){
         QMovieEntity movie = QMovieEntity.movieEntity;
-
         return jpaQueryFactory
                 .selectFrom(movie)  // movie 엔티티 전체 선택
                 .orderBy(movie.booking.desc())  // 예매율로 내림차순 정렬

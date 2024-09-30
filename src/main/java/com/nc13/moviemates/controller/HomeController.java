@@ -4,7 +4,6 @@ import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.PosterEntity;
 import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.PosterService;
-import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +40,6 @@ public class HomeController {
 
            //movie chart
             List<MovieEntity> chart = movieService.findChart();
-            System.out.println(chart);
             model.addAttribute("charts", chart);
             model.addAttribute("posters", poster);
             model.addAttribute("movies", movie);
@@ -51,7 +49,7 @@ public class HomeController {
 
     @GetMapping("/single")
     public String toSingle() {
-        return "single";
+        return "single2";
     }
 
     @GetMapping("details")
