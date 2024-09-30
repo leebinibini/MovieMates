@@ -5,26 +5,35 @@
 
 <!-- Custom CSS for table styling -->
 <style>
+    /* 전체 레이아웃 및 색상 설정 */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f7fa;
+        color: #4a4a4a;
+    }
+
     /* 테이블 외곽 스타일 */
     #responseText {
         margin-top: 20px;
-        background-color: #f4f4f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 15px;
     }
 
     /* 셀 스타일링 */
     .jexcel td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        font-size: 14px;
-        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 10px;
+        font-size: 15px;
+        background-color: #fdfdfd;
+        color: #333;
     }
 
     /* 헤더 스타일 */
     .jexcel thead td {
-        background-color: #007bff;
+        background-color: #343a40;
         color: white;
         font-weight: bold;
         text-align: center;
@@ -32,7 +41,8 @@
 
     /* 행 hover 효과 */
     .jexcel tr:hover td {
-        background-color: #e6f7ff;
+        background-color: #e9f7fa;
+        cursor: pointer;
     }
 
     /* 텍스트 중앙 정렬 */
@@ -44,6 +54,86 @@
     .jexcel {
         width: 100%;
         border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+    /* 버튼 스타일 */
+    .btn {
+        margin: 10px 5px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    /* 페이지 레이아웃 */
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .content-header {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb {
+        background: none;
+        padding: 0;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: ">";
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    footer {
+        background-color: #f8f9fa;
+        padding: 15px 0;
+    }
+
+    footer a {
+        color: #6c757d;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    footer a:hover {
+        color: #343a40;
     }
 </style>
 <body class="sb-nav-fixed">
@@ -123,7 +213,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Movie</h1>
+                <h1 class="mt-4">Movie Management</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="@{/api/admin}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Movie</li>
@@ -132,23 +222,26 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <p class="mb-0">
-                            This page is an example of using static navigation...
+                            Manage movies and edit information through this intuitive interface.
                         </p>
                     </div>
                 </div>
 
                 <!-- Button and response area -->
                 <div>
-                    <button type="button" class="register-btn" id="register-btn" th:onclick="|location.href='@{/api/movie/register}'|">Register</button>
-                    <button class="save-btn" id="save-btn">Save</button>
-                    <button class="delete-btn" id="delete-btn">Delete</button>
+                    <button type="button" class="btn btn-primary" id="register-btn" th:onclick="|location.href='@{/api/movie/register}'|">Register Movie</button>
+                    <button class="btn btn-success" id="save-btn">Save Changes</button>
+                    <button class="btn btn-danger" id="delete-btn">Delete Selected</button>
 
-                    <p id="responseText"></p> <!-- jspreadsheet 데이터가 이 영역에 삽입됩니다 -->
+                    <div id="responseText"></div> <!-- jspreadsheet 데이터가 이 영역에 삽입됩니다 -->
                 </div>
 
                 <div class="card mb-4">
-                    <div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div>
+                    <div class="card-body">Scroll to manage all the data conveniently.</div>
                 </div>
+
+                <div th:insert="~{/admin/movie/ex :: chart-movie}"></div>
+
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">
@@ -170,12 +263,12 @@
 <script src="https://cdn.jsdelivr.net/npm/jspreadsheet-ce/dist/index.min.js"></script>
 
 <script>
-    const test = () => {
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. jspreadsheet 초기화
         axios.get('/api/movie/list')
             .then(function (res) {
                 const movies = res.data;
 
-                // 영화 데이터를 2차원 배열로 변환하여 jspreadsheet에 사용할 준비
                 const movieData = movies.map(movie => [
                     movie.id,
                     movie.title,
@@ -186,7 +279,6 @@
                     movie.rate || 0,
                 ]);
 
-                // jSpreadsheet로 데이터 표시
                 const table = jspreadsheet(document.getElementById('responseText'), {
                     data: movieData,
                     columns: [
@@ -200,25 +292,21 @@
                         {type: 'checkbox', title: 'Delete', width: 100}
                     ],
                     search: true,
-                    pagination: 10,   // 페이지당 10개의 영화 표시
-                    freezeColumns: 1, // 첫 번째 열 고정
-                    minDimensions: [8, 10], // 최소 차원 (열, 행)
-                    tableOverflow: true,   // 테이블이 div의 크기에 맞게 overflow 설정
-                    tableHeight: '500px',  // 테이블 높이 설정
-                    tableWidth: '100%',    // 테이블 너비 설정
+                    pagination: 10,
+                    freezeColumns: 1,
+                    minDimensions: [8, 10],
+                    tableOverflow: true,
+                    tableHeight: '500px',
+                    tableWidth: '100%',
 
-                    // jSpreadsheet가 로드된 후 실행
                     onload: function () {
                         const saveBtn = document.getElementById('save-btn');
                         const deleteBtn = document.getElementById('delete-btn');
 
-                        // save 버튼 눌렀을 때
                         saveBtn.addEventListener('click', function () {
                             const data = table.getData();
                             alert(data);
 
-
-                            // 2차원 배열 데이터를 MovieModel 객체 배열로 변환
                             const movieData = data.map(row => {
                                 return {
                                     id: row[0],
@@ -232,33 +320,25 @@
                                 };
                             });
 
-                            console.log("확인용:" +  movieData);
                             axios.post('/api/movie/update', movieData)
-                                .then(res => {
-                                    console.log(res);
-                                })
+                                .then(res => console.log(res))
                                 .catch(err => console.log("Error: " + err));
                         });
 
-                        // delete 버튼 눌렀을 때
                         deleteBtn.addEventListener('click', function () {
                             const checkedRows = [];
                             const data = table.getData();
 
-                            // 각 행을 순회하여 체크박스가 선택된 경우 movieId 수집
                             data.forEach((row, index) => {
-                                const isChecked = table.getValueFromCoords(7, index); // 7번째 열이 체크박스라고 가정
-                                const movieId = table.getValueFromCoords(0, index);   // 1번째 열이 movieId라고 가정
+                                const isChecked = table.getValueFromCoords(7, index);
+                                const movieId = table.getValueFromCoords(0, index);
 
-                                if (isChecked === true) { // 체크박스가 체크된 경우
-                                    checkedRows.push(movieId); // movieId를 배열에 추가
+                                if (isChecked === true) {
+                                    checkedRows.push(movieId);
                                 }
                             });
 
-                            console.log(checkedRows); // 선택된 영화 ID 출력
-
                             if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
-                                // 선택된 movieId 리스트를 서버로 전송
                                 axios.post(`/api/movie/deleteMany`, checkedRows)
                                     .then(res => {
                                         if (res.data !== 0) {
@@ -268,9 +348,7 @@
                                             alert('영화 정보 삭제 실패!');
                                         }
                                     })
-                                    .catch(err => {
-                                        console.log(err);
-                                    });
+                                    .catch(err => console.log(err));
                             } else {
                                 alert('삭제할 영화를 선택해주세요.');
                             }
@@ -281,9 +359,62 @@
             .catch(function (error) {
                 console.log('Error:', error);
             });
-    }
 
-    document.addEventListener('DOMContentLoaded', test);
+        // 2. Chart.js 차트 초기화
+        const movieReservations = [
+            { "title": "Inception", "reservations": 150 },
+            { "title": "Avatar", "reservations": 200 },
+            { "title": "Interstellar", "reservations": 100 },
+            { "title": "The Dark Knight", "reservations": 180 }
+        ];
+
+        const movieTitles = movieReservations.map(movie => movie.title);
+        const reservationCounts = movieReservations.map(movie => movie.reservations);
+
+        const ctx = document.getElementById('reservationChart').getContext('2d');
+        const reservationChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: movieTitles,
+                datasets: [{
+                    label: '예매 횟수',
+                    data: reservationCounts,
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 50
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    });
+</script>
+        });
+    });
 </script>
 
 </body>
