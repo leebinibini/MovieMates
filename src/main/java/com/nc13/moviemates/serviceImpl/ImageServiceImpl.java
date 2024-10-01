@@ -91,11 +91,14 @@ public class ImageServiceImpl implements ImageService {
                     .uploadURL(uploadURL)
                     .movieId(movieEntity.getId())
                     .build();
+            //uploadpath는 storage에 있음 -> 저장경로
+            //uploadURL는 불러올 때 사용하는 경로  (얘는 데이터베이스에 저장된다!! 나중에 이미지를 불러올 때 사용)
 
             ImageEntity imageEntity = convertToEntity(imageModel);
             imageEntity.setMovie(movieEntity);
 
             ImageEntity savedEntity = repository.save(imageEntity);
+
             imageModel.setId(savedEntity.getId());
             s3files.add(imageModel);
 
