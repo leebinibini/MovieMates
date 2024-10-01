@@ -31,7 +31,7 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
     }
 
     @Override
-    public List<OrderModel> findByMovieId(Long movieId) {
+    public List<OrderModel> findOrderByMovieId(Long movieId) {
         List<Tuple> results = jpaQueryFactory.select(qTheater.name, qSchedule.showDate, qSchedule.showTime)
                 .from(qSchedule)
                 .join(qTheater)
@@ -48,6 +48,13 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
                                .build())
                .collect(Collectors.toList());
     }
+    @Override
+    public List<ScheduleEntity> findByMovieId(Long movieId){
+        List<ScheduleEntity> ent = jpaQueryFactory.selectFrom(qSchedule)
+                .where(qSchedule.movieId.eq(movieId))
+                .fetch();
+        return ent;
+    }
 
     @Override
     public Long getRowCount() {
@@ -58,4 +65,6 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
     public Boolean exists(Long id) {
         return jpaQueryFactory.select(qSchedule.id.count()).from(qSchedule).fetchCount()>0;
     }
+
+
 }

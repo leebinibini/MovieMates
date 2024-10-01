@@ -3,6 +3,7 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.entity.HistoryEntity;
 import com.nc13.moviemates.entity.ReservationEntity;
 import com.nc13.moviemates.service.HistoryService;
+import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +17,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
-@RequestMapping("/api/reservations")
+@RequestMapping("/api/reservation")
 public class ReservationController {
     @Qualifier("reservationServiceImpl")
     private final ReservationService service;

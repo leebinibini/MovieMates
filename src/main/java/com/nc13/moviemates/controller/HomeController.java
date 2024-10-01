@@ -5,6 +5,7 @@ import com.nc13.moviemates.entity.PosterEntity;
 import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.PosterService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.ast.tree.expression.Star;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,25 +26,21 @@ public class HomeController {
             // top5 크게보기
             List<MovieEntity> movie = movieService.findAll();
 
-            // 장르 , 기준으로 잘라서 보이기
-            List<String> genreList = new ArrayList<>();
-            for (MovieEntity movieEntity : movie) {
-                // 먼저 장르가 null인지 확인
-                if (movieEntity.getGenre() != null) {
-                    // null이 아니라면 ,로 분리하여 리스트에 추가
-                    String[] genres = movieEntity.getGenre().split(",");
-                    genreList.addAll(Arrays.asList(genres));
-                }
-            }
             // 현재 상영중인 영화 세로 포스터
-            List<PosterEntity> poster = posterService.findAll();
 
-           //movie chart
+            //movie chart
+
+            List<String> star = new ArrayList<>() {{
+                add("☆☆☆☆☆");
+            }
+        };
+
+            model.addAttribute("star", star);
             List<MovieEntity> chart = movieService.findChart();
             model.addAttribute("charts", chart);
-            model.addAttribute("posters", poster);
             model.addAttribute("movies", movie);
-            model.addAttribute("genres", genreList);
+            model.addAttribute("movieInfos", movieService.findAll());
+            System.out.println(movieService.findAll());
             return "index";
     }
 

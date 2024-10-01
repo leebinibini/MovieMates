@@ -29,10 +29,19 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
 
+
+
     @Override
-    public List<OrderModel> findByMovieId(Long movieId) {
+    public List<OrderModel> findOrderByMovieId(Long movieId) {
+        return repository.findOrderByMovieId(movieId);
+    }
+
+    @Override
+    public List<ScheduleEntity> findByMovieId(Long movieId) {
         return repository.findByMovieId(movieId);
     }
+
+
 
     @Override
     public Boolean existsById(Long id) {

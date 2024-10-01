@@ -13,7 +13,9 @@ public interface ScheduleService {
     Boolean save(ScheduleEntity email);
 
 
-    List<OrderModel> findByMovieId(Long movieId);
+    List<OrderModel> findOrderByMovieId(Long movieId);
+
+    List<ScheduleEntity> findByMovieId(Long movieId);
 
     Boolean existsById(Long id);
 

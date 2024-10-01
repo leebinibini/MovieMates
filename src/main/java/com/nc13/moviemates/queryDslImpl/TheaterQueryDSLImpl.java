@@ -27,6 +27,13 @@ public class TheaterQueryDSLImpl implements TheaterQueryDSL {
     }
 
     @Override
+    public List<TheaterEntity> findByMovieId(Long movieId) {
+        return jpaQueryFactory.selectFrom(qTheater)
+                .where(qTheater.movieId.eq(movieId))
+                .fetch();
+    }
+
+    @Override
     public Boolean exists(Long id) {
         return jpaQueryFactory.selectFrom(qTheater).where(qTheater.id.eq(id)).fetchCount()>0;
     }

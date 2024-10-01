@@ -47,4 +47,9 @@ public class TheaterServiceImpl implements TheaterService{
         return !existsById(id);
     }
 
+    @Override
+    public List findByMovieId(Long movieId) {
+        return repository.findByMovieId(movieId);
+    }
+
 }
