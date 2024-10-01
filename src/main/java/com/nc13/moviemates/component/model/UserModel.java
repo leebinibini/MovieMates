@@ -13,7 +13,7 @@ public class UserModel {
     private Role role;
 
     public enum Role {
-        AUDIENCE, ADMIN
+        ADMIN, USER,
     }
 
 }

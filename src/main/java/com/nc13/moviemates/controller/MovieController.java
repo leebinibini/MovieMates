@@ -20,7 +20,6 @@ import java.util.Optional;
 public class MovieController {
     private final MovieService service;
 
-
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
         return ResponseEntity.ok(service.findAll());
