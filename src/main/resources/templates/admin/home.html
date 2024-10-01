@@ -23,8 +23,9 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" th:href="@{/api/admin/movie}">Movie</a>
+                            <a class="nav-link" th:href="@{/api/admin/theater}">Theater</a>
+                            <a class="nav-link" th:href="@{/api/admin/schedule}">Schedule</a>
                             <a class="nav-link" th:href="@{/api/admin/layout-sidenav-light}">Light Sidenav</a>
-                            <a class="nav-link" th:href="@{/api/theater}">Theater</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -40,6 +41,9 @@
                             </a>
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" th:href="@{/api/admin/user}">User</a>
+                                    <a class="nav-link" th:href="@{/api/admin/reservation}">Reservation</a>
+                                    <a class="nav-link" th:href="@{/api/admin/review}">Review</a>
                                     <a class="nav-link" th:href="@{/api/admin/login}">Login</a>
                                     <a class="nav-link" th:href="@{/api/admin/register}">Register</a>
                                     <a class="nav-link" th:href="@{/api/admin/password}">Forgot Password</a>

@@ -20,12 +20,6 @@ import java.util.Optional;
 public class TheaterController {
     private final TheaterService service;
 
-    @GetMapping()
-    public String toTheaterAdmin(){
-        return "admin/theater/list";
-    }
-
-
     @GetMapping("/list")
     public ResponseEntity<List<TheaterEntity>> getList(){
         return ResponseEntity.ok(service.findAll());

@@ -1,5 +1,6 @@
 package com.nc13.moviemates.serviceImpl;
 
+import com.nc13.moviemates.component.model.UserModel;
 import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.repository.UserRepository;
 import com.nc13.moviemates.service.UserService;
@@ -25,6 +26,14 @@ public class UserServiceImpl implements UserService {
         }
 
         return false;
+    }
+
+    @Override
+    public Boolean update(List<UserModel> userData) {
+        System.out.println("user정보: " + userData);
+        userData.forEach(user -> repository.update(user));
+
+        return true;
     }
 
     @Override

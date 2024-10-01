@@ -65,6 +65,22 @@ public class AdminController {
         return "admin/movie/list";
     }
 
+    @GetMapping("/theater")
+    public String adminToTheater(){
+        return "admin/theater/list";
+    }
+
+    @GetMapping("/schedule")
+    public String adminToSchedule(){
+        return "admin/schedule/list";
+    }
+
+    @GetMapping("/user")
+    public String adminToUser() {
+        return "admin/user/list";
+    }
+
+
     @GetMapping("layout-static")
     public String adminLayoutStatic() {
         return "admin/layout-static";
