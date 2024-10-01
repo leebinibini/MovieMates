@@ -43,6 +43,8 @@ public class MovieServiceImpl implements MovieService {
         return true;
     }
 
+
+
     @Override
     public List<String> getNowPlayingList() {
         return repository.getNowPlayingList();

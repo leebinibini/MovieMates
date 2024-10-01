@@ -5,9 +5,12 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.nc13.moviemates.component.model.ImageModel;
+import com.nc13.moviemates.component.model.MovieModel;
+import com.nc13.moviemates.config.BucketConfig;
 import com.nc13.moviemates.entity.ImageEntity;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.repository.ImageRepository;
+import com.nc13.moviemates.repository.MovieRepository;
 import com.nc13.moviemates.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,10 +27,11 @@ import java.util.List;
 public class ImageServiceImpl implements ImageService {
     private final ImageRepository repository;
     private final MovieServiceImpl movieService;
+    private final MovieRepository movieRepository;
     private final AmazonS3 amazonS3;
     String uploadPath = "uploads/movies";
     // 버킷경로 가져오기
-    @Value("moviemates-storage")
+    @Value("${application.bucket.name}")
     private String bucketName;
 
     // 확장자 뽑아내기
@@ -39,13 +43,18 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Boolean uploadFiles(long movieId, List<MultipartFile> multipartFiles) {
+        System.out.println("이미지 서비스 업로드파일 함수 진입!!!");
         // 파일 저장 공간을 리스트 형태로 만들겠다!
         List<ImageModel> s3files = new ArrayList<>();
 
+        // Find movie entity
         MovieEntity movieEntity = movieService.findEntityById(movieId);
         if (movieEntity == null) {
             throw new IllegalArgumentException("Invalid movieId: " + movieId);
         }
+
+        // Prepare a list to store updated MovieModel objects
+        List<MovieModel> updatedMovies = new ArrayList<>();
 
         for (MultipartFile multipartFile : multipartFiles) {
             String originalFilename = multipartFile.getOriginalFilename();
@@ -56,7 +65,7 @@ public class ImageServiceImpl implements ImageService {
             }
             String uploadURL = "";
 
-            // AmazonS3 사용하려면 아래의 추가정보(메타데이터)가 필요함!!!
+            // Set metadata for AmazonS3 upload
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentLength(multipartFile.getSize());
             objectMetadata.setContentType(multipartFile.getContentType());
@@ -64,17 +73,17 @@ public class ImageServiceImpl implements ImageService {
             try (InputStream inputStream = multipartFile.getInputStream()) {
                 String keyName = uploadPath + "/" + storedFileName;
 
-                amazonS3.putObject(
-                        new PutObjectRequest(bucketName, keyName, inputStream, objectMetadata)
-                                .withCannedAcl(CannedAccessControlList.PublicRead));
+                amazonS3.putObject(new PutObjectRequest(bucketName, keyName, inputStream, objectMetadata));
+                System.out.println("keyName = " + keyName);
 
-                // 결국 최종 URL : uploadURL
-                uploadURL = "https://kr.object.ncloudstorage.com/" + bucketName + "/" + keyName;
+                // Generate the upload URL
+                uploadURL = "https://" + bucketName + ".s3.ap-northeast-2.amazonaws.com/" + keyName;
+                System.out.println("uploadURL = " + uploadURL);
             } catch (IOException e) {
                 throw new RuntimeException("파일 업로드 실패: " + e.getMessage());
             }
 
-            // Model로 받아와서 Entity로 변환!
+            // Convert ImageModel to ImageEntity and save
             ImageModel imageModel = ImageModel.builder()
                     .originalFilename(originalFilename)
                     .storedFileName(storedFileName)
@@ -83,22 +92,33 @@ public class ImageServiceImpl implements ImageService {
                     .uploadURL(uploadURL)
                     .movieId(movieEntity.getId())
                     .build();
-            //uploadpath는 storage에 있음 -> 저장경로
-            //uploadURL는 불러올 때 사용하는 경로  (얘는 데이터베이스에 저장된다!! 나중에 이미지를 불러올 때 사용)
 
             ImageEntity imageEntity = convertToEntity(imageModel);
             imageEntity.setMovie(movieEntity);
 
             ImageEntity savedEntity = repository.save(imageEntity);
-
             imageModel.setId(savedEntity.getId());
             s3files.add(imageModel);
+
+            // Update movie's posterUrl and prepare MovieModel for update
+            movieEntity.setPosterUrl(uploadURL);
+
+            // Convert MovieEntity to MovieModel
+            MovieModel movieModel = convertEntityToModel(movieEntity);
+            updatedMovies.add(movieModel);
+
+            System.out.println("Poster URL 업데이트됨: " + uploadURL);
         }
-        return !s3files.isEmpty() ? true : false;
+
+        // Call movieService.update to update the list of movies
+        movieService.update(updatedMovies);
+
+        return !s3files.isEmpty();
     }
 
     private ImageEntity convertToEntity(ImageModel model) {
         MovieEntity movieEntity = movieService.findEntityById(model.getMovieId());
+        System.out.println("convertToEntity의 movieEntity : " + movieEntity);
 
         return ImageEntity.builder()
                 .originalFileName(model.getOriginalFilename())
@@ -106,6 +126,15 @@ public class ImageServiceImpl implements ImageService {
                 .extension(model.getExtension())
                 .uploadPath(model.getUploadPath())
                 .uploadURL(model.getUploadURL())
+                .build();
+    }
+
+    private MovieModel convertEntityToModel(MovieEntity movieEntity) {
+        return MovieModel.builder()
+                .id(movieEntity.getId())
+                .title(movieEntity.getTitle())
+                .plot(movieEntity.getPlot())
+                .posterUrl(movieEntity.getPosterUrl()) // Add any other relevant fields
                 .build();
     }
 }
