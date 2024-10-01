@@ -17,4 +17,6 @@ public interface TheaterService {
     Long count();
 
     Boolean deleteById(Long id);
+
+    List findByMovieId(Long movieId);
 }

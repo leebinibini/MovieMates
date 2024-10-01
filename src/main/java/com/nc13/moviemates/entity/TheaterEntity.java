@@ -19,4 +19,5 @@ public class TheaterEntity {
     private String name;
     private String location;
     private int capacity;
+    private Long movieId;
 }

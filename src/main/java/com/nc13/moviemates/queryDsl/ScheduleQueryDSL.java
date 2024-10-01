@@ -10,6 +10,7 @@ public interface ScheduleQueryDSL {
     List<ScheduleEntity> getAll();
     ScheduleEntity getById(Long id);
     Boolean exists(Long id);
-    List<OrderModel> findByMovieId(Long movieId);
+    List<OrderModel> findOrderByMovieId(Long movieId);
     Long getRowCount();
+    List<ScheduleEntity> findByMovieId(Long movieId);
 }

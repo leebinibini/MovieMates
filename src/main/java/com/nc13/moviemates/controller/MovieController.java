@@ -2,7 +2,10 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.service.MovieService;
+import com.nc13.moviemates.service.ScheduleService;
+import com.nc13.moviemates.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +18,8 @@ import java.util.*;
 @RequestMapping("/api/movie")
 public class MovieController {
     private final MovieService service;
+    private final TheaterService theaterService;
+    private final ScheduleService scheduleService;
 
     @GetMapping()
     public String toMovieAdmin(){
@@ -35,6 +40,15 @@ public class MovieController {
     }
     // 홈페이지 화면 리스트 가져오기
 
+
+    @GetMapping("/order/{movieId}")
+    public ResponseEntity<Map<String, Object>> getOrderList(@PathVariable Long movieId){
+        Map<String, Object> map = new HashMap<>();
+        map.put("theater", theaterService.findByMovieId(movieId));
+        map.put("schedule", scheduleService.findByMovieId(movieId));
+        System.out.println(map);
+        return ResponseEntity.ok().body(map);
+    }
 
 
 
