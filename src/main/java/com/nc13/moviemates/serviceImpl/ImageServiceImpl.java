@@ -101,7 +101,8 @@ public class ImageServiceImpl implements ImageService {
             s3files.add(imageModel);
 
             // Update movie's posterUrl and prepare MovieModel for update
-            movieEntity.setPosterUrl(uploadURL);
+            movieEntity.setWidthPosterUrl(uploadURL);
+            movieEntity.setLengthPosterUrl(uploadURL);
 
             // Convert MovieEntity to MovieModel
             MovieModel movieModel = convertEntityToModel(movieEntity);
@@ -134,7 +135,8 @@ public class ImageServiceImpl implements ImageService {
                 .id(movieEntity.getId())
                 .title(movieEntity.getTitle())
                 .plot(movieEntity.getPlot())
-                .posterUrl(movieEntity.getPosterUrl()) // Add any other relevant fields
+                .posterUrl(movieEntity.getWidthPosterUrl())
+                .posterUrl(movieEntity.getLengthPosterUrl())// Add any other relevant fields
                 .build();
     }
 }

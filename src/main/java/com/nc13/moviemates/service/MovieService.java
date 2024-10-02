@@ -4,14 +4,16 @@ import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-
 public interface MovieService {
 
+    MovieEntity findEntityById(Long id);
+
     List<MovieEntity> findAll();
+
+    List<MovieEntity> findChart();
 
     Long save(MovieModel movie);
 
@@ -29,8 +31,6 @@ public interface MovieService {
 
     Boolean deleteById(Long id);
 
-    MovieEntity findEntityById(Long id);
-
-    //  void crawlMovies() throws IOException;
+   // void crawlMovies() throws IOException;
 
 }

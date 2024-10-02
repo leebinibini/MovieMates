@@ -1,8 +1,10 @@
 package com.nc13.moviemates.serviceImpl;
 
+import com.nc13.moviemates.component.model.OrderModel;
 import com.nc13.moviemates.entity.ScheduleEntity;
 import com.nc13.moviemates.repository.ScheduleRepository;
 import com.nc13.moviemates.service.ScheduleService;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +28,20 @@ public class ScheduleServiceImpl implements ScheduleService {
         return existsById(id);
     }
 
+
+
+
     @Override
-    public Optional<ScheduleEntity> findById(Long id) {
-        return repository.findById(id);
+    public List<OrderModel> findOrderByMovieId(Long movieId) {
+        return repository.findOrderByMovieId(movieId);
     }
+
+    @Override
+    public List<ScheduleEntity> findByMovieId(Long movieId) {
+        return repository.findByMovieId(movieId);
+    }
+
+
 
     @Override
     public Boolean existsById(Long id) {

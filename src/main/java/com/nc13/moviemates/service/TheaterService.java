@@ -1,6 +1,6 @@
 package com.nc13.moviemates.service;
 
-import com.nc13.moviemates.component.model.TheaterModel;
+import com.nc13.moviemates.component.model.TheaterModel;;
 import com.nc13.moviemates.entity.TheaterEntity;
 
 import java.util.List;
@@ -22,4 +22,6 @@ public interface TheaterService {
     Boolean deleteById(Long id);
 
     Boolean update(List<TheaterModel> theaterList);
+
+    List findByMovieId(Long movieId);
 }

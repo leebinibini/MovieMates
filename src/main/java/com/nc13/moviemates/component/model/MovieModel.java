@@ -14,15 +14,20 @@ import java.util.Date;
 public class MovieModel {
     private Long id;
     private String title;
-    private String plot;
-    private Date releaseDate;
     private String genre;
-    private int runningTime;
-    private Long reviewId;
     private String director;
-    private String filepath;
-    private String posterUrl;
+    private String actors;
+    private double rate;
+    private String plot;
+    private String releaseDate;
+    private int runningTime;
     private String ageClass;
-    private double  rate;
-    
+    private int booking;
+    private String widthPosterUrl;
+    private String lengthPosterUrl;
+    private String posterUrl;
+
+    public MovieModel(String title, Date releaseDate, String runningTime, String information, String genre, String director) {
+    }
+
 }

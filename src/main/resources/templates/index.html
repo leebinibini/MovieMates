@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Tenguu Cinema - Movie Theater Template</title>
-    <meta name="keywords" content="HTML5,CSS3,HTML,Template,Themeton">
-    <meta name="description" content="Tenguu Cinema - Movie Theater Template">
-    <meta name="author" content="Themeton">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon.png}" />
-
-    <link
-        href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900'
-        rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/packages.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/default.css}">
-    <!-- axios 사용하려고 추가한 script jquery 바로 -->
-
+<head th:insert="~{fragments/head.html::headFragment}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anvogue - My Account</title>
+    <link rel="shortcut icon" href="./assets/images/fav.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./dist/output-scss.css" />
+    <link rel="stylesheet" href="./dist/output-tailwind.css" />
 </head>
 <body class="sticky-menu">
     <div id="loader">
@@ -33,11 +24,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-4">
-                        <a href="/" id="logo" title="Tenguu" class="logo-image" th:data-bg-image="@{/images/logo.png}">Tenguu</a>
+                        <a href="/" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
                     </div>
                     <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
                         <div class="header_author">
                             <a th:href="@{/api/user/login}">Login</a>
+                        </div>
+                        <div class="header_author">
+                            <a th:href="@{/api/user/mypage}">Mypage</a>
                         </div>
                         <div class="header_ticket">
                             <a th:href="@{/single}">Movie</a>
@@ -58,7 +52,7 @@
                             <a href="javascript:;" class="close-window"></a>
                             <nav class="overlay-menu">
                                 <ul>
-                                    <li><a href="./">Home</a></li>
+                                    <li><a href="../../../../../../../../OneDrive/문서/카카오톡%20받은%20파일/resources%20(2)">Home</a></li>
                                     <li><a th:href="@{/single}">Single</a></li>
                                     <li><a href="#order" class="order_btn">Order</a></li>
                                 </ul>
@@ -70,29 +64,28 @@
         </header>
         <div class="fullwidth-slider">
             <div id="headerslider" class="carousel slide">
-                <ol class="carousel-indicators">
+                <ol class="carousel-indicators" >
                     <li data-target="#headerslider" data-slide-to="0" class="active"></li>
                     <li data-target="#headerslider" data-slide-to="1"></li>
                     <li data-target="#headerslider" data-slide-to="2"></li>
                 </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <div class="fill" th:data-bg-image="@{images/header/header.png}">
+                <div class="carousel-inner" role="listbox" >
+                    <div class="item active" th:each="movie: ${movies}" >
+                        <div class="fill"  th:data-bg-image="${movie.widthPosterUrl}">
                             <div class="bs-slider-overlay"></div>
                             <div class="container movie-slider-container">
                                 <div class="row">
                                     <div class="col-sm-12 movie-slider-content">
                                         <div class="slider-content">
-                                            <ul class="subtitle" data-animation="animated bounceInRight">
-                                                <li>Action</li>
-                                                <li>Science Fiction</li>
-                                                <li>Adventure</li>
+                                            <ul class="subtitle"  data-animation="animated bounceInRight">
+                                                <li th:text="${movie.genre}">Genre</li>
                                             </ul>
-                                            <div class="title" data-animation="animated bounceInRight">Lord of the
-                                                rings: The return of the kings <i>(2017)</i></div>
+
+                                            <div th:text="${movie.title}" class="title" data-animation="animated bounceInRight"><i>(2017)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
-                                                <a href="javascript:;" class="btn-trailer">watch trailer</a> <a
-                                                    href="javascript:;" class="btn-ticket">buy ticket</a>
+                                                <a href="javascript:;" class="btn-trailer">watch trailer</a>
+                                                <a
+                                                    href="#order" class="btn-ticket">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -103,15 +96,15 @@
                                             <div class="chart-cirle">
                                                 <div class="chart-circle-l" data-animation="animated bounceInUp">
                                                     <div class="circle-chart" data-circle-width="7" data-percent="64"
-                                                        data-text="6.4">
+                                                        th:data-text="${movie.rate}">
                                                     </div>
-                                                    <span>IMDB Ratffing</span>
+                                                    <span>RATING</span>
                                                 </div>
                                                 <div class="chart-circle-r" data-animation="animated bounceInUp">
                                                     <div class="circle-chart" data-circle-width="7" data-percent="84"
-                                                        data-text="8.4">
+                                                         th:data-text="${movie.booking}">
                                                     </div>
-                                                    <span>Rotten Rating</span>
+                                                    <span>Ticket Rate</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -120,23 +113,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="fill" th:data-bg-image="@{images/product/feature-item.jpg}">
+                    <div class="item" th:each="movie: ${movies}">
+                        <div class="fill" th:data-bg-image="${movie.widthPosterUrl}">
                             <div class="bs-slider-overlay"></div>
                             <div class="container movie-slider-container">
                                 <div class="row">
                                     <div class="col-sm-12 movie-slider-content">
                                         <div class="slider-content">
-                                            <ul class="subtitle" data-animation="animated bounceInRight">
-                                                <li>Action</li>
-                                                <li>Science Fiction</li>
-                                                <li>Adventure</li>
+                                            <ul class="subtitle"  data-animation="animated bounceInRight">
+                                                <li th:text="${movie.genre}">Genre</li>
                                             </ul>
-                                            <div class="title" data-animation="animated bounceInRight">The Battle of
-                                                Algiers (La Battaglia) <i>(1967)</i></div>
+                                            <div class="title" data-animation="animated bounceInRight" th:text="${movie.title}"> <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
                                                 <a href="javascript:;" class="btn-trailer">watch trailer</a> <a
-                                                    href="javascript:;" class="btn-ticket">buy ticket</a>
+                                                    href="#order" class="btn-ticket">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -147,15 +137,15 @@
                                             <div class="chart-cirle">
                                                 <div class="chart-circle-l" data-animation="animated bounceInUp">
                                                     <div class="circle-chart" data-circle-width="7" data-percent="94"
-                                                        data-text="9.4">
+                                                         th:data-text="${movie.rate}">
                                                     </div>
-                                                    <span>IMDB Ratffing</span>
+                                                    <span>RATING</span>
                                                 </div>
                                                 <div class="chart-circle-r" data-animation="animated bounceInUp">
                                                     <div class="circle-chart" data-circle-width="7" data-percent="84"
-                                                        data-text="8.4">
+                                                         th:data-text="${movie.booking}">
                                                     </div>
-                                                    <span>Rotten Rating</span>
+                                                    <span>Ticket Rate</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,22 +154,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="fill" th:data-bg-image="@{images/header/header.png}">
+                    <div class="item" th:each="movie: ${movies}">
+                        <div class="fill" th:data-bg-image="${movie.widthPosterUrl}">
                             <div class="bs-slider-overlay"></div>
                             <div class="container movie-slider-container">
                                 <div class="row">
                                     <div class="col-sm-12 movie-slider-content">
                                         <div class="slider-content">
-                                            <ul class="subtitle" data-animation="animated bounceInRight">
-                                                <li>Action</li>
-                                                <li>Science Fiction</li>
+                                            <ul class="subtitle"  data-animation="animated bounceInRight">
+                                                <li th:text="${movie.genre}">Genre</li>
                                             </ul>
-                                            <div class="title" data-animation="animated bounceInRight">The Battle of
-                                                Algiers (Di Algeri)<i>(1967)</i></div>
+                                            <div class="title" data-animation="animated bounceInRight" th:text="${movie.title}">
+                                              <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
-                                                <a href="javascript:;" class="btn-trailer">watch trailer</a> <a
-                                                    href="javascript:;" class="btn-ticket">buy ticket</a>
+                                                <a href="javascript:;" class="btn-trailers video-player" >watch trailer</a>
+                                                <a href="#order" class="btn-ticket order_btn">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -190,15 +179,15 @@
                                             <div class="chart-cirle" data-animation="animated bounceInUp">
                                                 <div class="chart-circle-l" data-animation="animated bounceInUp">
                                                     <div class="circle-chart" data-circle-width="7" data-percent="86"
-                                                        data-text="8.6">
+                                                         th:data-text="${movie.rate}">
                                                     </div>
-                                                    <span>IMDB Ratffing</span>
+                                                    <span>Rating</span>
                                                 </div>
                                                 <div class="chart-circle-r" data-animation="animated bounceInUp">
                                                     <div class="circle-chart" data-circle-width="7" data-percent="74"
-                                                        data-text="7.4">
+                                                         th:data-text="${movie.booking}">
                                                     </div>
-                                                    <span>Rotten Rating</span>
+                                                    <span>Ticket Rate</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -207,216 +196,168 @@
                             </div>
                         </div>
                     </div>
+                    <a class="carousel-control left" href="#headerslider" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="carousel-control right" href="#headerslider" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 </div>
-
-                <!-- Controls -->
-                <a class="carousel-control left" href="#headerslider" data-slide="prev">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                <a class="carousel-control right" href="#headerslider" data-slide="next">
-                    <i class="fa fa-angle-right"></i>
-                </a>
+<div class="fullwidth-slider">
+    <div id="headerslider" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#headerslider" data-slide-to="0" class="active"></li>
+            <li data-target="#headerslider" data-slide-to="1"></li>
+            <li data-target="#headerslider" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="fill" data-bg-image="images/header/header.png">
+                 <div class="bs-slider-overlay"></div>
+                    <div class="container movie-slider-container">
+                        <div class="row">
+                             <div class="col-sm-12 movie-slider-content">
+                                <div class="slider-content" >
+                                    <ul class="subtitle"  data-animation="animated bounceInRight">
+                                        <li>Action</li>
+                                        <li>Science Fiction</li>
+                                        <li>Adventure</li>
+                                    </ul>
+                                    <div class="title" data-animation="animated bounceInRight" >Lord of the rings: The return of the kings <i>(2017)</i></div>
+                                    <div class="slide_right" data-animation="animated bounceInRight">
+                                        <a href="javascript:;" class="btn-trailer">watch trailer</a> <a href="javascript:;" class="btn-ticket">buy ticket</a>
+                                        <ul class="award-logo">
+                                            <li><img src="images/header/icon1.png" alt="icon" ></li>
+                                            <li><img src="images/header/icon2.png" alt="icon"></li>
+                                            <li><img src="images/header/icon3.png" alt="icon"></li>
+                                            <li><img src="images/header/icon4.png" alt="icon"></li>
+                                        </ul>
+                                    </div>
+                                    <div class="chart-cirle">
+                                        <div class="chart-circle-l" data-animation="animated bounceInUp">
+                                            <div class="circle-chart" data-circle-width="7" data-percent="64" data-text="6.4" >
+                                            </div>
+                                            <span>IMDB Ratffing</span>
+                                        </div>
+                                        <div class="chart-circle-r" data-animation="animated bounceInUp">
+                                            <div class="circle-chart" data-circle-width="7" data-percent="84" data-text="8.4" >
+                                            </div>
+                                            <span>Rotten Rating</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" data-bg-image="images/product/feature-item.jpg">
+                 <div class="bs-slider-overlay"></div>
+                    <div class="container movie-slider-container">
+                        <div class="row">
+                             <div class="col-sm-12 movie-slider-content">
+                                <div class="slider-content" >
+                                    <ul class="subtitle"  data-animation="animated bounceInRight">
+                                        <li>Action</li>
+                                        <li>Science Fiction</li>
+                                        <li>Adventure</li>
+                                    </ul>
+                                    <div class="title" data-animation="animated bounceInRight" >The Battle of Algiers (La Battaglia)  <i>(1967)</i></div>
+                                    <div class="slide_right" data-animation="animated bounceInRight">
+                                        <a href="javascript:;" class="btn-trailer">watch trailer</a> <a href="javascript:;" class="btn-ticket">buy ticket</a>
+                                        <ul class="award-logo">
+                                            <li><img src="images/header/icon1.png" alt="icon" ></li>
+                                            <li><img src="images/header/icon2.png" alt="icon"></li>
+                                            <li><img src="images/header/icon3.png" alt="icon"></li>
+                                            <li><img src="images/header/icon4.png" alt="icon"></li>
+                                        </ul>
+                                    </div>
+                                    <div class="chart-cirle">
+                                        <div class="chart-circle-l" data-animation="animated bounceInUp">
+                                            <div class="circle-chart" data-circle-width="7" data-percent="94" data-text="9.4">
+                                            </div>
+                                            <span>IMDB Ratffing</span>
+                                        </div>
+                                        <div class="chart-circle-r" data-animation="animated bounceInUp">
+                                            <div class="circle-chart" data-circle-width="7" data-percent="84" data-text="8.4">
+                                            </div>
+                                            <span>Rotten Rating</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" data-bg-image="images/header/header.png">
+                 <div class="bs-slider-overlay"></div>
+                    <div class="container movie-slider-container">
+                        <div class="row">
+                             <div class="col-sm-12 movie-slider-content">
+                                <div class="slider-content" >
+                                    <ul class="subtitle"  data-animation="animated bounceInRight">
+                                        <li>Action</li>
+                                        <li>Science Fiction</li>
+                                    </ul>
+                                    <div class="title" data-animation="animated bounceInRight" >The Battle of Algiers (Di Algeri)<i>(1967)</i></div>
+                                    <div class="slide_right" data-animation="animated bounceInRight">
+                                        <a href="javascript:;" class="btn-trailer">watch trailer</a> <a href="javascript:;" class="btn-ticket">buy ticket</a>
+                                        <ul class="award-logo">
+                                            <li><img src="images/header/icon1.png" alt="icon" ></li>
+                                            <li><img src="images/header/icon2.png" alt="icon"></li>
+                                            <li><img src="images/header/icon3.png" alt="icon"></li>
+                                            <li><img src="images/header/icon4.png" alt="icon"></li>
+                                        </ul>
+                                    </div>
+                                    <div class="chart-cirle" data-animation="animated bounceInUp">
+                                        <div class="chart-circle-l" data-animation="animated bounceInUp">
+                                            <div class="circle-chart" data-circle-width="7" data-percent="86" data-text="8.6">
+                                            </div>
+                                            <span>IMDB Ratffing</span>
+                                        </div>
+                                        <div class="chart-circle-r" data-animation="animated bounceInUp">
+                                            <div class="circle-chart" data-circle-width="7" data-percent="74" data-text="7.4">
+                                            </div>
+                                            <span>Rotten Rating</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
+                <!-- Controls -->
 
+            </div>
+        </div>
         <section class="section-content">
             <div class="container-fluid pv11 ">
                 <div class="row">
                     <div class="col-sm-12">
                         <h3 class="heading text-center">Now playing</h3>
-                        <div class="ticket-carousel pvt85">
+                        <div class="ticket-carousel pvt85" >
                             <div class="swiper-container carousel-container movie-images" data-col="5">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="movie-image" th:data-bg-image="@{images/carousel/movie-1.jpg}">
+                                    <div class="swiper-slide" th:each="movieInfo: ${movieInfos}">
+                                        <div class="movie-image" th:data-bg-image="${movieInfo.lengthPosterUrl}">
                                             <div class="entry-hover">
                                                 <div class="entry-actions">
                                                     <a href="https://vimeo.com/28177848"
-                                                        class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
+                                                        class="btn-trailers video-player" >watch trailer</a>
+                                                    <a href="#order" class="btn-ticket order_btn" th:data-id="${movieInfo.id}" >buy ticket</a>
                                                 </div>
                                             </div>
-                                            <div class="entry-desc">
+                                            <div class="entry-desc" th:each="star: ${star}">
                                                 <div class="rating">
                                                     <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
+                                                    <label th:text="${star}"></label>
                                                 </div>
-                                                <h3 class="entry-title">X-Men:Apocalypse</h3>
-                                                <ul class="entry-date">
-                                                    <li>11 :00</li>
-                                                    <li>13 :50</li>
-                                                    <li>14 :00</li>
-                                                    <li>18 :00</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="movie-image" th:data-bg-image="@{images/carousel/movie-2.jpg}">
-                                            <div class="entry-hover">
-                                                <div class="entry-actions">
-                                                    <a href="https://vimeo.com/28177848"
-                                                        class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
-                                                </div>
-                                            </div>
-                                            <div class="entry-desc">
-                                                <div class="rating">
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                </div>
-                                                <h3 class="entry-title">X-Men:Apocalypse</h3>
-                                                <ul class="entry-date">
-                                                    <li>11 :00</li>
-                                                    <li>13 :50</li>
-                                                    <li>14 :00</li>
-                                                    <li>18 :00</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="movie-image" th:data-bg-image="@{images/carousel/movie-3.jpg}">
-                                            <div class="entry-hover">
-                                                <div class="entry-actions">
-                                                    <a href="https://vimeo.com/28177848"
-                                                        class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
-                                                </div>
-                                            </div>
-                                            <div class="entry-desc">
-                                                <div class="rating">
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                </div>
-                                                <h3 class="entry-title">X-Men:Apocalypse</h3>
-                                                <ul class="entry-date">
-                                                    <li>11 :00</li>
-                                                    <li>13 :50</li>
-                                                    <li>14 :00</li>
-                                                    <li>18 :00</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="movie-image" th:data-bg-image="@{images/carousel/movie-4.jpg}">
-                                            <div class="entry-hover">
-                                                <div class="entry-actions">
-                                                    <a href="https://vimeo.com/28177848"
-                                                        class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
-                                                </div>
-                                            </div>
-                                            <div class="entry-desc">
-                                                <div class="rating">
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                </div>
-                                                <h3 class="entry-title">X-Men:Apocalypse</h3>
-                                                <ul class="entry-date">
-                                                    <li>11 :00</li>
-                                                    <li>13 :50</li>
-                                                    <li>14 :00</li>
-                                                    <li>18 :00</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="movie-image" th:data-bg-image="@{images/carousel/movie-5.jpg}">
-                                            <div class="entry-hover">
-                                                <div class="entry-actions">
-                                                    <a href="https://vimeo.com/28177848"
-                                                        class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
-                                                </div>
-                                            </div>
-                                            <div class="entry-desc">
-                                                <div class="rating">
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                </div>
-                                                <h3 class="entry-title">X-Men:Apocalypse</h3>
-                                                <ul class="entry-date">
-                                                    <li>11 :00</li>
-                                                    <li>13 :50</li>
-                                                    <li>14 :00</li>
-                                                    <li>18 :00</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="movie-image" th:data-bg-image="@{images/carousel/movie-6.jpg}">
-                                            <div class="entry-hover">
-                                                <div class="entry-actions">
-                                                    <a href="https://vimeo.com/28177848"
-                                                        class="btn-trailers video-player">watch trailer</a>
-                                                    <a href="#order" class="btn-ticket order_btn ">buy ticket</a>
-                                                </div>
-                                            </div>
-                                            <div class="entry-desc">
-                                                <div class="rating">
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio">
-                                                    <label>☆</label>
-                                                </div>
-                                                <h3 class="entry-title">X-Men:Apocalypse</h3>
-                                                <ul class="entry-date">
-                                                    <li>11 :00</li>
-                                                    <li>13 :50</li>
-                                                    <li>14 :00</li>
-                                                    <li>18 :00</li>
-                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -425,7 +366,6 @@
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-button-next"></div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -477,68 +417,20 @@
                     <div class="row">
                         <div class="col-sm-7 col-xs-12">
                             <h3>box office</h3>
-                            <ul class="wpc-box-list">
-                                <li class="wpc-box-item">
+                            <ul class="wpc-box-list" >
+                                <li class="wpc-box-item" th:each="chart: ${charts}">
+                                    <script> console.log([[${charts}]])</script>
                                     <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-1.jpg}" alt="thumb"></li>
+                                        <li class="bx-item-t"><img th:src="${chart.lengthPosterUrl}" alt="thumb" width="58" height="87"></li>
                                         <li class="bx-item-c">1</li>
                                         <li class="bx-item-title">
-                                            <h4>X-Men: Apocalypse</h4>
-                                            <span>Action, thriller</span>
+                                            <h4 th:text="${chart.title}"></h4>
+                                            <span th:text="${chart.genre}"></span>
                                         </li>
                                         <li class="bx-item-d">1 week</li>
                                         <li class="bx-item-m">1.1m</li>
                                     </ol>
                                 </li>
-                                <li class="wpc-box-item">
-                                    <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-2.jpg}" alt="thumb"></li>
-                                        <li class="bx-item-c">2</li>
-                                        <li class="bx-item-title">
-                                            <h4>Warcraft</h4>
-                                            <span>Action, thriller</span>
-                                        </li>
-                                        <li class="bx-item-d">2 week</li>
-                                        <li class="bx-item-m">1.2m</li>
-                                    </ol>
-                                </li>
-                                <li class="wpc-box-item">
-                                    <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-3.jpg}" alt="thumb"></li>
-                                        <li class="bx-item-c">3</li>
-                                        <li class="bx-item-title">
-                                            <h4>Hobbit: The battle</h4>
-                                            <span>Action, thriller</span>
-                                        </li>
-                                        <li class="bx-item-d">3 week</li>
-                                        <li class="bx-item-m">1.3m</li>
-                                    </ol>
-                                </li>
-                                <li class="wpc-box-item">
-                                    <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-4.jpg}" alt="thumb"></li>
-                                        <li class="bx-item-c">4</li>
-                                        <li class="bx-item-title">
-                                            <h4>James Bond: Spectre</h4>
-                                            <span>Action, thriller</span>
-                                        </li>
-                                        <li class="bx-item-d">4 week</li>
-                                        <li class="bx-item-m">1.4m</li>
-                                    </ol>
-                                </li>
-                                <li class="wpc-box-item">
-                                    <ol>
-                                        <li class="bx-item-t"><img th:src="@{images/boxoffice/thumb-5.jpg}" alt="thumb"></li>
-                                        <li class="bx-item-c">5</li>
-                                        <li class="bx-item-title">
-                                            <h4>London has fallen</h4>
-                                            <span>Action, thriller</span>
-                                        </li>
-                                        <li class="bx-item-d">5 week</li>
-                                        <li class="bx-item-m">1.5m</li>
-                                    </ol>
-                                </li>
-
                             </ul>
                         </div>
                         <div class="col-sm-5 col-xs-12 ">
@@ -653,7 +545,7 @@
                 </div>
             </div>
             <script type="text/javascript" th:src="@{js/google-maps.js}"></script>
-            <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuuDwFAppkkrpOTWM-hmFwz_zCbP3u_PQ&callback=initMap"></script>
         </section>
         <footer id="footer">
             <div class="container footer-container">
@@ -734,7 +626,7 @@
         </form>
         <a href="javascript:;" class="close-window"></a>
     </div>
-    <div id="order">
+    <article id="order">
         <div class="container">
             <div class="row order-content">
                 <div class="col-sm-8 col-xs-12 seat_content ph0">
@@ -745,19 +637,14 @@
                             <fieldset>
                                 <div class="wpc-content">
                                     <h3>location</h3>
-                                    <select name="location">
-                                        <option>Tenguu Cinema Tysons corner</option>
+                                    <select name="location" >
+                                        <option>gangnam</option>
                                         <option>Tenguu Cinema </option>
                                         <option>Tenguu Cinema corner</option>
                                         <option>Tenguu Cinema Tysons</option>
                                     </select>
-                                    <h3 class="mt3">Movie</h3>
-                                    <select>
-                                        <option>Dead pool</option>
-                                        <option>THE BATTLE OF ALGIERS (DI ALGERI)</option>
-                                        <option>LORD OF THE RINGS: THE RETURN OF THE KINGS</option>
-                                        <option>Tenguu Cinema Tysons corner</option>
-                                    </select>
+                                    <h3>Movie</h3>
+                                    <input id="movie-selection" value="deadpool" readonly/>
                                     <h3 class="mt3">Date</h3>
                                     <input type='date' class="datetime" />
                                     <h3 class="mt3">TIME</h3>
@@ -800,8 +687,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </article>
+    <script>
 
+
+    </script>
     <div>
         <button onclick="test()">TEST</button>
         <p id="responseText"></p>
@@ -814,9 +704,8 @@
     <script type="text/javascript" th:src="@{js/packages.min.js}"></script>
     <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
 
-    <script>
-        let historys = [1234]
 
+    <script>
         const test = () => {
             axios({
                 method: "get",
@@ -828,6 +717,61 @@
                 console.log("err", err);
             });
         }
+
+       /* $('#movie-selection').on('change', function(event) {
+            event.preventDefault();
+
+            var movieId = $(this).val();
+            alert("영화번호:" +movieId);// 선택한 영화의 movieId를 가져옴
+            console.log("영화번호:" +movieId);
+            // 영화 ID로 영화관 및 상영 정보를 가져옴
+            axios.get(`/api/movie/${movieId}`)
+                .then(function(res) {
+                    console.log(res.data);
+                    var cinemas = res.data.name; // 영화관 목록
+                    var schedules = res.data.show; // 상영 시간 목록
+
+                    // 영화관 선택 영역 업데이트
+                    var cinemaSelect = $('#cinema-selection');
+                    cinemaSelect.empty(); // 기존 옵션 초기화
+
+                    cinemas.forEach(function(cinema) {
+                        cinemaSelect.append(`<option value="${cinema.id}">${cinema.name}</option>`);
+                    });
+
+                    // 상영 시간 선택 영역 업데이트
+                    var scheduleList = $('#schedule-list');
+                    scheduleList.empty(); // 기존 상영 시간 초기화
+
+                    schedules.forEach(function(schedule) {
+                        scheduleList.append(`<li><a href="javascript:;"><i>${schedule.show_time}</i></a></li>`);
+                    });
+
+                })
+                .catch(function(err) {
+                    console.error('Error fetching schedules:', err);
+                });
+        });*/
+
+    document.addEventListener("DOMContentLoaded", function (){
+        $(".btn-ticket").on('click', function(e) {
+            // 클릭한 요소의 data-id 속성 값 가져오기
+            var movieId = $(e.target).data('id');  // 또는 e.target.getAttribute('data-id');
+
+            axios.get(`/api/movie/order/${movieId}`)
+                .then(function (res) {
+                    console.log(res);
+                var theaterList = res.data.theater;
+                console.log(res.data);
+                var scheduleList = res.data.schedule;
+            })
+                .catch(function (error){
+                    console.log("error data:", error);
+                });
+        });
+    });
+
+
     </script>
 
 </body>

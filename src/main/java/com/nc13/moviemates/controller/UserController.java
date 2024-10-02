@@ -1,15 +1,19 @@
 package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.UserModel;
+import com.nc13.moviemates.entity.HistoryEntity;
 import com.nc13.moviemates.entity.UserEntity;
+import com.nc13.moviemates.service.HistoryService;
 import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.serviceImpl.UserServiceImpl;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +23,21 @@ import java.util.Optional;
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService service;
+    private final HistoryService historyService;
+
+    @GetMapping("/mypage")
+    public String getList(Model model){
+        List<HistoryEntity> histories = historyService.findAll();
+        List<String> titles = new ArrayList<>();
+
+        for(int i=0; i<histories.size(); i++){
+            //System.out.println("히스토리 제목: "+histories.get(i).getTitle());
+        }
+        model.addAttribute("histories", histories);
+
+        System.out.println(model);
+        return "profile/main";
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -41,6 +60,12 @@ public class UserController {
         return ResponseEntity.ok(service.findAll());
     }
 
+    /*@GetMapping("/mypage")
+    public String mypage3() {
+
+        System.out.println("llllllllllllllllllllllllllllllll");
+        return "profile/main";
+    }*/
 
     @GetMapping("/details/{id}")
     public ResponseEntity<Optional<UserEntity>> getById(@PathVariable Long id) {

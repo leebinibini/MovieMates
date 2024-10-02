@@ -43,11 +43,15 @@ public class TheaterServiceImpl implements TheaterService{
         return repository.count();
     }
 
-
     @Override
     public Boolean deleteById(Long id) {
          repository.deleteById(id);
         return !existsById(id);
+    }
+
+    @Override
+    public List findByMovieId(Long movieId) {
+        return repository.findByMovieId(movieId);
     }
 
     @Override

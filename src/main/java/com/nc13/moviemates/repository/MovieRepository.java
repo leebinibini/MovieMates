@@ -2,6 +2,7 @@ package com.nc13.moviemates.repository;
 
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.queryDsl.MovieQueryDSL;
+import com.querydsl.core.Tuple;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,4 +15,5 @@ public interface MovieRepository extends JpaRepository<MovieEntity, Long>, Movie
     @Query("SELECT m.title FROM MovieEntity m")
     List<String> getNowPlayingList();
 
+    List<MovieEntity> findChart();
 }

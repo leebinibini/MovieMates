@@ -1,7 +1,6 @@
 package com.nc13.moviemates.queryDslImpl;
 
 import com.nc13.moviemates.component.model.TheaterModel;
-import com.nc13.moviemates.entity.QMovieEntity;
 import com.nc13.moviemates.entity.QTheaterEntity;
 import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.queryDsl.TheaterQueryDSL;
@@ -32,6 +31,13 @@ public class TheaterQueryDSLImpl implements TheaterQueryDSL {
     @Override
     public Long getRowCount() {
         return jpaQueryFactory.select(qTheater.id.count()).fetchOne();
+    }
+
+    @Override
+    public List<TheaterEntity> findByMovieId(Long movieId) {
+        return jpaQueryFactory.selectFrom(qTheater)
+                .where(qTheater.movieId.eq(movieId))
+                .fetch();
     }
 
     @Override
@@ -67,6 +73,7 @@ public class TheaterQueryDSLImpl implements TheaterQueryDSL {
                     .execute();
         }
     }
+
 
     @Override
     public Boolean exists(Long id) {
