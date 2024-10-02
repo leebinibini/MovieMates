@@ -56,7 +56,7 @@ public class MovieController {
 //        return ResponseEntity.ok(service.save(movie));
 //    }
 
-
+    @ResponseBody
     @PostMapping("/update")
     public ResponseEntity<Boolean> update(@RequestBody List<MovieModel> movieList) {
         System.out.println("영화 수정 컨트롤러 진입 성공!");

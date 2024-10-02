@@ -23,5 +23,6 @@ public class MovieModel {
     private String filepath;
     private String posterUrl;
     private String ageClass;
+    private double  rate;
     
 }

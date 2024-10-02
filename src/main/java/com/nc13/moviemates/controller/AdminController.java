@@ -80,6 +80,16 @@ public class AdminController {
         return "admin/user/list";
     }
 
+    @GetMapping("/reservation")
+    public String adminToReservation() {
+        return "admin/reservation/list";
+    }
+
+    @GetMapping("/review")
+    public String adminToReview() {
+        return "admin/review/list";
+    }
+
 
     @GetMapping("layout-static")
     public String adminLayoutStatic() {
