@@ -14,4 +14,5 @@ public interface MovieQueryDSL {
 
     Long deleteMany(List<Long> movieIdList);
     void update(MovieModel movieModel);
+    List<MovieEntity> findChart();
 }

@@ -15,4 +15,6 @@ public interface TheaterQueryDSL {
 
     Long deleteMany(List<Long> theaterIdList);
     void update(TheaterModel theaterModel);
+
+    List<TheaterEntity> findByMovieId(Long movieId);
 }

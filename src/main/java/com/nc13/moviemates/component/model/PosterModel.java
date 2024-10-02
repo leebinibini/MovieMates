@@ -20,4 +20,5 @@ public class PosterModel {
         this.filepath = posterPath;
         this.filename = uploadName;
     }
+    private String url;
 }

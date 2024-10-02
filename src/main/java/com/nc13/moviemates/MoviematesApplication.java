@@ -1,15 +1,21 @@
 package com.nc13.moviemates;
 
+import com.nc13.moviemates.component.proxy.WebCrawlerService;
 import com.nc13.moviemates.service.MovieService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 
 @RequiredArgsConstructor
 @SpringBootApplication
 public class MoviematesApplication {
+    private MovieService movieService;
 
     public static void main(String[] args) {
         SpringApplication.run(MoviematesApplication.class, args);
@@ -29,4 +35,3 @@ public class MoviematesApplication {
         }
     }*/
 }
-

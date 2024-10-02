@@ -26,13 +26,14 @@
                                     <option>Tenguu Cinema corner</option>
                                     <option>Tenguu Cinema Tysons</option>
                                 </select>
-                                <h3 class="mt3">Movie</h3>
-                                <select>
-                                    <option>Dead pool</option>
-                                    <option>THE BATTLE OF ALGIERS (DI ALGERI)</option>
-                                    <option>LORD OF THE RINGS: THE RETURN OF THE KINGS</option>
-                                    <option>Tenguu Cinema Tysons corner</option>
+                                <h3>Movie</h3>
+                                <select id="movie-selection">
+                                    <option value="deadpool">Dead pool</option>
+                                    <option value="battle-of-algiers">THE BATTLE OF ALGIERS (DI ALGERI)</option>
+                                    <option value="lotr">LORD OF THE RINGS: THE RETURN OF THE KINGS</option>
+                                    <option value="cinema-tysons">Tenguu Cinema Tysons corner</option>
                                 </select>
+
                                 <h3 class="mt3">Date</h3>
                                 <input type='date' class="datetime"/>
                                 <h3 class="mt3">TIME</h3>
@@ -74,5 +75,26 @@
         </div>
     </div>
 </div>
+
+
 </body>
+<script>
+    $('#movie-selection').on('change', function(){
+        var movieId = $(this).val(); // 선택한 영화 ID
+        $.ajax({
+            url: '/getCinemas', // 영화관 리스트를 가져오는 API
+            type: 'POST',
+            data: { movieId: movieId },
+            success: function(cinemas) {
+                // 영화관 목록을 동적으로 생성
+                var cinemaSelect = $('select[name="location"]');
+                cinemaSelect.empty();
+                $.each(cinemas, function(index, cinema) {
+                    cinemaSelect.append('<option value="'+cinema.id+'">'+cinema.name+'</option>');
+                });
+            }
+        });
+    });
+
+</script>
 </html>

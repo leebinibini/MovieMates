@@ -2,7 +2,10 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.service.MovieService;
+import com.nc13.moviemates.service.ScheduleService;
+import com.nc13.moviemates.service.TheaterService;
 import com.nc13.moviemates.serviceImpl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,6 +21,14 @@ import java.util.Optional;
 @RequestMapping("/api/movie")
 public class MovieController {
     private final MovieService service;
+    private final TheaterService theaterService;
+    private final ScheduleService scheduleService;
+
+    @GetMapping()
+    public String toMovieAdmin(){
+        return "admin/movie";
+    }
+
 
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
@@ -30,7 +40,15 @@ public class MovieController {
     public ResponseEntity<List<String>> getNowPlayingList() {
         List<String> title = service.getNowPlayingList();
         return ResponseEntity.ok(title);
+    }
 
+    @GetMapping("/order/{movieId}")
+    public ResponseEntity<Map<String, Object>> getOrderList(@PathVariable Long movieId){
+        Map<String, Object> map = new HashMap<>();
+        map.put("theater", theaterService.findByMovieId(movieId));
+        map.put("schedule", scheduleService.findByMovieId(movieId));
+        System.out.println(map);
+        return ResponseEntity.ok().body(map);
     }
 
     @GetMapping("/{id}")
@@ -50,14 +68,13 @@ public class MovieController {
         return ResponseEntity.ok(service.save(movie));
     }
 
-
 //    @PutMapping
 //    public ResponseEntity<Boolean> update(@RequestBody MovieModel movie){
 //        return ResponseEntity.ok(service.save(movie));
 //    }
 
     @ResponseBody
-    @PostMapping("/update")
+    @PostMapping("/updateMany")
     public ResponseEntity<Boolean> update(@RequestBody List<MovieModel> movieList) {
         System.out.println("영화 수정 컨트롤러 진입 성공!");
         System.out.println("영화리스트" + movieList);
@@ -69,6 +86,7 @@ public class MovieController {
     public ResponseEntity<Long> deleteMany(@RequestBody List<Long> movieIdList){
         return ResponseEntity.ok(service.deleteMany(movieIdList));
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteById(@PathVariable long id){
