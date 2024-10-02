@@ -3261,6 +3261,12 @@ img.full-size {
   border: 1px solid #fb802d;
   color: #fff;
 }
+/* 선택된 항목의 스타일 (selected 클래스) */
+#order .order-content .entry-order-content #msform fieldset .wpc-content .order-date li a.selected i {
+  background: #007bff; /* 선택된 상태의 배경색 */
+  color: white;        /* 선택된 상태의 글자색 */
+  border: 1px solid #007bff; /* 선택된 상태의 테두리 색 */
+}
 #order .order-content .entry-order-content #msform fieldset .wpc-content .order-ticket {
   list-style-type: none;
   padding-left: 0;

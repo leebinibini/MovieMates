@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anvogue - My Account</title>
-    <link rel="shortcut icon" href="./assets/images/fav.png" type="image/x-icon" />
-    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="./dist/output-scss.css" />
-    <link rel="stylesheet" href="./dist/output-tailwind.css" />
+    <link rel="shortcut icon" th:href="@{/assets/images/fav.png}" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/assets/css/swiper-bundle.min.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/dist/output-scss.css}" />
+    <link rel="stylesheet" th:href="@{/dist/output-tailwind.css}" />
 </head>
 <body class="sticky-menu">
     <div id="loader">
@@ -52,7 +52,7 @@
                             <a href="javascript:;" class="close-window"></a>
                             <nav class="overlay-menu">
                                 <ul>
-                                    <li><a href="../../../../../../../../OneDrive/문서/카카오톡%20받은%20파일/resources%20(2)">Home</a></li>
+                                    <li><a th:href="@{/}">Home</a></li>
                                     <li><a th:href="@{/single}">Single</a></li>
                                     <li><a href="#order" class="order_btn">Order</a></li>
                                 </ul>
@@ -203,137 +203,6 @@
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </div>
-<div class="fullwidth-slider">
-    <div id="headerslider" class="carousel slide">
-        <ol class="carousel-indicators">
-            <li data-target="#headerslider" data-slide-to="0" class="active"></li>
-            <li data-target="#headerslider" data-slide-to="1"></li>
-            <li data-target="#headerslider" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <div class="fill" data-bg-image="images/header/header.png">
-                 <div class="bs-slider-overlay"></div>
-                    <div class="container movie-slider-container">
-                        <div class="row">
-                             <div class="col-sm-12 movie-slider-content">
-                                <div class="slider-content" >
-                                    <ul class="subtitle"  data-animation="animated bounceInRight">
-                                        <li>Action</li>
-                                        <li>Science Fiction</li>
-                                        <li>Adventure</li>
-                                    </ul>
-                                    <div class="title" data-animation="animated bounceInRight" >Lord of the rings: The return of the kings <i>(2017)</i></div>
-                                    <div class="slide_right" data-animation="animated bounceInRight">
-                                        <a href="javascript:;" class="btn-trailer">watch trailer</a> <a href="javascript:;" class="btn-ticket">buy ticket</a>
-                                        <ul class="award-logo">
-                                            <li><img src="images/header/icon1.png" alt="icon" ></li>
-                                            <li><img src="images/header/icon2.png" alt="icon"></li>
-                                            <li><img src="images/header/icon3.png" alt="icon"></li>
-                                            <li><img src="images/header/icon4.png" alt="icon"></li>
-                                        </ul>
-                                    </div>
-                                    <div class="chart-cirle">
-                                        <div class="chart-circle-l" data-animation="animated bounceInUp">
-                                            <div class="circle-chart" data-circle-width="7" data-percent="64" data-text="6.4" >
-                                            </div>
-                                            <span>IMDB Ratffing</span>
-                                        </div>
-                                        <div class="chart-circle-r" data-animation="animated bounceInUp">
-                                            <div class="circle-chart" data-circle-width="7" data-percent="84" data-text="8.4" >
-                                            </div>
-                                            <span>Rotten Rating</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" data-bg-image="images/product/feature-item.jpg">
-                 <div class="bs-slider-overlay"></div>
-                    <div class="container movie-slider-container">
-                        <div class="row">
-                             <div class="col-sm-12 movie-slider-content">
-                                <div class="slider-content" >
-                                    <ul class="subtitle"  data-animation="animated bounceInRight">
-                                        <li>Action</li>
-                                        <li>Science Fiction</li>
-                                        <li>Adventure</li>
-                                    </ul>
-                                    <div class="title" data-animation="animated bounceInRight" >The Battle of Algiers (La Battaglia)  <i>(1967)</i></div>
-                                    <div class="slide_right" data-animation="animated bounceInRight">
-                                        <a href="javascript:;" class="btn-trailer">watch trailer</a> <a href="javascript:;" class="btn-ticket">buy ticket</a>
-                                        <ul class="award-logo">
-                                            <li><img src="images/header/icon1.png" alt="icon" ></li>
-                                            <li><img src="images/header/icon2.png" alt="icon"></li>
-                                            <li><img src="images/header/icon3.png" alt="icon"></li>
-                                            <li><img src="images/header/icon4.png" alt="icon"></li>
-                                        </ul>
-                                    </div>
-                                    <div class="chart-cirle">
-                                        <div class="chart-circle-l" data-animation="animated bounceInUp">
-                                            <div class="circle-chart" data-circle-width="7" data-percent="94" data-text="9.4">
-                                            </div>
-                                            <span>IMDB Ratffing</span>
-                                        </div>
-                                        <div class="chart-circle-r" data-animation="animated bounceInUp">
-                                            <div class="circle-chart" data-circle-width="7" data-percent="84" data-text="8.4">
-                                            </div>
-                                            <span>Rotten Rating</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" data-bg-image="images/header/header.png">
-                 <div class="bs-slider-overlay"></div>
-                    <div class="container movie-slider-container">
-                        <div class="row">
-                             <div class="col-sm-12 movie-slider-content">
-                                <div class="slider-content" >
-                                    <ul class="subtitle"  data-animation="animated bounceInRight">
-                                        <li>Action</li>
-                                        <li>Science Fiction</li>
-                                    </ul>
-                                    <div class="title" data-animation="animated bounceInRight" >The Battle of Algiers (Di Algeri)<i>(1967)</i></div>
-                                    <div class="slide_right" data-animation="animated bounceInRight">
-                                        <a href="javascript:;" class="btn-trailer">watch trailer</a> <a href="javascript:;" class="btn-ticket">buy ticket</a>
-                                        <ul class="award-logo">
-                                            <li><img src="images/header/icon1.png" alt="icon" ></li>
-                                            <li><img src="images/header/icon2.png" alt="icon"></li>
-                                            <li><img src="images/header/icon3.png" alt="icon"></li>
-                                            <li><img src="images/header/icon4.png" alt="icon"></li>
-                                        </ul>
-                                    </div>
-                                    <div class="chart-cirle" data-animation="animated bounceInUp">
-                                        <div class="chart-circle-l" data-animation="animated bounceInUp">
-                                            <div class="circle-chart" data-circle-width="7" data-percent="86" data-text="8.6">
-                                            </div>
-                                            <span>IMDB Ratffing</span>
-                                        </div>
-                                        <div class="chart-circle-r" data-animation="animated bounceInUp">
-                                            <div class="circle-chart" data-circle-width="7" data-percent="74" data-text="7.4">
-                                            </div>
-                                            <span>Rotten Rating</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-                <!-- Controls -->
-
             </div>
         </div>
         <section class="section-content">
@@ -643,19 +512,22 @@
                                         <option>Tenguu Cinema corner</option>
                                         <option>Tenguu Cinema Tysons</option>
                                     </select>
-                                    <h3>Movie</h3>
+
+                                    <h3 class="mt3">Movie</h3>
                                     <input id="movie-selection" value="deadpool" readonly/>
+
                                     <h3 class="mt3">Date</h3>
-                                    <input type='date' class="datetime" />
+                                    <input type='date' class="datetime"/>
                                     <h3 class="mt3">TIME</h3>
                                     <ul class="order-date">
-                                        <li><a href="javascript:;"><i>11:50</i></a></li>
-                                        <li><a href="javascript:;"><i>13:40</i></a></li>
-                                        <li><a href="javascript:;"><i>16:35</i></a></li>
-                                        <li><a href="javascript:;"><i>17:30</i></a></li>
-                                        <li><a href="javascript:;"><i>19:50</i></a></li>
-                                        <li><a href="javascript:;"><i>21:10</i></a></li>
+                                        <li><a href="javascript:;" data-time="11:50"><i>11:50</i></a></li>
+                                        <li><a href="javascript:;" data-time="13:40"><i>13:40</i></a></li>
+                                        <li><a href="javascript:;" data-time="16:35"><i>16:35</i></a></li>
+                                        <li><a href="javascript:;" data-time="17:30"><i>17:30</i></a></li>
+                                        <li><a href="javascript:;" data-time="19:50"><i>19:50</i></a></li>
+                                        <li><a href="javascript:;" data-time="21:10"><i>21:10</i></a></li>
                                     </ul>
+
                                 </div>
                                 <input type="button" name="next" class="next action-button" value="Next" />
                             </fieldset>
@@ -718,61 +590,124 @@
             });
         }
 
-       /* $('#movie-selection').on('change', function(event) {
-            event.preventDefault();
+        document.addEventListener("DOMContentLoaded", function (){
+            $(".btn-ticket").on('click', function(e) {
+                // 클릭한 요소의 data-id 속성 값 가져오기
+                var movieId = $(e.target).data('id');
 
-            var movieId = $(this).val();
-            alert("영화번호:" +movieId);// 선택한 영화의 movieId를 가져옴
-            console.log("영화번호:" +movieId);
-            // 영화 ID로 영화관 및 상영 정보를 가져옴
-            axios.get(`/api/movie/${movieId}`)
-                .then(function(res) {
-                    console.log(res.data);
-                    var cinemas = res.data.name; // 영화관 목록
-                    var schedules = res.data.show; // 상영 시간 목록
+                axios.get(`/api/movie/order/${movieId}`)
+                    .then(function (res) {
+                        var theaterList = res.data.theater;
+                        var scheduleList = res.data.schedule;
+                        var title = res.data.title;
+                        alert(JSON.stringify(res.data));
 
-                    // 영화관 선택 영역 업데이트
-                    var cinemaSelect = $('#cinema-selection');
-                    cinemaSelect.empty(); // 기존 옵션 초기화
+                        // 영화관 목록 렌더링
+                        var locationSelect = $("select[name='location']");
+                        locationSelect.empty();
+                        theaterList.forEach(function (theater) {
+                            locationSelect.append(new Option(theater.name, theater.id));
+                        });
+                        $('#movie-selection').val(title);
 
-                    cinemas.forEach(function(cinema) {
-                        cinemaSelect.append(`<option value="${cinema.id}">${cinema.name}</option>`);
+                        // 날짜, 시간 렌더링
+                        var timeList = $(".order-date");
+                        timeList.empty();
+                        scheduleList.forEach(function (schedule) {
+                            var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            timeList.append('<li><a href="javascript:;" data-time="' + time + '"><i>' + time + '</i></a></li>');
+                        });
+
+                        // 서버에서 받은 날짜 필터링
+                        var dateInput = document.querySelector('.datetime');
+                        var availableDates = scheduleList.map(function(schedule) {
+                            return new Date(schedule.showDate).toISOString().split('T')[0];
+                        });
+
+                        var today = new Date().toISOString().split('T')[0];
+                        dateInput.setAttribute('min', today);
+                        dateInput.setAttribute('max', availableDates[availableDates.length - 1]);
+                        dateInput.value = today;
+
+                        // 날짜 선택에 따른 시간 필터링
+                        function renderTimesForSelectedDate(selectedDate) {
+                            var filteredSchedules = scheduleList.filter(function(schedule) {
+                                var scheduleDate = new Date(schedule.showDate).toISOString().split('T')[0];
+                                return scheduleDate === selectedDate;
+                            });
+
+                            timeList.empty();
+                            if (filteredSchedules.length > 0) {
+                                filteredSchedules.forEach(function(schedule) {
+                                    var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                                    timeList.append('<li><a href="javascript:;" data-time="' + time + '"><i>' + time + '</i></a></li>');
+                                });
+                            } else {
+                                timeList.append('<li><a href="javascript:;"><i>해당 날짜에 상영 시간이 없습니다.</i></a></li>');
+                            }
+                        }
+
+                        // 처음 로드 시 오늘 날짜의 상영 시간 렌더링
+                        renderTimesForSelectedDate(today);
+
+                        // 날짜 변경 시 해당 날짜의 시간 렌더링
+                        dateInput.addEventListener('change', function() {
+                            var selectedDate = dateInput.value;
+                            if (availableDates.includes(selectedDate)) {
+                                renderTimesForSelectedDate(selectedDate);
+                            } else {
+                                dateInput.value = '';
+                                alert('해당 날짜에 상영정보가 없습니다.');
+                            }
+                        });
+
+                        // 시간 선택 처리
+                        $('.order-date').off('click').on('click', 'a', function() {
+                            var selectedTime = $(this).data('time');
+
+                            $('.order-date a').removeClass('selected');
+
+                            // 클릭한 <a> 태그에 'selected' 클래스를 추가하여 색상 유지
+                            $(this).addClass('selected');
+
+
+                            // 여기서 선택한 정보들을 저장하고 다음 단계로 넘김
+                            var selectedLocation = $('select[name="location"]').val();
+                            var selectedMovie = $('#movie-selection').val();
+                            var selectedDate = $('.datetime').val();
+
+
+                            // 선택한 정보 저장
+                            sessionStorage.setItem('selectedLocation', selectedLocation);
+                            sessionStorage.setItem('selectedMovie', selectedMovie);
+                            sessionStorage.setItem('selectedDate', selectedDate);
+                            sessionStorage.setItem('selectedTime', selectedTime);
+
+
+                            // 다음 단계로 이동
+                            alert('"선택된 영화관: "' + selectedLocation +
+                                '    "선택된 영화: "' + selectedMovie +
+                                '     "선택된 날짜: "' + selectedDate +
+                                '"선택된 시간:"' + selectedTime );
+                            // window.location.href = '/next-page-url'; // 다음 페이지로 이동할 때 사용할 URL
+                            console.log("선택된 영화관: " + selectedLocation);
+                            console.log("선택된 영화: " + selectedMovie);
+                            console.log("선택된 날짜: " + selectedDate);
+
+                        });
+                        console.log("선택된 영화관: " + selectedLocation);
+                        console.log("선택된 영화: " + selectedMovie);
+                        console.log("선택된 날짜: " + selectedDate);
+                    })
+
+
+            .catch(function (error) {
+                        console.log("error data:", error);
                     });
-
-                    // 상영 시간 선택 영역 업데이트
-                    var scheduleList = $('#schedule-list');
-                    scheduleList.empty(); // 기존 상영 시간 초기화
-
-                    schedules.forEach(function(schedule) {
-                        scheduleList.append(`<li><a href="javascript:;"><i>${schedule.show_time}</i></a></li>`);
-                    });
-
-                })
-                .catch(function(err) {
-                    console.error('Error fetching schedules:', err);
-                });
-        });*/
-
-    document.addEventListener("DOMContentLoaded", function (){
-        $(".btn-ticket").on('click', function(e) {
-            // 클릭한 요소의 data-id 속성 값 가져오기
-            var movieId = $(e.target).data('id');  // 또는 e.target.getAttribute('data-id');
-
-            axios.get(`/api/movie/order/${movieId}`)
-                .then(function (res) {
-                    console.log(res);
-                var theaterList = res.data.theater;
-                console.log(res.data);
-                var scheduleList = res.data.schedule;
-            })
-                .catch(function (error){
-                    console.log("error data:", error);
-                });
+            });
         });
-    });
 
 
     </script>
-
 </body>
 </html>
