@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{/admin/head :: headContent}">
+  <title>Login</title>
+  <style>
+    .google-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: #444;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .google-btn:hover {
+      background-color: #f5f5f5;
+    }
+
+    .google-btn img {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .google-btn span {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body style="background-color: #000;"> <!-- 배경색을 검정색으로 설정 -->
+  <a th:href="@{/}" class="google-btn">
+  <img th:src="@{https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg}" alt="Google logo" />
+  <span>Google로 로그인</span>
+</a>
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                            <div class="card-body">
+                                <form id="loginForm">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                        <label for="inputEmail">Email address</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                        <label for="inputPassword">Password</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                        <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                        <a class="small" th:href="@{/api/admin/password}">Forgot Password?</a>
+                                        <a class="btn btn-primary" th:href="@{/api/admin/login}">Login</a>
+<!--                                        <button type="submit">Login</button>-->
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer text-center py-3">
+                                <div class="small"><a th:href="@{/api/admin/register}">Need an account? Sign up!</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="layoutAuthentication_footer">
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        &middot;
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script th:src="@{/admin/js/scripts.js}"></script>
+<!--<script>-->
+<!--    document.querySelector('#loginForm').addEventListener('submit', (event) => {-->
+<!--        event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지-->
+
+<!--        const email = document.getElementById('inputEmail').value;-->
+<!--        const password = document.getElementById('inputPassword').value;-->
+
+<!--        // jQuery 추가하면 다음을 사용할 수 있음-->
+<!--        // const email = $('#inputEmail').val();-->
+<!--        // const password = $('#inputPassword').val();-->
+
+<!--        axios.post("/api/admin/login", {-->
+<!--            email: email,-->
+<!--            password: password-->
+<!--        }).then(res => {-->
+<!--            console.log('Login successful:', res.data);-->
+
+<!--        }).catch(err => {-->
+<!--            console.log("Login failed: ", err);-->
+<!--        });-->
+<!--    })-->
+<!--</script>-->
+
+
+  <title>Login</title>
+  <style>
+    .google-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: #444;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .google-btn:hover {
+      background-color: #f5f5f5;
+    }
+
+    .google-btn img {
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .google-btn span {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+<h2>로그인</h2>
+<a th:href="@{/}" class="google-btn">
+  <img th:src="@{https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg}" alt="Google logo" />
+  <span>Google로 로그인</span>
+</a>
+</body>
+</html>

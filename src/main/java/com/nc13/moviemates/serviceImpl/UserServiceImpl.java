@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserEntity> findById(Long id) {
+
         return repository.findById(id);
     }
 
@@ -46,4 +48,5 @@ public class UserServiceImpl implements UserService {
     public Boolean existsById(Long id) {
         return repository.existsById(id);
     }
+
 }

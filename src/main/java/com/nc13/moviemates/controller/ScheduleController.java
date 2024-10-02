@@ -1,15 +1,14 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.entity.PosterEntity;
+import com.nc13.moviemates.component.model.OrderModel;
 import com.nc13.moviemates.entity.ScheduleEntity;
-import com.nc13.moviemates.service.PosterService;
 import com.nc13.moviemates.service.ScheduleService;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -25,10 +24,14 @@ public class ScheduleController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity <Optional<ScheduleEntity>> getById(@PathVariable Long id){
-        return ResponseEntity.ok(service.findById(id));
-    }
+    /*//오더 누르면 상영정보와 영화관 리스트 불러오기
+    @GetMapping("/order/{movieid}")
+    public ResponseEntity<List<OrderModel>> findById(@PathVariable Long movieId){
+        System.out.println("컨트롤러 진입!!");
+        System.out.println(movieId);
+        System.out.println(service.findByMovieId(movieId));
+        return ResponseEntity.ok(service.findByMovieId(movieId));
+    }*/
 
     @PostMapping
     public ResponseEntity<Boolean> insert (@RequestBody ScheduleEntity schedule){
@@ -51,4 +54,6 @@ public class ScheduleController {
 
     public long count() {
         return service.count();}
+
+
 }

@@ -16,4 +16,5 @@ public class TheaterModel {
     private String name;
     private String location;
     private int capacity;
+    private Long movieId;
 }

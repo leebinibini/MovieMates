@@ -1,41 +1,74 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.service.MovieService;
+import com.nc13.moviemates.service.ScheduleService;
+import com.nc13.moviemates.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/api/movies")
+@RequestMapping("/api/movie")
 public class MovieController {
     private final MovieService service;
+    private final TheaterService theaterService;
+    private final ScheduleService scheduleService;
+
+    @GetMapping()
+    public String toMovieAdmin(){
+        return "admin/movie";
+    }
 
 
-    @GetMapping
-    public ResponseEntity<List<MovieEntity>> getList(){
+    @GetMapping("/list")
+    public ResponseEntity<List<MovieEntity>> getList() {
         return ResponseEntity.ok(service.findAll());
     }
+
+
+    @GetMapping("/names")
+    public ResponseEntity<List<String>> getNowPlayingList() {
+        List<String> title = service.getNowPlayingList();
+        return ResponseEntity.ok(title);
+    }
+    // 홈페이지 화면 리스트 가져오기
+
+
+    @GetMapping("/order/{movieId}")
+    public ResponseEntity<Map<String, Object>> getOrderList(@PathVariable Long movieId){
+        Map<String, Object> map = new HashMap<>();
+        map.put("theater", theaterService.findByMovieId(movieId));
+        map.put("schedule", scheduleService.findByMovieId(movieId));
+        System.out.println(map);
+        return ResponseEntity.ok().body(map);
+    }
+
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity <Optional<MovieEntity>> getById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping("")
-    public ResponseEntity<Boolean> insert (@RequestBody MovieEntity movie){
+    @PostMapping("/register")
+    @ResponseBody
+    public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
+        System.out.println("영화등록 화면에서 넘어온 값 : "+ movie);
         return ResponseEntity.ok(service.save(movie));
     }
 
-    @PutMapping
-    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
-        return ResponseEntity.ok(service.save(movie));
-    }
+//    @PutMapping
+//    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
+//        return ResponseEntity.ok(service.save(movie));
+//    }
 
     @DeleteMapping("/{id}")
     public Boolean deleteById(@PathVariable Long id){
@@ -50,6 +83,18 @@ public class MovieController {
 
     public long count() {
         return service.count();}
+
+
+    /*@GetMapping("/crawl")
+    public String crawlMovies() {
+        try {
+            service.crawlMovies();
+            return "Crawling complete!";
+        } catch (Exception e) {
+            return "Error occurred: " + e.getMessage();
+        }
+    }*/
 }
+
 
 
