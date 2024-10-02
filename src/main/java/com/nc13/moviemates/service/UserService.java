@@ -4,9 +4,10 @@ import com.nc13.moviemates.entity.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-@Service
+
 public interface UserService {
     List<?> findAll();
 
@@ -19,4 +20,5 @@ public interface UserService {
     Long count();
 
     Boolean existsById(Long id);
+
 }

@@ -11,4 +11,6 @@ public interface TheaterQueryDSL {
 
     Boolean exists(Long id);
     Long getRowCount();
+
+    List<TheaterEntity> findByMovieId(Long movieId);
 }

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .text-red { color: red; }
+        .border-line { border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">마이페이지</h2>
+    <form id="faceImageUploadForm" th:action="@{/profile/update}" method="post" enctype="multipart/form-data">
+        <div class="heading5 pb-4">정보</div>
+        <div class="upload_image col-span-full mb-4">
+            <label for="uploadImage">아바타 업로드: <span class="text-red">*</span></label>
+            <div class="flex flex-wrap items-center gap-5 mt-3">
+                <div class="bg_img flex-shrink-0 relative w-[7.5rem] h-[7.5rem] rounded-lg overflow-hidden bg-surface">
+                    <span class="ph ph-image text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-secondary"></span>
+                    <img th:src="@{/profile/assets/images/avatar/img.png}" alt="avatar" class="upload_img relative z-[1] w-full h-full object-cover" />
+                </div>
+                <div>
+                    <strong class="text-button">파일 업로드:</strong>
+                    <p class="caption1 text-secondary mt-1">JPG 120x120px</p>
+                    <div class="upload_file flex items-center gap-3 w-[220px] mt-3 px-3 py-2 border border-line rounded">
+                        <label for="uploadImage" class="caption2 py-1 px-3 rounded bg-line whitespace-nowrap cursor-pointer">파일 선택</label>
+                        <input type="file" name="uploadImage" id="uploadImage" accept="image/*" class="caption2 cursor-pointer" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-5">
+            <div class="first-name mb-4">
+                <label for="firstName" class="caption1 capitalize">이름 <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="firstName" name="firstName" type="text" value="Tony" placeholder="이름" required />
+            </div>
+            <div class="last-name mb-4">
+                <label for="lastName" class="caption1 capitalize">성 <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="lastName" name="lastName" type="text" value="Nguyen" placeholder="성" required />
+            </div>
+            <div class="phone-number mb-4">
+                <label for="phoneNumber" class="caption1 capitalize">전화번호 <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="phoneNumber" name="phoneNumber" type="text" value="(+12) 345 678 910" placeholder="전화번호" required />
+            </div>
+            <div class="email mb-4">
+                <label for="email" class="caption1 capitalize">이메일 주소 <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="email" name="email" type="email" value="hi.avitex@gmail.com" placeholder="이메일 주소" required />
+            </div>
+            <div class="gender mb-4">
+                <label for="gender" class="caption1 capitalize">성별 <span class="text-red">*</span></label>
+                <div class="select-block mt-2">
+                    <select class="border border-line px-4 py-3 w-full rounded-lg" id="gender" name="gender" required>
+                        <option value="default" disabled>성별 선택</option>
+                        <option value="Male">남성</option>
+                        <option value="Female">여성</option>
+                        <option value="Other">기타</option>
+                    </select>
+                </div>
+            </div>
+            <div class="birth mb-4">
+                <label for="birth" class="caption1">생년월일 <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="birth" name="birth" type="date" required />
+            </div>
+        </div>
+        <div class="heading5 pb-4 lg:mt-10 mt-6">비밀번호 변경</div>
+        <div class="pass mb-4">
+            <label for="password" class="caption1">현재 비밀번호 <span class="text-red">*</span></label>
+            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="password" name="password" type="password" placeholder="비밀번호 *" required />
+        </div>
+        <div class="new-pass mb-4">
+            <label for="newPassword" class="caption1">새 비밀번호 <span class="text-red">*</span></label>
+            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="newPassword" name="newPassword" type="password" placeholder="새 비밀번호 *" required />
+        </div>
+        <div class="confirm-pass mb-4">
+            <label for="confirmPassword" class="caption1">새 비밀번호 확인 <span class="text-red">*</span></label>
+            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="confirmPassword" name="confirmPassword" type="password" placeholder="비밀번호 확인 *" required />
+        </div>
+        <div class="block-button lg:mt-10 mt-6">
+            <button type="submit" class="btn btn-primary">변경 사항 저장</button>
+        </div>
+    </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    const uploadImageInput = document.getElementById('uploadImage');
+    const label = document.querySelector('label[for="uploadImage"]');
+
+    uploadImageInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            label.textContent = this.files[0].name; // 선택한 파일의 이름으로 라벨 업데이트
+        } else {
+            label.textContent = '파일 선택'; // 기본 텍스트로 리셋
+        }
+    });
+</script>
+<script> document.querySelector('#faceImageUploadForm').addEventListener('submit', (event) => {
+    event.preventDefault(); // 폼의 기본 제출 동작 방지
+
+    const fileInput = document.getElementById('uploadImage').files[0]; // 파일 객체 가져오기
+    const formData = new FormData();
+
+    // 입력 필드에서 값 가져오기
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const email = document.getElementById('email').value;
+    const gender = document.getElementById('gender').value;
+    const birth = document.getElementById('birth').value;
+    const password = document.getElementById('password').value; // 현재 비밀번호
+    const newPassword = document.getElementById('newPassword').value; // 새 비밀번호
+
+    // 폼 데이터에 이미지와 추가 정보 추가
+    if (fileInput) {
+        formData.append('uploadImage', fileInput); // 파일 추가
+    } else {
+        alert("이미지를 선택해주세요!"); // 파일이 선택되지 않았을 때 경고
+        return; // 처리 중단
+    }
+
+    // 추가 정보 추가
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('phoneNumber', phoneNumber);
+    formData.append('email', email);
+    formData.append('gender', gender);
+    formData.append('birth', birth);
+    formData.append('password', password); // 현재 비밀번호
+    formData.append('newPassword', newPassword); // 새 비밀번호
+
+    // 서버에 데이터 업로드 요청
+    axios.post('/mypage/update', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data' // 파일 전송을 위한 헤더 설정
+        }
+    }).then(response => {
+        if (response.status === 200) {
+            console.log("정보 저장 성공!");
+            alert("정보 저장 성공!");
+            window.location.href = "/mypage"; // 성공 후 리다이렉션
+        } else {
+            console.log("정보 저장 실패!");
+            alert("정보 저장 실패!");
+        }
+    }).catch(error => {
+        console.log("Error: ", error);
+    });
+});
+</script>
+
+</body>
+</html>

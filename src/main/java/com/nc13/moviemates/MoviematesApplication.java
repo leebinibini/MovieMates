@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 
 @RequiredArgsConstructor
@@ -18,17 +21,17 @@ public class MoviematesApplication {
         SpringApplication.run(MoviematesApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner run() {
-        return args -> {
-            // 애플리케이션 시작 시 크롤링 및 데이터베이스 저장 실행
-            String url = "https://megabox.co.kr/";
-            crawling(url);
-        };
-    }
+    // CommandLineRunner로 크롤링 작업 자동 실행
+    /*@Component
+    @RequiredArgsConstructor
+    class MovieCrawlerRunner implements CommandLineRunner {
 
-    private void crawling(String url) {
-    }
+        private final MovieService movieService;
 
+        @Override
+        public void run(String... args) throws Exception {
 
+            movieService.crawlMovies();  // 크롤링 실행
+        }
+    }*/
 }

@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name= "posters")
 public class PosterEntity {
@@ -16,6 +16,12 @@ public class PosterEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long movieId;
+    private String url;
     private String filepath;
     private String filename;
+
+    public PosterEntity(String posterPath, String uploadName) {
+        this.filepath = posterPath;
+        this.filename = uploadName;
+    }
 }
