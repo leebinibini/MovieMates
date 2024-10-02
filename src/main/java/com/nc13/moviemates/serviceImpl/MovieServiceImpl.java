@@ -27,7 +27,12 @@ public class MovieServiceImpl implements MovieService {
     public Long save(MovieModel movie) {
         MovieEntity ent = MovieEntity.builder()
                 .title(movie.getTitle())
+                .posterUrl(movie.getPosterUrl())
+                .genre(movie.getGenre())
+                .director(movie.getDirector())
                 .plot(movie.getPlot())
+                .runningTime(movie.getRunningTime())
+                .rate(movie.getRate())
                 .build();
 
         MovieEntity savedEntity = repository.save(ent);
@@ -42,7 +47,6 @@ public class MovieServiceImpl implements MovieService {
         movieList.forEach(movie -> repository.update(movie));
         return true;
     }
-
 
 
     @Override

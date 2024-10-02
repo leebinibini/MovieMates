@@ -47,6 +47,7 @@ public class TheaterController {
         return ResponseEntity.ok(service.save(theater));
     }
 
+    @ResponseBody
     @PostMapping("/update")
     public ResponseEntity<Boolean> update(@RequestBody List<TheaterModel> theaterList) {
         System.out.println("극장 수정 컨트롤러 진입 성공!");

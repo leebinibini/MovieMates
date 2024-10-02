@@ -45,6 +45,8 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
                 .where(qMovie.id.eq(movie.getId()))
                 .set(qMovie.title, movie.getTitle())
                 .set(qMovie.director, movie.getDirector())
+                .set(qMovie.posterUrl, movie.getPosterUrl())
+                .set(qMovie.genre, movie.getGenre())
                 .execute();
     }
 

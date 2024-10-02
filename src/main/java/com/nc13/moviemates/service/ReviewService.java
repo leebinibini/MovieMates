@@ -1,15 +1,15 @@
 package com.nc13.moviemates.service;
 
+import com.nc13.moviemates.component.model.ReviewModel;
 import com.nc13.moviemates.entity.ReviewEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public interface ReviewService {
 
-    List<?> findAll();
+    List<ReviewEntity> findAll();
 
     Optional<ReviewEntity> findById(Long id);
 
@@ -20,4 +20,7 @@ public interface ReviewService {
     Long count();
 
     Boolean existsById(Long id);
+
+
+    Long deleteMany(List<Long> reviewIdList);
 }

@@ -1,10 +1,14 @@
 package com.nc13.moviemates.serviceImpl;
 
+import com.nc13.moviemates.component.model.ReviewModel;
+import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
+import com.nc13.moviemates.entity.ScheduleEntity;
 import com.nc13.moviemates.repository.ReviewRepository;
 import com.nc13.moviemates.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +19,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository repository;
 
     @Override
-    public List<?> findAll() {
+    public List<ReviewEntity> findAll() {
         return repository.findAll();
     }
 
@@ -45,5 +49,12 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Boolean existsById(Long id) {
         return repository.existsById(id);
+    }
+
+
+    @Transactional
+    @Override
+    public Long deleteMany(List<Long> reviewIdList) {
+        return repository.deleteMany(reviewIdList);
     }
 }

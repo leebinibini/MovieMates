@@ -63,6 +63,7 @@ public class TheaterQueryDSLImpl implements TheaterQueryDSL {
                     .set(qTheater.name, theater.getName())
                     .set(qTheater.room, theater.getRoom())
                     .set(qTheater.location, theater.getLocation())
+                    .set(qTheater.capacity, theater.getCapacity())
                     .execute();
         }
     }
