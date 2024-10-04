@@ -1,20 +1,25 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.component.model.MovieModel;
+import com.nc13.moviemates.component.model.TheaterModel;
 import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.service.TheaterService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @CrossOrigin
 @RequestMapping("/api/theater")
 public class TheaterController {
     private final TheaterService service;
+
 
     @GetMapping("/findTheaterIdByName")
     public ResponseEntity<Long> findTheaterIdByName(@RequestParam("name") String name ){
@@ -23,7 +28,7 @@ public class TheaterController {
 
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<TheaterEntity>> getList(){
         return ResponseEntity.ok(service.findAll());
     }
@@ -33,14 +38,35 @@ public class TheaterController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping
+    @GetMapping("/register")
+    public String toTheaterRegister (){
+        return "admin/theater/register";
+    }
+
+    @ResponseBody
+    @PostMapping("/register")
     public ResponseEntity<Boolean> insert (@RequestBody TheaterEntity theater){
+        System.out.println("화면에서 넘어오는 극장 정보: " + theater);
         return ResponseEntity.ok(service.save(theater));
     }
 
     @PutMapping
     public ResponseEntity<Boolean> update(@RequestBody TheaterEntity theater){
         return ResponseEntity.ok(service.save(theater));
+    }
+
+    @ResponseBody
+    @PostMapping("/update")
+    public ResponseEntity<Boolean> update(@RequestBody List<TheaterModel> theaterList) {
+        System.out.println("극장 수정 컨트롤러 진입 성공!");
+        System.out.println("극장리스트" + theaterList);
+        return ResponseEntity.ok(service.update(theaterList));
+    }
+
+    @ResponseBody
+    @PostMapping("/deleteMany")
+    public ResponseEntity<Long> deleteMany(@RequestBody List<Long> theaterIdList){
+        return ResponseEntity.ok(service.deleteMany(theaterIdList));
     }
 
     @DeleteMapping("/{id}")

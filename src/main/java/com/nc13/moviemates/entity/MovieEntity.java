@@ -21,14 +21,15 @@ public class MovieEntity{
     private String title;
     private String genre;
     private String director;
-    private String filepath;
     private String actors;
     private double rate;
     private String plot;
     private String releaseDate;
     private int runningTime;
-    private String WidthPosterUrl;
     private String ageClass;
     private int booking;
+    private String WidthPosterUrl;
     private String lengthPosterUrl;
+    private String posterUrl;
+
 }

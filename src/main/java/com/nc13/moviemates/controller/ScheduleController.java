@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/api/schedules")
+@RequestMapping("/api/schedule")
 public class ScheduleController {
     private final ScheduleService service;
     private final TheaterService theaterService;
@@ -30,7 +30,7 @@ public class ScheduleController {
     }*/
 
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<ScheduleEntity>> getList(){
         return ResponseEntity.ok(service.findAll());
     }
@@ -44,7 +44,8 @@ public class ScheduleController {
         return ResponseEntity.ok(service.findByMovieId(movieId));
     }*/
 
-    @PostMapping
+    @ResponseBody
+    @PostMapping("/register")
     public ResponseEntity<Boolean> insert (@RequestBody ScheduleEntity schedule){
         return ResponseEntity.ok(service.save(schedule));
     }

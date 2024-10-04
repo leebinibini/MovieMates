@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class ImageModel {
     private Long id;
@@ -19,6 +19,4 @@ public class ImageModel {
     private String uploadPath; // storage 내에 파일이 저장된 경로
     private String uploadURL; // storage에서 파일에 접근할 수 있는 URL
     private Long movieId;
-
-
 }

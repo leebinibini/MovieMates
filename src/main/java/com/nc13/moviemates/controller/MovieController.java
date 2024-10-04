@@ -6,13 +6,16 @@ import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.ScheduleService;
 import com.nc13.moviemates.service.TheaterService;
+import com.nc13.moviemates.serviceImpl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @CrossOrigin
 @RequestMapping("/api/movie")
@@ -38,8 +41,6 @@ public class MovieController {
         List<String> title = service.getNowPlayingList();
         return ResponseEntity.ok(title);
     }
-    // 홈페이지 화면 리스트 가져오기
-
 
     @GetMapping("/order/{movieId}")
     public ResponseEntity<Map<String, Object>> getOrderList(@PathVariable Long movieId){
@@ -54,28 +55,45 @@ public class MovieController {
         return ResponseEntity.ok().body(map);
     }
 
-
-
-
     @GetMapping("/{id}")
     public ResponseEntity <Optional<MovieEntity>> getById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping("/register")
+    @GetMapping("/register")
+    public String toMovieRegister(){
+        return "admin/movie/register";
+    }
+
     @ResponseBody
+    @PostMapping("/register")
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
         return ResponseEntity.ok(service.save(movie));
     }
 
 //    @PutMapping
-//    public ResponseEntity<Boolean> update(@RequestBody MovieEntity movie){
+//    public ResponseEntity<Boolean> update(@RequestBody MovieModel movie){
 //        return ResponseEntity.ok(service.save(movie));
 //    }
 
+    @ResponseBody
+    @PostMapping("/updateMany")
+    public ResponseEntity<Boolean> update(@RequestBody List<MovieModel> movieList) {
+        System.out.println("영화 수정 컨트롤러 진입 성공!");
+        System.out.println("영화리스트" + movieList);
+        return ResponseEntity.ok(service.update(movieList));
+    }
+
+    @ResponseBody
+    @PostMapping("/deleteMany")
+    public ResponseEntity<Long> deleteMany(@RequestBody List<Long> movieIdList){
+        return ResponseEntity.ok(service.deleteMany(movieIdList));
+    }
+
+
     @DeleteMapping("/{id}")
-    public Boolean deleteById(@PathVariable Long id){
-        return service.deleteById(id);
+    public ResponseEntity<Boolean> deleteById(@PathVariable long id){
+        return ResponseEntity.ok(service.deleteById(id));
     }
 
     @GetMapping("/exists/{id}")

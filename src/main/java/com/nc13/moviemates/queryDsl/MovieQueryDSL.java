@@ -1,7 +1,7 @@
 package com.nc13.moviemates.queryDsl;
 
+import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
-import com.querydsl.core.Tuple;
 
 import java.util.List;
 
@@ -11,6 +11,9 @@ public interface MovieQueryDSL {
     Boolean exists(Long id);
     Long getRowCount();
     List<String> getNowPlayingList();
+
+    Long deleteMany(List<Long> movieIdList);
+    void update(MovieModel movieModel);
     List<MovieEntity> findChart();
     Long findMovieIdByName(String name);
 }

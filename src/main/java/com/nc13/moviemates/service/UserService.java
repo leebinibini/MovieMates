@@ -1,5 +1,6 @@
 package com.nc13.moviemates.service;
 
+import com.nc13.moviemates.component.model.UserModel;
 import com.nc13.moviemates.entity.UserEntity;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public interface UserService {
 
     Optional<UserEntity> findById(Long id);
 
+
     Boolean save(UserEntity user);
 
     Boolean deleteById(Long id);
@@ -21,4 +23,7 @@ public interface UserService {
 
     Boolean existsById(Long id);
 
+    boolean authenticate(String email, String password);
+
+    Boolean update(List<UserModel> userData);
 }

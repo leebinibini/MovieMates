@@ -1,12 +1,28 @@
 package com.nc13.moviemates.serviceImpl;
 
+import com.nc13.moviemates.component.proxy.MovieSelenium;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.repository.MovieRepository;
 import com.nc13.moviemates.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +31,7 @@ import java.util.Optional;
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository repository;
-
+    private final MovieSelenium movieSelenium;
 
     @Override
     public List<MovieEntity> findAll() {
@@ -31,14 +47,46 @@ public class MovieServiceImpl implements MovieService {
     public Long save(MovieModel movie) {
         MovieEntity ent = MovieEntity.builder()
                 .title(movie.getTitle())
+                .lengthPosterUrl(movie.getPosterUrl())
+                .genre(movie.getGenre())
+                .director(movie.getDirector())
                 .plot(movie.getPlot())
+                .runningTime(movie.getRunningTime())
+                .rate(movie.getRate())
                 .build();
 
         MovieEntity savedEntity = repository.save(ent);
+
         long id = savedEntity.getId();
         return existsById(id)? id : 0;
     }
 
+    @Override
+    @Transactional
+    public Boolean update(List<MovieModel> movieList) {
+        System.out.println("영화서비스 진입 성공!");
+        movieList.forEach(movieModel -> {
+            MovieEntity movieEntity = MovieEntity.builder()
+                    .id(movieModel.getId())
+                    .title(movieModel.getTitle())
+                    .genre(movieModel.getGenre())
+                    .plot(movieModel.getPlot())
+                    .releaseDate(movieModel.getReleaseDate())
+                    .director(movieModel.getDirector())
+                    .runningTime(movieModel.getRunningTime())
+                    .actors(movieModel.getActors())
+                    .lengthPosterUrl(movieModel.getLengthPosterUrl())
+                    .WidthPosterUrl(movieModel.getWidthPosterUrl())
+                    .rate(movieModel.getRate())
+                    .ageClass(movieModel.getAgeClass())
+                    .build(); // 변환 메서드 호출
+            repository.save(movieEntity);
+        });
+        return true;
+    }
+
+
+    @Override
     public List<String> getNowPlayingList() {
         return repository.getNowPlayingList();
     }
@@ -66,6 +114,12 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    @Transactional
+    public Long deleteMany(List<Long> movieIdList) {
+        return repository.deleteMany(movieIdList);
+    }
+
+    @Override
     public Boolean deleteById(Long id) {
         repository.deleteById(id);
         return !existsById(id);
@@ -77,12 +131,20 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public MovieEntity findEntityById(Long id){
+    public MovieEntity findEntityById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found id" + id));
+                .orElseThrow(()-> new RuntimeException("Movie not Found with id: " +id));
     }
 
-
+    // 변환 메서드
+    private MovieEntity modelToEntity(MovieModel movieModel) {
+        return MovieEntity.builder()
+                .id(movieModel.getId())
+                .title(movieModel.getTitle())
+                .genre(movieModel.getGenre())
+                // 필요한 필드를 변환
+                .build();
+    }
 
    /* @Override
     public void crawlMovies() throws IOException {
@@ -236,5 +298,5 @@ public class MovieServiceImpl implements MovieService {
         }
         driver.quit();
     }*/
-    }
+}
 
