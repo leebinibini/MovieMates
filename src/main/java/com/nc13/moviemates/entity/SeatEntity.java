@@ -1,10 +1,8 @@
 package com.nc13.moviemates.entity;
 
+
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Date;
-
 
 @Entity
 @Getter
@@ -13,15 +11,17 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Table(name= "schedules")
-public class ScheduleEntity {
+@Table(name= "seats")
+public class SeatEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long theaterId;
-    private Long movieId;
-    private Date showDate;
-    private Date showTime;
+    private Long scheduleId;
+    private int row;
+    private int column;
 
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private SeatStatus status;
 }

@@ -36,7 +36,7 @@ public class UserController {
         }
         model.addAttribute("histories", histories);
 
-        System.out.println(model);
+
         return "profile/main";
     }
 

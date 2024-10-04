@@ -6,11 +6,9 @@ import java.util.List;
 
 public interface TheaterQueryDSL {
     List<TheaterEntity> getAll();
-
+    Long findTheaterIdByName (String name);
     TheaterEntity getById(Long id);
-
     Boolean exists(Long id);
     Long getRowCount();
-
     List<TheaterEntity> findByMovieId(Long movieId);
 }

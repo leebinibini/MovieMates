@@ -12,4 +12,5 @@ public interface MovieQueryDSL {
     Long getRowCount();
     List<String> getNowPlayingList();
     List<MovieEntity> findChart();
+    Long findMovieIdByName(String name);
 }

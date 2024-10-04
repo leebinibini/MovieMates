@@ -72,10 +72,17 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public Long findMovieIdByName(String name) {
+        return repository.findMovieIdByName(name);
+    }
+
+    @Override
     public MovieEntity findEntityById(Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("not found id" + id));
     }
+
+
 
    /* @Override
     public void crawlMovies() throws IOException {
