@@ -6,8 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface ImageService {
-
     String getFileName(String fileName);
 
-    List<ImageModel> uploadFiles(List<MultipartFile> multipartFiles, String uploadPath, Long postId);
+    Boolean uploadFiles(long movieId, List<MultipartFile> multipartFiles);
 }

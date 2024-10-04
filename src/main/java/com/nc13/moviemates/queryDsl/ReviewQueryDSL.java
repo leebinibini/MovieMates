@@ -1,5 +1,6 @@
 package com.nc13.moviemates.queryDsl;
 
+import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.ReviewEntity;
 
 import java.util.List;
@@ -9,4 +10,6 @@ public interface ReviewQueryDSL {
     ReviewEntity getById(Long id);
     Boolean exists(Long id);
     Long getRowCount();
+
+    Long deleteMany(List<Long> reviewIdList);
 }

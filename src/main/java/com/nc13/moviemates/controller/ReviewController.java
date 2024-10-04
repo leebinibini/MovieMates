@@ -1,6 +1,9 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.component.model.MovieModel;
+import com.nc13.moviemates.component.model.ReviewModel;
 import com.nc13.moviemates.entity.ReviewEntity;
+import com.nc13.moviemates.entity.ScheduleEntity;
 import com.nc13.moviemates.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,13 +16,12 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
-@RequestMapping("/api/reviews")
+@RequestMapping("/api/review")
 public class ReviewController {
-    @Qualifier("reviewServiceImpl")
     private final ReviewService service;
 
-    @GetMapping()
-    public ResponseEntity<List<?>> getList() {
+    @GetMapping("/list")
+    public ResponseEntity<List<ReviewEntity>> getList() {
         return ResponseEntity.ok(service.findAll());
     }
 
@@ -28,9 +30,22 @@ public class ReviewController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping()
+    @ResponseBody
+    @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody ReviewEntity review) {
         return ResponseEntity.ok(service.save(review));
+    }
+
+
+    @PutMapping
+    public ResponseEntity<Boolean> update(@RequestBody ReviewEntity review){
+        return ResponseEntity.ok(service.save(review));
+    }
+
+    @ResponseBody
+    @PostMapping("/deleteMany")
+    public ResponseEntity<Long> deleteMany(@RequestBody List<Long> reviewIdList){
+        return ResponseEntity.ok(service.deleteMany(reviewIdList));
     }
 
     @DeleteMapping("/{id}")

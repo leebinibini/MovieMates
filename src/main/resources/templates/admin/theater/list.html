@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/head :: headContent}"></head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspreadsheet-ce/dist/jspreadsheet.min.css" type="text/css" />
+
+
+<!-- Custom CSS for table styling -->
+<style>
+    /* 테이블 외곽 스타일 */
+    #responseText {
+        margin-top: 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    /* 셀 스타일링 */
+    .jexcel td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        font-size: 14px;
+        background-color: #fff;
+    }
+
+    /* 헤더 스타일 */
+    .jexcel thead td {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* 행 hover 효과 */
+    .jexcel tr:hover td {
+        background-color: #e9f5ff;
+    }
+
+    /* 텍스트 중앙 정렬 */
+    .jexcel td {
+        text-align: center;
+    }
+
+    /* 테이블 전체 크기 및 스타일 조정 */
+    .jexcel {
+        width: 100%;
+        border-spacing: 0;
+    }
+
+    /* 버튼 스타일 */
+    .btn {
+        margin: 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    /* 페이지 레이아웃 */
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .content-header {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb {
+        background: none;
+        padding: 0;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: ">";
+    }
+
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    footer {
+        background-color: #f8f9fa;
+        padding: 15px 0;
+    }
+
+    footer a {
+        color: #6c757d;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    footer a:hover {
+        color: #343a40;
+    }
+</style>
+<body class="sb-nav-fixed">
+<div th:replace="~{/admin/navbar-dark :: navbar}"></div>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" th:href="@{/api/admin}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Layouts
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/api/admin/movie}">Movie</a>
+                            <a class="nav-link" th:href="@{/api/admin/theater}">Theater</a>
+                            <a class="nav-link" th:href="@{/api/admin/schedule}">Schedule</a>
+                            <a class="nav-link" th:href="@{/api/admin/layout-sidenav-light}">Light Sidenav</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" th:href="@{/api/admin/login}">Login</a>
+                                    <a class="nav-link" th:href="@{/api/admin/register}">Register</a>
+                                    <a class="nav-link" th:href="@{/api/admin/password}">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" th:href="@{/api/admin/401}">401 Page</a>
+                                    <a class="nav-link" th:href="@{/api/admin/404}">404 Page</a>
+                                    <a class="nav-link" th:href="@{/api/admin/500}">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading">Addons</div>
+                    <a class="nav-link" th:href="@{/api/admin/charts}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Charts
+                    </a>
+                    <a class="nav-link" th:href="@{/api/admin/tables}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Tables
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Start Bootstrap
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Theater Management</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/api/admin}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Theater</li>
+                </ol>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p class="mb-0">
+                            Manage theaters and edit information easily through this table interface.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Button and response area -->
+                <div>
+                    <button class="btn btn-primary" onclick="test()">TEST</button>
+                    <button class="btn btn-success" id="register-btn" th:onclick="|location.href='@{/api/theater/register}'|">Register</button>
+                    <button class="btn btn-primary" id="save-btn">Save</button>
+                    <button class="btn btn-danger" id="delete-btn">Delete</button>
+
+                    <div id="responseText"></div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">The static navigation remains fixed at the top even when scrolling.</div>
+                </div>
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- jSpreadsheet JS -->
+<script src="https://cdn.jsdelivr.net/npm/jspreadsheet-ce/dist/index.min.js"></script>
+
+<script>
+    const test = () => {
+        axios.get('/api/theater/list')
+            .then(function (res) {
+                console.log(res.data);
+
+                const theaters = res.data;
+
+                // 영화 데이터를 2차원 배열로 변환
+                const theaterData = theaters.map(theater => [
+                    theater.id,
+                    theater.name,
+                    theater.room,
+                    theater.capacity,
+                    theater.location
+                ]);
+
+                // jSpreadsheet로 데이터 표시
+                const table = jspreadsheet(document.getElementById('responseText'), {
+                    data: theaterData,
+                    columns: [
+                        {type: 'text', title: 'ID', width: 50},
+                        {type: 'text', title: 'NAME', width: 150},
+                        {type: 'text', title: 'ROOM', width: 100},
+                        {type: 'text', title: 'CAPACITY', width: 150},
+                        {type: 'text', title: 'LOCATION', width: 200},
+                        {type: 'checkbox', title: 'Delete', width: 100}
+                    ],
+                    search: true,
+                    pagination: 10,   // 페이지당 10개의 영화 표시
+                    freezeColumns: 1, // 첫 번째 열 고정
+                    minDimensions: [6, 10], // 최소 차원 (열, 행)
+                    tableOverflow: true,   // 테이블이 div의 크기에 맞게 overflow 설정
+                    tableHeight: '500px',  // 테이블 높이 설정
+                    tableWidth: '100%',    // 테이블 너비 설정
+
+
+                    // jSpreadsheet가 로드된 후 실행
+                    onload: function () {
+                        const saveBtn = document.getElementById('save-btn');
+                        const deleteBtn = document.getElementById('delete-btn');
+
+                        // save 버튼 눌렀을 때
+                        saveBtn.addEventListener('click', function () {
+                            const data = table.getData();
+                            alert(data);
+
+                            // 2차원 배열 데이터를 TheaterModel 객체 배열로 변환
+                            const theaterData = data.map(row => {
+                                return {
+                                    id: row[0],
+                                    name: row[1],
+                                    room: row[2],
+                                    capacity: Number(row[3]),
+                                    location: row[4]
+                                };
+                            });
+
+                            console.log("극장 수정 정보 확인용: " +  theaterData);
+                            axios.post('/api/theater/update', theaterData)
+                                .then(res => {
+                                    console.log(res);
+                                    alert("저장 성공!!")
+                                })
+                                .catch(err => console.log("Error: " + err));
+                        })
+
+                        // 삭제 버튼 눌렀을 때
+                        deleteBtn.addEventListener('click', function () {
+                            const checkedRows = [];
+                            const data = table.getData();
+
+                            // 각 행을 순회하여 체크박스가 선택된 경우 movieId 수집
+                            data.forEach((row, index) => {
+                                const isChecked = table.getValueFromCoords(5, index); // 체크박스 열의 값 가져오기
+                                const theaterId = table.getValueFromCoords(0, index);   // 첫 번째 열에서 theaterId 가져오기
+
+                                if (isChecked === true) { // 체크박스가 체크된 경우
+                                    checkedRows.push(theaterId); // theaterId를 배열에 추가
+                                }
+                            });
+
+                            console.log(checkedRows); // 선택된 극장 ID 출력
+
+                            if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
+                                // 선택된 theaterId 리스트를 서버로 전송
+                                axios.post(`/api/theater/deleteMany`, checkedRows)
+                                    .then(res => {
+                                        if (res.data !== 0) {
+                                            alert('극장 정보 삭제 성공!');
+                                            location.reload();
+                                        } else {
+                                            alert('극장 정보 삭제 실패!');
+                                        }
+                                    })
+                                    .catch(err => {
+                                        console.log(err);
+                                    });
+                            } else {
+                                alert('삭제할 극장을 선택해주세요.');
+                            }
+
+                        })
+                    }
+                })
+            })
+            .catch(function (error) {
+                console.log('Error:', error);
+            });
+
+    }
+
+
+    document.addEventListener('DOMContentLoaded', test);
+</script>
+
+<script>
+    document.querySelector('#loginForm').addEventListener('submit', (event) => {
+        event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지
+
+        const email = document.getElementById('inputEmail').value;
+        const password = document.getElementById('inputPassword').value;
+
+        axios.post("/api/admin/login", { email: email, password: password })
+            .then(res => {
+                console.log('Login successful:', res.data);
+            }).catch(err => {
+            console.log("Login failed: ", err);
+        });
+    });
+</script>
+</body>
+</html>

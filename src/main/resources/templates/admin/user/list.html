@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/head :: headContent}"></head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspreadsheet-ce/dist/jspreadsheet.min.css" type="text/css" />
+
+<!-- Custom CSS for table styling -->
+<style>
+    /* 전체 레이아웃 및 색상 설정 */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f7fa;
+        color: #4a4a4a;
+    }
+
+    /* 테이블 외곽 스타일 */
+    #responseText {
+        margin-top: 20px;
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+    }
+
+    /* 셀 스타일링 */
+    .jexcel td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        font-size: 15px;
+        background-color: #fdfdfd;
+        color: #333;
+    }
+
+    /* 헤더 스타일 */
+    .jexcel thead td {
+        background-color: #343a40;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* 행 hover 효과 */
+    .jexcel tr:hover td {
+        background-color: #e9f7fa;
+        cursor: pointer;
+    }
+
+    /* 텍스트 중앙 정렬 */
+    .jexcel td {
+        text-align: center;
+    }
+
+    /* 테이블 전체 크기 및 스타일 조정 */
+    .jexcel {
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+    /* 버튼 스타일 */
+    .btn {
+        margin: 10px 5px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    /* 페이지 레이아웃 */
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .content-header {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb {
+        background: none;
+        padding: 0;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: ">";
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    footer {
+        background-color: #f8f9fa;
+        padding: 15px 0;
+    }
+
+    footer a {
+        color: #6c757d;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    footer a:hover {
+        color: #343a40;
+    }
+</style>
+<body class="sb-nav-fixed">
+<div th:replace="~{/admin/navbar-dark :: navbar}"></div>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" th:href="@{/api/admin}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Layouts
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/api/admin/movie}">Movie</a>
+                            <a class="nav-link" th:href="@{/api/admin/theater}">Theater</a>
+                            <a class="nav-link" th:href="@{/api/admin/schedule}">Schedule</a>
+                            <a class="nav-link" th:href="@{/api/admin/layout-sidenav-light}">Light Sidenav</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" th:href="@{/api/admin/user}">User</a>
+                                    <a class="nav-link" th:href="@{/api/admin/reservation}">Reservation</a>
+                                    <a class="nav-link" th:href="@{/api/admin/review}">Review</a>
+                                    <a class="nav-link" th:href="@{/api/admin/login}">Login</a>
+                                    <a class="nav-link" th:href="@{/api/admin/register}">Register</a>
+                                    <a class="nav-link" th:href="@{/api/admin/password}">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" th:href="@{/api/admin/401}">401 Page</a>
+                                    <a class="nav-link" th:href="@{/api/admin/404}">404 Page</a>
+                                    <a class="nav-link" th:href="@{/api/admin/500}">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading">Addons</div>
+                    <a class="nav-link" th:href="@{/api/admin/charts}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Charts
+                    </a>
+                    <a class="nav-link" th:href="@{/api/admin/tables}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Tables
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Start Bootstrap
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">User Management</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/api/admin}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Movie</li>
+                </ol>
+                <div th:insert="~{/admin/movie/chart :: chart-movie}"></div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p class="mb-0">
+                            Manage users and edit information through this intuitive interface.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Button and response area -->
+                <div>
+                    <button class="btn btn-success" id="save-btn">Update Changes</button>
+                    <button class="btn btn-danger" id="delete-btn">Delete Selected</button>
+
+                    <div id="responseText"></div> <!-- jspreadsheet 데이터가 이 영역에 삽입됩니다 -->
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">Scroll to manage all the data conveniently.</div>
+                </div>
+
+
+
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspreadsheet-ce/dist/index.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. jspreadsheet 초기화
+        axios.get('/api/user/list')
+            .then(function (res) {
+                const users = res.data;
+                console.log(users)
+                alert(users)
+
+                const userData = users.map(user => [
+                    user.id,
+                    user.email,
+                    user.password,
+                    user.nickname,
+                    user.role
+                ]);
+
+                const table = jspreadsheet(document.getElementById('responseText'), {
+                    data: userData, // movieData -> userData로 변경
+                    columns: [
+                        {type: 'text', title: 'ID', width: 50},
+                        {type: 'text', title: 'Email', width: 150},
+                        {type: 'text', title: 'Password', width: 100},
+                        {type: 'text', title: 'Nickname', width: 150},
+                        {type: 'text', title: 'Role', width: 200},
+                        {type: 'checkbox', title: 'Delete', width: 100}
+                    ],
+                    search: true,
+                    pagination: 10,
+                    freezeColumns: 1,
+                    minDimensions: [6, 10],
+                    tableOverflow: true,
+                    tableHeight: '500px',
+                    tableWidth: '100%',
+
+                    onload: function () {
+                        const saveBtn = document.getElementById('save-btn');
+                        const deleteBtn = document.getElementById('delete-btn');
+
+                        saveBtn.addEventListener('click', function () {
+                            const data = table.getData();
+                            alert(data);
+                            console.log(data)
+
+                            const userData = data.map(row => {
+                                return {
+                                    id: row[0],
+                                    email: row[1],
+                                    password: row[2],
+                                    nickname: row[3],
+                                    role: row[4],
+                                    delete: row[5]
+                                };
+                            });
+
+                            axios.post('/api/user/update', userData)
+                                .then(res => console.log(res))
+                                .catch(err => console.log("Error: " + err));
+                        });
+
+                        deleteBtn.addEventListener('click', function () {
+                            const checkedRows = [];
+                            const data = table.getData();
+
+                            data.forEach((row, index) => {
+                                const isChecked = table.getValueFromCoords(5, index);
+                                const userId = table.getValueFromCoords(0, index);
+
+                                if (isChecked === true) {
+                                    checkedRows.push(userId);
+                                }
+                            });
+
+                            if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
+                                axios.post(`/api/user/deleteMany`, checkedRows)
+                                    .then(res => {
+                                        if (res.data !== 0) {
+                                            alert('유저 정보 삭제 성공!');
+                                            location.reload();
+                                        } else {
+                                            alert('유저 정보 삭제 실패!');
+                                        }
+                                    })
+                                    .catch(err => console.log(err));
+                            } else {
+                                alert('삭제할 유저를 선택해주세요.');
+                            }
+                        });
+                    }
+                });
+            })
+            .catch(function (error) {
+                console.log('Error:', error);
+            });
+
+
+        // 2. Chart.js 차트 초기화
+        const movieReservations = [
+            { "title": "Inception", "reservations": 150 },
+            { "title": "Avatar", "reservations": 200 },
+            { "title": "Interstellar", "reservations": 100 },
+            { "title": "The Dark Knight", "reservations": 180 }
+        ];
+
+        const movieTitles = movieReservations.map(movie => movie.title);
+        const reservationCounts = movieReservations.map(movie => movie.reservations);
+
+        const ctx = document.getElementById('reservationChart').getContext('2d');
+        const reservationChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: movieTitles,
+                datasets: [{
+                    label: '예매 횟수',
+                    data: reservationCounts,
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 50
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    });
+</script>
+        });
+    });
+</script>
+
+</body>
+</html>
