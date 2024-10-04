@@ -65,7 +65,7 @@ public class AdminController {
         return "admin/password";
     }
 
-    @GetMapping("/movie")
+    @GetMapping("/movie/list")
     public String adminToMovie() {
         return "admin/movie/list";
     }
