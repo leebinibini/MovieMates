@@ -231,30 +231,12 @@
                 </div>
 
                 <!-- Button and response area -->
-                <div class="container">
-                    <div class="button-group text-center my-4">
-                        <button type="button" class="btn btn-primary" id="register-btn" th:onclick="|location.href='@{/api/movie/register}'|">
-                            Register Movie
-                        </button>
-                        <button class="btn btn-success" id="save-btn">
-                            Save Changes
-                        </button>
-                        <button class="btn btn-danger" id="delete-btn">
-                            Delete Selected
-                        </button>
-                    </div>
+                <div>
+                    <button type="button" class="btn btn-primary" id="register-btn" th:onclick="|location.href='@{/api/movie/register}'|">Register Movie</button>
+                    <button class="btn btn-success" id="save-btn">Save Changes</button>
+                    <button class="btn btn-danger" id="delete-btn">Delete Selected</button>
 
-                    <div th:fragment="datatable" class="table-responsive">
-                        <div class="card mb-4">
-                            <div class="card-header text-center bg-dark text-white">
-                                <i class="fas fa-table me-1"></i>
-                                Movie DataTable
-                            </div>
-                            <div class="card-body">
-                                <div id="responseText"></div> <!-- jspreadsheet 데이터가 이 영역에 삽입됩니다 -->
-                            </div>
-                        </div>
-                    </div>
+                    <div id="responseText"></div> <!-- jspreadsheet 데이터가 이 영역에 삽입됩니다 -->
                 </div>
 
                 <div class="card mb-4">
@@ -451,6 +433,9 @@
             }
         });
     });
+</script>
+});
+});
 </script>
 
 </body>

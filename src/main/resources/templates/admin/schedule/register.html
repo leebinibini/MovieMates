@@ -17,22 +17,22 @@
                                 <form id="scheduleRegisterForm" enctype="multipart/form-data">
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="inputMovie" type="text" placeholder="영화를 선택하세요" />
-                                        <label for="inputMovie"></label>
+                                        <label for="inputMovie">Movie Title</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="inputTheater" type="text" placeholder="상영관을 선택하세요" />
-                                        <label for="inputTheater">Schedule Information</label>
+                                        <label for="inputTheater">Theater Information</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="inputShowDate" type="text" placeholder="상영날짜를 선택하세요" />
-                                        <label for="inputShowDate"></label>
+                                        <label for="inputShowDate">Show Date</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="inputShowTime" type="text" placeholder="상영시간을 선택하세요" />
-                                        <label for="inputShowTime"></label>
+                                        <label for="inputShowTime">ShowTime</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <button type="submit">영화 정보 등록하기</button>
+                                        <button type="submit">상영 정보 등록하기</button>
                                     </div>
                                 </form>
                             </div>
@@ -62,58 +62,67 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    document.querySelector('#movieRegisterForm').addEventListener('submit', async (event) => {
+    document.querySelector('#scheduleRegisterForm').addEventListener('submit', async (event) => {
         event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지
 
-        const title = document.getElementById('inputTitle').value;
-        const plot = document.getElementById('inputPlot').value;
-        const selectImages = document.getElementById('inputPoster').files; // 파일 객체 가져오기
+        const inputMovie = document.getElementById('inputMovie').value;
+        const inputTheater = document.getElementById('inputTheater').value;
+        const inputShowDate = document.getElementById('inputShowDate').value;
+        const inputShowTime = document.getElementById('inputShowTime').value;
 
-        let multipartFiles = new FormData(); // imageData를 밖에서 정의
+        // JSON 객체로 변환
+        const formData = JSON.stringify({
+            'inputMovie': inputMovie,
+            'inputTheater': inputTheater,
+            'inputShowDate': inputShowDate,
+            'inputShowTime': inputShowTime  // 오타 수정
+        });
+        alert(formData);
+        console.log(formData)
 
-        if (selectImages.length > 0) {
-            // 파일 객체는 배열처럼 동작하므로 for문을 사용
-            for (let i = 0; i < selectImages.length; i++) {
-                multipartFiles.append('multipartFiles', selectImages[i]);
+        // Axios POST 요청
+        try {
+            const response = await axios.post('/api/schedule/register', formData, {
+                headers: {
+                    'Content-Type': 'application/json'  // JSON 전송을 명시
+                }
+            });
+
+            if (response.status === 200) {
+                console.log("스케줄 정보 저장 성공: ", response);
+                alert("스케줄 정보 저장 성공!");
             }
-
-            console.log("업로드할 이미지 데이터: ", multipartFiles);
-        } else {
-            console.log("선택된 이미지가 없습니다.");
+        } catch (error) {
+            console.log("스케줄 정보 저장 실패: ", error);
         }
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#inputShowDate').datepicker({
+            dateFormat: 'yy-mm-dd',  // 날짜 형식 설정 (YYYY-MM-DD)
+            minDate: 0,  // 오늘 이전 날짜 선택 불가
+            maxDate: "+1Y",  // 1년 이후까지 선택 가능
+            showAnim: "slideDown",  // 애니메이션 효과
+            changeMonth: true,  // 월 선택 가능
+            changeYear: true  // 년 선택 가능
+        });
 
-        axios.post('/api/movie/register', {
-            title: title,
-            plot: plot
-        }).then(res => {
-            if (res.status === 200) {
-                console.log("영화 정보 저장 성공: ", res);
-                alert("영화 정보 저장 성공!");
-                console.log(res.data)
-                const movieId = res.data;
+        // 날짜 선택 시 콘솔에 선택한 날짜 출력
+        $('#inputShowDate').on("change", function() {
+            console.log("선택한 날짜: " + $(this).val());
+        });
 
-                // 이미지 업로드
-                axios.post(`/api/images/upload/${movieId}`, multipartFiles, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data' // 파일 전송 시 multipart 설정 필요
-                    }
-
-                }).then(res => {
-                    if (res.status === 200) {
-                        console.log("이미지 저장 성공!");
-                        alert("이미지 저장 성공!");
-                        console.log("저장한 이미지 리스트: " + res.data);
-                        window.location.href = "/api/admin/movie/list";
-                    } else {
-                        console.log("이미지 저장 실패!");
-                        alert("이미지 저장 실패!");
-                    }
-                }).catch(err => {
-                    console.log('이미지 저장 실패: ', err);
-                });
-            }
-        }).catch(err => {
-            console.log("영화 정보 저장 실패: ", err);
+        // ShowTime에 Timepicker 적용
+        $('#inputShowTime').timepicker({
+            timeFormat: 'H:i',  // 24시간 형식 (오전/오후가 아닌 HH:mm 형식)
+            interval: 30,       // 30분 간격
+            minTime: '0',       // 최소 시간 (00:00)
+            maxTime: '23:59',   // 최대 시간 (23:59)
+            dynamic: false,     // 동적으로 시간 변경
+            dropdown: true,     // 드롭다운 표시 여부
+            scrollbar: true,    // 스크롤바 표시 여부
+            zindex: 9999        // 드롭다운이 다른 요소들 위에 나타나도록 설정
         });
     });
 </script>
