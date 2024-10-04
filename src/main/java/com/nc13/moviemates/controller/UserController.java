@@ -41,7 +41,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "admin/auth-login";
     }
 
     @GetMapping("/login/oauth2/code/google")

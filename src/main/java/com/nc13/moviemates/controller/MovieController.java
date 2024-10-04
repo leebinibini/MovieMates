@@ -58,7 +58,7 @@ public class MovieController {
 
     @GetMapping("/register")
     public String toMovieRegister(){
-        return "admin/movie/register";
+        return "admin/form-elements";
     }
 
     @ResponseBody

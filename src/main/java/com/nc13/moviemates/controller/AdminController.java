@@ -19,7 +19,7 @@ public class AdminController {
 
     @GetMapping()
     public String showAdmin() {
-        return "admin/home";
+        return "admin/home2";
     }
 
 //    @GetMapping("/login")
@@ -36,7 +36,7 @@ public class AdminController {
 
         boolean isAuthenticated = userService.authenticate(email, password);
 
-        if (isAuthenticated) {
+        if (isAuthenticated ) {
             System.out.println("인증완료!");
             return "true"; // 인증 성공 시 home 페이지로 이동
         } else {
@@ -45,9 +45,14 @@ public class AdminController {
         }
     }
 
-    @GetMapping("logout")
+    @GetMapping("/")
     public String adminLogout() {
         return "redirect:/";
+    }
+
+    @GetMapping("/pages-starter")
+    public String adminToStarter() {
+        return "admin/pages-starter";
     }
 
     @GetMapping("register")
