@@ -56,4 +56,13 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
                 .fetch();  // 결과 목록 반환
     }
 
+    @Override
+    public Long findMovieIdByName(String name) {
+        return jpaQueryFactory
+                .select(qMovie.id)
+                .from(qMovie)
+                .where(qMovie.title.eq(name))
+                .fetchOne();
+    }
+
 }

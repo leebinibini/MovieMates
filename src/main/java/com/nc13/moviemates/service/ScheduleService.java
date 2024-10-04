@@ -4,6 +4,7 @@ import com.nc13.moviemates.component.model.OrderModel;
 import com.nc13.moviemates.entity.ScheduleEntity;
 import com.querydsl.core.Tuple;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,4 +23,6 @@ public interface ScheduleService {
     Long count();
 
     Boolean deleteById(Long id);
+
+    ScheduleEntity findSchedule(Long theaterId, Long movieId, Date showDate, Date showTime);
 }

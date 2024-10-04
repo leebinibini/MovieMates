@@ -32,7 +32,7 @@ public class PosterController {
     @PostMapping("/register")
     @ResponseBody
     public ResponseEntity<String> insert (@RequestBody MultipartFile file){
-        System.out.println("컨트롤러 진입!!");
+        //System.out.println("컨트롤러 진입!!");
         return ResponseEntity.ok(service.save(file));
     }
 

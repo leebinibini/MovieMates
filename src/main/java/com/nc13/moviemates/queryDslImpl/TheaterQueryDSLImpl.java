@@ -17,6 +17,14 @@ public class TheaterQueryDSLImpl implements TheaterQueryDSL {
     }
 
     @Override
+    public Long findTheaterIdByName(String name) {
+        return jpaQueryFactory.select(qTheater.id)
+                .from(qTheater)
+                .where(qTheater.name.eq(name))
+                .fetchOne();
+    }
+
+    @Override
     public TheaterEntity getById(Long id) {
         throw new UnsupportedOperationException("UnImpleamentdeMethod'getById'");
     }

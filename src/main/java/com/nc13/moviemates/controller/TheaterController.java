@@ -12,10 +12,16 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/api/theaters")
+@RequestMapping("/api/theater")
 public class TheaterController {
     private final TheaterService service;
 
+    @GetMapping("/findTheaterIdByName")
+    public ResponseEntity<Long> findTheaterIdByName(@RequestParam("name") String name ){
+        System.out.println("관 아이디:"+service.findTheaterIdByName(name));
+        return ResponseEntity.ok(service.findTheaterIdByName(name));
+
+    }
 
     @GetMapping
     public ResponseEntity<List<TheaterEntity>> getList(){

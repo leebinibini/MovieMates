@@ -17,7 +17,6 @@ public class DbInit {
     private final JdbcTemplate jdbcTemplate;
 @Transactional
     public void saveMovieTitle(String title) {
-        System.out.println("무비저장");
         String sql = "INSERT INTO movies (title) VALUES (?)";
         jdbcTemplate.update(sql, title);
     }

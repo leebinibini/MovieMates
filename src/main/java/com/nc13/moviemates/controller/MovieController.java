@@ -51,7 +51,6 @@ public class MovieController {
         map.put("theater", theaterService.findByMovieId(movieId));
         map.put("schedule", scheduleService.findByMovieId(movieId));
         map.put("title", title);
-        System.out.println(map);
         return ResponseEntity.ok().body(map);
     }
 
@@ -66,7 +65,6 @@ public class MovieController {
     @PostMapping("/register")
     @ResponseBody
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
-        System.out.println("영화등록 화면에서 넘어온 값 : "+ movie);
         return ResponseEntity.ok(service.save(movie));
     }
 
@@ -84,6 +82,13 @@ public class MovieController {
     public Boolean existsById(Long id) {
         return service.existsById(id);
     }
+
+    @PostMapping("/findMovieIdByName")
+    public ResponseEntity<Long> findMovieIdByName(@RequestParam("name") String name){
+
+        return ResponseEntity.ok(service.findMovieIdByName(name));
+    }
+
 
 
     public long count() {

@@ -3,8 +3,6 @@ package com.nc13.moviemates.component.model;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
 @Component
 @Getter
 @Setter
@@ -12,12 +10,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ScheduleModel {
+public class SeatModel {
     private Long id;
-    private Long theaterId;
-    private Long movieId;
-    private Date showDate;
-    private Date showTime;
-    private String location;
-    private String movie;
+    private Long scheduleId;
+    private int row;
+    private int column;
 }

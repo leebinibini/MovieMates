@@ -22,8 +22,6 @@ public class ReservationController {
     @Qualifier("reservationServiceImpl")
     private final ReservationService service;
 
-
-
     @GetMapping()
     public ResponseEntity<List<?>> getList() {
         return ResponseEntity.ok(service.findAll());

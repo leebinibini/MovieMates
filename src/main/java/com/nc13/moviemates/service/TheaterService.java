@@ -19,4 +19,6 @@ public interface TheaterService {
     Boolean deleteById(Long id);
 
     List findByMovieId(Long movieId);
+
+    Long findTheaterIdByName(String name);
 }

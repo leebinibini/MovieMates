@@ -40,7 +40,6 @@ public class HomeController {
             model.addAttribute("charts", chart);
             model.addAttribute("movies", movie);
             model.addAttribute("movieInfos", movieService.findAll());
-            System.out.println(movieService.findAll());
             return "index";
     }
 

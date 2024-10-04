@@ -27,6 +27,8 @@ public interface MovieService {
 
     Boolean deleteById(Long id);
 
+   Long findMovieIdByName(String name);
+
    // void crawlMovies() throws IOException;
 
 }

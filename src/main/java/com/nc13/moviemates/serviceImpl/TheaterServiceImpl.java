@@ -52,4 +52,9 @@ public class TheaterServiceImpl implements TheaterService{
         return repository.findByMovieId(movieId);
     }
 
+    @Override
+    public Long findTheaterIdByName(String name) {
+        return repository.findTheaterIdByName(name);
+    }
+
 }

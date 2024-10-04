@@ -10,6 +10,7 @@ import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,5 +67,17 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
         return jpaQueryFactory.select(qSchedule.id.count()).from(qSchedule).fetchCount()>0;
     }
 
+    @Override
+    public ScheduleEntity findScheduleEntity(Long theaterId, Long movieId, Date showDate, Date showTime) {
+        return jpaQueryFactory
+                .selectFrom(qSchedule)
+                .where(
+                        qSchedule.theaterId.eq(theaterId),
+                        qSchedule.movieId.eq(movieId),
+                        qSchedule.showDate.eq(showDate),
+                        qSchedule.showTime.eq(showTime)
+                )
+                .fetchOne();
+    }
 
 }

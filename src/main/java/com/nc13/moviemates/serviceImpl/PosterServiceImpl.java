@@ -28,7 +28,7 @@ public class PosterServiceImpl implements PosterService {
 
     @Override
     public String save(MultipartFile file) {
-        System.out.println("service도 진입!!");
+        //System.out.println("service도 진입!!");
         File pathDir = new File(POSTER_PATH);
         if (!pathDir.exists()) {
             new File(POSTER_PATH).mkdirs();

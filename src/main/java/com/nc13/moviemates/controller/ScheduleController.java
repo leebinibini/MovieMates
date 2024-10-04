@@ -1,8 +1,12 @@
 package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.OrderModel;
+import com.nc13.moviemates.component.model.ScheduleModel;
+import com.nc13.moviemates.component.model.SeatModel;
 import com.nc13.moviemates.entity.ScheduleEntity;
+import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.ScheduleService;
+import com.nc13.moviemates.service.TheaterService;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +21,13 @@ import java.util.List;
 @RequestMapping("/api/schedules")
 public class ScheduleController {
     private final ScheduleService service;
+    private final TheaterService theaterService;
+    private final MovieService movieService;
+
+    /*@PostMapping("/")
+    public ResponseEntity<?> getSeat(@RequestBody ScheduleModel scheduleModel){
+        Long theaterId = theaterService.findTheaterIdByName(scheduleModel.getThea);
+    }*/
 
 
     @GetMapping
