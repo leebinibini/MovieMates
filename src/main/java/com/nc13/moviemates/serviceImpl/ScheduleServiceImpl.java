@@ -75,13 +75,16 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public Boolean saveSchedule(Map<String, String> scheduleForm) {
         System.out.println("스케줄 serviceImpl 진입!");
-        // 영화 제목으로 movieId 조회
-        MovieEntity movie = movieRepository.findByTitle(scheduleForm.get("inputMovie"))
-                .orElseThrow(() -> new IllegalArgumentException("해당 영화 제목을 찾을 수 없습니다"));
+        Long movieId = Long.valueOf(scheduleForm.get("inputMovie"));
+        Long theaterId = Long.valueOf(scheduleForm.get("inputTheater"));
 
-        // 극장 이름으로 theaterId 조회
-        TheaterEntity theater = theaterRepository.findByName(scheduleForm.get("inputTheater"))
-                .orElseThrow(() -> new IllegalArgumentException("해당 극장 이름을 찾을 수 없습니다"));
+//        // 영화 제목으로 movieId 조회
+//        MovieEntity movie = movieRepository.findByTitle(scheduleForm.get("inputMovie"))
+//                .orElseThrow(() -> new IllegalArgumentException("해당 영화 제목을 찾을 수 없습니다"));
+//
+//        // 극장 이름으로 theaterId 조회
+//        TheaterEntity theater = theaterRepository.findByName(scheduleForm.get("inputTheater"))
+//                .orElseThrow(() -> new IllegalArgumentException("해당 극장 이름을 찾을 수 없습니다"));
 
         // showDate와 showTime을 문자열에서 LocalDate 및 LocalTime으로 변환
         String inputShowDate = scheduleForm.get("inputShowDate");  // "yyyy-MM-dd" 형식
@@ -97,8 +100,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         // 스케줄 생성 및 저장
         ScheduleEntity ent = ScheduleEntity.builder()
-                .movieId(movie.getId())
-                .theaterId(theater.getId())
+                .movieId(movieId)
+                .theaterId(theaterId)
                 .showDate(showDate)
                 .showTime(showTime)
                 .build();
