@@ -27,6 +27,16 @@ public class ReservationQueryDSLImpl implements ReservationQueryDSL {
     }
 
     @Override
+    public Long deleteMany(List<Long> reservationIdList) {
+        long deletedCount = jpaQueryFactory
+                .delete(qReservation)
+                .where(qReservation.id.in(reservationIdList))
+                .execute();
+
+        return deletedCount; // 삭제된 행의 수 반환
+    }
+
+    @Override
     public Boolean exists(Long id) {
         return jpaQueryFactory.selectFrom(qReservation).where(qReservation.id.eq(id)).fetchCount()>0;
     }

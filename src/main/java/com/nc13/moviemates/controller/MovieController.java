@@ -75,7 +75,7 @@ public class MovieController {
 
     @ResponseBody
     @PostMapping("/updateMany")
-    public ResponseEntity<Boolean> update(@RequestBody List<MovieModel> movieList) {
+    public ResponseEntity<Boolean> updateByJspreadsheet(@RequestBody List<MovieModel> movieList) {
         System.out.println("영화 수정 컨트롤러 진입 성공!");
         System.out.println("영화리스트" + movieList);
         return ResponseEntity.ok(service.update(movieList));
@@ -113,6 +113,4 @@ public class MovieController {
         }
     }*/
 }
-
-
 

@@ -75,7 +75,7 @@
             'inputMovie': inputMovie,
             'inputTheater': inputTheater,
             'inputShowDate': inputShowDate,
-            'inputShowTime': inputShowTime  // 오타 수정
+            'inputShowTime': inputShowTime
         });
         alert(formData);
         console.log(formData)
@@ -91,6 +91,7 @@
             if (response.status === 200) {
                 console.log("스케줄 정보 저장 성공: ", response);
                 alert("스케줄 정보 저장 성공!");
+                window.location.href="/api/admin/schedule"
             }
         } catch (error) {
             console.log("스케줄 정보 저장 실패: ", error);
