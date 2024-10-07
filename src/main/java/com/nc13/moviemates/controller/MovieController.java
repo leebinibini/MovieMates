@@ -24,11 +24,6 @@ public class MovieController {
     private final TheaterService theaterService;
     private final ScheduleService scheduleService;
 
-    @GetMapping()
-    public String toMovieAdmin(){
-        return "admin/movie";
-    }
-
 
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
