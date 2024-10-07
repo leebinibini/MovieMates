@@ -2,11 +2,9 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
-import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.ScheduleService;
 import com.nc13.moviemates.service.TheaterService;
-import com.nc13.moviemates.serviceImpl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -52,7 +50,9 @@ public class MovieController {
     }
 
     @GetMapping("/register")
-    public String toMovieRegister(){
+    public String toMovieRegister(Model model){
+        model.addAttribute("movieList", service.findAll());
+        model.addAttribute("theaterList", theaterService.findAll());
         return "admin/movie/register";
     }
 
@@ -107,5 +107,6 @@ public class MovieController {
             return "Error occurred: " + e.getMessage();
         }
     }*/
+
 }
 

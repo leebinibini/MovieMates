@@ -2,11 +2,14 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.ScheduleModel;
 import com.nc13.moviemates.entity.ScheduleEntity;
+import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.ScheduleService;
+import com.nc13.moviemates.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -25,6 +28,8 @@ import java.util.Map;
 @RequestMapping("/api/schedule")
 public class ScheduleController {
     private final ScheduleService service;
+    private final MovieService movieService;
+    private final TheaterService theaterService;
 
 
     @GetMapping("/list")
@@ -42,7 +47,9 @@ public class ScheduleController {
     }*/
 
     @GetMapping("/register")
-    public String toScheduleRegister(){
+    public String toScheduleRegister(Model model){
+        model.addAttribute("movieList", movieService.findAll());
+        model.addAttribute("theaterList", theaterService.findAll());
         return "admin/schedule/register";
     }
 
@@ -91,5 +98,7 @@ public class ScheduleController {
 
     public long count() {
         return service.count();}
+
+
 
 }
