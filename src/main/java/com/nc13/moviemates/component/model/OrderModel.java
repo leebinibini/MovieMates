@@ -3,6 +3,8 @@ package com.nc13.moviemates.component.model;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Component
@@ -14,7 +16,7 @@ import java.util.Date;
 @Builder
 public class OrderModel {
     private String theaterName;
-    private Date showDate;
-    private Date showTime;
+    private LocalDate showDate;
+    private LocalTime showTime;
 
 }

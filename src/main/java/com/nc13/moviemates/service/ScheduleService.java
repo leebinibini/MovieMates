@@ -10,13 +10,13 @@ import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ScheduleService {
     List<ScheduleEntity> findAll();
 
     Boolean save(ScheduleEntity email);
-
 
     List<OrderModel> findOrderByMovieId(Long movieId);
 
@@ -28,6 +28,9 @@ public interface ScheduleService {
 
     Boolean deleteById(Long id);
 
-    Boolean saveSchedule(ScheduleModel schedule, String inputMovie, String inputTheater);
+    Boolean deleteMany(List<Long> scheduleIdList);
 
+    Boolean saveSchedule(Map<String, String> scheduleForm);
+
+    Boolean update(List<ScheduleModel> scheduleList);
 }
