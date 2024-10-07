@@ -56,6 +56,13 @@ public class MovieController {
         return "admin/movie/register";
     }
 
+    @GetMapping("/register2")
+    public String toMovieRegister2(Model model){
+        model.addAttribute("movieList", service.findAll());
+        model.addAttribute("theaterList", theaterService.findAll());
+        return "admin/movie/register2";
+    }
+
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){

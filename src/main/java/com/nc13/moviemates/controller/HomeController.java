@@ -69,4 +69,9 @@ public class HomeController {
         return  "admin/form-advanced";
     }
 
+    @GetMapping("/api/form-fileuploads")
+    public String toCheck2(){
+        return  "admin/form-fileuploads";
+    }
+
 }
