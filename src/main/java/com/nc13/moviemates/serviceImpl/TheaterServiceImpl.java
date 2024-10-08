@@ -50,7 +50,7 @@ public class TheaterServiceImpl implements TheaterService{
     }
 
     @Override
-    public List findByMovieId(Long movieId) {
+    public List<TheaterEntity> findByMovieId(Long movieId) {
         return repository.findByMovieId(movieId);
     }
 
