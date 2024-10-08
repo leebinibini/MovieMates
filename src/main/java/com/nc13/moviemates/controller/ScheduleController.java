@@ -10,12 +10,13 @@ import com.nc13.moviemates.service.TheaterService;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @CrossOrigin
 @RequestMapping("/api/schedule")
