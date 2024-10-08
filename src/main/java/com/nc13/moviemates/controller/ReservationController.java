@@ -8,18 +8,18 @@ import com.nc13.moviemates.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/api/reservation")
 public class ReservationController {
-    @Qualifier("reservationServiceImpl")
     private final ReservationService service;
 
     @GetMapping()
