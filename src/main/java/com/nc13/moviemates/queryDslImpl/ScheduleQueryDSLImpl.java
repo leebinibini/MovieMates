@@ -50,13 +50,11 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
                                .build())
                .collect(Collectors.toList());
     }
-
     @Override
     public List<ScheduleEntity> findByMovieId(Long movieId){
-        List<ScheduleEntity> ent = jpaQueryFactory.selectFrom(qSchedule)
+        return jpaQueryFactory.selectFrom(qSchedule)
                 .where(qSchedule.movieId.eq(movieId))
                 .fetch();
-        return ent;
     }
 
     @Override
@@ -81,6 +79,5 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
                 )
                 .fetchOne();
     }
-
 
 }

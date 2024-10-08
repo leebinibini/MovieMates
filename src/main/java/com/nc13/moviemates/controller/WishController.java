@@ -4,15 +4,16 @@ import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@CrossOrigin
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("/api/wishes")
+@CrossOrigin
+@RequestMapping("/api/wish")
 public class WishController {
     private final WishService service;
 

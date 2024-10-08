@@ -1,5 +1,4 @@
 package com.nc13.moviemates.controller;
-import com.nc13.moviemates.component.model.SeatResponse;
 import com.nc13.moviemates.component.model.ScheduleModel;
 import com.nc13.moviemates.entity.ScheduleEntity;
 import com.nc13.moviemates.entity.SeatEntity;
@@ -8,19 +7,16 @@ import com.nc13.moviemates.service.SeatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/api/seat")
 public class SeatController {
