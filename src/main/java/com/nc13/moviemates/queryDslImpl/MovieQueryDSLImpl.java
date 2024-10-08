@@ -28,7 +28,6 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
 
     @Override
     public Long deleteMany(List<Long> movieIdList) {
-
         // QueryDSL을 사용하여 여러 영화 삭제
         long deletedCount = jpaQueryFactory
                 .delete(qMovie)

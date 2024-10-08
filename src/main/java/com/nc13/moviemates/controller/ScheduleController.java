@@ -9,20 +9,30 @@ import com.nc13.moviemates.service.ScheduleService;
 import com.nc13.moviemates.service.TheaterService;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @CrossOrigin
 @RequestMapping("/api/schedule")
 public class ScheduleController {
     private final ScheduleService service;
-    private final TheaterService theaterService;
     private final MovieService movieService;
+    private final TheaterService theaterService;
 
     /*@PostMapping("/")
     public ResponseEntity<?> getSeat(@RequestBody ScheduleModel scheduleModel){
@@ -44,15 +54,45 @@ public class ScheduleController {
         return ResponseEntity.ok(service.findByMovieId(movieId));
     }*/
 
-    @ResponseBody
-    @PostMapping("/register")
-    public ResponseEntity<Boolean> insert (@RequestBody ScheduleEntity schedule){
-        return ResponseEntity.ok(service.save(schedule));
+    @GetMapping("/register")
+    public String toScheduleRegister(Model model){
+        model.addAttribute("movieList", movieService.findAll());
+        model.addAttribute("theaterList", theaterService.findAll());
+        return "admin/schedule/register";
     }
 
-    @PutMapping
-    public ResponseEntity<Boolean> update(@RequestBody ScheduleEntity schedule){
-        return ResponseEntity.ok(service.save(schedule));
+    @ResponseBody
+    @PostMapping("/register")
+    public ResponseEntity<String> insert (@RequestBody Map<String, String> scheduleForm){
+        System.out.println("상영정보 등록 컨트롤러 진입!!!!");
+        System.out.println("schedulForm: " + scheduleForm);
+        try {
+            // 삼항 연산자 사용
+            return service.saveSchedule(scheduleForm)
+                    ? ResponseEntity.ok("스케줄 등록 성공!")
+                    : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("스케줄 등록 실패");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘못된 요청: " + e.getMessage());
+        }
+    }
+
+    @ResponseBody
+    @PostMapping("/updateMany")
+    public ResponseEntity<Boolean> updateByJspreadsheet (@RequestBody List<ScheduleModel> scheduleList){
+        System.out.println("상영스케줄 업데이트 컨트롤러 진입");
+        System.out.println(scheduleList);
+        return ResponseEntity.ok(service.update(scheduleList));
+    }
+
+//    @PutMapping
+//    public ResponseEntity<Boolean> update(@RequestBody ScheduleEntity schedule){
+//        return ResponseEntity.ok(service.save(schedule));
+//    }
+
+    @ResponseBody
+    @PostMapping("/deleteMany")
+    public ResponseEntity<Boolean> deleteMany(@RequestBody List<Long> scheduleIdList){
+        return ResponseEntity.ok(service.deleteMany(scheduleIdList));
     }
 
     @DeleteMapping("/{id}")

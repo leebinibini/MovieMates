@@ -63,4 +63,19 @@ public class HomeController {
         return map;
     }
 
+    @GetMapping("/api/form-elements")
+    public String toCheck(){
+        return  "admin/form-advanced";
+    }
+
+    @GetMapping("/api/form-fileuploads")
+    public String toCheck2(){
+        return  "admin/form-fileuploads";
+    }
+
+    @GetMapping("/api/admin/index")
+    public String toCheck3(){
+        return  "admin/home";
+    }
+
 }

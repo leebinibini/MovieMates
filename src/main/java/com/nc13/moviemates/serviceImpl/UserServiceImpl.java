@@ -6,6 +6,7 @@ import com.nc13.moviemates.repository.UserRepository;
 import com.nc13.moviemates.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -28,12 +29,26 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Transactional
     @Override
-    public Boolean update(List<UserModel> userData) {
-        System.out.println("user정보: " + userData);
-        userData.forEach(user -> repository.update(user));
+    public Boolean update(List<UserModel> userList) {
+        System.out.println("user정보: " + userList);
+        userList.forEach(user -> repository.update(user));
 
         return true;
+    }
+
+    @Transactional
+    @Override
+    public Boolean deleteMany(List<Long> userIdList) {
+        try {
+            userIdList.forEach(userId -> {
+                repository.deleteById(userId);
+            });
+            return true; // 모든 삭제 작업이 성공했을 때 true 반환
+        } catch (Exception e) {
+            return false; // 중간에 오류가 발생한 경우 false 반환
+        }
     }
 
     @Override

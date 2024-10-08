@@ -216,24 +216,24 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Schedule Management</h1>
+                <h1 class="mt-4">Reservation Management</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="@{/api/admin}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Schedule</li>
+                    <li class="breadcrumb-item active">Reservation</li>
                 </ol>
+
                 <div th:insert="~{/admin/movie/chart :: chart-movie}"></div>
                 <div class="card mb-4">
                     <div class="card-body">
                         <p class="mb-0">
-                            Manage movies and edit information through this intuitive interface.
+                            Manage reservations and edit information through this intuitive interface.
                         </p>
                     </div>
                 </div>
 
                 <!-- Button and response area -->
                 <div>
-                    <button type="button" class="btn btn-primary" id="register-btn" th:onclick="|location.href='@{/api/schedule/register}'|">Register Schedule</button>
-                    <button class="btn btn-success" id="save-btn">Save Changes</button>
+                    <button class="btn btn-success" id="save-btn">Update Changes</button>
                     <button class="btn btn-danger" id="delete-btn">Delete Selected</button>
 
                     <div id="responseText"></div> <!-- jspreadsheet 데이터가 이 영역에 삽입됩니다 -->
@@ -268,32 +268,39 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // 1. jspreadsheet 초기화
-        axios.get('/api/schedule/list')
+        axios.get('/api/reservation/list')
             .then(function (res) {
-                const schedules = res.data;
+                const reservations = res.data;
+                console.log(reservations)
+                alert(reservations)
 
-                const scheduleData = schedules.map(schedule => [
-                    schedule.id,
-                    schedule.movieId,
-                    schedule.theaterId,
-                    schedule.showDate || '',
-                    schedule.showTime || '',
+                const reservationData = reservations.map(reservation => [
+                    reservation.id,
+                    reservation.userId,
+                    reservation.scheduleId,
+                    reservation.reservationDate,
+                    reservation.seatNumber,
+                    reservation.paymentId,
+                    reservation.ticketPrice,
+                    reservation.delete
                 ]);
 
                 const table = jspreadsheet(document.getElementById('responseText'), {
-                    data: scheduleData,
+                    data: reservationData,
                     columns: [
                         {type: 'text', title: 'ID', width: 50},
-                        {type: 'text', title: 'MovieId', width: 150},
-                        {type: 'text', title: 'TheaterId', width: 100},
-                        {type: 'text', title: 'ShowDate', width: 150},
-                        {type: 'text', title: 'ShowTime', width: 200},
+                        {type: 'text', title: 'UserId', width: 100},
+                        {type: 'text', title: 'ScheduleId', width: 100},
+                        {type: 'text', title: 'ReservationDate', width: 150},
+                        {type: 'text', title: 'SeatNumber', width: 100},
+                        {type: 'text', title: 'PaymentId', width: 100},
+                        {type: 'text', title: 'TicketPrice', width: 100},
                         {type: 'checkbox', title: 'Delete', width: 100}
                     ],
                     search: true,
                     pagination: 10,
                     freezeColumns: 1,
-                    minDimensions: [6, 10],
+                    minDimensions: [8, 10],
                     tableOverflow: true,
                     tableHeight: '500px',
                     tableWidth: '100%',
@@ -304,20 +311,27 @@
 
                         saveBtn.addEventListener('click', function () {
                             const data = table.getData();
-                            alert(data);
+                            alert(JSON.stringify(data)); // 데이터를 확인하기 위해 alert으로 출력
+                            console.log(data); // 콘솔에 데이터 출력
 
-                            const scheduleData = data.map(row => {
-                                return {
-                                    id: row[0],
-                                    movieId: row[1],
-                                    theaterId: row[2],
-                                    showDate: row[3],
-                                    showTime: row[4],
-                                    delete: row[5]
-                                };
-                            });
+                            const reservationData = data
+                                .filter(row => row.slice(0, 6).some(cell => cell !== ""))
+                                .map(row => {
+                                    return {
+                                        id: row[0],
+                                        userId: row[1],
+                                        scheduleId: row[2],
+                                        reservationDate: row[3],
+                                        seatNumber: row[4],
+                                        paymentId: row[5],
+                                        ticketPrice: row[6],
+                                        delete: row[7]
+                                    };
+                                });
+                            alert(JSON.stringify(reservationData));
+                            console.log(reservationData);
 
-                            axios.post('/api/schedule/updateMany', scheduleData)
+                            axios.post('/api/reservation/updateMany', reservationData)
                                 .then(res => console.log(res))
                                 .catch(err => console.log("Error: " + err));
                         });
@@ -327,27 +341,27 @@
                             const data = table.getData();
 
                             data.forEach((row, index) => {
-                                const isChecked = table.getValueFromCoords(5, index);
-                                const scheduleId = table.getValueFromCoords(0, index);
+                                const isChecked = table.getValueFromCoords(7, index);
+                                const reservationId = table.getValueFromCoords(0, index);
 
                                 if (isChecked === true) {
-                                    checkedRows.push(scheduleId);
+                                    checkedRows.push(reservationId);
                                 }
                             });
 
                             if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
-                                axios.post(`/api/schedule/deleteMany`, checkedRows)
+                                axios.post(`/api/reservation/deleteMany`, checkedRows)
                                     .then(res => {
                                         if (res.data !== 0) {
-                                            alert('상영 정보 삭제 성공!');
+                                            alert('예약 정보 삭제 성공!');
                                             location.reload();
                                         } else {
-                                            alert('상영 정보 삭제 실패!');
+                                            alert('예약 정보 삭제 실패!');
                                         }
                                     })
                                     .catch(err => console.log(err));
                             } else {
-                                alert('삭제할 상영정보를 선택해주세요.');
+                                alert('삭제할 예약정보를 선택해주세요.');
                             }
                         });
                     }
@@ -357,39 +371,68 @@
                 console.log('Error:', error);
             });
 
-        // 2. Chart.js 차트 초기화
-        const movieReservations = [
-            { "title": "Inception", "reservations": 150 },
-            { "title": "Avatar", "reservations": 200 },
-            { "title": "Interstellar", "reservations": 100 },
-            { "title": "The Dark Knight", "reservations": 180 }
+
+        const movieAgeGroupReservations = [
+            {
+                title: "Inception",
+                reservations: { "10대": 30, "20대": 50, "30대": 40, "40대": 30 }
+            },
+            {
+                title: "Avatar",
+                reservations: { "10대": 40, "20대": 60, "30대": 50, "40대": 50 }
+            },
+            {
+                title: "Interstellar",
+                reservations: { "10대": 20, "20대": 40, "30대": 30, "40대": 10 }
+            }
         ];
 
-        const movieTitles = movieReservations.map(movie => movie.title);
-        const reservationCounts = movieReservations.map(movie => movie.reservations);
 
+        // 영화 제목과 각 연령대별 예매 데이터 추출
+        const movieTitles = movieAgeGroupReservations.map(movie => movie.title);
+
+// 연령대별 예매 데이터를 각각 추출
+        const ageGroups = ["10대", "20대", "30대", "40대"];
+        const ageGroupReservations = ageGroups.map(ageGroup => {
+            return movieAgeGroupReservations.map(movie => movie.reservations[ageGroup]);
+        });
+
+// 차트 초기화
         const ctx = document.getElementById('reservationChart').getContext('2d');
         const reservationChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: movieTitles,
-                datasets: [{
-                    label: '예매 횟수',
-                    data: reservationCounts,
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(153, 102, 255, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(153, 102, 255, 1)'
-                    ],
-                    borderWidth: 1
-                }]
+                labels: movieTitles,  // 영화 제목
+                datasets: [
+                    {
+                        label: '10대',
+                        data: ageGroupReservations[0],  // 10대 예매수
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '20대',
+                        data: ageGroupReservations[1],  // 20대 예매수
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '30대',
+                        data: ageGroupReservations[2],  // 30대 예매수
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '40대',
+                        data: ageGroupReservations[3],  // 40대 예매수
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }
+                ]
             },
             options: {
                 responsive: true,
@@ -397,7 +440,7 @@
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            stepSize: 50
+                            stepSize: 20
                         }
                     }
                 },
@@ -408,9 +451,7 @@
                 }
             }
         });
-    });
-</script>
-        });
+
     });
 </script>
 

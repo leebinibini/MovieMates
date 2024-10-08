@@ -41,7 +41,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "admin/auth-login";
     }
 
     @GetMapping("/login/oauth2/code/google")
@@ -78,9 +78,20 @@ public class UserController {
     }
 
     @ResponseBody
-    @PostMapping("/update")
-    public ResponseEntity<Boolean> update(@RequestBody List<UserModel> userData) {
-        return ResponseEntity.ok(service.update(userData));
+    @PostMapping("/updateMany")
+    public ResponseEntity<Boolean> updateByJspreadsheet(@RequestBody List<UserModel> userList) {
+        return ResponseEntity.ok(service.update(userList));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Boolean> update(@RequestBody UserEntity user) {
+        return ResponseEntity.ok(service.save(user));
+    }
+
+    @ResponseBody
+    @PostMapping("/deleteMany")
+    public ResponseEntity<Boolean> deleteMany(@RequestBody List<Long> userIdList){
+        return ResponseEntity.ok(service.deleteMany(userIdList));
     }
 
     @DeleteMapping("/delete/{id}")

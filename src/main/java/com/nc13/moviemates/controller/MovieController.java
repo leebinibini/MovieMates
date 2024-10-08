@@ -2,11 +2,9 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
-import com.nc13.moviemates.entity.TheaterEntity;
 import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.ScheduleService;
 import com.nc13.moviemates.service.TheaterService;
-import com.nc13.moviemates.serviceImpl.MovieServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,11 +21,6 @@ public class MovieController {
     private final MovieService service;
     private final TheaterService theaterService;
     private final ScheduleService scheduleService;
-
-    @GetMapping()
-    public String toMovieAdmin(){
-        return "admin/movie";
-    }
 
 
     @GetMapping("/list")
@@ -61,8 +54,17 @@ public class MovieController {
     }
 
     @GetMapping("/register")
-    public String toMovieRegister(){
+    public String toMovieRegister(Model model){
+        model.addAttribute("movieList", service.findAll());
+        model.addAttribute("theaterList", theaterService.findAll());
         return "admin/movie/register";
+    }
+
+    @GetMapping("/register2")
+    public String toMovieRegister2(Model model){
+        model.addAttribute("movieList", service.findAll());
+        model.addAttribute("theaterList", theaterService.findAll());
+        return "admin/movie/register2";
     }
 
     @ResponseBody
@@ -78,7 +80,7 @@ public class MovieController {
 
     @ResponseBody
     @PostMapping("/updateMany")
-    public ResponseEntity<Boolean> update(@RequestBody List<MovieModel> movieList) {
+    public ResponseEntity<Boolean> updateByJspreadsheet(@RequestBody List<MovieModel> movieList) {
         System.out.println("영화 수정 컨트롤러 진입 성공!");
         System.out.println("영화리스트" + movieList);
         return ResponseEntity.ok(service.update(movieList));
@@ -122,7 +124,6 @@ public class MovieController {
             return "Error occurred: " + e.getMessage();
         }
     }*/
+
 }
-
-
 
