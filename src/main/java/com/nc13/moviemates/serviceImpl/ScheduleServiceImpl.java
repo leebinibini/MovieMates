@@ -8,6 +8,8 @@ import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +32,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public ScheduleEntity findSchedule(Long theaterId, Long movieId, Date showDate, Date showTime) {
+    public ScheduleEntity findSchedule(Long theaterId, Long movieId, LocalDate showDate, LocalTime showTime) {
         return repository.findScheduleEntity(theaterId, movieId, showDate, showTime);
     }
 

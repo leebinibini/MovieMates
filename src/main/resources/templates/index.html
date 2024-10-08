@@ -85,7 +85,7 @@
                                             <div class="slide_right" data-animation="animated bounceInRight">
                                                 <a href="javascript:;" class="btn-trailer">watch trailer</a>
                                                 <a
-                                                    href="#order" class="btn-ticket">buy ticket</a>
+                                                    href="#order" class="btn-ticket order_btn" th:data-id="${movie.id}">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -126,7 +126,7 @@
                                             <div class="title" data-animation="animated bounceInRight" th:text="${movie.title}"> <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
                                                 <a href="javascript:;" class="btn-trailer">watch trailer</a> <a
-                                                    href="#order" class="btn-ticket">buy ticket</a>
+                                                    href="#order" class="btn-ticket order_btn" th:data-id="${movie.id}">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -168,7 +168,7 @@
                                               <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
                                                 <a href="javascript:;" class="btn-trailers video-player" >watch trailer</a>
-                                                <a href="#order" class="btn-ticket order_btn">buy ticket</a>
+                                                <a href="#order" class="btn-ticket order_btn" th:data-id="${movie.id}">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -537,10 +537,13 @@
     </div>
     <!-- Overlay Search -->
     <div id="overlay-search">
-            <input type="text" name="s" placeholder="Search..." autocomplete="off">
+        <form method="get" action="./">
+            <label>
+                <input type="text" name="s" placeholder="Search..." autocomplete="off">
             <button type="submit">
                 <i class="fa fa-search"></i>
             </button>
+            </label>
         </form>
         <a href="javascript:;" class="close-window"></a>
     </div>
@@ -550,8 +553,8 @@
                 <div class="col-sm-8 col-xs-12 seat_content ph0">
                     <h2>order a ticket</h2>
                     <div class="entry-order-content">
+                        <div class="btn-ticket">
                         <form id="msform" name="msform">
-                            <!-- fieldsets -->
                             <fieldset>
                                 <div class="wpc-content">
                                     <h3>location</h3>
@@ -563,18 +566,12 @@
                                     </select>
 
                                     <h3 class="mt3">Movie</h3>
-                                    <input id="movie-selection" value="deadpool" readonly/>
-
+                                    <input id="movie-selection" value="" readonly/>
                                     <h3 class="mt3">Date</h3>
                                     <input type='date' class="datetime"/>
                                     <h3 class="mt3">TIME</h3>
                                     <ul class="order-date">
-                                        <li><a href="javascript:;" data-time="11:50"><i>11:50</i></a></li>
-                                        <li><a href="javascript:;" data-time="13:40"><i>13:40</i></a></li>
-                                        <li><a href="javascript:;" data-time="16:35"><i>16:35</i></a></li>
-                                        <li><a href="javascript:;" data-time="17:30"><i>17:30</i></a></li>
-                                        <li><a href="javascript:;" data-time="19:50"><i>19:50</i></a></li>
-                                        <li><a href="javascript:;" data-time="21:10"><i>21:10</i></a></li>
+                                        <li><a href="javascript:;" data-time="" data-schedule-id="1" ><i></i></a></li>
                                     </ul>
 
                                 </div>
@@ -590,6 +587,7 @@
                                 <input type="submit" name="submit" class="submit action-button" value="Submit" />
                             </fieldset>
                         </form>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-12 order_sidebar ph0">
@@ -614,117 +612,7 @@
     <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{js/packages.min.js}"></script>
     <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
-
-
-    <script>
-
-        document.addEventListener("DOMContentLoaded", function (){
-            $(".btn-ticket").on('click', function(e) {
-                // 클릭한 요소의 data-id 속성 값 가져오기
-                var movieId = $(e.target).data('id');
-
-                axios.get(`/api/movie/order/${movieId}`)
-                    .then(function (res) {
-                        var theaterList = res.data.theater;
-                        var scheduleList = res.data.schedule;
-                        var title = res.data.title;
-                        alert(JSON.stringify(res.data));
-
-                        // 영화관 목록 렌더링
-                        var locationSelect = $("select[name='location']");
-                        locationSelect.empty();
-                        theaterList.forEach(function (theater) {
-                            locationSelect.append(new Option(theater.name, theater.id));
-                        });
-                        $('#movie-selection').val(title);
-
-                        // 날짜, 시간 렌더링
-                        var timeList = $(".order-date");
-                        timeList.empty();
-                        scheduleList.forEach(function (schedule) {
-                            var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                            timeList.append('<li><a href="javascript:;" data-time="' + time + '"><i>' + time + '</i></a></li>');
-                        });
-
-                        // 서버에서 받은 날짜 필터링
-                        var dateInput = document.querySelector('.datetime');
-                        var availableDates = scheduleList.map(function(schedule) {
-                            return new Date(schedule.showDate).toISOString().split('T')[0];
-                        });
-
-                        var today = new Date().toISOString().split('T')[0];
-                        dateInput.setAttribute('min', today);
-                        dateInput.setAttribute('max', availableDates[availableDates.length - 1]);
-                        dateInput.value = today;
-
-                        // 날짜 선택에 따른 시간 필터링
-                        function renderTimesForSelectedDate(selectedDate) {
-                            var filteredSchedules = scheduleList.filter(function(schedule) {
-                                var scheduleDate = new Date(schedule.showDate).toISOString().split('T')[0];
-                                return scheduleDate === selectedDate;
-                            });
-
-                            timeList.empty();
-                            if (filteredSchedules.length > 0) {
-                                filteredSchedules.forEach(function(schedule) {
-                                    var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                                    timeList.append('<li><a href="javascript:;" data-time="' + time + '"><i>' + time + '</i></a></li>');
-                                });
-                            } else {
-                                timeList.append('<li><a href="javascript:;"><i>해당 날짜에 상영 시간이 없습니다.</i></a></li>');
-                            }
-                        }
-
-                        // 처음 로드 시 오늘 날짜의 상영 시간 렌더링
-                        renderTimesForSelectedDate(today);
-
-                        // 날짜 변경 시 해당 날짜의 시간 렌더링
-                        dateInput.addEventListener('change', function() {
-                            var selectedDate = dateInput.value;
-                            if (availableDates.includes(selectedDate)) {
-                                renderTimesForSelectedDate(selectedDate);
-                            } else {
-                                dateInput.value = '';
-                                alert('해당 날짜에 상영정보가 없습니다.');
-                            }
-                        });
-
-                        // 시간 선택 처리
-                        $('.order-date').off('click').on('click', 'a', function() {
-                            var selectedTime = $(this).data('time');
-
-                            $('.order-date a').removeClass('selected');
-
-                            // 클릭한 <a> 태그에 'selected' 클래스를 추가하여 색상 유지
-                            $(this).addClass('selected');
-
-
-                            // 여기서 선택한 정보들을 저장하고 다음 단계로 넘김
-                            var selectedLocation = $('select[name="location"]').val();
-                            var selectedMovie = $('#movie-selection').val();
-                            var selectedDate = $('.datetime').val();
-
-
-                            // 선택한 정보 저장
-                            sessionStorage.setItem('selectedLocation', selectedLocation);
-                            sessionStorage.setItem('selectedMovie', selectedMovie);
-                            sessionStorage.setItem('selectedDate', selectedDate);
-                            sessionStorage.setItem('selectedTime', selectedTime);
-
-
-                            // 다음 단계로 이동
-                            alert('"선택된 영화관: "' + selectedLocation +
-                                '    "선택된 영화: "' + selectedMovie +
-                                '     "선택된 날짜: "' + selectedDate +
-                                '"선택된 시간:"' + selectedTime );
-                            // window.location.href = '/next-page-url'; // 다음 페이지로 이동할 때 사용할 URL
-                        });
-                    })
-            .catch(function (error) {
-                        console.log("error data:", error);
-                    });
-            });
-        });
-    </script>
+    <script type="text/javascript" th:src="@{js/scripts.js}"></script>
+    <script type="text/javascript" th:src="@{js/movie.api.js}"></script>
 </body>
 </html>
