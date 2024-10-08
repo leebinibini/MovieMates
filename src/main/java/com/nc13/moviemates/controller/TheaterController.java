@@ -43,6 +43,11 @@ public class TheaterController {
         return "admin/theater/register";
     }
 
+    @GetMapping("/register2")
+    public String toTheaterRegister2 (){
+        return "admin/theater/register2";
+    }
+
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert (@RequestBody TheaterEntity theater){

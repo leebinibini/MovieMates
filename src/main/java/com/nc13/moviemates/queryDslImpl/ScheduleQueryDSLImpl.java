@@ -10,6 +10,8 @@ import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +42,6 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
                 .where(qSchedule.movieId.eq(movieId))
                 .fetch();
 
-
        return results.stream()
                        .map(tuple -> OrderModel.builder()
                                .theaterName(tuple.get(qTheater.name))
@@ -49,6 +50,7 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
                                .build())
                .collect(Collectors.toList());
     }
+
     @Override
     public List<ScheduleEntity> findByMovieId(Long movieId){
         List<ScheduleEntity> ent = jpaQueryFactory.selectFrom(qSchedule)
@@ -68,7 +70,7 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
     }
 
     @Override
-    public ScheduleEntity findScheduleEntity(Long theaterId, Long movieId, Date showDate, Date showTime) {
+    public ScheduleEntity findScheduleEntity(Long theaterId, Long movieId, LocalDate showDate, LocalTime showTime) {
         return jpaQueryFactory
                 .selectFrom(qSchedule)
                 .where(
@@ -79,5 +81,6 @@ public class ScheduleQueryDSLImpl implements ScheduleQueryDSL {
                 )
                 .fetchOne();
     }
+
 
 }

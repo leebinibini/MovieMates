@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -29,8 +31,8 @@ public class SeatController {
     public ResponseEntity<?> getSeats(@RequestBody ScheduleModel scheduleModel){
         Long theaterId = scheduleModel.getTheaterId();
         Long movieId = scheduleModel.getMovieId();
-        Date showDate = scheduleModel.getShowDate();
-        Date showTime = scheduleModel.getShowTime();
+        LocalDate showDate = scheduleModel.getShowDate();
+        LocalTime showTime = LocalTime.from(scheduleModel.getShowTime());
 
         ScheduleEntity schedule = scheduleService.findSchedule(theaterId, movieId, showDate, showTime);
         if (schedule == null) {

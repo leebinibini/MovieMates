@@ -1,5 +1,6 @@
 package com.nc13.moviemates.component.model;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,11 @@ public class UserModel {
     private Role role;
 
     public enum Role {
-        ADMIN, USER,
+        ADMIN,
+        USER,
+
+        @JsonEnumDefaultValue
+        UNKNOWN;
     }
 
 }

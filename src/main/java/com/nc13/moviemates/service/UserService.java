@@ -25,5 +25,7 @@ public interface UserService {
 
     boolean authenticate(String email, String password);
 
-    Boolean update(List<UserModel> userData);
+    Boolean update(List<UserModel> userList);
+
+    Boolean deleteMany(List<Long> userIdList);
 }

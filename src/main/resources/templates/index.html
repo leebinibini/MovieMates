@@ -42,6 +42,44 @@
                             <span>3</span>
                         </div>
 
+                    <a href="javascript:;" id="header-search"></a>
+                    <div class="button_container" id="toggle">
+                        <span class="top"></span>
+                        <span class="middle"></span>
+                        <span class="bottom"></span>
+                    </div>
+                    <div class="overlay" id="overlay">
+                        <a href="javascript:;" class="close-window"></a>
+                        <nav class="overlay-menu">
+                            <ul>
+                                <li><a th:href="@{/}">Home</a></li>
+                                <li><a th:href="@{/single}">Single</a></li>
+                                <li><a href="#order" class="order_btn">Order</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="fullwidth-slider">
+        <div id="headerslider" class="carousel slide">
+            <ol class="carousel-indicators" >
+                <li data-target="#headerslider" data-slide-to="0" class="active"></li>
+                <li data-target="#headerslider" data-slide-to="1"></li>
+                <li data-target="#headerslider" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox" >
+                <div class="item active" th:each="movie: ${movies}" >
+                    <div class="fill"  th:data-bg-image="${movie.widthPosterUrl}">
+                        <div class="bs-slider-overlay"></div>
+                        <div class="container movie-slider-container">
+                            <div class="row">
+                                <div class="col-sm-12 movie-slider-content">
+                                    <div class="slider-content">
+                                        <ul class="subtitle"  data-animation="animated bounceInRight">
+                                            <li th:text="${movie.genre}">Genre</li>
+                                        </ul>
                         <a href="javascript:;" id="header-search"></a>
                         <div class="button_container" id="toggle">
                             <span class="top"></span>
@@ -81,10 +119,10 @@
                                                 <li th:text="${movie.genre}">Genre</li>
                                             </ul>
 
-                                            <div th:text="${movie.title}" class="title" data-animation="animated bounceInRight"><i>(2017)</i></div>
-                                            <div class="slide_right" data-animation="animated bounceInRight">
-                                                <a href="javascript:;" class="btn-trailer">watch trailer</a>
-                                                <a
+                                        <div th:text="${movie.title}" class="title" data-animation="animated bounceInRight"><i>(2017)</i></div>
+                                        <div class="slide_right" data-animation="animated bounceInRight">
+                                            <a href="javascript:;" class="btn-trailer">watch trailer</a>
+                                            <a
                                                     href="#order" class="btn-ticket">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>

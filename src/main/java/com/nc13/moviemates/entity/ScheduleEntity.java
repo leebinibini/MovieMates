@@ -3,6 +3,8 @@ package com.nc13.moviemates.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -20,8 +22,8 @@ public class ScheduleEntity {
     private Long id;
     private Long theaterId;
     private Long movieId;
-    private Date showDate;
-    private Date showTime;
+    private LocalDate showDate;
+    private LocalTime showTime;
 
 
 }
