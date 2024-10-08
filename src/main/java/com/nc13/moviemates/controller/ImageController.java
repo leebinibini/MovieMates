@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@RestController
+@Controller
 @CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/api/images")
