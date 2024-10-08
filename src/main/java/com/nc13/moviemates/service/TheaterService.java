@@ -23,7 +23,7 @@ public interface TheaterService {
 
     Boolean update(List<TheaterModel> theaterList);
 
-    List findByMovieId(Long movieId);
+    List<TheaterEntity> findByMovieId(Long movieId);
 
     Long findTheaterIdByName(String name);
 }

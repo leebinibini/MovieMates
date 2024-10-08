@@ -35,8 +35,8 @@ public class ScheduleController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    /*//오더 누르면 상영정보와 영화관 리스트 불러오기
-    @GetMapping("/order/{movieid}")
+    //오더 누르면 상영정보와 영화관 리스트 불러오기
+    /*@GetMapping("/order/{movieid}")
     public ResponseEntity<List<OrderModel>> findById(@PathVariable Long movieId){
         System.out.println("컨트롤러 진입!!");
         System.out.println(movieId);

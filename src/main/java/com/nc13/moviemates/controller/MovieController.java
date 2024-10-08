@@ -45,6 +45,7 @@ public class MovieController {
     @GetMapping("/order/{movieId}")
     public ResponseEntity<Map<String, Object>> getOrderList(@PathVariable Long movieId){
         Map<String, Object> map = new HashMap<>();
+        System.out.println(movieId);
         String title = service.findById(movieId)
                         .orElseThrow(()-> new RuntimeException("Movie not found"))
                                 .getTitle();
@@ -52,7 +53,8 @@ public class MovieController {
         map.put("theater", theaterService.findByMovieId(movieId));
         map.put("schedule", scheduleService.findByMovieId(movieId));
         map.put("title", title);
-        return ResponseEntity.ok().body(map);
+        System.out.println(map);
+        return ResponseEntity.ok(map);
     }
 
     @GetMapping("/{id}")
