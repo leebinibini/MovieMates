@@ -964,60 +964,52 @@
                                                 </div> <!-- end col -->
 
                                                 <h5 class="mb-3">Poster</h5>
-                                                <div class="form-floating mb-4">
 
-
-                                                </div>
-
-                                                <div class="justify-content-end row">
-                                                    <div class="col-9 text-end">
-                                                        <button type="submit" class="btn btn-info">Register</button>
-                                                    </div>
-                                                </div>
                                             </form>
                                         </div> <!-- end col -->
                                     </div>
                                     <!-- end row-->
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form action="/" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
+                                                          data-upload-preview-template="#uploadPreviewTemplate">
+                                                        <div class="fallback">
+                                                            <input name="file" type="file" multiple />
+                                                        </div>
+
+                                                        <div class="dz-message needsclick">
+                                                            <i class="h1 text-muted ri-upload-cloud-2-line"></i>
+                                                            <h3>Drop files here or click to upload.</h3>
+                                                            <span class="text-muted fs-13">(This is just a demo dropzone. Selected files are
+                                                    <strong>not</strong> actually uploaded.)</span>
+                                                        </div>
+                                                    </form>
+
+                                                    <!-- Preview -->
+                                                    <div class="dropzone-previews mt-3" id="file-previews"></div>
+
+                                                </div>
+                                                <!-- end card-body -->
+                                            </div>
+                                            <!-- end card-->
+                                        </div>
+                                        <!-- end col-->
+                                    </div>
+                                    <!-- end row -->
+
+                                    <div class="justify-content-end row">
+                                        <div class="col-9 text-end">
+                                            <button type="submit" class="btn btn-info">Register</button>
+                                        </div>
+                                    </div>
+
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->
                         </div><!-- end col -->
                     </div><!-- end row -->
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="header-title">Dropzone File Upload</h4>
-                                    <p class="text-muted mb-0">
-                                        DropzoneJS is an open source library that provides drag’n’drop file uploads with image previews.
-                                    </p>
-                                </div>
-                                <div class="card-body">
-                                    <form action="/" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                                          data-upload-preview-template="#uploadPreviewTemplate">
-                                        <div class="fallback">
-                                            <input name="file" type="file" multiple />
-                                        </div>
-
-                                        <div class="dz-message needsclick">
-                                            <i class="h1 text-muted ri-upload-cloud-2-line"></i>
-                                            <h3>Drop files here or click to upload.</h3>
-                                            <span class="text-muted fs-13">(This is just a demo dropzone. Selected files are
-                                                    <strong>not</strong> actually uploaded.)</span>
-                                        </div>
-                                    </form>
-
-                                    <!-- Preview -->
-                                    <div class="dropzone-previews mt-3" id="file-previews"></div>
-
-                                </div>
-                                <!-- end card-body -->
-                            </div>
-                            <!-- end card-->
-                        </div>
-                        <!-- end col-->
-                    </div>
-                    <!-- end row -->
 
                 </div> <!-- container -->
 
@@ -1184,7 +1176,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-small" value="condensed">
                                     <label class="form-check-label" for="leftbar-size-small">
-                                        <img th:src="@{../assets/images/layouts/sm.png}" alt="" class="img-fluid">
+                                        <img th:src="@{/admin/assets/images/layouts/sm.png}" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Condensed</h5>
@@ -1195,7 +1187,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-full" value="full">
                                     <label class="form-check-label" for="leftbar-size-full">
-                                        <img th:src="@{../assets/images/layouts/full.png}" alt="" class="img-fluid">
+                                        <img th:src="@{/admin/assets/images/layouts/full.png}" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Full Layout</h5>
@@ -1316,7 +1308,7 @@
 
             // JSON 객체로 변환
             const formData = JSON.stringify({
-                'inputMovie': inputMovie,
+                'inputTitle': inputTitle,
                 'inputTheater': inputTheater,
                 'inputShowDate': inputShowDate,
                 'inputShowTime': inputShowTime
@@ -1326,54 +1318,20 @@
 
             // Axios POST 요청
             try {
-                const response = await axios.post('/api/schedule/register', formData, {
+                const response = await axios.post('/api/movie/register', formData, {
                     headers: {
                         'Content-Type': 'application/json'  // JSON 전송을 명시
                     }
                 });
 
                 if (response.status === 200) {
-                    console.log("스케줄 정보 저장 성공: ", response);
-                    alert("스케줄 정보 저장 성공!");
-                    window.location.href="/api/admin/schedule"
+                    console.log("영화 정보 저장 성공: ", response);
+                    alert("영화 정보 저장 성공!");
+                    window.location.href="/api/admin/movie"
                 }
             } catch (error) {
-                console.log("스케줄 정보 저장 실패: ", error);
+                console.log("영화 정보 저장 실패: ", error);
             }
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#inputShowDate').datepicker({
-                dateFormat: 'yy-mm-dd',  // 날짜 형식 설정 (YYYY-MM-DD)
-                minDate: 0,  // 오늘 이전 날짜 선택 불가
-                maxDate: "+1Y",  // 1년 이후까지 선택 가능
-                showAnim: "slideDown",  // 애니메이션 효과
-                changeMonth: true,  // 월 선택 가능
-                changeYear: true  // 년 선택 가능
-            });
-
-            // 날짜 선택 시 콘솔에 선택한 날짜 출력
-            $('#inputShowDate').datepicker({
-                dateFormat: 'yy-mm-dd',  // 날짜 형식 설정 (YYYY-MM-DD)
-                minDate: 0,  // 오늘 이전 날짜 선택 불가
-                maxDate: "+1Y",  // 1년 이후까지 선택 가능
-                showAnim: "slideDown",  // 애니메이션 효과
-                changeMonth: true,  // 월 선택 가능
-                changeYear: true  // 년 선택 가능
-            });
-
-            // ShowTime에 Timepicker 적용
-            $('#inputShowTime').timepicker({
-                timeFormat: 'H:i',  // 24시간 형식 (오전/오후가 아닌 HH:mm 형식)
-                interval: 30,       // 30분 간격
-                minTime: '0',       // 최소 시간 (00:00)
-                maxTime: '23:59',   // 최대 시간 (23:59)
-                dynamic: false,     // 동적으로 시간 변경
-                dropdown: true,     // 드롭다운 표시 여부
-                scrollbar: true,    // 스크롤바 표시 여부
-                zindex: 9999        // 드롭다운이 다른 요소들 위에 나타나도록 설정
-            });
         });
     </script>
 

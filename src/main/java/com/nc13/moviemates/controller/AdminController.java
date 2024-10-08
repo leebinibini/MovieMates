@@ -19,7 +19,7 @@ public class AdminController {
 
     @GetMapping()
     public String showAdmin() {
-        return "admin/home2";
+        return "admin/home";
     }
 
 //    @GetMapping("/login")

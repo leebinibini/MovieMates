@@ -19,6 +19,8 @@
 
   <!-- Icons css -->
   <link th:href="@{/admin/assets/css/icons.min.css}" rel="stylesheet" type="text/css" />
+
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 <body>
@@ -896,23 +898,18 @@
                 <h4 class="header-title">Theater Register</h4>
               </div>
               <div class="card-body">
-                <form>
+                <form id="theaterRegisterForm">
                   <div class="row g-2">
                     <div class="mb-3 col-md-6">
-                      <label for="inputEmail4" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="inputEmail4"
-                             placeholder="Email">
-                    </div>
-                    <div class="mb-3 col-md-6">
-                      <label for="inputPassword4" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="inputPassword4"
-                             placeholder="Password">
+                      <label for="inputName" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="inputName"
+                             placeholder="Name" required>
                     </div>
                   </div>
 
                   <h5 class="mb-3">Room</h5>
-                  <div class="form-floating mb-4">
-                    <select class="form-select" id="inputRoom" aria-label="Room">
+                  <div class="form-floating mb-4 col-md-6"  >
+                    <select class="form-select" id="inputRoom" aria-label="Room" required>
                       <option value="">Select a room</option>
                       <option>1관</option>
                       <option>2관</option>
@@ -923,52 +920,48 @@
                     <label for="inputRoom">Room</label>
                   </div>
 
-                  <h5 class="mb-3">Room</h5>
-                  <div class="form-floating mb-4">
+                  <h5 class="mb-3">Capacity</h5>
+                  <div class="form-floating mb-4 col-md-6">
                     <select class="form-select" id="inputCapacity" aria-label="Capacity">
                       <option value="">Select a capacity</option>
-                      <option>20</option>
+                      <`option>20</option>
                       <option>30</option>
                       <option>40</option>
                       <option>60</option>
-                      <option>100</option>
+                      <option>100</option>`
                     </select>
                     <label for="inputCapacity">Capacity</label>
                   </div>
 
-                  <div class="mb-3">
-                    <label for="inputAddress" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="inputAddress"
-                           placeholder="1234 Main St">
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="inputAddress2" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2"
-                           placeholder="Apartment, studio, or floor">
-                  </div>
 
                   <div class="row g-2">
-                    <div class="mb-3 col-md-6">
-                      <label for="inputCity" class="form-label">City</label>
-                      <input type="text" class="form-control" id="inputCity">
+                    <div class="mb-3 col-md-5">
+                      <label for="postcode" class="form-label">Zip</label>
+                      <input type="text" class="form-control" id="postcode">
                     </div>
-                    <div class="mb-3 col-md-4">
-                      <label for="inputState" class="form-label">State</label>
-                      <select id="inputState" class="form-select">
-                        <option>Choose</option>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
-                      </select>
-                    </div>
-                    <div class="mb-3 col-md-2">
-                      <label for="inputZip" class="form-label">Zip</label>
-                      <input type="text" class="form-control" id="inputZip">
+                    <div class="mb-3 col-md-2" style="margin-top: 40px;">
+                      <button type="button" class="btn btn-primary" onclick="execDaumPostcode()">주소 검색</button>
                     </div>
                   </div>
 
-                  <button type="submit" class="btn btn-primary">Register</button>
+                  <div class="mb-3 col-md-6">
+                    <label for="inputAddress" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="예) 판교역로 166, 분당 주공, 백현동 532">
+                  </div>
+
+                  <div class="mb-3 col-md-6">
+                    <label for="inputDetailAddress" class="form-label">Detail Address</label>
+                    <input type="text" class="form-control" id="inputDetailAddress" placeholder="상세주소">
+                  </div>
+
+                  <div class="mb-3 col-md-6">
+                    <label for="inputExtraAddress" class="form-label">Extra Address</label>
+                    <input type="text" class="form-control" id="inputExtraAddress" placeholder="참고항목">
+                  </div>
+
+                  <div class="mb-3 col-md-6" style="text-align: right;">
+                    <button type="submit" onclick="theaterRegister()" class="btn btn-primary">Register</button>
+                  </div>
                 </form>
 
               </div> <!-- end card-body -->
@@ -1191,6 +1184,88 @@
 
 <!-- App js -->
 <script th:src="@{/admin/assets/js/app.min.js}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+  function execDaumPostcode() {
+    new daum.Postcode({
+      oncomplete: function(data) {
+        var addr = ''; // 주소 변수
+        var extraAddr = ''; // 참고항목 변수
+
+        // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+        if (data.userSelectedType === 'R') { // 도로명 주소
+          addr = data.roadAddress;
+        } else { // 지번 주소
+          addr = data.jibunAddress;
+        }
+
+        // 도로명 타입일 때 참고 항목을 조합한다.
+        if (data.userSelectedType === 'R') {
+          if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+            extraAddr += data.bname;
+          }
+          if (data.buildingName !== '' && data.apartment === 'Y') {
+            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+          }
+          if (extraAddr !== '') {
+            extraAddr = ' (' + extraAddr + ')';
+          }
+          document.getElementById("inputExtraAddress").value = extraAddr;
+        } else {
+          document.getElementById("inputExtraAddress").value = '';
+        }
+
+        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+        document.getElementById('postcode').value = data.zonecode;
+        document.getElementById("inputAddress").value = addr;
+
+        // 커서를 상세주소 필드로 이동한다.
+        document.getElementById("inputDetailAddress").focus();
+      }
+    }).open();
+  }
+</script>
+<script>
+  function theaterRegister() {
+    document.querySelector('#theaterRegisterForm').addEventListener('submit', async (event) => {
+      event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지
+
+      const name = document.getElementById('inputName').value;
+      const room = document.getElementById('inputRoom').value;
+      const capacity = document.getElementById('inputCapacity').value;
+
+      const postcode = document.getElementById('postcode').value;
+      const address = document.getElementById("inputAddress").value;
+      const detailAddr = document.getElementById("inputDetailAddress").value;
+      const extraAddr = document.getElementById("inputExtraAddress").value;
+      const location = address + detailAddr + extraAddr + "(" + postcode + ")";
+      alert(location);
+
+      if (!name || !room || !address) {
+        alert("모든 필드를 입력해주세요.");
+        return; // 입력이 비어 있으면 함수 종료
+      }
+
+      axios.post('/api/theater/register', {
+        name: name,
+        location: location,
+        room: room,
+        capacity: capacity
+      }).then(res => {
+        if (res.status === 200) {
+          console.log("극장 정보 저장 성공: ", res);
+          alert("극장 정보 저장 성공!");
+          console.log(res.data);
+          window.location.href = "/api/admin/theater";
+        }
+      }).catch(err => {
+        console.log("극장 정보 저장 실패: ", err);
+      });
+    });
+  }
+</script>
 
 </body>
 
