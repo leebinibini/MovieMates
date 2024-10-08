@@ -41,7 +41,7 @@ public class SeatQueryDSLImpl implements SeatQueryDSL {
 
     @Override
     public List<SeatEntity> findSeatsByScheduleId(Long scheduleId) {
-        return jpaQueryFactory.select(qSeat)
+        return jpaQueryFactory.selectFrom(qSeat)
                 .where(qSeat.scheduleId.eq(scheduleId))
                 .fetch();
     }

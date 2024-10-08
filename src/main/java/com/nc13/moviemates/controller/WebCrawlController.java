@@ -3,13 +3,14 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.component.proxy.WebCrawlerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RequiredArgsConstructor
-@RestController
+@Controller
 @RequestMapping("/api/crawl")
 public class WebCrawlController {
     @Autowired

@@ -39,6 +39,9 @@ public class UserController {
         return "profile/main";
     }
 
+    @GetMapping("/profile/setting")
+    public String setting(){return "/profile/setting";}
+
     @GetMapping("/login")
     public String login() {
         return "admin/auth-login";
