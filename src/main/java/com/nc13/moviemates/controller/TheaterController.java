@@ -21,10 +21,10 @@ public class TheaterController {
     private final TheaterService service;
 
 
-    @GetMapping("/findTheaterIdByName")
-    public ResponseEntity<Long> findTheaterIdByName(@RequestParam("name") String name ){
-        System.out.println("관 아이디:"+service.findTheaterIdByName(name));
-        return ResponseEntity.ok(service.findTheaterIdByName(name));
+    @GetMapping("/findTheaterIdByName/{selectedLocation}")
+    public ResponseEntity<Long> findTheaterIdByName(@PathVariable String selectedLocation ){
+        System.out.println("관 아이디:"+service.findTheaterIdByName(selectedLocation));
+        return ResponseEntity.ok(service.findTheaterIdByName(selectedLocation));
 
     }
 

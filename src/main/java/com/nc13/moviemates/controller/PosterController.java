@@ -5,13 +5,14 @@ import com.nc13.moviemates.entity.PosterEntity;
 import com.nc13.moviemates.service.PosterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @CrossOrigin
 @RequestMapping("/api/poster")
