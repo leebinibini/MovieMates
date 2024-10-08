@@ -74,4 +74,9 @@ public class HomeController {
         return  "admin/form-fileuploads";
     }
 
+    @GetMapping("/api/admin/index")
+    public String toCheck3(){
+        return  "admin/home";
+    }
+
 }
