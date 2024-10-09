@@ -47,7 +47,9 @@ public class MovieServiceImpl implements MovieService {
     public Long save(MovieModel movie) {
         MovieEntity ent = MovieEntity.builder()
                 .title(movie.getTitle())
+                .WidthPosterUrl(movie.getWidthPosterUrl())
                 .lengthPosterUrl(movie.getPosterUrl())
+                .posterUrl(movie.getPosterUrl())
                 .genre(movie.getGenre())
                 .director(movie.getDirector())
                 .plot(movie.getPlot())

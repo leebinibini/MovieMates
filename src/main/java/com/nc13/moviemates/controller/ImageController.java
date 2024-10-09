@@ -25,7 +25,7 @@ public class ImageController {
 
     @PostMapping("/upload/{movieId}")
     public ResponseEntity<Boolean> uploadFiles(
-            @PathVariable long movieId, @RequestPart("multipartFiles") List<MultipartFile> multipartFiles) {
+            @PathVariable("movieId") long movieId, @RequestPart("multipartFiles") List<MultipartFile> multipartFiles) {
         System.out.println("이미지 컨트롤러 진입!");
         System.out.println("movieId: " + movieId);
         return ResponseEntity.ok(service.uploadFiles(movieId, multipartFiles));

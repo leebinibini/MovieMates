@@ -103,6 +103,7 @@ public class ImageServiceImpl implements ImageService {
             // Update movie's posterUrl and prepare MovieModel for update
             movieEntity.setWidthPosterUrl(uploadURL);
             movieEntity.setLengthPosterUrl(uploadURL);
+            movieEntity.setPosterUrl(uploadURL);
 
             // Convert MovieEntity to MovieModel
             MovieModel movieModel = convertEntityToModel(movieEntity);
@@ -135,8 +136,10 @@ public class ImageServiceImpl implements ImageService {
                 .id(movieEntity.getId())
                 .title(movieEntity.getTitle())
                 .plot(movieEntity.getPlot())
-                .posterUrl(movieEntity.getWidthPosterUrl())
-                .posterUrl(movieEntity.getLengthPosterUrl())// Add any other relevant fields
+                .genre(movieEntity.getGenre())
+                .widthPosterUrl(movieEntity.getWidthPosterUrl())
+                .lengthPosterUrl(movieEntity.getLengthPosterUrl())
+                .posterUrl(movieEntity.getPosterUrl())
                 .build();
     }
 }
