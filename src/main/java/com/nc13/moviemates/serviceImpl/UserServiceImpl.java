@@ -5,6 +5,7 @@ import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.repository.UserRepository;
 import com.nc13.moviemates.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public boolean authenticate(String email, String password) {
@@ -50,6 +52,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean save(UserEntity user) {
         UserEntity ent = repository.save(user);
+        ent.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Long id = ent.getId();
         return existsById(id);
     }

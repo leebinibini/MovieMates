@@ -44,8 +44,17 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "admin/login";
     }
+
+    /*@GetMapping("/")
+    public String loginSuccess(@AuthenticationPrincipal OAuth2User principal, Model model) {
+        model.addAttribute("name", principal.getAttribute("name"));
+        model.addAttribute("email", principal.getAttribute("email"));
+        return "admin/login"; // loginSuccess.html 뷰를 반환
+    }*/
+
+
 
     @GetMapping("/login/oauth2/code/google")
     public String loginOAuth() {
