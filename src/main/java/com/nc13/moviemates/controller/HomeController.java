@@ -78,4 +78,19 @@ public class HomeController {
         return  "admin/home";
     }
 
+    @GetMapping("/api/admin/tables-basic")
+    public String toCheck4(){
+        return  "admin/tables-basic";
+    }
+
+    @GetMapping("/api/admin/tables-datatable")
+    public String toCheck5(){
+        return  "admin/tables-datatable";
+    }
+
+    @GetMapping("/api/admin/ui-buttons")
+    public String toCheck6(){
+        return  "admin/ui-buttons";
+    }
+
 }
