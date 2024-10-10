@@ -483,15 +483,6 @@
     //sc.get(['2_9', '2_11', '2_12','2_13','2_14','2_15','2_10','3_11','3_12','3_13',]).status('unavailable');
 
 
-    //sum total money
-    function recalculateTotal(sc) {
-        var total = 0;
-        sc.find('selected').each(function () {
-            total += price;
-        });
-
-        return total;
-    }
 
 
 

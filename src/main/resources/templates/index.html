@@ -465,8 +465,6 @@
                 window.onload = loadGoogleMaps;
             </script>
         </section>
-        <button th:class="bb">bb 실행</button>
-
         <footer id="footer">
             <div class="container footer-container">
                 <div class="row">
@@ -573,7 +571,7 @@
                                     <input type='date' class="datetime"/>
                                     <h3 class="mt3">TIME</h3>
                                     <ul class="order-date">
-                                        <li><a href="javascript:;" data-time="" data-schedule-id="1" ><i></i></a></li>
+                                        <li><a href="javascript:;" data-time="16:00" data-schedule-id="1" ><i></i></a></li>
                                     </ul>
 
                                 </div>
@@ -615,98 +613,7 @@
     <script type="text/javascript" th:src="@{js/packages.min.js}"></script>
     <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
     <script type="text/javascript" th:src="@{js/scripts.js}"></script>
-    <script type="text/javascript" th:src="@{js/movie.api.js}"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function (){
-            $(".btn-ticket").on('click', function(e) {
-                // 클릭한 요소의 data-id 속성 값 가져오기
-                var movieId = $(e.target).data('id');
-                axios.get(`/api/movie/order/${movieId}`)
-                    .then(function (res) {
-                        var theaterList = res.data.theater;
-                        var scheduleList = res.data.schedule;
-                        var title = res.data.title;
-                        alert(JSON.stringify(res.data));
-                        // 영화관 목록 렌더링
-                        var locationSelect = $("select[name='location']");
-                        locationSelect.empty();
-                        theaterList.forEach(function (theater) {
-                            locationSelect.append(new Option(theater.name, theater.id));
-                        });
-                        $('#movie-selection').val(title);
-                        // 날짜, 시간 렌더링
-                        var timeList = $(".order-date");
-                        timeList.empty();
-                        scheduleList.forEach(function (schedule) {
-                            var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                            timeList.append('<li><a href="javascript:;" data-time="' + time + '"><i>' + time + '</i></a></li>');
-                        });
-                        // 서버에서 받은 날짜 필터링
-                        var dateInput = document.querySelector('.datetime');
-                        var availableDates = scheduleList.map(function(schedule) {
-                            return new Date(schedule.showDate).toISOString().split('T')[0];
-                        });
-                        var today = new Date().toISOString().split('T')[0];
-                        dateInput.setAttribute('min', today);
-                        dateInput.setAttribute('max', availableDates[availableDates.length - 1]);
-                        dateInput.value = today;
-                        // 날짜 선택에 따른 시간 필터링
-                        function renderTimesForSelectedDate(selectedDate) {
-                            var filteredSchedules = scheduleList.filter(function(schedule) {
-                                var scheduleDate = new Date(schedule.showDate).toISOString().split('T')[0];
-                                return scheduleDate === selectedDate;
-                            });
-                            timeList.empty();
-                            if (filteredSchedules.length > 0) {
-                                filteredSchedules.forEach(function(schedule) {
-                                    var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                                    timeList.append('<li><a href="javascript:;" data-time="' + time + '"><i>' + time + '</i></a></li>');
-                                });
-                            } else {
-                                timeList.append('<li><a href="javascript:;"><i>해당 날짜에 상영 시간이 없습니다.</i></a></li>');
-                            }
-                        }
-                        // 처음 로드 시 오늘 날짜의 상영 시간 렌더링
-                        renderTimesForSelectedDate(today);
-                        // 날짜 변경 시 해당 날짜의 시간 렌더링
-                        dateInput.addEventListener('change', function() {
-                            var selectedDate = dateInput.value;
-                            if (availableDates.includes(selectedDate)) {
-                                renderTimesForSelectedDate(selectedDate);
-                            } else {
-                                dateInput.value = '';
-                                alert('해당 날짜에 상영정보가 없습니다.');
-                            }
-                        });
-                        // 시간 선택 처리
-                        $('.order-date').off('click').on('click', 'a', function() {
-                            var selectedTime = $(this).data('time');
-                            $('.order-date a').removeClass('selected');
-                            // 클릭한 <a> 태그에 'selected' 클래스를 추가하여 색상 유지
-                            $(this).addClass('selected');
-                            // 여기서 선택한 정보들을 저장하고 다음 단계로 넘김
-                            var selectedLocation = $('select[name="location"]').val();
-                            var selectedMovie = $('#movie-selection').val();
-                            var selectedDate = $('.datetime').val();
-                            // 선택한 정보 저장
-                            sessionStorage.setItem('selectedLocation', selectedLocation);
-                            sessionStorage.setItem('selectedMovie', selectedMovie);
-                            sessionStorage.setItem('selectedDate', selectedDate);
-                            sessionStorage.setItem('selectedTime', selectedTime);
-                            // 다음 단계로 이동
-                            alert('"선택된 영화관: "' + selectedLocation +
-                                '    "선택된 영화: "' + selectedMovie +
-                                '     "선택된 날짜: "' + selectedDate +
-                                '"선택된 시간:"' + selectedTime );
-                            // window.location.href = '/next-page-url'; // 다음 페이지로 이동할 때 사용할 URL
-                        });
-                    })
-                    .catch(function (error) {
-                        console.log("error data:", error);
-                    });
-            });
-        });
-    </script>
+    <script type="text/javascript" th:src="@{js/order.js}" ></script>
 
 </body>
 </html>
