@@ -13,4 +13,6 @@ public interface UserQueryDSL {
     Long getRowCount();
 
     void update(UserModel user);
+
+    Boolean exitsByEmail(String email);
 }
