@@ -60,7 +60,7 @@
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a th:href="@{index}" class="logo-light">
+                        <a th:href="@{/api/admin}" class="logo-light">
                             <span class="logo-lg">
                                 <img th:src="@{/admin/assets/images/logo.png}" alt="logo">
                             </span>
@@ -70,7 +70,7 @@
                         </a>
 
                         <!-- Logo Dark -->
-                        <a th:href="@{../../index.html}" class="logo-dark">
+                        <a th:href="@{/api/admin}" class="logo-dark">
                             <span class="logo-lg">
                                 <img th:src="@{/admin/assets/images/logo-dark.png}" alt="dark logo">
                             </span>
@@ -434,7 +434,7 @@
                             </a>
 
                             <!-- item-->
-                            <a href="auth-logout-2.html" class="dropdown-item">
+                            <a th:href="@{/}" class="dropdown-item">
                                 <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                                 <span>Logout</span>
                             </a>
@@ -450,7 +450,7 @@
         <div class="leftside-menu">
 
             <!-- Brand Logo Light -->
-            <a href="index.html" class="logo logo-light">
+            <a th:href="@{/api/admin}" class="logo logo-light">
                 <span class="logo-lg">
                     <img th:src="@{/admin/assets/images/logo.png}" alt="logo">
                 </span>
@@ -460,7 +460,7 @@
             </a>
 
             <!-- Brand Logo Dark -->
-            <a href="index.html" class="logo logo-dark">
+            <a th:href="@{/api/admin}" class="logo logo-dark">
                 <span class="logo-lg">
                     <img th:src="@{/admin/assets/images/logo-dark.png}" alt="dark logo">
                 </span>
@@ -493,37 +493,25 @@
                         <div class="collapse" id="sidebarPages">
                             <ul class="side-nav-second-level">
                                 <li>
-                                    <a href="pages-starter.html">Starter Page</a>
+                                    <a th:href="@{/api/admin/pages-starter}">Starter Page</a>
                                 </li>
                                 <li>
-                                    <a href="pages-contact-list.html">Contact List</a>
+                                    <a th:href="@{/api/admin/movie}">Movie</a>
                                 </li>
                                 <li>
-                                    <a href="pages-profile.html">Profile</a>
+                                    <a th:href="@{/api/admin/theater}">Theater</a>
                                 </li>
                                 <li>
-                                    <a href="pages-timeline.html">Timeline</a>
+                                    <a th:href="@{/api/admin/schedule}">Schedule</a>
                                 </li>
                                 <li>
-                                    <a href="pages-invoice.html">Invoice</a>
+                                    <a th:href="@{/api/admin/user}">User</a>
                                 </li>
                                 <li>
-                                    <a href="pages-faq.html">FAQ</a>
+                                    <a th:href="@{/api/admin/reservation}">Reservation</a>
                                 </li>
                                 <li>
-                                    <a href="pages-pricing.html">Pricing</a>
-                                </li>
-                                <li>
-                                    <a href="pages-maintenance.html">Maintenance</a>
-                                </li>
-                                <li>
-                                    <a href="error-404.html">Error 404</a>
-                                </li>
-                                <li>
-                                    <a href="error-404-alt.html">Error 404-alt</a>
-                                </li>
-                                <li>
-                                    <a href="error-500.html">Error 500</a>
+                                    <a th:href="@{/api/admin/review}">Review</a>
                                 </li>
                             </ul>
                         </div>
