@@ -112,7 +112,6 @@ public class MovieController {
     }
 
 
-
     public long count() {
         return service.count();}
 

@@ -1007,10 +1007,10 @@
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">MovieMates</a></li>
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
-                                            <li class="breadcrumb-item active">Schedule</li>
+                                            <li class="breadcrumb-item active">User</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Schedule List</h4>
+                                    <h4 class="page-title">User List</h4>
                                 </div>
                             </div>
                         </div>
@@ -1024,9 +1024,6 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col text-start">
-                                    <button type="button" class="btn btn-outline-primary" id="register-btn" th:onclick="|location.href='@{/api/schedule/register}'|">Register Schedule</button>
-                                </div>
                                 <div class="col text-end">
                                     <button class="btn btn-outline-success" id="save-btn">Save Changes</button>
                                     <button class="btn btn-outline-danger" id="delete-btn">Delete Selected</button>
@@ -1271,26 +1268,26 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // 1. jspreadsheet 초기화
-                axios.get('/api/schedule/list')
+                axios.get('/api/user/list')
                     .then(function (res) {
-                        const schedules = res.data;
+                        const users = res.data;
 
-                        const scheduleData = schedules.map(schedule => [
-                            schedule.id,
-                            schedule.movieId,
-                            schedule.theaterId,
-                            schedule.showDate || '',
-                            schedule.showTime || '',
+                        const userData = users.map(user => [
+                            user.id,
+                            user.email,
+                            user.password,
+                            user.nickname,
+                            user.role
                         ]);
 
                         const table = jspreadsheet(document.getElementById('responseText'), {
-                            data: scheduleData,
+                            data: userData,
                             columns: [
                                 {type: 'text', title: 'ID', width: 50},
-                                {type: 'text', title: 'MovieId', width: 150},
-                                {type: 'text', title: 'TheaterId', width: 100},
-                                {type: 'text', title: 'ShowDate', width: 150},
-                                {type: 'text', title: 'ShowTime', width: 200},
+                                {type: 'text', title: 'Email', width: 150},
+                                {type: 'text', title: 'Password', width: 100},
+                                {type: 'text', title: 'Nickname', width: 150},
+                                {type: 'text', title: 'Role', width: 200},
                                 {type: 'checkbox', title: 'Delete', width: 100}
                             ],
                             search: true,
@@ -1310,20 +1307,22 @@
                                     const data = table.getData();
                                     alert(data);
 
-                                    const scheduleData = data.map(row => {
+                                    const userData = data
+                                        .filter(row => row.slice(0, 5).some(cell => cell !== ""))
+                                        .map(row => {
                                         return {
                                             id: row[0],
-                                            movieId: row[1],
-                                            theaterId: row[2],
-                                            showDate: row[3],
-                                            showTime: row[4],
+                                            email: row[1],
+                                            password: row[2],
+                                            nickname: row[3],
+                                            role: row[4],
                                             delete: row[5]
                                         };
 
                                     });
 
-                                    console.log("극장 수정 정보 확인용: " +  scheduleData);
-                                    axios.post('/api/schedule/updateMany', scheduleData)
+                                    console.log("극장 수정 정보 확인용: " +  userData);
+                                    axios.post('/api/user/updateMany', userData)
                                         .then(res => {
                                             console.log(res)
                                             alert("저장 성공!!")
@@ -1337,15 +1336,15 @@
 
                                     data.forEach((row, index) => {
                                         const isChecked = table.getValueFromCoords(5, index);
-                                        const scheduleId = table.getValueFromCoords(0, index);
+                                        const userId = table.getValueFromCoords(0, index);
 
                                         if (isChecked === true) {
-                                            checkedRows.push(scheduleId);
+                                            checkedRows.push(userId);
                                         }
                                     });
 
                                     if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
-                                        axios.post(`/api/schedule/deleteMany`, checkedRows)
+                                        axios.post(`/api/user/deleteMany`, checkedRows)
                                             .then(res => {
                                                 if (res.data !== 0) {
                                                     alert('상영 정보 삭제 성공!');

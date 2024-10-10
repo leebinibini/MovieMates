@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReservationService {
-    List<?> findAll();
+    List<ReservationEntity> findAll();
 
    Optional<ReservationEntity> findById(Long id);
 
-    Boolean save(ReservationEntity reservation);
+    Boolean save(ReservationModel reservation);
 
     Boolean deleteById(Long id);
 
