@@ -60,4 +60,9 @@ public class UserQueryDSLImpl implements UserQueryDSL {
     public Boolean exists(Long id) {
         return jpaQueryFactory.selectFrom(qUser).where(qUser.id.eq(id)).fetchCount()>0;
     }
+
+    @Override
+    public Boolean exitsByEmail(String email){
+        return jpaQueryFactory.selectFrom(qUser).where(qUser.email.eq(email)).fetchCount()>0;}
+
 }
