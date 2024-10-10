@@ -61,7 +61,7 @@ public class TheaterController {
     }
 
     @ResponseBody
-    @PostMapping("/update")
+    @PostMapping("/updateMany")
     public ResponseEntity<Boolean> update(@RequestBody List<TheaterModel> theaterList) {
         System.out.println("극장 수정 컨트롤러 진입 성공!");
         System.out.println("극장리스트" + theaterList);
