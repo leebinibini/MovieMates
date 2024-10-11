@@ -39,8 +39,7 @@ public class UserController {
         return "profile/main";
     }
 
-    @GetMapping("/profile/setting")
-    public String setting(){return "/profile/setting";}
+
 
     @GetMapping("/login")
     public String login() {
@@ -86,17 +85,37 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user) {
+
         return ResponseEntity.ok(service.save(user));
     }
 
+    @GetMapping("/profile/setting/{id}")
+    public String getProfile(Model model, @PathVariable Long id)
+    {
+        Optional<UserEntity> userOptional = service.findById(id);
+        if(userOptional.isPresent()) {
+            UserEntity user = userOptional.get();
+            // user의 필드를 다루는 로직을 추가할 수 있습니다.
+        }
+        model.addAttribute("userId", 1);
+        model.addAttribute("user", userOptional.orElse(null));
+        System.out.println(userOptional.get());
+        System.out.println(userOptional);
+        return "/profile/setting";}
+
     @ResponseBody
     @PostMapping("/update")
-    public ResponseEntity<Boolean> update(@RequestBody List<UserModel> userData) {
+    public ResponseEntity<Boolean> update(@RequestBody UserModel userData) {
+        System.out.println("넘어온 값" + userData);
         return ResponseEntity.ok(service.update(userData));
     }
 
+
+
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+        System.out.println("딜리트 요청 완니:"+ id);
         return ResponseEntity.ok(service.deleteById(id));
     }
 

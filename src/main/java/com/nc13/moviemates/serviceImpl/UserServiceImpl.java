@@ -28,10 +28,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean update(List<UserModel> userData) {
+    public Boolean update(UserModel userData) {
         System.out.println("user정보: " + userData);
-        userData.forEach(user -> repository.update(user));
-
+        repository.update(userData);
         return true;
     }
 
