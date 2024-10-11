@@ -3,6 +3,7 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.service.MovieService;
+import com.nc13.moviemates.service.ReviewService;
 import com.nc13.moviemates.service.ScheduleService;
 import com.nc13.moviemates.service.TheaterService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class MovieController {
     private final MovieService service;
     private final TheaterService theaterService;
     private final ScheduleService scheduleService;
+    private final ReviewService reviewService;
 
 
     @GetMapping("/list")
@@ -50,8 +52,32 @@ public class MovieController {
         return ResponseEntity.ok(map);
     }
 
+    @GetMapping("/single/{movieId}")
+    public String getSingle(@PathVariable("movieId") Long movieId, Model model) {
+        Optional<MovieModel> movie = service.findById(movieId); // movieId는 적절히 설정
+        if (movie.isPresent()) {
+            model.addAttribute("movie", movie.get());
+        } else {
+            // movie가 없을 경우 예외 처리 로직 추가 (예: 404 페이지로 리다이렉트 등)
+            return "admin/404"; // 예시로 404 페이지 반환
+        }
+
+        model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
+        model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
+        model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
+        model.addAttribute("movieList", service.findAll());
+
+        System.out.println(movie);
+        System.out.println(theaterService.findByMovieId(movieId));
+        System.out.println(scheduleService.findByMovieId(movieId));
+
+        System.out.println(model);
+        return "single";
+    }
+
+
     @GetMapping("/{id}")
-    public ResponseEntity <Optional<MovieEntity>> getById(@PathVariable Long id){
+    public ResponseEntity <Optional<MovieModel>> getById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 

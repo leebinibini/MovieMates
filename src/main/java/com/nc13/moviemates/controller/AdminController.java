@@ -1,6 +1,7 @@
 package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.repository.UserRepository;
+import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.serviceImpl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,7 @@ import java.util.Map;
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
 public class AdminController {
-    private final UserServiceImpl userService;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping()
     public String showAdmin() {

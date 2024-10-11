@@ -50,4 +50,9 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
         return deletedCount; // 삭제된 행의 수 반환
     }
 
+    @Override
+    public List<ReviewEntity> findAllByMovieId(Long movieId) {
+        return jpaQueryFactory.selectFrom(qReview).where(qReview.movieId.eq(movieId)).fetch();
+    }
+
 }

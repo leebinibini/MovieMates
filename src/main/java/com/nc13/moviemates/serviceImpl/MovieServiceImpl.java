@@ -101,8 +101,21 @@ public class MovieServiceImpl implements MovieService {
     }*/
 
     @Override
-    public Optional<MovieEntity> findById(Long id) {
-        return repository.findById(id);
+    public Optional<MovieModel> findById(Long id) {
+        Optional<MovieEntity> ent = repository.findById(id);
+
+        // Optional의 값이 존재하면 MovieModel로 변환하고, 그렇지 않으면 빈 Optional을 반환
+        return ent.map(movieEntity -> MovieModel.builder()
+                .id(movieEntity.getId())
+                .genre(movieEntity.getGenre())
+                .title(movieEntity.getTitle())
+                .director(movieEntity.getDirector())
+                .rate(movieEntity.getRate())
+                .runningTime(movieEntity.getRunningTime())
+                .posterUrl(movieEntity.getPosterUrl())
+                .lengthPosterUrl(movieEntity.getLengthPosterUrl())
+                .widthPosterUrl(movieEntity.getWidthPosterUrl())
+                .build());
     }
 
     @Override

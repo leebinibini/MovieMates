@@ -21,6 +21,8 @@ public interface ReviewService {
 
     Boolean existsById(Long id);
 
+    List<ReviewModel> findAllByMovieId(Long movieId);
 
     Long deleteMany(List<Long> reviewIdList);
+
 }
