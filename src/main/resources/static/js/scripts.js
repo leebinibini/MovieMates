@@ -226,6 +226,7 @@
     }
 
     // Carousel
+
     $('.wpc-testimonails').each(function () {
         var $this = $(this);
         $this.find('.swiper-container').swiper({

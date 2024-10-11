@@ -25,5 +25,5 @@ public interface UserService {
 
     boolean authenticate(String email, String password);
 
-    Boolean update(List<UserModel> userData);
+    Boolean update(UserModel userData);
 }

@@ -8,6 +8,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -43,6 +44,7 @@ public class UserQueryDSLImpl implements UserQueryDSL {
     }
 
     @Override
+    @Transactional
     public void update(UserModel user) {
         QUserEntity qUser = QUserEntity.userEntity;
 
@@ -52,7 +54,10 @@ public class UserQueryDSLImpl implements UserQueryDSL {
                 .set(qUser.email, user.getEmail())
                 .set(qUser.password, user.getPassword())
                 .set(qUser.nickname, user.getNickname())
-                .set(qUser.role, user.getRole())
+                .set(qUser.fName, user.getFName())
+                .set(qUser.lName, user.getLName())
+                .set(qUser.gender, user.getGender())
+                .set(qUser.tel, user.getTel())
                 .execute();
     }
 

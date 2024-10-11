@@ -614,6 +614,12 @@
     <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
     <script type="text/javascript" th:src="@{js/scripts.js}"></script>
     <script type="text/javascript" th:src="@{js/order.js}" ></script>
+<script type="module">
+    import MovieApi from "/js/movie/movie.api.js";
+    import movieAPI from "../static/js/movie/movie.api";
+
+    movieAPI.getMovieList()
+</script>
 
 </body>
 </html>
