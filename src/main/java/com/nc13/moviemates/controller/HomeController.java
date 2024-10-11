@@ -93,6 +93,11 @@ public class HomeController {
         return  "admin/ui-buttons";
     }
 
+    @GetMapping("/api/admin/icons-remixicons")
+    public String toCheck7(){
+        return  "admin/icons-remixicons";
+    }
+
 //    @GetMapping("/api/movie/single")
 //    public String toMovieSingle() {
 //            return "single";

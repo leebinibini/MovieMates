@@ -65,12 +65,12 @@
         <div class="row">
             <div class="col-md-12">
                 <article class="blog-item single" >
-                    <div class="col-md-4 col-sm12 post-image hover-dark" th:data-bg-image="${movie.lengthPosterUrl}">
+                    <div class="col-md-4 col-sm12 post-image hover-dark" th:data-bg-image="${movie.lengthPosterUrl}" >
                         <a href="https://vimeo.com/28177848" class="video-player"><i class="fa fa-play"></i></a>
                     </div>
                     <div class="col-md-8 col-sm-12 col-xs-12 ph0">
-                        <div class="post-content bg-cover" th:data-bg-image="${movie.widthPosterUrl}">
-                            <div class="content-meta"> 
+                        <div class="post-content bg-cover" th:data-bg-image="${movie.widthPosterUrl}" >
+                            <div class="content-meta">
                                 <h2 class="entry-title" th:text="${movie != null ? movie.title : '영화 정보를 찾을 수 없습니다'}">
                                 <span>Synopsis</span>
                                 </h2>
@@ -138,29 +138,29 @@
                    <div class="single-slider">
                         <div class="swiper-container movie-images" id="singleslider" data-col="5">
                             <div class="swiper-wrapper" >
-                                                                    <div class="swiper-slide" th:each="single: ${movieList}">
-                                        <div class="movie-image"  th:data-bg-image="${single.getLengthPosterUrl()}">
+                                                                    <div class="swiper-slide" th:each="m: ${movieList}">
+                                        <div class="movie-image"  th:data-bg-image="${m.getLengthPosterUrl()}">
                                             <div class="entry-hover">
                                                 <div class="entry-actions">
                                                     <a href="javascript:;" class="btn fill">More</a>
                                                 </div>
                                             </div>
                                             <div class="entry-desc">
-                                                <div                                                           class="rating">
-                                                    <input name="stars" type="radio" th:checked="${single.rate >= 1}">
+                                                <div class="rating">
+                                                    <input name="stars" type="radio" th:checked="${m.rate >= 1}">
                                                     <label>☆</label>
-                                                    <input name="stars" type="radio" th:checked="${single.rate >= 2}">
+                                                    <input name="stars" type="radio" th:checked="${m.rate >= 2}">
                                                     <label>☆</label>
-                                                    <input name="stars" type="radio" th:checked="${single.rate >= 3}">
+                                                    <input name="stars" type="radio" th:checked="${m.rate >= 3}">
                                                     <label>☆</label>
-                                                    <input name="stars" type="radio" th:checked="${single.rate >= 4}">
+                                                    <input name="stars" type="radio" th:checked="${m.rate >= 4}">
                                                     <label>☆</label>
-                                                    <input name="stars" type="radio" th:checked="${single.rate >= 5}">
+                                                    <input name="stars" type="radio" th:checked="${m.rate >= 5}">
                                                     <label>☆</label>
                                                 </div>
-                                                <h3 class="entry-title" th:text="${single.title}"></h3>
-                                                <ul class="entry-date" th:text="${single.releaseDate}">
-                                                    <li>5 May 2017</li>  
+                                                <h3 class="entry-title" th:text="${m.title}"></h3>
+                                                <ul class="entry-date" th:text="${m.releaseDate}">
+                                                    <li>5 May 2017</li>
                                                 </ul>
                                             </div>
                                         </div>

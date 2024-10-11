@@ -33,6 +33,8 @@ public interface MovieService {
 
    Long findMovieIdByName(String name);
 
-   // void crawlMovies() throws IOException;
+    boolean updateLikeStatus(Long movieId, Boolean liked);
+
+    // void crawlMovies() throws IOException;
 
 }
