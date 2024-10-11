@@ -93,4 +93,9 @@ public class HomeController {
         return  "admin/ui-buttons";
     }
 
+//    @GetMapping("/api/movie/single")
+//    public String toMovieSingle() {
+//            return "single";
+//    }
+
 }

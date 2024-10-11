@@ -12,6 +12,7 @@ import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.repository.ImageRepository;
 import com.nc13.moviemates.repository.MovieRepository;
 import com.nc13.moviemates.service.ImageService;
+import com.nc13.moviemates.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
     private final ImageRepository repository;
-    private final MovieServiceImpl movieService;
+    private final MovieService movieService;
     private final MovieRepository movieRepository;
     private final AmazonS3 amazonS3;
     String uploadPath = "uploads/movies";

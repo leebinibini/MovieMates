@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +52,23 @@ public class ReviewServiceImpl implements ReviewService {
         return repository.existsById(id);
     }
 
+    @Override
+    public List<ReviewModel> findAllByMovieId(Long movieId) {
+        List<ReviewEntity> entList =  repository.findAllByMovieId(movieId);
+
+        // ReviewEntity 리스트를 ReviewModel 리스트로 변환
+        List<ReviewModel> modelList = entList.stream()
+                .map(entity -> ReviewModel.builder()
+                        .id(entity.getId())
+                        .content(entity.getContent())
+                        .rating(entity.getRating())
+                        .movieId(entity.getMovieId())
+                        .writerId(entity.getWriterId())
+                        .build())
+                .collect(Collectors.toList());
+
+        return modelList;
+    }
 
     @Transactional
     @Override

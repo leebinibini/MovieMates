@@ -1,6 +1,7 @@
 package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.ImageModel;
+import com.nc13.moviemates.service.ImageService;
 import com.nc13.moviemates.serviceImpl.ImageServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/images")
 public class ImageController {
-    private final ImageServiceImpl service;
+    private final ImageService service;
     //filename
     //upload
     @GetMapping("/fileName")
