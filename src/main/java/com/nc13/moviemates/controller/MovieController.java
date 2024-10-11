@@ -68,6 +68,9 @@ public class MovieController {
         model.addAttribute("movieList", service.findAll());
 
         System.out.println(movie);
+
+
+
         System.out.println(theaterService.findByMovieId(movieId));
         System.out.println(scheduleService.findByMovieId(movieId));
 
@@ -140,6 +143,21 @@ public class MovieController {
 
     public long count() {
         return service.count();}
+
+
+    @PostMapping("/api/movie/like")
+    public ResponseEntity<Map<String, Object>> likeMovie(@RequestBody Map<String, Object> payload) {
+        Long movieId = ((Number) payload.get("movieId")).longValue();
+        Boolean liked = (Boolean) payload.get("liked");
+
+        // 영화 좋아요 처리 로직 (예: DB에 저장)
+        boolean success = service.updateLikeStatus(movieId, liked);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", success);
+
+        return ResponseEntity.ok(response);
+    }
 
 
     /*@GetMapping("/crawl")

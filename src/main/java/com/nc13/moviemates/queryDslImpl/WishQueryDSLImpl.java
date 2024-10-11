@@ -7,6 +7,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
+
 @RequiredArgsConstructor
 public class WishQueryDSLImpl implements WishQueryDSL {
     private final JPAQueryFactory jpaQueryFactory;
@@ -25,6 +27,28 @@ public class WishQueryDSLImpl implements WishQueryDSL {
     @Override
     public Long getRowCount() {
         return jpaQueryFactory.select(qWish.id.count()).from(qWish).fetchOne();
+    }
+
+    @Override
+    public Optional<WishEntity> findByUserIdAndMovieId(Long userId, Long movieId) {
+        WishEntity result = jpaQueryFactory.selectFrom(qWish)
+                .where(qWish.userId.eq(userId)
+                .and(qWish.movieId.eq(movieId))
+                )
+                .fetchOne();
+
+        return Optional.ofNullable(result);
+    }
+
+    @Override
+    public boolean existsByUserIdAndMovieId(Long userId, Long movieId) {
+        WishEntity result = jpaQueryFactory.selectFrom(qWish)
+                .where(qWish.userId.eq(userId)
+                        .and(qWish.movieId.eq(movieId))
+                )
+                .fetchOne();
+
+        return result != null;
     }
 
     @Override
