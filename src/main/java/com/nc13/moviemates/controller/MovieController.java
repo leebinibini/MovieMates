@@ -1,10 +1,10 @@
 package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.MovieModel;
+import com.nc13.moviemates.component.model.WishModel;
 import com.nc13.moviemates.entity.MovieEntity;
-import com.nc13.moviemates.service.MovieService;
-import com.nc13.moviemates.service.ScheduleService;
-import com.nc13.moviemates.service.TheaterService;
+import com.nc13.moviemates.entity.WishEntity;
+import com.nc13.moviemates.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,8 @@ public class MovieController {
     private final MovieService service;
     private final TheaterService theaterService;
     private final ScheduleService scheduleService;
-
+    private final ReviewService reviewService;
+    private final WishService wishService;
 
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
@@ -50,8 +51,33 @@ public class MovieController {
         return ResponseEntity.ok(map);
     }
 
+    @GetMapping("/single/{movieId}")
+    public String getSingle(@PathVariable("movieId") Long movieId, Model model) {
+        Optional<MovieModel> movie = service.findById(movieId);
+        if (movie.isPresent()) {
+            model.addAttribute("movie", movie.get());
+        } else {
+            // 영화가 없을 경우 처리
+            return "admin/404";
+        }
+
+        // Theater, Schedule, Review 리스트 추가
+        model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
+        model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
+        model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
+        model.addAttribute("movieList", service.findAll());
+
+        // 위시리스트 여부 확인
+        boolean isWishlisted = wishService.existsByMovieIdandUserId(movieId, 1L);
+        System.out.println("isWishlisted 값: " + isWishlisted);
+        model.addAttribute("isWishlisted", isWishlisted);
+
+        return "single";
+    }
+
+
     @GetMapping("/{id}")
-    public ResponseEntity <Optional<MovieEntity>> getById(@PathVariable Long id){
+    public ResponseEntity <Optional<MovieModel>> getById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
@@ -112,10 +138,8 @@ public class MovieController {
     }
 
 
-
     public long count() {
         return service.count();}
-
 
     /*@GetMapping("/crawl")
     public String crawlMovies() {

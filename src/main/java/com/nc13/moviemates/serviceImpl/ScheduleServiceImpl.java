@@ -16,6 +16,8 @@ import java.util.Date;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,7 +51,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<ScheduleEntity> findByMovieId(Long movieId) {
-        return repository.findByMovieId(movieId);
+        List<ScheduleEntity> scheduleList = repository.findByMovieId(movieId);
+        // showTime() 기준으로 정렬한 리스트 반환
+        return scheduleList.stream()
+                .sorted(Comparator.comparing(ScheduleEntity::getShowTime)) // showTime을 기준으로 오름차순 정렬
+                .collect(Collectors.toList());
     }
 
 

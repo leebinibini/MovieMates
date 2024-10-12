@@ -1,10 +1,15 @@
 package com.nc13.moviemates.component.model;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class WishModel {
     private Long id;
     private Long userId;

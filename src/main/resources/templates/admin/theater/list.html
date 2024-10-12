@@ -8,8 +8,8 @@
 <!-- Theme Config Js -->
 <script th:src="@{/admin/assets/js/config.js}"></script>
 
-<!-- App css -->
-<link th:href="@{/admin/assets/css/app.min.css}" rel="stylesheet" type="text/css" id="app-style" />
+<!--&lt;!&ndash; App css &ndash;&gt;-->
+<!--<link th:href="@{/admin/assets/css/app.min.css}" rel="stylesheet" type="text/css" id="app-style" />-->
 
 <!-- Icons css -->
 <link th:href="@{/admin/assets/css/icons.min.css}" rel="stylesheet" type="text/css" />
@@ -122,7 +122,7 @@
 </style>
     <head>
         <meta charset="utf-8" />
-        <title>Starter Page | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
+        <title>Admin Page - Movie</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
         <meta content="Techzaa" name="author" />
@@ -993,12 +993,12 @@
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">MovieMates</a></li>
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
-                                            <li class="breadcrumb-item active">Starter</li>
+                                            <li class="breadcrumb-item active">Theater</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Starter</h4>
+                                    <h4 class="page-title">Theater List</h4>
                                 </div>
                             </div>
                         </div>
@@ -1007,26 +1007,13 @@
                     </div> <!-- container -->
 
                 </div> <!-- content -->
-                <div class="col-xl-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Simple Pie Chart</h4>
-                            <div dir="ltr">
-                                <div id="simple-pie" class="apex-charts" data-colors="#3bc0c3,#6c757d,#4489e4,#d03f3f,#edc755"></div>
-                            </div>
-                        </div>
-                        <!-- end card body-->
-                    </div>
-                    <!-- end card -->
-                </div>
-                <!-- end col-->
 
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col text-start">
-                                    <button type="button" class="btn btn-outline-primary" id="register-btn" th:onclick="|location.href='@{/api/movie/register}'|">Register Movie</button>
+                                    <button type="button" class="btn btn-outline-primary" id="register-btn" th:onclick="|location.href='@{/api/theater/register}'|">Register Theater</button>
                                 </div>
                                 <div class="col text-end">
                                     <button class="btn btn-outline-success" id="save-btn">Save Changes</button>
@@ -1272,58 +1259,38 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // 1. jspreadsheet 초기화
-                axios.get('/api/movie/list')
+                axios.get('/api/theater/list')
                     .then(function (res) {
-                        const movies = res.data;
+                        const theaters = res.data;
 
-                        const movieData = movies.map(movie => [
-                            movie.id,
-                            movie.title,
-                            movie.posterUrl,
-                            movie.genre || '',
-                            movie.director || '',
-                            movie.plot || '',
-                            movie.runningTime || 0,
-                            movie.rate || 0,
+                        const theaterData = theaters.map(theater => [
+                            theater.id,
+                            theater.name,
+                            theater.room,
+                            theater.capacity,
+                            theater.location
                         ]);
 
                         const table = jspreadsheet(document.getElementById('responseText'), {
-                            data: movieData,
-
-
+                            data: theaterData,
                             columns: [
                                 {type: 'text', title: 'ID', width: 50},
-                                {type: 'text', title: 'Title', width: 150},
-                                {
-                                    type: 'image',
-                                    title: 'Poster',
-                                    width: 100,
-                                    render: function (cell, value) {
-                                        // URL이 유효하고 이미지를 표시하고 싶은 경우
-                                        if (value) {
-                                            cell.innerHTML = `<img src="${value}" alt="Poster" style="width:100px;height:auto;">`;
-                                        } else {
-                                            cell.innerHTML = '이미지 없음';
-                                        }
-                                    }
-                                },
-                                {type: 'text', title: 'Genre', width: 100},
-                                {type: 'text', title: 'Director', width: 150},
-                                {type: 'text', title: 'Plot', width: 200},
-                                {type: 'text', title: 'Running Time', width: 100},
-                                {type: 'text', title: 'Rate', width: 50},
+                                {type: 'text', title: 'NAME', width: 150},
+                                {type: 'text', title: 'ROOM', width: 100},
+                                {type: 'text', title: 'CAPACITY', width: 150},
+                                {type: 'text', title: 'LOCATION', width: 200},
                                 {type: 'checkbox', title: 'Delete', width: 100}
                             ],
                             search: true,
                             pagination: 10,
                             freezeColumns: 1,
-                            minDimensions: [9, 10],
+                            minDimensions: [6, 10],
                             tableOverflow: true,
                             tableHeight: '500px',
                             tableWidth: '100%',
 
+                            // jSpreadsheet가 로드된 후 실행
                             onload: function () {
-
                                 const saveBtn = document.getElementById('save-btn');
                                 const deleteBtn = document.getElementById('delete-btn');
 
@@ -1331,23 +1298,23 @@
                                     const data = table.getData();
                                     alert(data);
 
-                                    const movieData = data.map(row => {
+                                    const theaterData = data.map(row => {
                                         return {
                                             id: row[0],
-                                            title: row[1],
-                                            posterUrl: row[2],
-                                            genre: row[3],
-                                            director: row[4],
-                                            plot: row[5],
-                                            runningTime: row[6],
-                                            rate: row[7],
-                                            delete: row[8]
+                                            name: row[1],
+                                            room: row[2],
+                                            capacity: Number(row[3]),
+                                            location: row[4]
                                         };
 
                                     });
 
-                                    axios.post('/api/movie/updateMany', movieData)
-                                        .then(res => console.log(res))
+                                    console.log("극장 수정 정보 확인용: " +  theaterData);
+                                    axios.post('/api/theater/updateMany', theaterData)
+                                        .then(res => {
+                                            console.log(res)
+                                            alert("저장 성공!!")
+                                        })
                                         .catch(err => console.log("Error: " + err));
                                 });
 
@@ -1356,27 +1323,27 @@
                                     const data = table.getData();
 
                                     data.forEach((row, index) => {
-                                        const isChecked = table.getValueFromCoords(8, index);
-                                        const movieId = table.getValueFromCoords(0, index);
+                                        const isChecked = table.getValueFromCoords(5, index);
+                                        const theaterId = table.getValueFromCoords(0, index);
 
                                         if (isChecked === true) {
-                                            checkedRows.push(movieId);
+                                            checkedRows.push(theaterId);
                                         }
                                     });
 
                                     if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
-                                        axios.post(`/api/movie/deleteMany`, checkedRows)
+                                        axios.post(`/api/theater/deleteMany`, checkedRows)
                                             .then(res => {
                                                 if (res.data !== 0) {
-                                                    alert('영화 정보 삭제 성공!');
+                                                    alert('극장 정보 삭제 성공!');
                                                     location.reload();
                                                 } else {
-                                                    alert('영화 정보 삭제 실패!');
+                                                    alert('극장 정보 삭제 실패!');
                                                 }
                                             })
                                             .catch(err => console.log(err));
                                     } else {
-                                        alert('삭제할 영화를 선택해주세요.');
+                                        alert('삭제할 극장을 선택해주세요.');
                                     }
                                 });
                             }
@@ -1386,63 +1353,8 @@
                         console.log('Error:', error);
                     });
 
-                // 2. Chart.js 차트 초기화
-                const movieReservations = [
-                    { "title": "Inception", "reservations": 150 },
-                    { "title": "Avatar", "reservations": 200 },
-                    { "title": "Interstellar", "reservations": 100 },
-                    { "title": "The Dark Knight", "reservations": 180 }
-                ];
-
-                const movieTitles = movieReservations.map(movie => movie.title);
-                const reservationCounts = movieReservations.map(movie => movie.reservations);
-
-                const ctx = document.getElementById('reservationChart').getContext('2d');
-                const reservationChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: movieTitles,
-                        datasets: [{
-                            label: '예매 횟수',
-                            data: reservationCounts,
-                            backgroundColor: [
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(153, 102, 255, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(153, 102, 255, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 50
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                position: 'top'
-                            }
-                        }
-                    }
-                });
             });
         </script>
-        });
-        });
-        </script>
-
 
     </body>
 </html>

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class TheaterServiceImpl implements TheaterService{
+public class TheaterServiceImpl  implements TheaterService{
     private final TheaterRepository repository;
 
     @Override

@@ -60,7 +60,7 @@
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a th:href="@{index}" class="logo-light">
+                        <a th:href="@{/api/admin}" class="logo-light">
                             <span class="logo-lg">
                                 <img th:src="@{/admin/assets/images/logo.png}" alt="logo">
                             </span>
@@ -70,7 +70,7 @@
                         </a>
 
                         <!-- Logo Dark -->
-                        <a th:href="@{../../index.html}" class="logo-dark">
+                        <a th:href="@{/api/admin}" class="logo-dark">
                             <span class="logo-lg">
                                 <img th:src="@{/admin/assets/images/logo-dark.png}" alt="dark logo">
                             </span>
@@ -434,7 +434,7 @@
                             </a>
 
                             <!-- item-->
-                            <a href="auth-logout-2.html" class="dropdown-item">
+                            <a th:href="@{/}" class="dropdown-item">
                                 <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                                 <span>Logout</span>
                             </a>
@@ -450,7 +450,7 @@
         <div class="leftside-menu">
 
             <!-- Brand Logo Light -->
-            <a href="index.html" class="logo logo-light">
+            <a th:href="@{/api/admin}" class="logo logo-light">
                 <span class="logo-lg">
                     <img th:src="@{/admin/assets/images/logo.png}" alt="logo">
                 </span>
@@ -460,7 +460,7 @@
             </a>
 
             <!-- Brand Logo Dark -->
-            <a href="index.html" class="logo logo-dark">
+            <a th:href="@{/api/admin}" class="logo logo-dark">
                 <span class="logo-lg">
                     <img th:src="@{/admin/assets/images/logo-dark.png}" alt="dark logo">
                 </span>
@@ -493,37 +493,25 @@
                         <div class="collapse" id="sidebarPages">
                             <ul class="side-nav-second-level">
                                 <li>
-                                    <a href="pages-starter.html">Starter Page</a>
+                                    <a th:href="@{/api/admin/pages-starter}">Starter Page</a>
                                 </li>
                                 <li>
-                                    <a href="pages-contact-list.html">Contact List</a>
+                                    <a th:href="@{/api/admin/movie}">Movie</a>
                                 </li>
                                 <li>
-                                    <a href="pages-profile.html">Profile</a>
+                                    <a th:href="@{/api/admin/theater}">Theater</a>
                                 </li>
                                 <li>
-                                    <a href="pages-timeline.html">Timeline</a>
+                                    <a th:href="@{/api/admin/schedule}">Schedule</a>
                                 </li>
                                 <li>
-                                    <a href="pages-invoice.html">Invoice</a>
+                                    <a th:href="@{/api/admin/user}">User</a>
                                 </li>
                                 <li>
-                                    <a href="pages-faq.html">FAQ</a>
+                                    <a th:href="@{/api/admin/reservation}">Reservation</a>
                                 </li>
                                 <li>
-                                    <a href="pages-pricing.html">Pricing</a>
-                                </li>
-                                <li>
-                                    <a href="pages-maintenance.html">Maintenance</a>
-                                </li>
-                                <li>
-                                    <a href="error-404.html">Error 404</a>
-                                </li>
-                                <li>
-                                    <a href="error-404-alt.html">Error 404-alt</a>
-                                </li>
-                                <li>
-                                    <a href="error-500.html">Error 500</a>
+                                    <a th:href="@{/api/admin/review}">Review</a>
                                 </li>
                             </ul>
                         </div>
@@ -926,7 +914,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <form id="MovieRegisterForm">
+                                            <form id="MovieRegisterForm" enctype="multipart/form-data">
                                                 <h5 class="form-floating mb-3">Title</h5>
                                                 <div class="form-floating mb-4">
                                                     <input type="text" class="form-control" id="inputTitle"
@@ -944,13 +932,13 @@
                                                 <h5 class="mb-3 mt-4">Plot</h5>
                                                 <div class="form-floating">
                                                 <textarea class="form-control" placeholder="Leave a comment here"
-                                                          id="floatingTextarea" style="height: 100px"></textarea>
-                                                    <label for="floatingTextarea">Comments</label>
+                                                          id="inputPlot" style="height: 100px"></textarea>
+                                                    <label for="inputPlot">Comments</label>
                                                 </div>
 
                                                 <h5 class="mb-3 mt-4">Genre</h5>
                                                 <div class="form-floating mb-4">
-                                                    <select class="select2 form-control select2-multiple" data-toggle="select2"
+                                                    <select id="inputGenre" class="select2 form-control select2-multiple" data-toggle="select2"
                                                             multiple="multiple" data-placeholder="Choose ...">
                                                         <optgroup label="Genre">
                                                             <option value="로맨스">로맨스</option>
@@ -965,7 +953,6 @@
 
                                                 <h5 class="mb-3">Poster</h5>
 
-                                            </form>
                                         </div> <!-- end col -->
                                     </div>
                                     <!-- end row-->
@@ -974,10 +961,10 @@
                                         <div class="col-12">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <form action="/" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
+                                                    <div class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
                                                           data-upload-preview-template="#uploadPreviewTemplate">
                                                         <div class="fallback">
-                                                            <input name="file" type="file" multiple />
+                                                            <input id="inputPoster" name="file" type="file" multiple accept="image/jpg,image/png,image/jpeg"/>
                                                         </div>
 
                                                         <div class="dz-message needsclick">
@@ -986,7 +973,7 @@
                                                             <span class="text-muted fs-13">(This is just a demo dropzone. Selected files are
                                                     <strong>not</strong> actually uploaded.)</span>
                                                         </div>
-                                                    </form>
+                                                    </div>
 
                                                     <!-- Preview -->
                                                     <div class="dropzone-previews mt-3" id="file-previews"></div>
@@ -995,6 +982,7 @@
                                                 <!-- end card-body -->
                                             </div>
                                             <!-- end card-->
+                                            </form>
                                         </div>
                                         <!-- end col-->
                                     </div>
@@ -1002,7 +990,7 @@
 
                                     <div class="justify-content-end row">
                                         <div class="col-9 text-end">
-                                            <button type="submit" class="btn btn-info">Register</button>
+                                            <button type="submit" class="btn btn-info" onclick="submitMovie()">Register</button>
                                         </div>
                                     </div>
 
@@ -1290,51 +1278,59 @@
     <!-- App js -->
     <script th:src="@{/admin/assets/js/app.min.js}"></script>
 
+    <!-- JS script to handle form submission -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.querySelector('#movieRegisterForm').addEventListener('submit', async (event) => {
-            event.preventDefault(); // 폼이 기본적으로 전송되지 않도록 방지
+        function submitMovie() {
+            event.preventDefault(); // 폼의 기본 동작 방지
 
-            const inputMovie = document.getElementById('inputTitle').value;
-            const inputTheater = document.getElementById('inputDirector').value;
-            const inputShowDate = document.getElementById('inputPlot').value;
-            const inputShowTime = document.getElementById('inputShowTime').value;
+            const title = document.getElementById('inputTitle').value;
+            const plot = document.getElementById('inputPlot').value;
+            const selectImages = document.getElementById('inputPoster').files;
+            const genres = Array.from(document.getElementById('inputGenre').selectedOptions)
+                .map(option => option.value)
+                .join(' | '); // 선택된 장르 배열
 
-            // 값이 비어있으면 경고 메시지 표시
-            if (!inputMovie || !inputTheater || !inputShowDate || !inputShowTime) {
-                alert('모든 필드를 채워 주세요.');
+            let multipartFiles = new FormData();
+
+            if (selectImages.length > 0) {
+                for (let i = 0; i < selectImages.length; i++) {
+                    multipartFiles.append('multipartFiles', selectImages[i]);
+                }
+            } else {
+                console.log("선택된 이미지가 없습니다.");
                 return;
             }
 
-            // JSON 객체로 변환
-            const formData = JSON.stringify({
-                'inputTitle': inputTitle,
-                'inputTheater': inputTheater,
-                'inputShowDate': inputShowDate,
-                'inputShowTime': inputShowTime
-            });
-            alert(formData);
-            console.log(formData)
+            axios.post('/api/movie/register', {
+                title: title,
+                plot: plot,
+                genre: genres
+            }).then(res => {
+                if (res.status === 200) {
+                    const movieId = res.data;
 
-            // Axios POST 요청
-            try {
-                const response = await axios.post('/api/movie/register', formData, {
-                    headers: {
-                        'Content-Type': 'application/json'  // JSON 전송을 명시
-                    }
-                });
-
-                if (response.status === 200) {
-                    console.log("영화 정보 저장 성공: ", response);
-                    alert("영화 정보 저장 성공!");
-                    window.location.href="/api/admin/movie"
+                    // 이미지 업로드
+                    axios.post(`/api/images/upload/${movieId}`, multipartFiles, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }).then(res => {
+                        if (res.status === 200) {
+                            alert("영화와 이미지가 성공적으로 등록되었습니다.");
+                            window.location.href = "/api/admin/movie";
+                        } else {
+                            alert("이미지 저장 실패!");
+                        }
+                    }).catch(err => {
+                        console.log("이미지 저장 실패: ", err);
+                    });
                 }
-            } catch (error) {
-                console.log("영화 정보 저장 실패: ", error);
-            }
-        });
+            }).catch(err => {
+                console.log("영화 정보 저장 실패: ", err);
+            });
+        }
     </script>
-
 </body>
 
 </html>
