@@ -519,7 +519,7 @@
             // 하트 아이콘 클릭 이벤트
             $('.wishlist-heart').on('click', function() {
                 var $icon = $(this).find('i');
-                var movieId = $(this).data('movie-id');
+                var movieId = [[${movie.id}]]
                 var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
 
                 // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
@@ -531,9 +531,13 @@
 
                 // AJAX 요청을 통해 위시리스트에 추가/삭제
                 $.ajax({
-                    url: '/wishlist/toggle',  // 위시리스트 컨트롤러의 엔드포인트
+                    url: '/api/wish/toggle',
                     method: 'POST',
-                    data: { movieId: movieId },
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        movieId: movieId,
+                        userId: 1
+                    }),
                     success: function(response) {
                         console.log('위시리스트 업데이트 성공', response);
                     },

@@ -44,8 +44,7 @@ public class WishQueryDSLImpl implements WishQueryDSL {
     public boolean existsByUserIdAndMovieId(Long userId, Long movieId) {
         WishEntity result = jpaQueryFactory.selectFrom(qWish)
                 .where(qWish.userId.eq(userId)
-                        .and(qWish.movieId.eq(movieId))
-                )
+                        .and(qWish.movieId.eq(movieId)))
                 .fetchOne();
 
         return result != null;
