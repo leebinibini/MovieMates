@@ -23,7 +23,6 @@ public class MovieController {
     private final ScheduleService scheduleService;
     private final ReviewService reviewService;
     private final WishService wishService;
-    private final WishModel wishModel;
 
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
