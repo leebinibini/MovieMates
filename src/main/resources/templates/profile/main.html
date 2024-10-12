@@ -1394,7 +1394,9 @@
                                     </td>
                                     <td class="py-3 price" th:text="${history.seat}">seat</td>
                                     <td class="py-3 text-right">
-                                        <span class="tag px-4 py-1.5 rounded-full bg-opacity-10 bg-yellow text-yellow caption1 font-semibold">Pending</span>
+                                        <a th:href="@{/api/review/register}">
+                                            <span class="tag px-4 py-1.5 rounded-full bg-opacity-10 bg-yellow text-yellow caption1 font-semibold">review 쓰러가기</span>
+                                        </a>
                                     </td>
                                 </tr>
                                 </tbody>

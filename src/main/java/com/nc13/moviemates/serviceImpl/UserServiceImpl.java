@@ -1,6 +1,7 @@
 package com.nc13.moviemates.serviceImpl;
 
 import com.nc13.moviemates.component.model.UserModel;
+import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.repository.UserRepository;
 import com.nc13.moviemates.service.UserService;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
+
 
     @Override
     public boolean authenticate(String email, String password) {
