@@ -149,30 +149,6 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public boolean updateLikeStatus(Long movieId, Boolean liked) {
-        Long userId = 1L;  // 여기서는 예시로 사용자 ID를 하드코딩했지만, 실제로는 인증된 사용자의 ID를 가져와야 합니다.
-
-        // 현재 사용자가 해당 영화를 좋아요 했는지 확인
-        Optional<WishEntity> existingWish = wishRepository.findByUserIdAndMovieId(userId, movieId);
-
-        if (liked) {
-            // 좋아요 요청이 들어오고, 아직 좋아요를 하지 않았다면 저장
-            if (!existingWish.isPresent()) {
-                wishRepository.save(WishEntity.builder()
-                        .userId(userId)
-                        .movieId(movieId)
-                        .build());
-            }
-        } else {
-            // 좋아요 취소 요청이 들어오고, 이미 좋아요가 되어 있으면 삭제
-            existingWish.ifPresent(wishRepository::delete);
-        }
-
-        // 현재 좋아요 상태를 반환
-        return wishRepository.existsByUserIdAndMovieId(userId, movieId);
-    }
-
-    @Override
     public MovieEntity findEntityById(Long id) {
         return repository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Movie not Found with id: " +id));
