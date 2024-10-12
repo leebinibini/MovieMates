@@ -2,6 +2,7 @@ package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.repository.UserRepository;
 import com.nc13.moviemates.service.UserService;
+import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.serviceImpl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

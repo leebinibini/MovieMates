@@ -3,7 +3,9 @@ package com.nc13.moviemates.serviceImpl;
 import com.nc13.moviemates.component.proxy.MovieSelenium;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.repository.MovieRepository;
+import com.nc13.moviemates.repository.WishRepository;
 import com.nc13.moviemates.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
@@ -32,6 +34,7 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository repository;
     private final MovieSelenium movieSelenium;
+    private final WishRepository wishRepository;
 
     @Override
     public List<MovieEntity> findAll() {
@@ -47,7 +50,9 @@ public class MovieServiceImpl implements MovieService {
     public Long save(MovieModel movie) {
         MovieEntity ent = MovieEntity.builder()
                 .title(movie.getTitle())
+                .WidthPosterUrl(movie.getWidthPosterUrl())
                 .lengthPosterUrl(movie.getPosterUrl())
+                .posterUrl(movie.getPosterUrl())
                 .genre(movie.getGenre())
                 .director(movie.getDirector())
                 .plot(movie.getPlot())
@@ -99,8 +104,21 @@ public class MovieServiceImpl implements MovieService {
     }*/
 
     @Override
-    public Optional<MovieEntity> findById(Long id) {
-        return repository.findById(id);
+    public Optional<MovieModel> findById(Long id) {
+        Optional<MovieEntity> ent = repository.findById(id);
+
+        // Optional의 값이 존재하면 MovieModel로 변환하고, 그렇지 않으면 빈 Optional을 반환
+        return ent.map(movieEntity -> MovieModel.builder()
+                .id(movieEntity.getId())
+                .genre(movieEntity.getGenre())
+                .title(movieEntity.getTitle())
+                .director(movieEntity.getDirector())
+                .rate(movieEntity.getRate())
+                .runningTime(movieEntity.getRunningTime())
+                .posterUrl(movieEntity.getPosterUrl())
+                .lengthPosterUrl(movieEntity.getLengthPosterUrl())
+                .widthPosterUrl(movieEntity.getWidthPosterUrl())
+                .build());
     }
 
     @Override

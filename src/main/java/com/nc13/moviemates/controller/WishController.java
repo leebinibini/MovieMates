@@ -1,5 +1,6 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.component.model.WishModel;
 import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.service.WishService;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,11 @@ public class WishController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping()
-    public ResponseEntity<Boolean> insert(@RequestBody WishEntity wishList) {
-        return ResponseEntity.ok(service.save(wishList));
+    @ResponseBody
+    @PostMapping("/register")
+    public ResponseEntity<Boolean> insert(@RequestBody WishModel wish) {
+        // 변환된 WishEntity를 저장
+        return ResponseEntity.ok(service.save(wish));
     }
 
     @DeleteMapping("/{id}")
@@ -45,5 +48,16 @@ public class WishController {
     @GetMapping("/existsById/{id}")
     public ResponseEntity<Boolean> existsById(@PathVariable Long id) {
         return ResponseEntity.ok(service.existsById(id));
+    }
+
+    @PostMapping("/toggle")
+    public ResponseEntity<Boolean> toggleWish(@RequestBody WishModel wish) {
+        boolean isWishlisted = service.existsByMovieIdandUserId(wish.getMovieId(), wish.getUserId());
+        if (isWishlisted) {
+            service.delete(wish); // 위시리스트에서 삭제
+        } else {
+            service.save(wish); // WishEntity를 저장// 위시리스트에 추가
+        }
+        return ResponseEntity.ok(!isWishlisted); // 토글 후 상태 반환
     }
 }

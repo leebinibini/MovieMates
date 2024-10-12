@@ -21,7 +21,7 @@ public interface MovieService {
 
     List<String> getNowPlayingList();
 
-    Optional<MovieEntity> findById(Long id);
+    Optional<MovieModel> findById(Long id);
 
     Boolean existsById(Long id);
 

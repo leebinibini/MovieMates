@@ -40,7 +40,7 @@
                         <div class="header_ticket">
                             <a href="#order" class="order_btn">Order</a>
                             <span>3</span>
-                        </div>21</div>
+                        </div>
 
                         <a href="javascript:;" id="header-search"></a>
                         <div class="button_container" id="toggle">
@@ -53,7 +53,7 @@
                             <nav class="overlay-menu">
                                 <ul>
                                     <li><a th:href="@{/}">Home</a></li>
-                                    <li><a th:href="@{/api/movie/single}">Single</a></li>
+                                    <li><a th:href="@{/single}">Single</a></li>
                                     <li><a href="#order" class="order_btn">Order</a></li>
                                 </ul>
                             </nav>
@@ -70,7 +70,6 @@
                     <li data-target="#headerslider" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner" role="listbox" >
-
                     <div class="item active" th:each="movie: ${movies}" >
                         <div class="fill"  th:data-bg-image="${movie.widthPosterUrl}">
                             <div class="bs-slider-overlay"></div>
@@ -85,11 +84,6 @@
                                             <div th:text="${movie.title}" class="title" data-animation="animated bounceInRight"><i>(2017)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
                                                 <a href="javascript:;" class="btn-trailer">watch trailer</a>
-
-                                                <div class="header_ticket">
-                                                    <a >Movie</a>
-                                                    <span>3</span>
-                                                </div>
                                                 <a
                                                     href="#order" class="btn-ticket order_btn" th:data-id="${movie.id}">buy ticket</a>
                                                 <ul class="award-logo">
@@ -132,7 +126,7 @@
                                             <div class="title" data-animation="animated bounceInRight" th:text="${movie.title}"> <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
                                                 <a href="javascript:;" class="btn-trailer">watch trailer</a> <a
-                                                    href="#order" class="btn-ticket order_btn" th:data-id="${movie.id}">buy ticket</a>
+                                                    href="#order" class="btn-ticket">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -174,7 +168,7 @@
                                               <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
                                                 <a href="javascript:;" class="btn-trailers video-player" >watch trailer</a>
-                                                <a href="#order" class="btn-ticket order_btn" th:data-id="${movie.id}">buy ticket</a>
+                                                <a href="#order" class="btn-ticket order_btn">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -223,7 +217,8 @@
                                         <div class="movie-image" th:data-bg-image="${movieInfo.lengthPosterUrl}">
                                             <div class="entry-hover">
                                                 <div class="entry-actions">
-                                                    <a th:href="@{/api/movie/single/{movieId}(movieId=${movieInfo.id})}">more</a>
+                                                    <a href="https://vimeo.com/28177848"
+                                                        class="btn-trailers video-player" >watch trailer</a>
                                                     <a href="#order" class="btn-ticket order_btn" th:data-id="${movieInfo.id}" >buy ticket</a>
                                                 </div>
                                             </div>
@@ -542,13 +537,10 @@
     </div>
     <!-- Overlay Search -->
     <div id="overlay-search">
-        <form method="get" action="./">
-            <label>
-                <input type="text" name="s" placeholder="Search..." autocomplete="off">
+            <input type="text" name="s" placeholder="Search..." autocomplete="off">
             <button type="submit">
                 <i class="fa fa-search"></i>
             </button>
-            </label>
         </form>
         <a href="javascript:;" class="close-window"></a>
     </div>
@@ -558,8 +550,8 @@
                 <div class="col-sm-8 col-xs-12 seat_content ph0">
                     <h2>order a ticket</h2>
                     <div class="entry-order-content">
-                        <div class="btn-ticket">
                         <form id="msform" name="msform">
+                            <!-- fieldsets -->
                             <fieldset>
                                 <div class="wpc-content">
                                     <h3>location</h3>
@@ -571,12 +563,18 @@
                                     </select>
 
                                     <h3 class="mt3">Movie</h3>
-                                    <input id="movie-selection" value="" readonly/>
+                                    <input id="movie-selection" value="deadpool" readonly/>
+
                                     <h3 class="mt3">Date</h3>
                                     <input type='date' class="datetime"/>
                                     <h3 class="mt3">TIME</h3>
                                     <ul class="order-date">
-                                        <li><a href="javascript:;" data-time="" data-schedule-id="1" ><i></i></a></li>
+                                        <li><a href="javascript:;" data-time="11:50"><i>11:50</i></a></li>
+                                        <li><a href="javascript:;" data-time="13:40"><i>13:40</i></a></li>
+                                        <li><a href="javascript:;" data-time="16:35"><i>16:35</i></a></li>
+                                        <li><a href="javascript:;" data-time="17:30"><i>17:30</i></a></li>
+                                        <li><a href="javascript:;" data-time="19:50"><i>19:50</i></a></li>
+                                        <li><a href="javascript:;" data-time="21:10"><i>21:10</i></a></li>
                                     </ul>
 
                                 </div>
@@ -592,7 +590,6 @@
                                 <input type="submit" name="submit" class="submit action-button" value="Submit" />
                             </fieldset>
                         </form>
-                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-12 order_sidebar ph0">
@@ -619,14 +616,5 @@
     <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
     <script type="text/javascript" th:src="@{js/scripts.js}"></script>
     <script type="text/javascript" th:src="@{js/movie.api.js}"></script>
-
-    <script type="text/javascript" th:src="@{js/order.js}" ></script>
-<script type="module">
-    import MovieApi from "/js/movie/movie.api.js";
-    import movieAPI from "../static/js/movie/movie.api";
-
-    movieAPI.getMovieList()
-</script>
-
 </body>
 </html>

@@ -122,7 +122,7 @@
 </style>
     <head>
         <meta charset="utf-8" />
-        <title>Starter Page | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
+        <title>Admin Page - Review</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
         <meta content="Techzaa" name="author" />
@@ -993,12 +993,12 @@
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">MovieMates</a></li>
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
-                                            <li class="breadcrumb-item active">Starter</li>
+                                            <li class="breadcrumb-item active">Review</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Starter</h4>
+                                    <h4 class="page-title">Review List</h4>
                                 </div>
                             </div>
                         </div>
@@ -1007,27 +1007,11 @@
                     </div> <!-- container -->
 
                 </div> <!-- content -->
-                <div class="col-xl-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Simple Pie Chart</h4>
-                            <div dir="ltr">
-                                <div id="simple-pie" class="apex-charts" data-colors="#3bc0c3,#6c757d,#4489e4,#d03f3f,#edc755"></div>
-                            </div>
-                        </div>
-                        <!-- end card body-->
-                    </div>
-                    <!-- end card -->
-                </div>
-                <!-- end col-->
 
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col text-start">
-                                    <button type="button" class="btn btn-outline-primary" id="register-btn" th:onclick="|location.href='@{/api/movie/register}'|">Register Movie</button>
-                                </div>
                                 <div class="col text-end">
                                     <button class="btn btn-outline-success" id="save-btn">Save Changes</button>
                                     <button class="btn btn-outline-danger" id="delete-btn">Delete Selected</button>
@@ -1272,81 +1256,64 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // 1. jspreadsheet 초기화
-                axios.get('/api/movie/list')
+                axios.get('/api/review/list')
                     .then(function (res) {
-                        const movies = res.data;
+                        const reviews = res.data;
 
-                        const movieData = movies.map(movie => [
-                            movie.id,
-                            movie.title,
-                            movie.posterUrl,
-                            movie.genre || '',
-                            movie.director || '',
-                            movie.plot || '',
-                            movie.runningTime || 0,
-                            movie.rate || 0,
+                        const reviewData = reviews.map(review => [
+                            review.id,
+                            review.movieId,
+                            review.writerId,
+                            review.content,
+                            review.rating,
+                            review.date
                         ]);
 
                         const table = jspreadsheet(document.getElementById('responseText'), {
-                            data: movieData,
-
-
+                            data: reviewData,
                             columns: [
                                 {type: 'text', title: 'ID', width: 50},
-                                {type: 'text', title: 'Title', width: 150},
-                                {
-                                    type: 'image',
-                                    title: 'Poster',
-                                    width: 100,
-                                    render: function (cell, value) {
-                                        // URL이 유효하고 이미지를 표시하고 싶은 경우
-                                        if (value) {
-                                            cell.innerHTML = `<img src="${value}" alt="Poster" style="width:100px;height:auto;">`;
-                                        } else {
-                                            cell.innerHTML = '이미지 없음';
-                                        }
-                                    }
-                                },
-                                {type: 'text', title: 'Genre', width: 100},
-                                {type: 'text', title: 'Director', width: 150},
-                                {type: 'text', title: 'Plot', width: 200},
-                                {type: 'text', title: 'Running Time', width: 100},
-                                {type: 'text', title: 'Rate', width: 50},
+                                {type: 'text', title: 'MovieId', width: 150},
+                                {type: 'text', title: 'WriterId', width: 100},
+                                {type: 'text', title: 'Content', width: 150},
+                                {type: 'text', title: 'Rating', width: 200},
+                                {type: 'text', title: 'Date', width: 100},
                                 {type: 'checkbox', title: 'Delete', width: 100}
                             ],
                             search: true,
                             pagination: 10,
                             freezeColumns: 1,
-                            minDimensions: [9, 10],
+                            minDimensions: [7, 10],
                             tableOverflow: true,
                             tableHeight: '500px',
                             tableWidth: '100%',
 
                             onload: function () {
-
                                 const saveBtn = document.getElementById('save-btn');
                                 const deleteBtn = document.getElementById('delete-btn');
 
                                 saveBtn.addEventListener('click', function () {
                                     const data = table.getData();
-                                    alert(data);
+                                    alert(JSON.stringify(data)); // 데이터를 확인하기 위해 alert으로 출력
+                                    console.log(data); // 콘솔에 데이터 출력
 
-                                    const movieData = data.map(row => {
-                                        return {
-                                            id: row[0],
-                                            title: row[1],
-                                            posterUrl: row[2],
-                                            genre: row[3],
-                                            director: row[4],
-                                            plot: row[5],
-                                            runningTime: row[6],
-                                            rate: row[7],
-                                            delete: row[8]
-                                        };
+                                    const reviewData = data
+                                        .filter(row => row.slice(0, 5).some(cell => cell !== ""))
+                                        .map(row => {
+                                            return {
+                                                id: row[0],
+                                                movieId: row[1],
+                                                writerId: row[2],
+                                                content: row[3],
+                                                rating: row[4],
+                                                date: row[5],
+                                                delete: row[6]
+                                            };
+                                        });
+                                    alert(JSON.stringify(reviewData));
+                                    console.log(reviewData);
 
-                                    });
-
-                                    axios.post('/api/movie/updateMany', movieData)
+                                    axios.post('/api/review/updateMany', reviewData)
                                         .then(res => console.log(res))
                                         .catch(err => console.log("Error: " + err));
                                 });
@@ -1356,27 +1323,27 @@
                                     const data = table.getData();
 
                                     data.forEach((row, index) => {
-                                        const isChecked = table.getValueFromCoords(8, index);
-                                        const movieId = table.getValueFromCoords(0, index);
+                                        const isChecked = table.getValueFromCoords(6, index);
+                                        const reviewId = table.getValueFromCoords(0, index);
 
                                         if (isChecked === true) {
-                                            checkedRows.push(movieId);
+                                            checkedRows.push(reviewId);
                                         }
                                     });
 
                                     if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
-                                        axios.post(`/api/movie/deleteMany`, checkedRows)
+                                        axios.post(`/api/review/deleteMany`, checkedRows)
                                             .then(res => {
                                                 if (res.data !== 0) {
-                                                    alert('영화 정보 삭제 성공!');
+                                                    alert('상영 정보 삭제 성공!');
                                                     location.reload();
                                                 } else {
-                                                    alert('영화 정보 삭제 실패!');
+                                                    alert('상영 정보 삭제 실패!');
                                                 }
                                             })
                                             .catch(err => console.log(err));
                                     } else {
-                                        alert('삭제할 영화를 선택해주세요.');
+                                        alert('삭제할 상영정보를 선택해주세요.');
                                     }
                                 });
                             }

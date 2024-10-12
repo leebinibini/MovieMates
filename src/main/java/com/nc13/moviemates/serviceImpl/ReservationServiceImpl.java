@@ -23,7 +23,7 @@ public class ReservationServiceImpl implements ReservationService {
     private final ReservationRepository repository;
 
     @Override
-    public List<?> findAll() {
+    public List<ReservationEntity> findAll() {
         return repository.findAll();
     }
 
@@ -33,8 +33,17 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Boolean save(ReservationEntity reservation) {
-        ReservationEntity ent = repository.save(reservation);
+    public Boolean save(ReservationModel reservation) {
+        ReservationEntity ent = ReservationEntity.builder()
+                .scheduleId(reservation.getScheduleId())
+                .paymentId(reservation.getPaymentId())
+                .reservationDate(reservation.getReservationDate())
+                .seatNumber(reservation.getSeatNumber())
+                .ticketPrice(reservation.getTicketPrice())
+                .userId(reservation.getUserId())
+                .build();
+        repository.save(ent);
+
         Long id = ent.getId();
         return existsById(id);
     }
@@ -59,6 +68,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Boolean update(List<ReservationModel> reservationList) {
         reservationList.forEach(reservation -> {
+            System.out.println("예매서비스 진입 성공!");
             LocalDateTime reservationDateTime;
 
             // 만약 reservationDate가 LocalDate 또는 String 형태로 온다면 이를 LocalDateTime으로 변환
