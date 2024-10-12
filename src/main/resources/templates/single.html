@@ -12,8 +12,60 @@
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/packages.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/default.css}">
+
+
+    <style>
+        /* 하트 아이콘 크기 조정 */
+        .wishlist-icon .wishlist-heart i {
+            font-size: 24px; /* 하트 아이콘 크기를 24px로 설정 */
+            color: #ccc; /* 비어있는 하트의 색상 (회색) */
+            transition: color 0.3s ease; /* 색상이 부드럽게 변하도록 애니메이션 추가 */
+        }
+
+        .wishlist-icon .wishlist-heart i.fa-solid {
+            color: #ff4d4d; /* 채워진 하트의 색상 (빨간색) */
+        }
+
+        .wishlist-icon .wishlist-heart:hover i {
+            color: #ff4d4d; /* 마우스를 올리면 하트가 빨간색으로 변함 */
+        }
+
+        /* 네모난 버튼 스타일 */
+        .heart-button {
+            background-color: transparent; /* 버튼 배경을 투명하게 설정 */
+            border: 2px solid #ccc; /* 테두리 색상과 두께 */
+            border-radius: 5px; /* 네모난 모양을 위한 작은 모서리 반경 설정 */
+            padding: 10px 15px; /* 버튼의 크기 조정 */
+            cursor: pointer; /* 클릭 가능한 커서로 변경 */
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* 하트가 채워졌을 때 버튼 테두리와 배경 색상 */
+        .heart-button .fa-solid {
+            color: #ff4d4d; /* 채워진 하트의 색상 */
+        }
+
+        .heart-button:hover {
+            border-color: #ff4d4d; /* 마우스를 올리면 테두리 색상 빨간색으로 변경 */
+            background-color: rgba(255, 77, 77, 0.1); /* 마우스를 올렸을 때 배경색 */
+        }
+
+        .heart-button i {
+            font-size: 24px; /* 하트 아이콘 크기 설정 */
+            transition: color 0.3s ease; /* 색상이 부드럽게 변하도록 애니메이션 */
+        }
+
+        .heart-button .fa-regular {
+            color: #ccc; /* 비어있는 하트의 색상 */
+        }
+
+        .heart-button:hover .fa-regular {
+            color: #ff4d4d; /* 마우스를 올리면 비어있는 하트도 빨간색으로 변경 */
+        }
+    </style>
 </head>
 <body class="sticky-menu">
     <div id="loader">
@@ -72,8 +124,15 @@
                         <div class="post-content bg-cover" th:data-bg-image="${movie.widthPosterUrl}" >
                             <div class="content-meta">
                                 <h2 class="entry-title" th:text="${movie != null ? movie.title : '영화 정보를 찾을 수 없습니다'}">
-                                <span>Synopsis</span>
                                 </h2>
+                                <!-- 위시리스트 하트 아이콘 -->
+                                <span class="wishlist-icon">
+    <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
+        <button class="heart-button">
+            <i class="fa-heart" th:classappend="${isWishlisted != null and isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+        </button>
+    </a>
+</span>
                                 <div class="social-links">
                                     <a href="javascript:;"><i class="fa fa-facebook"></i></a>
                                     <a href="javascript:;"><i class="fa fa-twitter"></i></a>
@@ -455,5 +514,35 @@
     <script type="text/javascript" th:src="@{/js/packages.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/scripts.min.js}"></script>
 <!-- jQuery easing plugin -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // 하트 아이콘 클릭 이벤트
+            $('.wishlist-heart').on('click', function() {
+                var $icon = $(this).find('i');
+                var movieId = $(this).data('movie-id');
+                var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
+
+                // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
+                if (isWishlisted) {
+                    $icon.removeClass('fa-solid').addClass('fa-regular');  // 비어있는 하트로 변경
+                } else {
+                    $icon.removeClass('fa-regular').addClass('fa-solid');  // 채워진 하트로 변경
+                }
+
+                // AJAX 요청을 통해 위시리스트에 추가/삭제
+                $.ajax({
+                    url: '/wishlist/toggle',  // 위시리스트 컨트롤러의 엔드포인트
+                    method: 'POST',
+                    data: { movieId: movieId },
+                    success: function(response) {
+                        console.log('위시리스트 업데이트 성공', response);
+                    },
+                    error: function(error) {
+                        console.error('위시리스트 업데이트 실패', error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
