@@ -5,6 +5,7 @@ import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.repository.UserRepository;
 import com.nc13.moviemates.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,10 +47,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean existsByPassword(String password) {
+        return repository.existsByPassword(password);
+    }
+
+    @Override
     public Boolean save(UserEntity user) {
         UserEntity ent = repository.save(user);
         Long id = ent.getId();
         return existsById(id);
+    }
+
+    @Override
+    public Boolean insert(UserEntity user){
+
+        UserEntity ent = repository.save(user);
+        System.out.println("서비스 진입, ent: " + ent);
+        Long id = ent.getId();
+        return repository.existsById(id);
     }
 
     @Override
