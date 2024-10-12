@@ -126,7 +126,7 @@
                                             <div class="title" data-animation="animated bounceInRight" th:text="${movie.title}"> <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
                                                 <a href="javascript:;" class="btn-trailer">watch trailer</a> <a
-                                                    href="#order" class="btn-ticket">buy ticket</a>
+                                                    href="#order" class="btn-ticket order_btn" th:data-id="${movie.id}">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -168,7 +168,7 @@
                                               <i>(1967)</i></div>
                                             <div class="slide_right" data-animation="animated bounceInRight">
                                                 <a href="javascript:;" class="btn-trailers video-player" >watch trailer</a>
-                                                <a href="#order" class="btn-ticket order_btn">buy ticket</a>
+                                                <a href="#order" class="btn-ticket order_btn" th:data-id="${movie.id}">buy ticket</a>
                                                 <ul class="award-logo">
                                                     <li><img th:src="@{images/header/icon1.png}" alt="icon"></li>
                                                     <li><img th:src="@{images/header/icon2.png}" alt="icon"></li>
@@ -537,10 +537,13 @@
     </div>
     <!-- Overlay Search -->
     <div id="overlay-search">
-            <input type="text" name="s" placeholder="Search..." autocomplete="off">
+        <form method="get" action="./">
+            <label>
+                <input type="text" name="s" placeholder="Search..." autocomplete="off">
             <button type="submit">
                 <i class="fa fa-search"></i>
             </button>
+            </label>
         </form>
         <a href="javascript:;" class="close-window"></a>
     </div>
@@ -550,8 +553,8 @@
                 <div class="col-sm-8 col-xs-12 seat_content ph0">
                     <h2>order a ticket</h2>
                     <div class="entry-order-content">
+                        <div class="btn-ticket">
                         <form id="msform" name="msform">
-                            <!-- fieldsets -->
                             <fieldset>
                                 <div class="wpc-content">
                                     <h3>location</h3>
@@ -563,18 +566,12 @@
                                     </select>
 
                                     <h3 class="mt3">Movie</h3>
-                                    <input id="movie-selection" value="deadpool" readonly/>
-
+                                    <input id="movie-selection" value="dd" readonly/>
                                     <h3 class="mt3">Date</h3>
                                     <input type='date' class="datetime"/>
                                     <h3 class="mt3">TIME</h3>
                                     <ul class="order-date">
-                                        <li><a href="javascript:;" data-time="11:50"><i>11:50</i></a></li>
-                                        <li><a href="javascript:;" data-time="13:40"><i>13:40</i></a></li>
-                                        <li><a href="javascript:;" data-time="16:35"><i>16:35</i></a></li>
-                                        <li><a href="javascript:;" data-time="17:30"><i>17:30</i></a></li>
-                                        <li><a href="javascript:;" data-time="19:50"><i>19:50</i></a></li>
-                                        <li><a href="javascript:;" data-time="21:10"><i>21:10</i></a></li>
+                                        <li><a href="javascript:;" data-time="16:00" data-schedule-id="1" ><i></i></a></li>
                                     </ul>
 
                                 </div>
@@ -590,6 +587,7 @@
                                 <input type="submit" name="submit" class="submit action-button" value="Submit" />
                             </fieldset>
                         </form>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-12 order_sidebar ph0">
@@ -615,6 +613,13 @@
     <script type="text/javascript" th:src="@{js/packages.min.js}"></script>
     <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
     <script type="text/javascript" th:src="@{js/scripts.js}"></script>
-    <script type="text/javascript" th:src="@{js/movie.api.js}"></script>
+    <script type="text/javascript" th:src="@{js/order.js}" ></script>
+<script type="module">
+    import MovieApi from "/js/movie/movie.api.js";
+    import movieAPI from "../static/js/movie/movie.api";
+
+    movieAPI.getMovieList()
+</script>
+
 </body>
 </html>

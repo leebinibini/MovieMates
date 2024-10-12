@@ -1,6 +1,7 @@
 package com.nc13.moviemates.service;
 
 import com.nc13.moviemates.component.model.ReviewModel;
+import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +24,6 @@ public interface ReviewService {
 
 
     Long deleteMany(List<Long> reviewIdList);
+
+    List<MovieEntity> getWatchedMoviesByUserId(Long userId);
 }

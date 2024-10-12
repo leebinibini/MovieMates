@@ -4,6 +4,8 @@ import com.nc13.moviemates.component.model.UserModel;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -17,9 +19,12 @@ public class UserEntity {
     private String email;
     private String password;
     private String nickname;
-    private UserModel.Role role;
+    private Role role;
+    private int tel;
+    private String gender;
+
 
     public enum Role {
-        AUDIENCE, ADMIN
+        ADMIN, USER
     }
 }

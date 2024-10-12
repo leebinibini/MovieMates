@@ -2,6 +2,7 @@ package com.nc13.moviemates.queryDslImpl;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.component.model.ReviewModel;
+import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.QMovieEntity;
 import com.nc13.moviemates.entity.QReviewEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
@@ -20,6 +21,7 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
     private final EntityManager entityManager;
     private final JPAQueryFactory jpaQueryFactory;
     private final QReviewEntity qReview = QReviewEntity.reviewEntity;
+
     @Override
     public List<ReviewEntity> getAll() {
         return jpaQueryFactory.selectFrom(qReview).fetch();
@@ -36,6 +38,11 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
     }
 
     @Override
+    public List<MovieEntity> findWatchedMoviesByUserId(Long userId) {
+        return List.of();
+    }
+
+    @Override
     public Boolean exists(Long id) {
         return jpaQueryFactory.selectFrom(qReview).where(qReview.id.eq(id)).fetchCount()>0;
     }
@@ -49,5 +56,6 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
 
         return deletedCount; // 삭제된 행의 수 반환
     }
+
 
 }

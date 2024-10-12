@@ -539,6 +539,8 @@ input[type=file]::-webkit-file-upload-button {
     color: var(--white);
 }
 
+
+
 @media (max-width: 1023.99px) {
     .text-sub-display {
         font-size: 16px;
