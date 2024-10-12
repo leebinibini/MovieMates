@@ -14,6 +14,7 @@ public interface UserService {
 
     Optional<UserEntity> findById(Long id);
 
+    Boolean existsByPassword(String password);
 
     Boolean save(UserEntity user);
 
@@ -22,6 +23,8 @@ public interface UserService {
     Long count();
 
     Boolean existsById(Long id);
+
+    Boolean insert(UserEntity user);
 
     boolean authenticate(String email, String password);
 

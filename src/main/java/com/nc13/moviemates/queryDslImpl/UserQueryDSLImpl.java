@@ -44,6 +44,25 @@ public class UserQueryDSLImpl implements UserQueryDSL {
     }
 
     @Override
+    public Boolean existsByPassword(String password) {
+        return jpaQueryFactory.selectFrom(qUser)
+                .where(qUser.password.eq(password))
+                .fetchFirst() != null;
+    }
+
+    @Override
+    public void insert(UserEntity user){
+
+        QUserEntity qUser = QUserEntity.userEntity;
+        jpaQueryFactory
+                .insert(qUser)
+                .columns(qUser.email, qUser.password, qUser.nickname, qUser.tel, qUser.gender)
+                .values(user.getEmail(), user.getPassword(), user.getNickname(), user.getTel(), user.getGender())
+                .execute();
+    }
+
+
+    @Override
     @Transactional
     public void update(UserModel user) {
         QUserEntity qUser = QUserEntity.userEntity;
@@ -54,8 +73,6 @@ public class UserQueryDSLImpl implements UserQueryDSL {
                 .set(qUser.email, user.getEmail())
                 .set(qUser.password, user.getPassword())
                 .set(qUser.nickname, user.getNickname())
-                .set(qUser.fName, user.getFName())
-                .set(qUser.lName, user.getLName())
                 .set(qUser.gender, user.getGender())
                 .set(qUser.tel, user.getTel())
                 .execute();
@@ -69,5 +86,7 @@ public class UserQueryDSLImpl implements UserQueryDSL {
     @Override
     public Boolean exitsByEmail(String email){
         return jpaQueryFactory.selectFrom(qUser).where(qUser.email.eq(email)).fetchCount()>0;}
+
+
 
 }

@@ -83,10 +83,15 @@ public class UserController {
         return ResponseEntity.ok(service.findById(id));
     }
 
+    @GetMapping("/register")
+    public String showRegisterPage() {
+        return "register"; // register.html을 반환
+    }
+    @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user) {
-
-        return ResponseEntity.ok(service.save(user));
+        System.out.println(user);
+        return ResponseEntity.ok(service.insert(user));
     }
 
     @GetMapping("/profile/setting/{id}")
@@ -105,8 +110,12 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/update")
-    public ResponseEntity<Boolean> update(@RequestBody UserModel userData) {
+    public ResponseEntity<Boolean> update(@RequestPart("userData") UserModel userData, @RequestPart("password") String password) {
         System.out.println("넘어온 값" + userData);
+        System.out.println("넘어온 값" + password);
+        if(!service.existsByPassword(password)){
+            return ResponseEntity.ok(false);
+        }
         return ResponseEntity.ok(service.update(userData));
     }
 
