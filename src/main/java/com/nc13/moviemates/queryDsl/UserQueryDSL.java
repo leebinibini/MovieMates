@@ -11,6 +11,9 @@ public interface UserQueryDSL {
     UserEntity getById(Long id);
     Boolean exists(Long id);
     Long getRowCount();
-
+    Boolean existsByPassword(String password);
+    void insert (UserEntity user);
     void update(UserModel user);
+
+    Boolean exitsByEmail(String email);
 }

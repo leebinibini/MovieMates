@@ -8,6 +8,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -43,6 +44,26 @@ public class UserQueryDSLImpl implements UserQueryDSL {
     }
 
     @Override
+    public Boolean existsByPassword(String password) {
+        return jpaQueryFactory.selectFrom(qUser)
+                .where(qUser.password.eq(password))
+                .fetchFirst() != null;
+    }
+
+    @Override
+    public void insert(UserEntity user){
+
+        QUserEntity qUser = QUserEntity.userEntity;
+        jpaQueryFactory
+                .insert(qUser)
+                .columns(qUser.email, qUser.password, qUser.nickname, qUser.tel, qUser.gender)
+                .values(user.getEmail(), user.getPassword(), user.getNickname(), user.getTel(), user.getGender())
+                .execute();
+    }
+
+
+    @Override
+    @Transactional
     public void update(UserModel user) {
         QUserEntity qUser = QUserEntity.userEntity;
 
@@ -52,7 +73,8 @@ public class UserQueryDSLImpl implements UserQueryDSL {
                 .set(qUser.email, user.getEmail())
                 .set(qUser.password, user.getPassword())
                 .set(qUser.nickname, user.getNickname())
-                .set(qUser.role, user.getRole())
+                .set(qUser.gender, user.getGender())
+                .set(qUser.tel, user.getTel())
                 .execute();
     }
 
@@ -60,4 +82,11 @@ public class UserQueryDSLImpl implements UserQueryDSL {
     public Boolean exists(Long id) {
         return jpaQueryFactory.selectFrom(qUser).where(qUser.id.eq(id)).fetchCount()>0;
     }
+
+    @Override
+    public Boolean exitsByEmail(String email){
+        return jpaQueryFactory.selectFrom(qUser).where(qUser.email.eq(email)).fetchCount()>0;}
+
+
+
 }

@@ -39,13 +39,21 @@ public class UserController {
         return "profile/main";
     }
 
-    @GetMapping("/profile/setting")
-    public String setting(){return "/profile/setting";}
+
 
     @GetMapping("/login")
     public String login() {
         return "admin/auth-login";
     }
+
+    /*@GetMapping("/")
+    public String loginSuccess(@AuthenticationPrincipal OAuth2User principal, Model model) {
+        model.addAttribute("name", principal.getAttribute("name"));
+        model.addAttribute("email", principal.getAttribute("email"));
+        return "admin/login"; // loginSuccess.html 뷰를 반환
+    }*/
+
+
 
     @GetMapping("/login/oauth2/code/google")
     public String loginOAuth() {
@@ -75,10 +83,30 @@ public class UserController {
         return ResponseEntity.ok(service.findById(id));
     }
 
+    @GetMapping("/register")
+    public String showRegisterPage() {
+        return "register"; // register.html을 반환
+    }
+    @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user) {
-        return ResponseEntity.ok(service.save(user));
+        System.out.println(user);
+        return ResponseEntity.ok(service.insert(user));
     }
+
+    @GetMapping("/profile/setting/{id}")
+    public String getProfile(Model model, @PathVariable Long id)
+    {
+        Optional<UserEntity> userOptional = service.findById(id);
+        if(userOptional.isPresent()) {
+            UserEntity user = userOptional.get();
+            // user의 필드를 다루는 로직을 추가할 수 있습니다.
+        }
+        model.addAttribute("userId", 1);
+        model.addAttribute("user", userOptional.orElse(null));
+        System.out.println(userOptional.get());
+        System.out.println(userOptional);
+        return "/profile/setting";}
 
     @ResponseBody
     @PostMapping("/updateMany")
@@ -89,6 +117,16 @@ public class UserController {
     @PutMapping("/update")
     public ResponseEntity<Boolean> update(@RequestBody UserEntity user) {
         return ResponseEntity.ok(service.save(user));
+    }
+    @ResponseBody
+    @PostMapping("/update")
+    public ResponseEntity<Boolean> update(@RequestPart("userData") UserModel userData, @RequestPart("password") String password) {
+        System.out.println("넘어온 값" + userData);
+        System.out.println("넘어온 값" + password);
+        if(!service.existsByPassword(password)){
+            return ResponseEntity.ok(false);
+        }
+        return ResponseEntity.ok(service.update(userData));
     }
 
     @ResponseBody
