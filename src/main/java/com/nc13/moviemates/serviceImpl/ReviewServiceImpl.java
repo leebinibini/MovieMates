@@ -1,5 +1,6 @@
 package com.nc13.moviemates.serviceImpl;
 
+import com.nc13.moviemates.component.model.ReviewModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
 import com.nc13.moviemates.repository.MovieRepository;
@@ -77,8 +78,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<MovieEntity> getWatchedMoviesByUserId(Long userId) {
-        // 유저가 본 영화 목록을 데이터베이스에서 조회
-        return movieRepository.findWatchedMoviesByUserId(userId);
+    public List<String> findMovieTitlesByUserId(Long userId) {
+        return repository.findMovieTitlesByUserId(userId);
     }
+
 }

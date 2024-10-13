@@ -26,5 +26,5 @@ public interface ReviewService {
 
     Long deleteMany(List<Long> reviewIdList);
 
-    List<MovieEntity> getWatchedMoviesByUserId(Long userId);
+    List<String> findMovieTitlesByUserId(Long userId);
 }

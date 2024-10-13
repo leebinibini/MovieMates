@@ -33,7 +33,6 @@ public interface MovieService {
 
    Long findMovieIdByName(String name);
 
-   List<MovieEntity> getWatchedMoviesByUserId(Long userId);
 
    // void crawlMovies() throws IOException;
 

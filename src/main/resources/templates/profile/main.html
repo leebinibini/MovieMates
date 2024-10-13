@@ -1394,7 +1394,8 @@
                                     </td>
                                     <td class="py-3 price" th:text="${history.seat}">seat</td>
                                     <td class="py-3 text-right">
-                                        <a th:href="@{/api/review/register}">
+                                        <!--<a th:href="@{/api/review/register(userId=${history.userId})}">-->
+                                        <a th:href="@{/api/review/register(userId=1)}">
                                             <span class="tag px-4 py-1.5 rounded-full bg-opacity-10 bg-yellow text-yellow caption1 font-semibold">review 쓰러가기</span>
                                         </a>
                                     </td>
@@ -1410,8 +1411,8 @@
                         document.getElementById('Hid').innerText = element.id;
                     })
                     console.log(historys);
-
                 </script>
+
                 <div class="filter-item tab_order text-content overflow-hidden w-full p-7 border border-line rounded-xl" th:data-item="${orders}">
                     <h6 class="heading6">Your Orders</h6>
                     <div class="w-full overflow-x-auto">

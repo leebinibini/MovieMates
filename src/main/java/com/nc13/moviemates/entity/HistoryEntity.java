@@ -24,4 +24,6 @@ public class HistoryEntity {
     private Date time;
     private String seat;
     private Long reservations;
+    private Long userId;
+    private Long movieId;
 }

@@ -21,6 +21,11 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    public List<MovieEntity> findMovieByUserId(Long userId) {
+        return repository.findMovieByUserId(userId);
+    }
+
+    @Override
     public Boolean save(HistoryEntity history) {
         HistoryEntity ent = repository.save(history);
         Long id = ent.getId();
