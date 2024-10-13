@@ -74,6 +74,9 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
                 .fetch();
     }
 
+
+
+
     public List<MovieEntity> findChart(){
         QMovieEntity movie = QMovieEntity.movieEntity;
         return jpaQueryFactory

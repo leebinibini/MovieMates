@@ -65,4 +65,17 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
         return jpaQueryFactory.selectFrom(qReview).where(qReview.movieId.eq(movieId)).fetch();
     }
 
+    @Override
+    public List<String> findMovieTitlesByUserId(Long userId) {
+        QReviewEntity review = QReviewEntity.reviewEntity;
+        QMovieEntity movie = QMovieEntity.movieEntity;
+
+        return jpaQueryFactory
+                .select(movie.title)
+                .from(review)
+                .join(movie).on(review.movieId.eq(movie.id))  // 리뷰의 movieId와 영화의 id 조인
+                .where(review.writerId.eq(userId))  // 리뷰의 writerId가 userId와 일치하는 경우
+                .fetch();
+    }
+
 }

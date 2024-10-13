@@ -10,7 +10,7 @@ public interface HistoryService {
 
     List<HistoryEntity> findAll();
 
-
+    List<MovieEntity> findMovieByUserId(Long userId);
 
     Boolean save(HistoryEntity email);
 

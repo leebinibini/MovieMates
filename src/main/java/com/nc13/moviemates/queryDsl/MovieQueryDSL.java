@@ -11,7 +11,6 @@ public interface MovieQueryDSL {
     Boolean exists(Long id);
     Long getRowCount();
     List<String> getNowPlayingList();
-    List<MovieEntity> findWatchedMoviesByUserId(Long userId);
     Long deleteMany(List<Long> movieIdList);
     void update(MovieModel movieModel);
     List<MovieEntity> findChart();
