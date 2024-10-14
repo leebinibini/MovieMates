@@ -17,4 +17,5 @@ public interface ReviewQueryDSL {
     Long getRowCount();
     Long deleteMany(List<Long> reviewIdList);
     List<ReviewEntity> findAllByMovieId(Long movieId);
+    List<String> findMovieTitlesByUserId(Long userId);
 }

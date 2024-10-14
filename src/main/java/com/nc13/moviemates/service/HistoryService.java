@@ -10,7 +10,7 @@ public interface HistoryService {
 
     List<HistoryEntity> findAll();
 
-
+    List<MovieEntity> findMovieByUserId(Long userId);
 
     Boolean save(HistoryEntity email);
 
@@ -19,4 +19,6 @@ public interface HistoryService {
     Long count();
 
     Boolean deleteById(Long id);
+
+    Optional<MovieEntity> findMovieForReview(Long userId, Long movieId);
 }

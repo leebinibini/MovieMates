@@ -21,13 +21,16 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    public List<MovieEntity> findMovieByUserId(Long userId) {
+        return repository.findMovieByUserId(userId);
+    }
+
+    @Override
     public Boolean save(HistoryEntity history) {
         HistoryEntity ent = repository.save(history);
         Long id = ent.getId();
         return existsById(id);
     }
-
-
 
     @Override
     public Boolean existsById(Long id) {
@@ -42,5 +45,10 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public Boolean deleteById(Long id) {
         return null;
+    }
+
+    @Override
+    public Optional<MovieEntity> findMovieForReview(Long userId, Long movieId) {
+        return repository.findMovieForReview(userId, movieId);
     }
 }

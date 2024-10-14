@@ -23,6 +23,7 @@ public class MovieEntity{
     private String director;
     private String actors;
     private double rate;
+    @Column(length = 1000)
     private String plot;
     private String releaseDate;
     private int runningTime;

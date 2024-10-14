@@ -96,7 +96,7 @@ public class UserController {
     }
 
     @GetMapping("/profile/setting/{id}")
-    public String getProfile(Model model, @PathVariable Long id)
+    public String getProfile(Model model, @PathVariable("id") Long id)
     {
         Optional<UserEntity> userOptional = service.findById(id);
         if(userOptional.isPresent()) {
