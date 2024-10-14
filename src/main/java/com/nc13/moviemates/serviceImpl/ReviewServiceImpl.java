@@ -1,5 +1,6 @@
 package com.nc13.moviemates.serviceImpl;
 
+import com.nc13.moviemates.component.model.ReviewModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
 import com.nc13.moviemates.repository.MovieRepository;
