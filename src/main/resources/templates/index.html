@@ -11,57 +11,36 @@
     <link rel="stylesheet" th:href="@{/dist/output-tailwind.css}" />
 </head>
 <body class="sticky-menu">
-    <div id="loader">
-        <div class="loader-ring">
-            <div class="loader-ring-light"></div>
-            <div class="loader-ring-track"></div>
-        </div>
+<div id="loader">
+    <div class="loader-ring">
+        <div class="loader-ring-light"></div>
+        <div class="loader-ring-track"></div>
     </div>
-    <div class="wrapper">
+</div>
+<div class="wrapper">
 
-
-        <header id="header" class="menu-top-left">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-4">
-                        <a href="/" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
+    <header id="header" class="menu-top-left">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-4">
+                    <a href="/" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
+                </div>
+                <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
+                    <div class="header_author">
+                        <a th:href="@{/api/user/login}">Login</a>
                     </div>
-                    <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
-                        <div class="header_author">
-                            <a th:href="@{/api/user/login}">Login</a>
-                        </div>
-                        <div class="header_author">
-                            <a th:href="@{/api/user/mypage}">Mypage</a>
-                        </div>
-                        <div class="header_ticket">
-                            <a th:href="@{/single}">Movie</a>
-                            <span>3</span>
-                        </div>
-                        <div class="header_ticket">
-                            <a href="#order" class="order_btn">Order</a>
-                            <span>3</span>
-                        </div>21</div>
-
-                        <a href="javascript:;" id="header-search"></a>
-                        <div class="button_container" id="toggle">
-                            <span class="top"></span>
-                            <span class="middle"></span>
-                            <span class="bottom"></span>
-                        </div>
-                        <div class="overlay" id="overlay">
-                            <a href="javascript:;" class="close-window"></a>
-                            <nav class="overlay-menu">
-                                <ul>
-                                    <li><a th:href="@{/}">Home</a></li>
-                                    <li><a th:href="@{/api/movie/single}">Single</a></li>
-                                    <li><a href="#order" class="order_btn">Order</a></li>
-                                </ul>
-                            </nav>
-                        </div>
+                    <div class="header_ticket">
+                        <a th:href="@{/api/user/mypage}">Mypage</a>
+                    </div>
+                    <div class="header_ticket">
+                        <a href="#order" class="order_btn">Order</a>
+                        <span>3</span>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
+
         <div class="fullwidth-slider">
             <div id="headerslider" class="carousel slide">
                 <ol class="carousel-indicators" >
@@ -398,77 +377,66 @@
                             <label class="label-title">Keep in Touch</label>
                         </div>
                         <div class="gmap-item">
-                            <label>
-                                <i class="fa fa-map-marker"></i>
-                            </label>
+                            <label><i class="fa fa-map-marker"></i></label>
                             <span>Address : 86 New Design Street, Melbourne 105</span>
                         </div>
                         <div class="gmap-item">
-                            <label>
-                                <i class="fa fa-phone"></i>
-                            </label>
+                            <label><i class="fa fa-phone"></i></label>
                             <span>Phone: (01) 200 123 544</span>
                         </div>
                         <div class="gmap-item">
-                            <label>
-                                <i class="fa fa-envelope"></i>
-                            </label>
+                            <label><i class="fa fa-envelope"></i></label>
                             <span>Email: info@example.com</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <script type="text/javascript" th:src="@{js/google-maps.js}"></script>
+
+            <!-- Google Maps API 스크립트 -->
             <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuuDwFAppkkrpOTWM-hmFwz_zCbP3u_PQ&callback=initMap"></script>
+
             <script>
                 function initMap() {
-                    // 기본 값으로 설정된 위치
-                    var mapOptions = {
-                        zoom: 16,
-                        center: { lat: 47.919311, lng: 106.917643 }, // 기본 위치
-                        styles: [], // 스타일을 비워두면 기본 컬러 스타일 적용됨
-                    };
-
-                    // 지도를 담을 변수
-                    var map = new google.maps.Map(document.getElementById('tt-google-map'), mapOptions);
-
-                    // 현재 위치 정보 가져오기
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            var userLocation = {
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude
-                            };
-
-                            // 사용자 위치로 지도 중심 이동
-                            map.setCenter(userLocation);
-
-                            // 사용자 위치에 마커 추가
-                            new google.maps.Marker({
-                                position: userLocation,
-                                map: map,
-                                title: "Your Location"
-                            });
-                        }, function () {
-                            console.error("사용자의 위치를 가져올 수 없습니다.");
-                        });
+                    // Google Maps 초기화
+                    if (typeof google === 'undefined') {
+                        console.error("Google Maps API가 로드되지 않았습니다.");
                     } else {
-                        console.error("Geolocation이 지원되지 않습니다.");
+                        var mapOptions = {
+                            zoom: 16,
+                            center: { lat: 47.919311, lng: 106.917643 }, // 기본 위치
+                            styles: [] // 스타일 비움
+                        };
+                        var map = new google.maps.Map(document.getElementById('tt-google-map'), mapOptions);
+
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function (position) {
+                                var userLocation = {
+                                    lat: position.coords.latitude,
+                                    lng: position.coords.longitude
+                                };
+                                map.setCenter(userLocation);
+                                new google.maps.Marker({
+                                    position: userLocation,
+                                    map: map,
+                                    title: "Your Location"
+                                });
+                            }, function () {
+                                console.error("사용자의 위치를 가져올 수 없습니다.");
+                            });
+                        }
                     }
                 }
 
-                // 구글 맵 API 불러오기
-                function loadGoogleMaps() {
-                    var script = document.createElement('script');
-                    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCuuDwFAppkkrpOTWM-hmFwz_zCbP3u_PQ&callback=initMap"; // YOUR_API_KEY는 구글맵 API 키로 대체
-                    script.async = true;
-                    script.defer = true;
-                    document.head.appendChild(script);
-                }
-
-                // 페이지 로딩 시 구글 맵 로드
-                window.onload = loadGoogleMaps;
+                // 페이지가 로드된 후에 Google Maps API를 로드
+                window.onload = function() {
+                    if (typeof google === 'undefined') {
+                        console.error("Google Maps API가 로드되지 않았습니다.");
+                    } else {
+                        initMap();
+                    }
+                };
             </script>
+
         </section>
         <footer id="footer">
             <div class="container footer-container">
@@ -621,12 +589,12 @@
     <script type="text/javascript" th:src="@{js/movie.api.js}"></script>
 
     <script type="text/javascript" th:src="@{js/order.js}" ></script>
-<script type="module">
-    import MovieApi from "/js/movie/movie.api.js";
-    import movieAPI from "../static/js/movie/movie.api";
+    <script type="module">
+        import MovieApi from "/js/movie/movie.api.js";
+        import movieAPI from "/static/js/movie/movie.api";
 
-    movieAPI.getMovieList()
-</script>
+        movieAPI.getMovieList()
+    </script>
 
 </body>
 </html>

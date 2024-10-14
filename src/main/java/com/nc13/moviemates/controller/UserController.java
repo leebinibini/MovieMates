@@ -87,6 +87,7 @@ public class UserController {
     public String showRegisterPage() {
         return "register"; // register.html을 반환
     }
+
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user) {
@@ -106,7 +107,7 @@ public class UserController {
         model.addAttribute("user", userOptional.orElse(null));
         System.out.println(userOptional.get());
         System.out.println(userOptional);
-        return "/profile/setting";}
+        return "profile/setting";}
 
     @ResponseBody
     @PostMapping("/updateMany")

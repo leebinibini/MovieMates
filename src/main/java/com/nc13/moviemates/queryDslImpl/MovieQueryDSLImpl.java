@@ -74,6 +74,11 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
                 .fetch();
     }
 
+    @Override
+    public List<MovieEntity> findWatchedMoviesByUserId(Long userId) {
+        return List.of();
+    }
+
     public List<MovieEntity> findChart(){
         QMovieEntity movie = QMovieEntity.movieEntity;
         return jpaQueryFactory
