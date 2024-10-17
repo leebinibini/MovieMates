@@ -32,6 +32,22 @@ public class HistoryQueryDSLImpl implements HistoryQueryDSL {
     }
 
     @Override
+    public Optional<MovieEntity> findMovieForReview(Long userId, Long movieId) {
+        QMovieEntity qMovie = QMovieEntity.movieEntity;
+        QHistoryEntity qHistory = QHistoryEntity.historyEntity;
+
+        MovieEntity movie = jpaQueryFactory
+                .select(qMovie)
+                .from(qHistory)
+                .join(qMovie).on(qHistory.movieId.eq(qMovie.id))  // 히스토리의 movieId와 영화 테이블의 id를 조인
+                .where(qHistory.userId.eq(userId)  // 히스토리에서 유저 아이디가 일치하고
+                        .and(qHistory.movieId.eq(movieId)))  // 히스토리에서 movieId가 일치하는 경우
+                .fetchOne();  // 단일 결과 반환
+
+        return Optional.ofNullable(movie);
+    }
+
+    @Override
     public List<HistoryEntity> getAll() {
         return jpaQueryFactory.selectFrom(qHistory).fetch();
     }

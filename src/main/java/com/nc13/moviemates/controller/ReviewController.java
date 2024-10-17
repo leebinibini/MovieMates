@@ -5,9 +5,7 @@ import com.nc13.moviemates.component.model.ReviewModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
 import com.nc13.moviemates.entity.ScheduleEntity;
-import com.nc13.moviemates.service.HistoryService;
-import com.nc13.moviemates.service.MovieService;
-import com.nc13.moviemates.service.ReviewService;
+import com.nc13.moviemates.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -26,6 +24,11 @@ import java.util.Optional;
 public class ReviewController {
     private final ReviewService service;
     private final HistoryService historyService;
+    private final TheaterService theaterService;
+    private final ScheduleService scheduleService;
+    private final ReviewService reviewService;
+    private final WishService wishService;
+    private final MovieService movieService;
     @GetMapping("/list")
     public ResponseEntity<List<ReviewEntity>> getList() {
         return ResponseEntity.ok(service.findAll());
@@ -37,29 +40,52 @@ public class ReviewController {
     }
 
     @GetMapping("/register")
-    public String getMoviesByUserId(@RequestParam Long userId, Model model) {
-        // userId로 리뷰에 연결된 영화 목록을 가져옴
-        List<MovieEntity> movie = historyService.findMovieByUserId(userId);
-
-        /*if (movieTitles.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);  // 영화 목록이 없을 경우 204 응답
-        }*/
-        if (movie == null || movie.isEmpty()) {
-            model.addAttribute("error", "No movies found for this user.");
-            return "error";  // error.html로 이동
+    public String getMoviesByUserId(@RequestParam Long userId, @RequestParam Long movieId, Model model) {
+        Optional<MovieEntity> movie = historyService.findMovieForReview(userId, movieId);
+        if (movie.isPresent()) {
+            boolean isWishlisted = wishService.existsByMovieIdandUserId(movieId, userId);
+            System.out.println("isWishlisted 값: " + isWishlisted);
+            model.addAttribute("isWishlisted", isWishlisted);
+            model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
+            model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
+            model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
+            model.addAttribute("movieList", movieService.findAll());
+            model.addAttribute("movie", movie.get());  // 영화 정보를 모델에 추가
+            model.addAttribute("userId", userId);// 유저 아이디도 모델에 추가
+            return  "single";  // 리뷰 작성 페이지로 이동
+        } else {
+            // 영화 정보를 찾지 못한 경우 예외 처리 (예: 에러 페이지로 이동)
+            return "error/404";  // 적절한 에러 페이지 반환
         }
-        model.addAttribute("movieTitles", movie);
-        return "imsisingle";  // 영화 제목 리스트 반환
+        // 영화 제목 리스트 반환
     }
 
 
 
     @ResponseBody
     @PostMapping("/register")
-    public ResponseEntity<Boolean> insert(@RequestBody ReviewEntity review) {
-        System.out.println("등록 컨트롤러 왓니");
-        System.out.println("review:"+ review);
-        return ResponseEntity.ok(service.save(review));
+    public ResponseEntity<String> insert(@RequestBody ReviewEntity review) {
+
+        boolean hasWatched = reviewService.hasUserWatchedMovie(review.getWriterId(), review.getMovieId());
+        if (!hasWatched) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("리뷰를 작성하려면 먼저 영화를 보셔야 합니다.");
+        }
+        // 유저 아이디가 있는지 확인
+        if (review.getWriterId() == null) {
+            System.out.println("유저 아이디가 없습니다.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유저 아이디가 필요합니다.");
+        }
+
+        System.out.println("등록 컨트롤러 왔니");
+        System.out.println("review: " + review);
+
+        // 리뷰 저장 성공 시 true 반환, 실패 시 false 반환
+        boolean result = service.save(review);
+        if (result) {
+            return ResponseEntity.ok("리뷰가 성공적으로 등록되었습니다.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("리뷰 등록에 실패했습니다.");
+        }
     }
 
 

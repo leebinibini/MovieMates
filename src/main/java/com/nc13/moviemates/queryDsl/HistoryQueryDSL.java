@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface HistoryQueryDSL {
 
+    Optional<MovieEntity> findMovieForReview(Long userId, Long movieId);
     List<MovieEntity> findMovieByUserId(Long userId);
     List<HistoryEntity> getAll();
 

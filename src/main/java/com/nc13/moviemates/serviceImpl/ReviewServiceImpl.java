@@ -4,6 +4,7 @@ import com.nc13.moviemates.component.model.ReviewModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
 import com.nc13.moviemates.repository.MovieRepository;
+import com.nc13.moviemates.repository.ReservationRepository;
 import com.nc13.moviemates.repository.ReviewRepository;
 import com.nc13.moviemates.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository repository;
     private final MovieRepository movieRepository;
+    private final ReservationRepository reservationRepository;
 
     @Override
     public List<ReviewEntity> findAll() {
@@ -80,6 +82,11 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<String> findMovieTitlesByUserId(Long userId) {
         return repository.findMovieTitlesByUserId(userId);
+    }
+
+    public boolean hasUserWatchedMovie(Long userId, Long movieId) {
+        // 예약 또는 관람 이력 조회
+        return reservationRepository.existsByUserIdAndMovieId(userId, movieId);
     }
 
 }

@@ -9,6 +9,6 @@ public interface ReservationQueryDSL {
     ReservationEntity getById(Long id);
     Boolean exists(Long id);
     Long getRowCount();
-
+    boolean existsByUserIdAndMovieId(Long userId, Long movieId);
     Long deleteMany(List<Long> reservationIdList);
 }

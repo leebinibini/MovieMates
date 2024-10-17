@@ -59,6 +59,11 @@ public class ReservationController {
         return ResponseEntity.ok(service.deleteMany(reservationIdList));
     }
 
+    @GetMapping("/iamport")
+    public String goPayment(){
+        return "iamport";
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         return ResponseEntity.ok(service.deleteById(id));

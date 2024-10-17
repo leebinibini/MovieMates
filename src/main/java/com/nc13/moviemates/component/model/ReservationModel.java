@@ -13,7 +13,9 @@ public class ReservationModel {
     private Long userId;
     private Long scheduleId;
     private LocalDateTime reservationDate;
-    private int seatNumber;
+    private Long seatId;
     private Long paymentId;
     private int ticketPrice;
+    private String status;
+    private Long movieId;
 }

@@ -38,7 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .scheduleId(reservation.getScheduleId())
                 .paymentId(reservation.getPaymentId())
                 .reservationDate(reservation.getReservationDate())
-                .seatNumber(reservation.getSeatNumber())
+                .seatId(reservation.getSeatId())
                 .ticketPrice(reservation.getTicketPrice())
                 .userId(reservation.getUserId())
                 .build();
@@ -85,7 +85,7 @@ public class ReservationServiceImpl implements ReservationService {
                     .userId(reservation.getUserId())
                     .scheduleId(reservation.getScheduleId())
                     .reservationDate(reservationDateTime)
-                    .seatNumber(reservation.getSeatNumber())
+                    .seatId(reservation.getSeatId())
                     .paymentId(reservation.getPaymentId())
                     .ticketPrice(reservation.getTicketPrice())
                     .build();

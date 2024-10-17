@@ -66,6 +66,8 @@ public class MovieController {
         model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
         model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
         model.addAttribute("movieList", service.findAll());
+        model.addAttribute("reviewMovie", movie.get());
+        System.out.println(movie.get());
 
         // 위시리스트 여부 확인
         boolean isWishlisted = wishService.existsByMovieIdandUserId(movieId, 1L);

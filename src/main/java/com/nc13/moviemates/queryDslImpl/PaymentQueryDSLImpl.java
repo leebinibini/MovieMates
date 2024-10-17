@@ -31,4 +31,6 @@ public class PaymentQueryDSLImpl implements PaymentQueryDSL{
     public Boolean exists(Long id) {
         return jpaQueryFactory.selectFrom(qPayment).where(qPayment.id.eq(id)).fetchCount()>0;
     }
+
+
 }

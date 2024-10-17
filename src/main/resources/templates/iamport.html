@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button id="button">Pay!!</button>
+<!--jQuery 라이브러리를 웹 페이지에 포함시키는 스크립트 -->
+<script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<!--결제 시스템(요청 및 응답을 처리)을 위한 javaScript SDK -->
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- iamport의 새로운 버전-->
+<!--<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>-->
+<script>
+
+    // Iamport SDK 초기화
+    IMP.init('imp01544136');
+
+    // 버튼 참조
+    const button = document.getElementById("button");
+
+    // 버튼 클릭 시 결제 요청 함수
+    const onClickPay = async () => {
+        const location = "강남점"
+        const movie = "대도시의 사랑법"
+        const userId = 1;
+        const seatId = 1;
+        const scheduleId = 1;
+        // Iamport 결제 요청
+        IMP.request_pay({
+            pg: "danal_tpay",          // PG사 설정
+            pay_method: "card",    // 결제 방법
+            name: movie,          // 상품 이름
+            amount: 100,          // 결제 금액
+            buyer_name: "홍길동", // 구매자 이름
+            custom_data: {
+                location: location,
+                userId : 1,
+                movie: movie,
+                seatId : 1,
+                scheduleId: 1
+            }
+            // buyer_tel: "010-5555-1111",  // 구매자 연락처
+        }, async function(res) {
+            // 결제 성공 시 서버에 결제 정보 전달
+            if (res.success) {
+                try {
+                    const {location, movie, userId, seatId} = res.custom_data;
+                    const response = await axios.post(`/api/payments/validation/${res.imp_uid}`,{
+                        location, movie, userId, seatId, scheduleId
+                    });
+                    alert("결제가 되었습니다! 마이페이지가서 확인해주세요:)")
+
+                } catch (error) {
+                    alert("결제에 실패하였습니다, 다시 시도해주세요!");
+                    console.error("Payment validation failed:", error.response.data);
+                }
+            } else {
+                // 결제 실패 시 에러 메시지 출력
+                console.error("Payment failed:", res.error_msg);
+            }
+        });
+    };
+
+    // 버튼 클릭 이벤트 리스너
+    button.addEventListener("click", onClickPay);
+
+</script>
+</body>
+</html>

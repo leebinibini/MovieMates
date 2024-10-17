@@ -23,12 +23,13 @@ public class MovieEntity{
     private String director;
     private String actors;
     private double rate;
+    @Column(length = 1000)
     private String plot;
     private String releaseDate;
     private int runningTime;
     private String ageClass;
     private int booking;
-    private String WidthPosterUrl;
+    private String widthPosterUrl;
     private String lengthPosterUrl;
     private String posterUrl;
 

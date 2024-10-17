@@ -27,4 +27,6 @@ public interface ReviewService {
     Long deleteMany(List<Long> reviewIdList);
 
     List<String> findMovieTitlesByUserId(Long userId);
+
+    boolean hasUserWatchedMovie(Long userId, Long movieId);
 }
