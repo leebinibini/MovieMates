@@ -40,4 +40,15 @@ public class ReservationQueryDSLImpl implements ReservationQueryDSL {
     public Boolean exists(Long id) {
         return jpaQueryFactory.selectFrom(qReservation).where(qReservation.id.eq(id)).fetchCount()>0;
     }
+
+    @Override
+    public boolean existsByUserIdAndMovieId(Long userId, Long movieId) {
+        Long count = jpaQueryFactory
+                .select(qReservation.count())
+                .from(qReservation)
+                .where(qReservation.userId.eq(userId)
+                        .and(qReservation.movieId.eq(movieId)))
+                .fetchOne();
+        return count != null && count > 0;
+    }
 }

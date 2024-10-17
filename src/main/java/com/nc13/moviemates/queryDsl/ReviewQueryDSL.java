@@ -10,9 +10,7 @@ import java.util.List;
 public interface ReviewQueryDSL {
     List<ReviewEntity> getAll();
     ReviewEntity getById(Long id);
-
     List<MovieEntity> findWatchedMoviesByUserId(Long userId);
-
     Boolean exists(Long id);
     Long getRowCount();
     Long deleteMany(List<Long> reviewIdList);

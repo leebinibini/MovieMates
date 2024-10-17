@@ -7,178 +7,150 @@
     <meta name="keywords" content="HTML5,CSS3,HTML,Template,Themeton" >
     <meta name="description" content="Tenguu Cinema - Movie Theater Template">
     <meta name="author" content="Themeton">
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/movieLogo.jpg}"/>
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/packages.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/default.css}">
 
-
     <style>
-        /* 하트 아이콘 크기 조정 */
         .wishlist-icon .wishlist-heart i {
-            font-size: 24px; /* 하트 아이콘 크기를 24px로 설정 */
-            color: #ccc; /* 비어있는 하트의 색상 (회색) */
-            transition: color 0.3s ease; /* 색상이 부드럽게 변하도록 애니메이션 추가 */
+            font-size: 24px;
+            color: #ccc;
+            transition: color 0.3s ease;
         }
-
         .wishlist-icon .wishlist-heart i.fa-solid {
-            color: #ff4d4d; /* 채워진 하트의 색상 (빨간색) */
+            color: #ff4d4d;
         }
-
         .wishlist-icon .wishlist-heart:hover i {
-            color: #ff4d4d; /* 마우스를 올리면 하트가 빨간색으로 변함 */
+            color: #ff4d4d;
         }
 
-        /* 네모난 버튼 스타일 */
         .heart-button {
-            background-color: transparent; /* 버튼 배경을 투명하게 설정 */
-            border: 2px solid #ccc; /* 테두리 색상과 두께 */
-            border-radius: 5px; /* 네모난 모양을 위한 작은 모서리 반경 설정 */
-            padding: 10px 15px; /* 버튼의 크기 조정 */
-            cursor: pointer; /* 클릭 가능한 커서로 변경 */
+            background-color: transparent;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
             transition: border-color 0.3s ease, background-color 0.3s ease;
         }
 
-        /* 하트가 채워졌을 때 버튼 테두리와 배경 색상 */
         .heart-button .fa-solid {
-            color: #ff4d4d; /* 채워진 하트의 색상 */
+            color: #ff4d4d;
         }
 
         .heart-button:hover {
-            border-color: #ff4d4d; /* 마우스를 올리면 테두리 색상 빨간색으로 변경 */
-            background-color: rgba(255, 77, 77, 0.1); /* 마우스를 올렸을 때 배경색 */
+            border-color: #ff4d4d;
+            background-color: rgba(255, 77, 77, 0.1);
         }
 
         .heart-button i {
-            font-size: 24px; /* 하트 아이콘 크기 설정 */
-            transition: color 0.3s ease; /* 색상이 부드럽게 변하도록 애니메이션 */
+            font-size: 24px;
+            transition: color 0.3s ease;
         }
 
         .heart-button .fa-regular {
-            color: #ccc; /* 비어있는 하트의 색상 */
+            color: #ccc;
         }
 
         .heart-button:hover .fa-regular {
-            color: #ff4d4d; /* 마우스를 올리면 비어있는 하트도 빨간색으로 변경 */
+            color: #ff4d4d;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body class="sticky-menu">
-    <div id="loader">
-        <div class="loader-ring">
-          <div class="loader-ring-light"></div>
-          <div class="loader-ring-track"></div>
-        </div>
+<div id="loader">
+    <div class="loader-ring">
+        <div class="loader-ring-light"></div>
+        <div class="loader-ring-track"></div>
     </div>
-    <div class="wrapper">
-
-
- <header id="header" class="menu-top-left">
-    <div class="container">
-        <div class="row">
-           <div class="col-md-6 col-sm-6 col-xs-4">
-                <a th:href="@{/}" id="logo" title="MovieMates" class="logo-image-white" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates
-                </a>
-            </div>
-             <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
-                <div class="header_author">
-                    <a href="#">User</a>
-                    <img th:src="@{/images/user.png}" class="user" alt="user">
-                </div>
-                <div class="header_ticket">
-                    <a href="#order" class="order_btn">My tickets</a>
-                    <span>3</span>
-                </div>
-                <a href="javascript:;" id="header-search"></a>
-                <div class="button_container" id="toggle">
-    <span class="top"></span>
-    <span class="middle"></span>
-    <span class="bottom"></span>
 </div>
-<div class="overlay" id="overlay">
-<a href="javascript:;" class="close-window"></a>
-  <nav class="overlay-menu">
-    <ul >
-        <li ><a th:href="@{/}">Home</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="single.html">Single</a></li>
-        <li><a href="#order" class="order_btn">Order</a></li>
-    </ul>
-  </nav>
-</div>            </div>
-        </div>
-    </div>
-</header><section class="section-content pv12 bg-cover" th:data-bg-image="${movie.widthPosterUrl}">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <article class="blog-item single" >
-                    <div class="col-md-4 col-sm12 post-image hover-dark" th:data-bg-image="${movie.lengthPosterUrl}" >
-                        <a href="https://vimeo.com/28177848" class="video-player"><i class="fa fa-play"></i></a>
+<div class="wrapper">
+
+    <!-- Header Section -->
+    <header id="header" class="menu-top-left">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-4">
+                    <a th:href="@{/}" id="logo" title="MovieMates" class="logo-image-white" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
+                </div>
+                <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
+                    <div class="header_author">
+                        <a href="#">User</a>
+                        <img th:src="@{/images/user.png}" class="user" alt="user">
                     </div>
-                    <div class="col-md-8 col-sm-12 col-xs-12 ph0">
-                        <div class="post-content bg-cover" th:data-bg-image="${movie.widthPosterUrl}" >
-                            <div class="content-meta">
-                                <h2 class="entry-title" th:text="${movie != null ? movie.title : '영화 정보를 찾을 수 없습니다'}">
-                                </h2>
-                                <!-- 위시리스트 하트 아이콘 -->
-                                <span class="wishlist-icon">
-    <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
-        <button class="heart-button">
-            <i class="fa-heart" th:classappend="${isWishlisted != null and isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
-        </button>
-    </a>
-</span>
-                                <div class="social-links">
-                                    <a href="javascript:;"><i class="fa fa-facebook"></i></a>
-                                    <a href="javascript:;"><i class="fa fa-twitter"></i></a>
-                                    <a href="javascript:;"><i class="fa fa-user"></i></a>
-                                </div>
-                            </div>
+                    <div class="header_ticket">
+                        <a href="#order" class="order_btn">My tickets</a>
+                        <span>3</span>
+                    </div>
+                    <a href="javascript:;" id="header-search"></a>
+                    <div class="button_container" id="toggle">
+                        <span class="top"></span>
+                        <span class="middle"></span>
+                        <span class="bottom"></span>
+                    </div>
+                    <div class="overlay" id="overlay">
+                        <a href="javascript:;" class="close-window"></a>
+                        <nav class="overlay-menu">
+                            <ul>
+                                <li><a th:href="@{/}">Home</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="single.html">Single</a></li>
+                                <li><a href="#order" class="order_btn">Order</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-                            <p class="entry-text" th:text="${movie.plot}">Continually aggregate cross-platform opportunities vis-a-vis high-quality intellectual capital. Efficiently aggregate seamless "outside the box" thinking for enterprise growth strategies. Assertively cultivate top-line ROI and timely relationships authoritatively matrix.</p>
-                            <div class="info-content">
-                                <ul class="item-info">
-                                    <li><span>Running Time:</span>  <p th:text="${movie != null ? movie.runningTime + '분' : '영화 정보를 찾을 수 없습니다'}"></p></li>
-                                    <li><span>Genre:</span>  <p th:text="${movie != null ? movie.genre : '영화 정보를 찾을 수 없습니다'}"></p></li>
-                                    <li><span>Director:</span>  <p th:text="${movie != null ? movie.director : '영화 정보를 찾을 수 없습니다'}"></p></li>
-                                    <li><span>Cast:</span>  <p th:text="${movie != null ? movie.actors : '영화 정보를 찾을 수 없습니다'}"></p></li>
-                                    <li><span>Release Date:</span>  <p th:text="${movie != null ? movie.releaseDate : '영화 정보를 찾을 수 없습니다'}"></p></li>
-                                </ul>
-                                <div class="item-info-rate">
-                                    <div class="chart-cirle">
-                                        <div class="chart-circle-l">
-                                            <div class="circle-chart" data-circle-width="7" data-percent="64" data-text="6.4">
-                                            </div>
-                                            <span>AMDB Rating</span>
-                                        </div>
-                                        <div class="chart-circle-r">
-                                            <div class="circle-chart" data-circle-width="7" data-percent="84" data-text="8.4">
-                                            </div>
-                                            <span>Rotten Rating</span>
-                                        </div>
-                                    </div>
+    <!-- Single Page Section -->
+    <section class="section-content pv12 bg-cover" th:data-bg-image="${movie.widthPosterUrl}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <article class="blog-item single">
+                        <div class="col-md-4 col-sm12 post-image hover-dark" th:data-bg-image="${movie.lengthPosterUrl}">
+                            <a href="https://vimeo.com/28177848" class="video-player"><i class="fa fa-play"></i></a>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12 ph0">
+                            <div class="post-content bg-cover" th:data-bg-image="${movie.widthPosterUrl}">
+                                <div class="content-meta">
+                                    <h2 class="entry-title" th:text="${movie != null ? movie.title : '영화 정보를 찾을 수 없습니다'}"></h2>
 
-                                    <div class="wpc-skills animated">
-                                        <div class="skill-block">
-                                            <span class="timer" data-to="70" data-speed="500">70 - Metacritic </span>
-                                            <div class="skill-line">
-                                                <div class="line-fill" data-width-pb="70%" style="width: 70%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-block">
-                                            <span class="timer" data-to="56" data-speed="500"> 5.6 - Metacritic </span>
-                                            <div class="skill-line">
-                                                <div class="line-fill" data-width-pb="56%" style="width: 56%;"></div>
-                                            </div>
-                                        </div>
+                                    <!-- Wishlist Heart Icon -->
+                                    <span class="wishlist-icon">
+                                        <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
+                                            <button class="heart-button">
+                                                <i class="fa-heart" th:classappend="${isWishlisted != null and isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+                                            </button>
+                                        </a>
+                                    </span>
+                                    <div class="social-links">
+                                        <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                        <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                                        <a href="javascript:;"><i class="fa fa-user"></i></a>
                                     </div>
                                 </div>
-                            </div>
+
+                                <p class="entry-text" th:text="${movie.plot}"></p>
+
+                                <div class="info-content">
+                                    <ul class="item-info">
+                                        <li><span>Running Time:</span> <p th:text="${movie != null ? movie.runningTime + '분' : '영화 정보를 찾을 수 없습니다'}"></p></li>
+                                        <li><span>Genre:</span> <p th:text="${movie != null ? movie.genre : '영화 정보를 찾을 수 없습니다'}"></p></li>
+                                        <li><span>Director:</span> <p th:text="${movie != null ? movie.director : '영화 정보를 찾을 수 없습니다'}"></p></li>
+                                        <li><span>Cast:</span> <p th:text="${movie != null ? movie.actors : '영화 정보를 찾을 수 없습니다'}"></p></li>
+                                        <li><span>Release Date:</span> <p th:text="${movie != null ? movie.releaseDate : '영화 정보를 찾을 수 없습니다'}"></p></li>
+                                    </ul>
+                                </div>
+
                                 <div class="content-footer">
                                     <span>Available time:</span>
                                     <ul class="mdate" th:each="schedule: ${scheduleList}">
@@ -186,105 +158,119 @@
                                     </ul>
                                     <a href="#order" class="order_btn btn order text-right">Buy ticket</a>
                                 </div>
+                            </div>
                         </div>
-
-                    </div>
-                </article>
+                    </article>
+                </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="row">
                 <div class="col-md-12 mt4">
-                   <div class="single-slider">
+                    <div class="single-slider">
                         <div class="swiper-container movie-images" id="singleslider" data-col="5">
                             <div class="swiper-wrapper" >
-                                                                    <div class="swiper-slide" th:each="m: ${movieList}">
-                                        <div class="movie-image"  th:data-bg-image="${m.getLengthPosterUrl()}">
-                                            <div class="entry-hover">
-                                                <div class="entry-actions">
-                                                    <a href="javascript:;" class="btn fill">More</a>
-                                                </div>
-                                            </div>
-                                            <div class="entry-desc">
-                                                <div class="rating">
-                                                    <input name="stars" type="radio" th:checked="${m.rate >= 1}">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio" th:checked="${m.rate >= 2}">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio" th:checked="${m.rate >= 3}">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio" th:checked="${m.rate >= 4}">
-                                                    <label>☆</label>
-                                                    <input name="stars" type="radio" th:checked="${m.rate >= 5}">
-                                                    <label>☆</label>
-                                                </div>
-                                                <h3 class="entry-title" th:text="${m.title}"></h3>
-                                                <ul class="entry-date" th:text="${m.releaseDate}">
-                                                    <li>5 May 2017</li>
-                                                </ul>
+                                <div class="swiper-slide" th:each="m: ${movieList}">
+                                    <div class="movie-image"  th:data-bg-image="${m.lengthPosterUrl}">
+                                        <div class="entry-hover">
+                                            <div class="entry-actions">
+                                                <a th:href="@{/api/movie/single/{movieId}(movieId=${m.id})}" class="btn fill">More</a>
                                             </div>
                                         </div>
+                                        <div class="entry-desc">
+                                            <div class="rating">
+                                                <input name="stars" type="radio" th:checked="${m.rate >= 1}">
+                                                <label>☆</label>
+                                                <input name="stars" type="radio" th:checked="${m.rate >= 2}">
+                                                <label>☆</label>
+                                                <input name="stars" type="radio" th:checked="${m.rate >= 3}">
+                                                <label>☆</label>
+                                                <input name="stars" type="radio" th:checked="${m.rate >= 4}">
+                                                <label>☆</label>
+                                                <input name="stars" type="radio" th:checked="${m.rate >= 5}">
+                                                <label>☆</label>
+                                            </div>
+                                            <h3 class="entry-title" th:text="${m.title}"></h3>
+                                            <ul class="entry-date" th:text="${m.releaseDate}">
+                                                <li>5 May 2017</li>
+                                            </ul>
+                                        </div>
                                     </div>
+                                </div>
 
-                                                            </div>
+                            </div>
                         </div>
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-</section>
-<div class="section-content pvb0">
-    <div class="container  pv8">
-        <div class="row">
-            <div class="col-sm-6">
-                <div id="comments" class="comments-area">
-                    <div class="comments-wrapper">
-                        <h2 class="comments-title">Comments (2)</h2>
-                        <ol class="comment-list" th:each="review:${reviewList}">
-                            <li>
-                                <article>
-                                    <div class="comment-avatar">
-                                        <img alt="Image" th:src="@{/images/blog/user-1.jpg}" class="avatar">
-                                    </div>
-                                    <div class="comment-body">
-                                        <div class="meta-data">
-                                            <a href="#" class="comment-author" th:text="${review.writerId}"></a>
-                                        </div>
-                                        <div class="comment-content" th:text="${review.content}">
-                                            Progressively repurpose extensive partnerships and one-to-one technology. Competently impact market positioning solutions before user friendly alignments. Energistically deploy reliable process improvements via interdependent.
-                                        </div>
-                                    </div>
-                                </article>
-                            </li>
-                        </ol>
+    </section>
+    <div class="section-content pvb0">
+        <div class="container  pv8">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="comments" class="comments-area">
+                        <div class="comments-wrapper">
+                            <h2 class="comments-title">Comments (2)</h2>
+                                <ol class="comment-list" th:each="review:${reviewList}">
+                                    <li>
+                                        <article>
+                                            <div class="comment-avatar">
+                                                <img alt="Image" th:src="@{/images/blog/user-1.jpg}" class="avatar">
+                                            </div>
+                                            <div class="comment-body">
+                                                <div class="meta-data">
+                                                    <a href="#" class="comment-author" th:text="${review.writerId}"></a>
+                                                </div>
+                                                <span class="review-rating" th:text="${review.rating != null ? review.rating : 'No rating'} + ' / 5.0'"></span>
+                                                <div class="comment-content" th:text="${review.content}">
+                                                    Progressively repurpose extensive partnerships and one-to-one technology. Competently impact market positioning solutions before user friendly alignments. Energistically deploy reliable process improvements via interdependent.
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </li>
+                                </ol>
+                        </div>
                     </div>
                 </div>
-             </div>
-            <div class="col-sm-6">
-                <div id="respond" class="comment-respond">
-                    <h3 id="reply-title" class="comment-reply-title">Leave a comment</h3>
-                    <form id="commentform" class="comment-form" novalidate="">
-                        <div class="row">
-                            <p class="comment-form-author col-sm-6">
-                                <input id="author" name="author" type="text" value="" size="30" placeholder="Name *">
+                <div class="col-sm-6">
+                    <div id="respond" class="comment-respond">
+                        <h3 id="reply-title" class="comment-reply-title">Leave a comment</h3>
+                        <form id="commentform" class="comment-form" novalidate="">
+                            <div class="row">
+                                <p class="comment-form-author col-sm-6">
+                                    <input id="movie" name="movie" type="text" th:value="${movie.title}" size="30" readonly style="color: black;">
+                                    <input type="hidden" id="movieId" name="movieId" th:value="${movie.id}">
+                                </p>
+                                <p class="comment-form-email col-sm-6">
+                                    <label for="rating">Rating:</label>
+                                <div id="star-rating">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                                <input type="hidden" id="rating" name="rating" value="">
+                                </p>
+                            </div>
+                            <p class="comment-form-comment">
+                                <textarea id="content" name="content" placeholder="Write your review..."></textarea>
                             </p>
-                            <p class="comment-form-email col-sm-6">
-                                <input id="email" name="email" type="email" value="" size="30" placeholder="E-mail *">
+                            <!-- 숨겨진 필드로 writerId 추가 -->
+                            <input type="hidden" id="writerId" name="writerId" th:value="${userId}"> <!-- 이 값은 세션이나 로그인 정보에서 가져올 수 있음 -->
+
+                            <p class="form-submit">
+                                <button type="button" class="button fill rectangle" id="submitReview">Submit Review</button>
                             </p>
-                        </div>
-                        <p class="comment-form-comment">
-                            <textarea id="comment" name="comment" placeholder="Comments"></textarea>
-                        </p>
-                        <p class="form-submit">
-                            <button type="submit" class="button fill rectangle">Send to us</button>
-                        </p>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Google Maps Section -->
     <div class="fullscreen-section">
         <div id="tt-google-map" class="tt-google-map" data-lat="47.919311" data-lng="106.917643" data-zoom="16" data-saturation="-100" data-color="#333" th:data-marker="@{/images/marker.png}">
             <div id="gmap_content">
@@ -292,78 +278,21 @@
                     <label class="label-title">Keep in Touch</label>
                 </div>
                 <div class="gmap-item">
-                    <label>
-                        <i class="fa fa-map-marker"></i>
-                    </label>
-                    <span>Address : 86 New Design Street, Melbourne 105</span>
+                    <label><i class="fa fa-map-marker"></i></label>
+                    <span>Address: 86 New Design Street, Melbourne 105</span>
                 </div>
                 <div class="gmap-item">
-                    <label>
-                        <i class="fa fa-phone"></i>
-                    </label>
+                    <label><i class="fa fa-phone"></i></label>
                     <span>Phone: (01) 200 123 544</span>
                 </div>
                 <div class="gmap-item">
-                    <label>
-                        <i class="fa fa-envelope"></i>
-                    </label>
+                    <label><i class="fa fa-envelope"></i></label>
                     <span>Email: info@example.com</span>
                 </div>
             </div>
         </div>
     </div>
-        <script type="text/javascript" th:src="@{js/google-maps.js}"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuuDwFAppkkrpOTWM-hmFwz_zCbP3u_PQ&callback=initMap"></script>
-        <script>
-            function initMap() {
-                // 기본 값으로 설정된 위치
-                var mapOptions = {
-                    zoom: 16,
-                    center: { lat: 47.919311, lng: 106.917643 }, // 기본 위치
-                    styles: [], // 스타일을 비워두면 기본 컬러 스타일 적용됨
-                };
 
-                // 지도를 담을 변수
-                var map = new google.maps.Map(document.getElementById('tt-google-map'), mapOptions);
-
-                // 현재 위치 정보 가져오기
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        var userLocation = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-
-                        // 사용자 위치로 지도 중심 이동
-                        map.setCenter(userLocation);
-
-                        // 사용자 위치에 마커 추가
-                        new google.maps.Marker({
-                            position: userLocation,
-                            map: map,
-                            title: "Your Location"
-                        });
-                    }, function () {
-                        console.error("사용자의 위치를 가져올 수 없습니다.");
-                    });
-                } else {
-                    console.error("Geolocation이 지원되지 않습니다.");
-                }
-            }
-
-            // 구글 맵 API 불러오기
-            function loadGoogleMaps() {
-                var script = document.createElement('script');
-                script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCuuDwFAppkkrpOTWM-hmFwz_zCbP3u_PQ&callback=initMap"; // YOUR_API_KEY는 구글맵 API 키로 대체
-                script.async = true;
-                script.defer = true;
-                document.head.appendChild(script);
-            }
-
-            // 페이지 로딩 시 구글 맵 로드
-            window.onload = loadGoogleMaps;
-        </script>
-        </section>
     <footer id="footer">
         <div class="container footer-container">
             <div class="row">
@@ -392,17 +321,17 @@
                         <p>
                             California. AMC Dine-In Theatres Marina,
                             Street 26, Distritc 543 #108
-                         </p>
-                         <p>
+                        </p>
+                        <p>
                             <i class="fa fa-mail"></i>Example@mail.com<br>
                             <i class="fa fa-phone"></i> + 123 456 7890
-                         </p>
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-6">
                     <div class="widget">
-                    <h5 class="widget-title">Leave a message</h5>
+                        <h5 class="widget-title">Leave a message</h5>
                         <form class="contact_form transparent">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -432,87 +361,222 @@
             </div>
         </div>
     </footer>
-    </div>
-    <!-- Overlay Search -->
-    <div id="overlay-search">
-        <form method="get" action="./">
-            <input type="text" name="s" placeholder="Search..." autocomplete="off">
-            <button type="submit">
-                <i class="fa fa-search"></i>
-            </button>
-        </form>
-        <a href="javascript:;" class="close-window"></a>
-    </div>
-    <div id="order">
-        <div class="container">
-            <div class="row order-content">
-                <div class="col-sm-8 col-xs-12 seat_content ph0">
-                    <h2>order a ticket</h2>
-                    <div class="entry-order-content">
-                        <form id="msform" name="msform">
-                            <!-- fieldsets -->
-                            <fieldset>
-                                 <div class="wpc-content">
-                                    <h3>location</h3>
-                                    <select name="location">
-                                        <option>Tenguu Cinema Tysons corner</option>
-                                        <option>Tenguu Cinema </option>
-                                        <option>Tenguu Cinema corner</option>
-                                        <option>Tenguu Cinema Tysons</option>
-                                    </select>
-                                    <h3 class="mt3">Movie</h3>
-                                    <select>
-                                        <option>Dead pool</option>
-                                        <option>THE BATTLE OF ALGIERS (DI ALGERI)</option>
-                                        <option>LORD OF THE RINGS: THE RETURN OF THE KINGS</option>
-                                        <option>Tenguu Cinema Tysons corner</option>
-                                    </select>
-                                    <h3 class="mt3">Date</h3>
-                                    <input type='date' class="datetime"/>
-                                    <h3 class="mt3">TIME</h3>
-                                    <ul class="order-date">
-                                        <li><a href="javascript:;"><i>11:50</i></a></li>
-                                        <li><a href="javascript:;"><i>13:40</i></a></li>
-                                        <li><a href="javascript:;"><i>16:35</i></a></li>
-                                        <li><a href="javascript:;"><i>17:30</i></a></li>
-                                        <li><a href="javascript:;"><i>19:50</i></a></li>
-                                        <li><a href="javascript:;"><i>21:10</i></a></li>
-                                    </ul>
-                                </div>
-                                <input type="button" name="next" class="next action-button" value="Next" />
-                            </fieldset>
-                            <fieldset class="seat-content">
-                                <div class="wpc-content">
-                                    <h3 class="seat_title">seat</h3>
-                                    <div id="seat-map"></div>
-                                    <div id="legend"></div>
-                                </div>
-                                <input type="button" name="previous" class="action-button previous" value="Previous" />
-                                <input type="submit" name="submit" class="submit action-button" value="Submit" />
-                            </fieldset>
-                        </form>
-                    </div>
+</div>
+<!-- Overlay Search -->
+<div id="overlay-search">
+    <form method="get" action="./">
+        <input type="text" name="s" placeholder="Search..." autocomplete="off">
+        <button type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+    <a href="javascript:;" class="close-window"></a>
+</div>
+<div id="order">
+    <div class="container">
+        <div class="row order-content">
+            <div class="col-sm-8 col-xs-12 seat_content ph0">
+                <h2>order a ticket</h2>
+                <div class="entry-order-content">
+                    <form id="msform" name="msform">
+                        <!-- fieldsets -->
+                        <fieldset>
+                            <div class="wpc-content">
+                                <h3>location</h3>
+                                <select name="location">
+                                    <option>Tenguu Cinema Tysons corner</option>
+                                    <option>Tenguu Cinema </option>
+                                    <option>Tenguu Cinema corner</option>
+                                    <option>Tenguu Cinema Tysons</option>
+                                </select>
+                                <h3 class="mt3">Movie</h3>
+                                <select>
+                                    <option>Dead pool</option>
+                                    <option>THE BATTLE OF ALGIERS (DI ALGERI)</option>
+                                    <option>LORD OF THE RINGS: THE RETURN OF THE KINGS</option>
+                                    <option>Tenguu Cinema Tysons corner</option>
+                                </select>
+                                <h3 class="mt3">Date</h3>
+                                <input type='date' class="datetime"/>
+                                <h3 class="mt3">TIME</h3>
+                                <ul class="order-date">
+                                    <li><a href="javascript:;"><i>11:50</i></a></li>
+                                    <li><a href="javascript:;"><i>13:40</i></a></li>
+                                    <li><a href="javascript:;"><i>16:35</i></a></li>
+                                    <li><a href="javascript:;"><i>17:30</i></a></li>
+                                    <li><a href="javascript:;"><i>19:50</i></a></li>
+                                    <li><a href="javascript:;"><i>21:10</i></a></li>
+                                </ul>
+                            </div>
+                            <input type="button" name="next" class="next action-button" value="Next" />
+                        </fieldset>
+                        <fieldset class="seat-content">
+                            <div class="wpc-content">
+                                <h3 class="seat_title">seat</h3>
+                                <div id="seat-map"></div>
+                                <div id="legend"></div>
+                            </div>
+                            <input type="button" name="previous" class="action-button previous" value="Previous" />
+                            <input type="submit" name="submit" class="submit action-button" value="Submit" />
+                        </fieldset>
+                    </form>
                 </div>
-                <div class="col-sm-4 col-xs-12 order_sidebar ph0">
-                    <h2>Your Information</h2>
-                    <div class="order-details">
-                        <span> Location:</span><p id="locationp">Tenguu Cinema Tysons corner</p>
-                        <span>Time:</span>  <p>2016.3.8 18:30</p>
-                        <span>Seat: </span>
-                        <ul id="selected-seats"></ul>
-                        <div>Tickets: <span id="counter">0</span></div>
-                        <div>Total: <b>$<span id="total">0</span></b></div>
-                    </div>
-                    <a href="javascript:;" class="close-window"><i class="fa fa-times"></i></a>
+            </div>
+            <div class="col-sm-4 col-xs-12 order_sidebar ph0">
+                <h2>Your Information</h2>
+                <div class="order-details">
+                    <span> Location:</span><p id="locationp">Tenguu Cinema Tysons corner</p>
+                    <span>Time:</span>  <p>2016.3.8 18:30</p>
+                    <span>Seat: </span>
+                    <ul id="selected-seats"></ul>
+                    <div>Tickets: <span id="counter">0</span></div>
+                    <div>Total: <b>$<span id="total">0</span></b></div>
                 </div>
+                <a href="javascript:;" class="close-window"><i class="fa fa-times"></i></a>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Include jQuery and Scripts -->
-    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/packages.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/scripts.min.js}"></script>
-<!-- jQuery easing plugin -->
+<!-- Scripts -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/packages.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+
+<!-- Google Maps API -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuuDwFAppkkrpOTWM-hmFwz_zCbP3u_PQ&callback=initMap&libraries=marker"></script>
+
+<script>
+    function initMap() {
+        var mapOptions = {
+            zoom: 16,
+            center: { lat: 47.919311, lng: 106.917643 },
+            styles: []
+        };
+
+        var map = new google.maps.Map(document.getElementById('tt-google-map'), mapOptions);
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                map.setCenter(userLocation);
+
+                // 기본 마커로 변경
+                new google.maps.Marker({
+                    position: userLocation,
+                    map: map,
+                    title: "Your Location"
+                });
+            }, function () {
+                console.error("사용자의 위치를 가져올 수 없습니다.");
+            });
+        } else {
+            console.error("Geolocation이 지원되지 않습니다.");
+        }
+    }
+
+    window.onload = function() {
+        document.getElementById('loader').style.display = 'none';
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // 하트 아이콘 클릭 이벤트
+        $('.wishlist-heart').on('click', function() {
+            var $icon = $(this).find('i');
+            var movieId = [[${movie.id}]]
+            var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
+
+            // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
+            if (isWishlisted) {
+                $icon.removeClass('fa-solid').addClass('fa-regular');  // 비어있는 하트로 변경
+            } else {
+                $icon.removeClass('fa-regular').addClass('fa-solid');  // 채워진 하트로 변경
+            }
+
+            // AJAX 요청을 통해 위시리스트에 추가/삭제
+            $.ajax({
+                url: '/api/wish/toggle',
+                method: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify({
+                    movieId: movieId,
+                    userId: 1
+                }),
+                success: function(response) {
+                    console.log('위시리스트 업데이트 성공', response);
+                },
+                error: function(error) {
+                    console.error('위시리스트 업데이트 실패', error);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    // 별점 클릭 시 선택된 값 저장
+    document.querySelectorAll('.star').forEach(function(star) {
+        star.addEventListener('click', function() {
+            let ratingValue = this.getAttribute('data-value');
+            document.getElementById('rating').value = ratingValue;
+
+            // 별 색상을 선택된 별까지 변경
+            document.querySelectorAll('.star').forEach(function(star) {
+                if (star.getAttribute('data-value') <= ratingValue) {
+                    star.style.color = 'gold';
+                } else {
+                    star.style.color = 'gray';
+                }
+            });
+        });
+    });
+
+    // 리뷰 제출 버튼 클릭 시
+    document.getElementById('submitReview').addEventListener('click', function() {
+        // 입력된 값 가져오기
+        const reviewData = {
+
+            movieId: document.getElementById('movieId').value,    // 영화 ID
+            writerId: document.getElementById('writerId').value,  // 작성자 ID (로그인된 사용자 ID)
+            rating: document.getElementById('rating').value,      // 별점
+            content: document.getElementById('content').value,    // 리뷰 내용
+            date: new Date().toISOString()                        // 현재 날짜를 ISO 형식으로 전달
+        };
+
+        if (!reviewData.writerId) {
+            alert("로그인 정보가 필요합니다. 로그인을 해주세요.");
+            return;
+        }
+        if (!reviewData.rating) {
+            alert("별점을 선택해 주세요.");
+            return;
+        }
+        if (!reviewData.content.trim()) {
+            alert("리뷰 내용을 입력해 주세요.");
+            return;
+        }
+
+        // 서버로 JSON 데이터 전송 (Axios 사용)
+        axios({
+            url:"/api/review/register",
+            method: 'post',
+            data: reviewData
+        })
+
+            .then(function(response) {
+                alert(response.data);
+                alert('Review submitted successfully!');
+                // 필요에 따라 페이지 리로드 또는 리디렉션
+            })
+            .catch(function(error) {
+                alert('Error submitting review: ' + error.message);
+            });
+    });
+</script>
 </body>
 </html>

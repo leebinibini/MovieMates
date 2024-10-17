@@ -15,6 +15,7 @@ java {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 ext {
@@ -28,6 +29,10 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
   //  implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+//    implementation 'com.siot.Iamport:iamport-rest-client-java:0.2.6'
+    implementation 'com.github.iamport:iamport-rest-client-java:0.2.6'
+
 
    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	//implementation 'org.springframework.boot:spring-boot-starter-security'

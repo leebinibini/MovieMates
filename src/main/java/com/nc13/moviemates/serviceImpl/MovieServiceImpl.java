@@ -50,7 +50,7 @@ public class MovieServiceImpl implements MovieService {
     public Long save(MovieModel movie) {
         MovieEntity ent = MovieEntity.builder()
                 .title(movie.getTitle())
-                .WidthPosterUrl(movie.getWidthPosterUrl())
+                .widthPosterUrl(movie.getWidthPosterUrl())
                 .lengthPosterUrl(movie.getPosterUrl())
                 .posterUrl(movie.getPosterUrl())
                 .genre(movie.getGenre())
@@ -81,7 +81,7 @@ public class MovieServiceImpl implements MovieService {
                     .runningTime(movieModel.getRunningTime())
                     .actors(movieModel.getActors())
                     .lengthPosterUrl(movieModel.getLengthPosterUrl())
-                    .WidthPosterUrl(movieModel.getWidthPosterUrl())
+                    .widthPosterUrl(movieModel.getWidthPosterUrl())
                     .rate(movieModel.getRate())
                     .ageClass(movieModel.getAgeClass())
                     .build(); // 변환 메서드 호출

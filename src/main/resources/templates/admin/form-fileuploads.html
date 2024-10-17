@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
     <head>
         <meta charset="utf-8" />
-        <title>Dashboard | MovieMates Administor Page</title>
+        <title>File Uploads | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
         <meta content="Techzaa" name="author" />
 
         <!-- App favicon -->
         <link rel="shortcut icon" th:href="@{/admin/assets/images/favicon.ico}">
-
-        <!-- Daterangepicker css -->
-        <link rel="stylesheet" th:href="@{/admin/assets/vendor/daterangepicker/daterangepicker.css}">
-
-        <!-- Vector Map css -->
-        <link rel="stylesheet" th:href="@{/admin/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css}">
 
         <!-- Theme Config Js -->
         <script th:src="@{/admin/assets/js/config.js}"></script>
@@ -30,8 +24,8 @@
     <body>
         <!-- Begin page -->
         <div class="wrapper">
-
-            
+th:
+    @{/admin/
             <!-- ========== Topbar Start ========== -->
             <div class="navbar-custom">
                 <div class="topbar container-fluid">
@@ -40,22 +34,22 @@
                         <!-- Topbar Brand Logo -->
                         <div class="logo-topbar">
                             <!-- Logo light -->
-                            <a th:href="@{/api/admin}" class="logo-light">
+                            <a href="index.html" class="logo-light">
                                 <span class="logo-lg">
-                                    <img th:src="@{/admin/assets/images/logo.jpeg}" alt="logo">
+                                    <img src="assets/images/logo.png" alt="logo">
                                 </span>
                                 <span class="logo-sm">
-                                    <img th:src="@{/admin/assets/images/logo.jpeg}" alt="small logo">
+                                    <img src="assets/images/logo-sm.png" alt="small logo">
                                 </span>
                             </a>
 
                             <!-- Logo Dark -->
-                            <a th:href="@{/api/admin}" class="logo-dark">
+                            <a href="index.html" class="logo-dark">
                                 <span class="logo-lg">
-                                    <img th:src="@{/admin/assets/images/logo.jpeg}" alt="dark logo">
+                                    <img src="assets/images/logo-dark.png" alt="dark logo">
                                 </span>
                                 <span class="logo-sm">
-                                    <img th:src="@{/admin/assets/images/logo.jpeg}" alt="small logo">
+                                    <img src="assets/images/logo-sm.png" alt="small logo">
                                 </span>
                             </a>
                         </div>
@@ -102,7 +96,7 @@
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
-                                <img th:src="@{/admin/assets/images/flags/us.jpg}" alt="user-image" class="me-0 me-sm-1" height="12">
+                                <img src="assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1" height="12">
                                 <span class="align-middle d-none d-lg-inline-block">English</span> <i
                                     class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i>
                             </a>
@@ -110,25 +104,25 @@
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img th:src="@{/admin/assets/images/flags/germany.jpg}" alt="user-image" class="me-1" height="12"> <span
+                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span
                                         class="align-middle">German</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img th:src="@{/admin/assets/images/flags/italy.jpg}" alt="user-image" class="me-1" height="12"> <span
+                                    <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span
                                         class="align-middle">Italian</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img th:src="@{/admin/assets/images/flags/spain.jpg}" alt="user-image" class="me-1" height="12"> <span
+                                    <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span
                                         class="align-middle">Spanish</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img th:src="@{/admin/assets/images/flags/russia.jpg}" alt="user-image" class="me-1" height="12"> <span
+                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span
                                         class="align-middle">Russian</span>
                                 </a>
 
@@ -164,8 +158,8 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img th:src="@{/admin/assets/images/users/avatar-1.jpg}" class="img-fluid rounded-circle"
-                                                             alt="" />
+                                                        <img src="assets/images/users/avatar-1.jpg" class="img-fluid rounded-circle"
+                                                            alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 text-truncate ms-2">
@@ -185,8 +179,8 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img th:src="@{/admin/assets/images/users/avatar-2.jpg}" class="img-fluid rounded-circle"
-                                                             alt="" />
+                                                        <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle"
+                                                            alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 text-truncate ms-2">
@@ -205,8 +199,8 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img th:src="@{/admin/assets/images/users/avatar-3.jpg}" class="img-fluid rounded-circle"
-                                                             alt="" />
+                                                        <img src="assets/images/users/avatar-3.jpg" class="img-fluid rounded-circle"
+                                                            alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 text-truncate ms-2">
@@ -225,8 +219,8 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img th:src="@{/admin/assets/images/users/avatar-4.jpg}" class="img-fluid rounded-circle"
-                                                             alt="" />
+                                                        <img src="assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle"
+                                                            alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 text-truncate ms-2">
@@ -246,8 +240,8 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img th:src="@{/admin/assets/images/users/avatar-5.jpg}" class="img-fluid rounded-circle"
-                                                             alt="" />
+                                                        <img src="assets/images/users/avatar-5.jpg" class="img-fluid rounded-circle"
+                                                            alt="" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 text-truncate ms-2">
@@ -376,7 +370,7 @@
                             <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
                                 <span class="account-user-avatar">
-                                    <img th:src="@{/admin/assets/images/users/avatar-1.jpg}" alt="user-image" width="32" class="rounded-circle">
+                                    <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
                                 </span>
                                 <span class="d-lg-block d-none">
                                     <h5 class="my-0 fw-normal">Thomson <i
@@ -414,7 +408,7 @@
                                 </a>
 
                                 <!-- item-->
-                                <a th:href="@{/}" class="dropdown-item">
+                                <a href="auth-logout-2.html" class="dropdown-item">
                                     <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                                     <span>Logout</span>
                                 </a>
@@ -430,22 +424,22 @@
             <div class="leftside-menu">
 
                 <!-- Brand Logo Light -->
-                <a th:href="@{/api/admin}" class="logo logo-light">
+                <a href="index.html" class="logo logo-light">
                     <span class="logo-lg">
-                        <img th:src="@{/admin/assets/images/logo.jpeg}" alt="logo">
+                        <img src="assets/images/logo.png" alt="logo">
                     </span>
                     <span class="logo-sm">
-                        <img th:src="@{/admin/assets/images/logo.jpeg}" alt="small logo">
+                        <img src="assets/images/logo-sm.png" alt="small logo">
                     </span>
                 </a>
 
                 <!-- Brand Logo Dark -->
-                <a th:href="@{/api/admin}" class="logo logo-dark">
+                <a href="index.html" class="logo logo-dark">
                     <span class="logo-lg">
-                        <img th:src="@{/admin/assets/images/logo.jpeg}" alt="dark logo">
+                        <img src="assets/images/logo-dark.png" alt="dark logo">
                     </span>
                     <span class="logo-sm">
-                        <img th:src="@{/admin/assets/images/logo.jpeg}" alt="small logo">
+                        <img src="assets/images/logo-sm.png" alt="small logo">
                     </span>
                 </a>
 
@@ -457,7 +451,7 @@
                         <li class="side-nav-title">Main</li>
 
                         <li class="side-nav-item">
-                            <a th:href="@{/api/admin}" class="side-nav-link">
+                            <a href="index.html" class="side-nav-link">
                                 <i class="ri-dashboard-3-line"></i>
                                 <span class="badge bg-success float-end">9+</span>
                                 <span> Dashboard </span>
@@ -473,25 +467,37 @@
                             <div class="collapse" id="sidebarPages">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a th:href="@{/api/admin/pages-starter}">Starter Page</a>
+                                        <a href="pages-starter.html">Starter Page</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/api/admin/movie}">Movie</a>
+                                        <a href="pages-contact-list.html">Contact List</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/api/admin/theater}">Theater</a>
+                                        <a href="pages-profile.html">Profile</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/api/admin/schedule}">Schedule</a>
+                                        <a href="pages-timeline.html">Timeline</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/api/admin/user}">User</a>
+                                        <a href="pages-invoice.html">Invoice</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/api/admin/reservation}">Reservation</a>
+                                        <a href="pages-faq.html">FAQ</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/api/admin/review}">Review</a>
+                                        <a href="pages-pricing.html">Pricing</a>
+                                    </li>
+                                    <li>
+                                        <a href="pages-maintenance.html">Maintenance</a>
+                                    </li>
+                                    <li>
+                                        <a href="error-404.html">Error 404</a>
+                                    </li>
+                                    <li>
+                                        <a href="error-404-alt.html">Error 404-alt</a>
+                                    </li>
+                                    <li>
+                                        <a href="error-500.html">Error 500</a>
                                     </li>
                                 </ul>
                             </div>
@@ -506,13 +512,13 @@
                             <div class="collapse" id="sidebarPagesAuth">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a th:href="@{/api/admin/auth-login}">Login</a>
+                                        <a href="auth-login.html">Login</a>
                                     </li>
                                     <li>
                                         <a href="auth-register.html">Register</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/}">Logout</a>
+                                        <a href="auth-logout.html">Logout</a>
                                     </li>
                                     <li>
                                         <a href="auth-forgotpw.html">Forgot Password</a>
@@ -523,6 +529,333 @@
                                 </ul>
                             </div>
                         </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarLayouts" aria-expanded="false" aria-controls="sidebarLayouts" class="side-nav-link">
+                                <i class="ri-layout-line"></i>
+                                <span class="badge bg-warning float-end">New</span>
+                                <span> Layouts </span>
+                            </a>
+                            <div class="collapse" id="sidebarLayouts">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="layouts-horizontal.html" target="_blank">Horizontal</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-light-sidebar.html" target="_blank">Light Sidebar</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-sm-sidebar.html" target="_blank">Small Sidebar</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-collapsed-sidebar.html" target="_blank">Collapsed Sidebar</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-unsticky-layout.html" target="_blank">Unsticky Layout</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-boxed.html" target="_blank">Boxed Layout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-title">Components</li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarBaseUI" aria-expanded="false" aria-controls="sidebarBaseUI" class="side-nav-link">
+                                <i class="ri-briefcase-line"></i>
+                                <span> Base UI </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarBaseUI">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="ui-accordions.html">Accordions</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-alerts.html">Alerts</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-avatars.html">Avatars</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-buttons.html">Buttons</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-badges.html">Badges</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-breadcrumb.html">Breadcrumb</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-cards.html">Cards</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-carousel.html">Carousel</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-collapse.html">Collapse</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-dropdowns.html">Dropdowns</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-embed-video.html">Embed Video</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-grid.html">Grid</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-links.html">Links</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-list-group.html">List Group</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-modals.html">Modals</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-notifications.html">Notifications</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-offcanvas.html">Offcanvas</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-placeholders.html">Placeholders</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-pagination.html">Pagination</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-popovers.html">Popovers</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-progress.html">Progress</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-spinners.html">Spinners</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-tabs.html">Tabs</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-tooltips.html">Tooltips</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-typography.html">Typography</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-utilities.html">Utilities</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
+                                <i class="ri-compasses-2-line"></i>
+                                <span> Extended UI </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarExtendedUI">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="extended-portlets.html">Portlets</a>
+                                    </li>
+                                    <li>
+                                        <a href="extended-scrollbar.html">Scrollbar</a>
+                                    </li>
+                                    <li>
+                                        <a href="extended-range-slider.html">Range Slider</a>
+                                    </li>
+                                    <li>
+                                        <a href="extended-scrollspy.html">Scrollspy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarIcons" aria-expanded="false" aria-controls="sidebarIcons" class="side-nav-link">
+                                <i class="ri-pencil-ruler-2-line"></i>
+                                <span> Icons </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarIcons">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="icons-remixicons.html">Remix Icons</a>
+                                    </li>
+                                    <li>
+                                        <a href="icons-bootstrap.html">Bootstrap Icons</a>
+                                    </li>
+                                    <li>
+                                        <a href="icons-mdi.html">Material Design Icons</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarCharts" aria-expanded="false" aria-controls="sidebarCharts" class="side-nav-link">
+                                <i class="ri-donut-chart-fill"></i>
+                                <span> Charts </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarCharts">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="charts-apex.html">Apex Charts</a>
+                                    </li>
+                                    <li>
+                                        <a href="charts-chartjs.html">Chartjs</a>
+                                    </li>
+                                    <li>
+                                        <a href="charts-sparklines.html">Sparkline Charts</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarForms" aria-expanded="false" aria-controls="sidebarForms" class="side-nav-link">
+                                <i class="ri-survey-line"></i>
+                                <span> Forms </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarForms">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="form-elements.html">Basic Elements</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-advanced.html">Form Advanced</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-validation.html">Form Validation</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-wizard.html">Form Wizard</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-fileuploads.html">File Uploads</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-editors.html">Form Editors</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-image-crop.html">Image Crop</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-x-editable.html">X Editable</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarTables" aria-expanded="false" aria-controls="sidebarTables" class="side-nav-link">
+                                <i class="ri-table-line"></i>
+                                <span> Tables </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarTables">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="tables-basic.html">Basic Tables</a>
+                                    </li>
+                                    <li>
+                                        <a href="tables-datatable.html">Data Tables</a>
+                                    </li>
+                                    <li>
+                                        <a href="tables-editable.html">Editable Tables</a>
+                                    </li>
+                                    <li>
+                                        <a href="tables-responsive.html">Responsive Table</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarMaps" aria-expanded="false" aria-controls="sidebarMaps" class="side-nav-link">
+                                <i class="ri-map-pin-line"></i>
+                                <span> Maps </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarMaps">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="maps-google.html">Google Maps</a>
+                                    </li>
+                                    <li>
+                                        <a href="maps-vector.html">Vector Maps</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarMultiLevel" aria-expanded="false" aria-controls="sidebarMultiLevel" class="side-nav-link">
+                                <i class="ri-share-line"></i>
+                                <span> Multi Level </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarMultiLevel">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="javascript: void(0);">Level 1.1</a>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a data-bs-toggle="collapse" href="#sidebarSecondLevel" aria-expanded="false" aria-controls="sidebarSecondLevel">
+                                            <span> Level 1.2 </span>
+                                            <span class="menu-arrow"></span>
+                                        </a>
+                                        <div class="collapse" id="sidebarSecondLevel">
+                                            <ul class="side-nav-third-level">
+                                                <li>
+                                                    <a href="javascript: void(0);">Item 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript: void(0);">Item 2</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a data-bs-toggle="collapse" href="#sidebarThirdLevel" aria-expanded="false" aria-controls="sidebarThirdLevel">
+                                            <span> Level 1.3 </span>
+                                            <span class="menu-arrow"></span>
+                                        </a>
+                                        <div class="collapse" id="sidebarThirdLevel">
+                                            <ul class="side-nav-third-level">
+                                                <li>
+                                                    <a href="javascript: void(0);">Item 1</a>
+                                                </li>
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#sidebarFourthLevel" aria-expanded="false" aria-controls="sidebarFourthLevel">
+                                                        <span> Item 2 </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarFourthLevel">
+                                                        <ul class="side-nav-forth-level">
+                                                            <li>
+                                                                <a href="javascript: void(0);">Item 2.1</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript: void(0);">Item 2.2</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
                     </ul>
                     <!--- End Sidemenu -->
 
@@ -547,276 +880,50 @@
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">MovieMates</a></li>
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a></li>
-                                            <li class="breadcrumb-item active">환영합니다!</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                                            <li class="breadcrumb-item active">File Uploads</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">환영합니다!</h4>
+                                    <h4 class="page-title">File Uploads</h4>
                                 </div>
                             </div>
                         </div>
                         <!-- end page title -->
 
                         <div class="row">
-                            <div class="col-xxl-3 col-sm-6">
-                                <div class="card widget-flat text-bg-pink">
-                                    <div class="card-body">
-                                        <div class="float-end">
-                                            <i class="ri-eye-line widget-icon"></i>
-                                        </div>
-                                        <h6 class="text-uppercase mt-0" title="Customers">오늘 방문자수</h6>
-                                        <h2 class="my-2">8,652</h2>
-                                        <p class="mb-0">
-                                            <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
-                                            <span class="text-nowrap">Since last month</span>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="header-title">Dropzone File Upload</h4>
+                                        <p class="text-muted mb-0">
+                                            DropzoneJS is an open source library that provides drag’n’drop file uploads with image previews.
                                         </p>
                                     </div>
-                                </div>
-                            </div> <!-- end col-->
-
-                            <div class="col-xxl-3 col-sm-6">
-                                <div class="card widget-flat text-bg-purple">
                                     <div class="card-body">
-                                        <div class="float-end">
-                                            <i class="ri-wallet-2-line widget-icon"></i>
-                                        </div>
-                                        <h6 class="text-uppercase mt-0" title="Customers">수익</h6>
-                                        <h2 class="my-2">$9,254.62</h2>
-                                        <p class="mb-0">
-                                            <span class="badge bg-white bg-opacity-10 me-1">18.25%</span>
-                                            <span class="text-nowrap">Since last month</span>
-                                        </p>
+                                        <form action="/" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
+                                            data-upload-preview-template="#uploadPreviewTemplate">
+                                            <div class="fallback">
+                                                <input name="file" type="file" multiple />
+                                            </div>
+
+                                            <div class="dz-message needsclick">
+                                                <i class="h1 text-muted ri-upload-cloud-2-line"></i>
+                                                <h3>Drop files here or click to upload.</h3>
+                                                <span class="text-muted fs-13">(This is just a demo dropzone. Selected files are
+                                                    <strong>not</strong> actually uploaded.)</span>
+                                            </div>
+                                        </form>
+
+                                        <!-- Preview -->
+                                        <div class="dropzone-previews mt-3" id="file-previews"></div>  
+
                                     </div>
+                                    <!-- end card-body -->
                                 </div>
-                            </div> <!-- end col-->
-
-                            <div class="col-xxl-3 col-sm-6">
-                                <div class="card widget-flat text-bg-info">
-                                    <div class="card-body">
-                                        <div class="float-end">
-                                            <i class="ri-shopping-basket-line widget-icon"></i>
-                                        </div>
-                                        <h6 class="text-uppercase mt-0" title="Customers">예매</h6>
-                                        <h2 class="my-2">753</h2>
-                                        <p class="mb-0">
-                                            <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
-                                            <span class="text-nowrap">Since last month</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> <!-- end col-->
-
-                            <div class="col-xxl-3 col-sm-6">
-                                <div class="card widget-flat text-bg-primary">
-                                    <div class="card-body">
-                                        <div class="float-end">
-                                            <i class="ri-group-2-line widget-icon"></i>
-                                        </div>
-                                        <h6 class="text-uppercase mt-0" title="Customers">사용자수</h6>
-                                        <h2 class="my-2">63,154</h2>
-                                        <p class="mb-0">
-                                            <span class="badge bg-white bg-opacity-10 me-1">8.21%</span>
-                                            <span class="text-nowrap">Since last month</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> <!-- end col-->
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="card-widgets">
-                                            <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
-                                            <a data-bs-toggle="collapse" href="#weeklysales-collapse" role="button" aria-expanded="false" aria-controls="weeklysales-collapse"><i class="ri-subtract-line"></i></a>
-                                            <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
-                                        </div>
-                                        <h5 class="header-title mb-0">주간 매출 보고서</h5>
-
-                                        <div id="weeklysales-collapse" class="collapse pt-3 show">
-                                            <div dir="ltr">
-                                                <div id="revenue-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
-                                            </div>
-
-                                            <div class="row text-center">
-                                                <div class="col">
-                                                    <p class="text-muted mt-3">Current Week</p>
-                                                    <h3 class=" mb-0">
-                                                        <span>$506.54</span>
-                                                    </h3>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3">Previous Week</p>
-                                                    <h3 class=" mb-0">
-                                                        <span>$305.25 </span>
-                                                    </h3>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3">Conversation</p>
-                                                    <h3 class=" mb-0">
-                                                        <span>3.27%</span>
-                                                    </h3>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3">Customers</p>
-                                                    <h3 class=" mb-0">
-                                                        <span>3k</span>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div> <!-- end card-body-->
-                                </div> <!-- end card-->
-                            </div> <!-- end col-->
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="card-widgets">
-                                            <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
-                                            <a data-bs-toggle="collapse" href="#yearly-sales-collapse" role="button" aria-expanded="false" aria-controls="yearly-sales-collapse"><i class="ri-subtract-line"></i></a>
-                                            <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
-                                        </div>
-                                        <h5 class="header-title mb-0">월간 매출 보고서</h5>
-
-                                        <div id="yearly-sales-collapse" class="collapse pt-3 show">
-                                            <div dir="ltr">
-                                                <div id="yearly-sales-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
-                                            </div>
-                                            <div class="row text-center">
-                                                <div class="col">
-                                                    <p class="text-muted mt-3 mb-2">Quarter 1</p>
-                                                    <h4 class="mb-0">$56.2k</h4>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3 mb-2">Quarter 2</p>
-                                                    <h4 class="mb-0">$42.5k</h4>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3 mb-2">All Time</p>
-                                                    <h4 class="mb-0">$102.03k</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div> <!-- end card-body-->
-                                </div> <!-- end card-->
-
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-grow-1 overflow-hidden">
-                                                <h4 class="fs-22 fw-semibold">69.25%</h4>
-                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> US Dollar Share</p>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <div id="us-share-chart" class="apex-charts" dir="ltr"></div>
-                                            </div>
-                                        </div>
-                                    </div><!-- end card body -->
-                                </div> <!-- end card-->
-                            </div> <!-- end col-->
-
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <!-- Todo-->
-                                <div class="card">
-                                    <div class="card-body p-0">
-                                        <div class="p-3">
-                                            <div class="card-widgets">
-                                                <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
-                                                <a data-bs-toggle="collapse" href="#yearly-sales-collapse" role="button" aria-expanded="false" aria-controls="yearly-sales-collapse"><i class="ri-subtract-line"></i></a>
-                                                <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
-                                            </div>
-                                            <h5 class="header-title mb-0">Projects</h5>
-                                        </div>
-    
-                                        <div id="yearly-sales-collapse" class="collapse show">
-    
-                                            <div class="table-responsive">
-                                                <table class="table table-nowrap table-hover mb-0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Movie Title</th>
-                                                            <th>Genre</th>
-                                                            <th>Director</th>
-                                                            <th>Plot</th>
-                                                            <th>Rate</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Velonic Admin v1</td>
-                                                            <td>01/01/2015</td>
-                                                            <td>26/04/2015</td>
-                                                            <td><span class="badge bg-info-subtle text-info">Released</span></td>
-                                                            <td>Techzaa Studio</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Velonic Frontend v1</td>
-                                                            <td>01/01/2015</td>
-                                                            <td>26/04/2015</td>
-                                                            <td><span class="badge bg-info-subtle text-info">Released</span></td>
-                                                            <td>Techzaa Studio</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Velonic Admin v1.1</td>
-                                                            <td>01/05/2015</td>
-                                                            <td>10/05/2015</td>
-                                                            <td><span class="badge bg-pink-subtle text-pink">Pending</span></td>
-                                                            <td>Techzaa Studio</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Velonic Frontend v1.1</td>
-                                                            <td>01/01/2015</td>
-                                                            <td>31/05/2015</td>
-                                                            <td><span class="badge bg-purple-subtle text-purple">Work in Progress</span></td>
-                                                            <td>Techzaa Studio</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>Velonic Admin v1.3</td>
-                                                            <td>01/01/2015</td>
-                                                            <td>31/05/2015</td>
-                                                            <td><span class="badge bg-warning-subtle text-warning">Coming soon</span></td>
-                                                            <td>Techzaa Studio</td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>6</td>
-                                                            <td>Velonic Admin v1.3</td>
-                                                            <td>01/01/2015</td>
-                                                            <td>31/05/2015</td>
-                                                            <td><span class="badge bg-primary-subtle text-primary">Coming soon</span></td>
-                                                            <td>Techzaa Studio</td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>7</td>
-                                                            <td>Velonic Admin v1.3</td>
-                                                            <td>01/01/2015</td>
-                                                            <td>31/05/2015</td>
-                                                            <td><span class="badge bg-danger-subtle text-danger">Cool</span></td>
-                                                            <td>Techzaa Studio</td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>        
-                                        </div>
-                                    </div>                           
-                                </div> <!-- end card-->
-                            </div> <!-- end col-->
+                                <!-- end card-->
+                            </div>
+                            <!-- end col-->
                         </div>
                         <!-- end row -->
 
@@ -843,9 +950,10 @@
             <!-- ============================================================== -->
             <!-- End Page content -->
             <!-- ============================================================== -->
-
         </div>
         <!-- END wrapper -->
+
+
 
         <!-- Theme Settings -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-settings-offcanvas">
@@ -864,7 +972,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-bs-theme" id="layout-color-light" value="light">
                                     <label class="form-check-label" for="layout-color-light">
-                                        <img th:src="@{/admin/assets/images/layouts/light.png}" alt="" class="img-fluid">
+                                        <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Light</h5>
@@ -874,7 +982,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-bs-theme" id="layout-color-dark" value="dark">
                                     <label class="form-check-label" for="layout-color-dark">
-                                        <img th:src="@{/admin/assets/images/layouts/dark.png}" alt="" class="img-fluid">
+                                        <img src="assets/images/layouts/dark.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
@@ -889,7 +997,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-layout-mode" id="layout-mode-fluid" value="fluid">
                                         <label class="form-check-label" for="layout-mode-fluid">
-                                            <img th:src="@{/admin/assets/images/layouts/light.png}" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Fluid</h5>
@@ -900,7 +1008,7 @@
                                         <div class="form-check form-switch card-switch mb-1">
                                             <input class="form-check-input" type="checkbox" name="data-layout-mode" id="layout-mode-boxed" value="boxed">
                                             <label class="form-check-label" for="layout-mode-boxed">
-                                                <img th:src="@{/admin/assets/images/layouts/boxed.png}" alt="" class="img-fluid">
+                                                <img src="assets/images/layouts/boxed.png" alt="" class="img-fluid">
                                             </label>
                                         </div>
                                         <h5 class="font-14 text-center text-muted mt-2">Boxed</h5>
@@ -916,7 +1024,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-topbar-color" id="topbar-color-light" value="light">
                                     <label class="form-check-label" for="topbar-color-light">
-                                        <img th:src="@{/admin/assets/images/layouts/light.png}" alt="" class="img-fluid">
+                                        <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Light</h5>
@@ -926,7 +1034,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-topbar-color" id="topbar-color-dark" value="dark">
                                     <label class="form-check-label" for="topbar-color-dark">
-                                        <img th:src="@{/admin/assets/images/layouts/topbar-dark.png}" alt="" class="img-fluid">
+                                        <img src="assets/images/layouts/topbar-dark.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
@@ -941,7 +1049,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-light" value="light">
                                         <label class="form-check-label" for="leftbar-color-light">
-                                            <img th:src="@{/admin/assets/images/layouts/sidebar-light.png}" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/sidebar-light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Light</h5>
@@ -951,7 +1059,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-dark" value="dark">
                                         <label class="form-check-label" for="leftbar-color-dark">
-                                            <img th:src="@{/admin/assets/images/layouts/light.png}" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
@@ -967,7 +1075,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-default" value="default">
                                         <label class="form-check-label" for="leftbar-size-default">
-                                            <img th:src="@{/admin/assets/images/layouts/light.png}" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Default</h5>
@@ -977,7 +1085,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-compact" value="compact">
                                         <label class="form-check-label" for="leftbar-size-compact">
-                                            <img th:src="@{/admin/assets/images/layouts/compact.png}" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/compact.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Compact</h5>
@@ -987,7 +1095,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-small" value="condensed">
                                         <label class="form-check-label" for="leftbar-size-small">
-                                            <img th:src="@{/admin/assets/images/layouts/sm.png}" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/sm.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Condensed</h5>
@@ -998,7 +1106,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-full" value="full">
                                         <label class="form-check-label" for="leftbar-size-full">
-                                            <img th:src="@{/admin/assets/images/layouts/full.png}" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/full.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Full Layout</h5>
@@ -1030,28 +1138,43 @@
                     </div>
                 </div>
             </div>
-        </div>        
-        
+        </div>
+
+        <!-- file preview template -->
+        <div class="d-none" id="uploadPreviewTemplate">
+            <div class="card mt-1 mb-0 shadow-none border">
+                <div class="p-2">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
+                        </div>
+                        <div class="col ps-0">
+                            <a href="javascript:void(0);" class="text-muted fw-bold" data-dz-name></a>
+                            <p class="mb-0" data-dz-size></p>
+                        </div>
+                        <div class="col-auto">
+                            <!-- Button -->
+                            <a href="" class="btn btn-link btn-lg text-danger" data-dz-remove>
+                                <i class="ri-close-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Vendor js -->
         <script th:src="@{/admin/assets/js/vendor.min.js}"></script>
 
-        <!-- Daterangepicker js -->
-        <script th:src="@{/admin/assets/vendor/daterangepicker/moment.min.js}"></script>
-        <script th:src="@{/admin/assets/vendor/daterangepicker/daterangepicker.js}"></script>
-        
-        <!-- Apex Charts js -->
-        <script th:src="@{/admin/assets/vendor/apexcharts/apexcharts.min.js}"></script>
+        <!-- Dropzone File Upload js -->
+        <script th:src="@{/admin/assets/vendor/dropzone/min/dropzone.min.js}"></script>
 
-        <!-- Vector Map js -->
-        <script th:src="@{/admin/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js}"></script>
-        <script th:src="@{/admin/assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js}"></script>
-
-        <!-- Dashboard App js -->
-        <script th:src="@{/admin/assets/js/pages/dashboard.js}"></script>
-
+        <!-- File Upload Demo js -->
+        <script th:src="@{/admin/assets/js/pages/fileupload.init.js}"></script>
 
         <!-- App js -->
         <script th:src="@{/admin/assets/js/app.min.js}"></script>
 
     </body>
-</html> 
+
+</html>

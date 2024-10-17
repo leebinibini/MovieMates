@@ -34,6 +34,8 @@ public class HistoryServiceImpl implements HistoryService {
 
 
 
+
+
     @Override
     public Boolean existsById(Long id) {
         return repository.existsById(id);
@@ -47,5 +49,10 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public Boolean deleteById(Long id) {
         return null;
+    }
+
+    @Override
+    public Optional<MovieEntity> findMovieForReview(Long userId, Long movieId) {
+        return repository.findMovieForReview(userId, movieId);
     }
 }

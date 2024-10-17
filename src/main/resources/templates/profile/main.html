@@ -1395,7 +1395,7 @@
                                     <td class="py-3 price" th:text="${history.seat}">seat</td>
                                     <td class="py-3 text-right">
                                         <!--<a th:href="@{/api/review/register(userId=${history.userId})}">-->
-                                        <a th:href="@{/api/review/register(userId=1)}">
+                                        <a th:href="@{/api/review/register(userId=${history.userId}, movieId=${history.movieId})}">
                                             <span class="tag px-4 py-1.5 rounded-full bg-opacity-10 bg-yellow text-yellow caption1 font-semibold">review 쓰러가기</span>
                                         </a>
                                     </td>
