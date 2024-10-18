@@ -22,6 +22,7 @@ public class UserEntity {
     private Role role;
     private int tel;
     private String gender;
+    private String profileImageUrl;
 
 
     public enum Role {

@@ -1,16 +1,17 @@
 package com.nc13.moviemates.serviceImpl;
 
 import com.nc13.moviemates.component.model.ReviewModel;
-import com.nc13.moviemates.entity.MovieEntity;
-import com.nc13.moviemates.entity.ReviewEntity;
+import com.nc13.moviemates.entity.*;
 import com.nc13.moviemates.repository.MovieRepository;
 import com.nc13.moviemates.repository.ReservationRepository;
 import com.nc13.moviemates.repository.ReviewRepository;
 import com.nc13.moviemates.service.ReviewService;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,6 +22,8 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository repository;
     private final MovieRepository movieRepository;
     private final ReservationRepository reservationRepository;
+    private final QReviewEntity qReview = QReviewEntity.reviewEntity;
+    private final QMovieEntity qMovie = QMovieEntity.movieEntity;
 
     @Override
     public List<ReviewEntity> findAll() {
@@ -89,4 +92,29 @@ public class ReviewServiceImpl implements ReviewService {
         return reservationRepository.existsByUserIdAndMovieId(userId, movieId);
     }
 
-}
+    @Override
+    public List<ReviewEntity> getReviewsByWriterId(Long writerId) {
+        return repository.getReviewsByWriterId(writerId);
+    }
+
+    @Override
+    public List<ReviewMovieEntity> findReviewsWithMovieByUserId(Long userId) {
+        List<Tuple> results = repository.findReviewsWithMovieByUserId(userId);
+
+        return results.stream().map(tuple -> {
+            Long id = null;
+            Long reviewId = tuple.get(qReview.id);
+            Long movieId = tuple.get(qReview.movieId);
+            Long writerId = tuple.get(qReview.writerId);
+            Date date = tuple.get(qReview.date);  // 필요에 따라 포맷 변경 가능
+            String content = tuple.get(qReview.content);
+            Float rating = tuple.get(qReview.rating);
+            String title = tuple.get(qMovie.title);
+            String posterUrl = tuple.get(qMovie.lengthPosterUrl);
+
+            return new ReviewMovieEntity(id, reviewId, movieId, writerId, date, content, rating, title, posterUrl);
+        }).collect(Collectors.toList());
+    }
+    }
+
+

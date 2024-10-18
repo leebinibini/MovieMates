@@ -5,6 +5,7 @@ import com.nc13.moviemates.component.model.ReviewModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
 import com.nc13.moviemates.entity.ScheduleEntity;
+import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,6 +30,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final WishService wishService;
     private final MovieService movieService;
+    private final UserService userService;
     @GetMapping("/list")
     public ResponseEntity<List<ReviewEntity>> getList() {
         return ResponseEntity.ok(service.findAll());
@@ -66,10 +68,11 @@ public class ReviewController {
     @PostMapping("/register")
     public ResponseEntity<String> insert(@RequestBody ReviewEntity review) {
 
-        boolean hasWatched = reviewService.hasUserWatchedMovie(review.getWriterId(), review.getMovieId());
+       /* 영화를 본 사람만 볼 수 작성할 수 있도록
+       boolean hasWatched = reviewService.hasUserWatchedMovie(review.getWriterId(), review.getMovieId());
         if (!hasWatched) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("리뷰를 작성하려면 먼저 영화를 보셔야 합니다.");
-        }
+        }*/
         // 유저 아이디가 있는지 확인
         if (review.getWriterId() == null) {
             System.out.println("유저 아이디가 없습니다.");
@@ -113,5 +116,16 @@ public class ReviewController {
     @GetMapping("/existsById/{id}")
     public ResponseEntity<Boolean> existsById(@PathVariable Long id) {
         return ResponseEntity.ok(service.existsById(id));
+    }
+
+    @GetMapping("/myList/{userId}")
+    public String showReviewList(Model model, @PathVariable Long userId) {
+        model.addAttribute("user", userService.findById(userId));
+        model.addAttribute("writerId", userId);
+        model.addAttribute("reviewList", service.getReviewsByWriterId(userId));
+        model.addAttribute("movieWithReview", service.findReviewsWithMovieByUserId(userId));
+        System.out.println(service.findReviewsWithMovieByUserId(userId));
+        System.out.println(service.getReviewsByWriterId(userId));
+        return "profile/myReviewList";
     }
 }

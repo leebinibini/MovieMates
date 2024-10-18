@@ -5,6 +5,7 @@ import com.nc13.moviemates.entity.QMovieEntity;
 import com.nc13.moviemates.entity.QReviewEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
 import com.nc13.moviemates.queryDsl.ReviewQueryDSL;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -75,6 +76,32 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
                 .from(review)
                 .join(movie).on(review.movieId.eq(movie.id))  // 리뷰의 movieId와 영화의 id 조인
                 .where(review.writerId.eq(userId))  // 리뷰의 writerId가 userId와 일치하는 경우
+                .fetch();
+    }
+    @Override
+    public List<ReviewEntity> getReviewsByWriterId(Long writerId){
+        return jpaQueryFactory
+                .selectFrom(qReview)
+                .where(qReview.writerId.eq(writerId))
+                .fetch();
+    }
+
+    @Override
+    public List<Tuple> findReviewsWithMovieByUserId(Long userId) {
+        return jpaQueryFactory
+                .select(
+                        qReview.id,
+                        qReview.movieId,
+                        qReview.writerId,
+                        qReview.date,
+                        qReview.content,
+                        qReview.rating,
+                        qMovie.title,        // 영화 제목
+                        qMovie.lengthPosterUrl     // 영화 포스터 URL
+                )
+                .from(qReview)
+                .leftJoin(qMovie).on(qReview.movieId.eq(qMovie.id))
+                .where(qReview.writerId.eq(userId))
                 .fetch();
     }
 
