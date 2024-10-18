@@ -19,5 +19,4 @@ public class ReviewModel {
     private Float rating;
     private String content;
     private Date date;
-
 }

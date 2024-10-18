@@ -10,16 +10,18 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-@Table (name="reviews")
+@Table(name="reviewmovie")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ReviewEntity {
+public class ReviewMovieEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long reviewId;
     private Long movieId;
     private Long writerId;
-    private Float rating;
-    private String content;
     private Date date;
-
+    private String content;
+    private Float rating;
+    private String title;
+    private String lengthPosterUrl;
 }

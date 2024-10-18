@@ -1318,17 +1318,17 @@
                         <div class="mail heading6 font-normal normal-case text-secondary text-center mt-1">hi.avitex@gmail.com</div>
                     </div>
                     <div class="menu-tab list-category w-full max-w-none lg:mt-10 mt-6">
-                        <a th:href="@{#}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active" th:data-item="${dashboard}">
+                        <a th:href="@{/api/user/profile/mypage}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active" th:data-item="${dashboard}">
                             <span class="ph ph-house-line text-xl"></span>
-                            <strong class="heading6">Dashboard</strong>
-                        </a>
-                        <a th:href="@{#}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" th:data-item="${orders}">
-                            <span class="ph ph-package text-xl"></span>
                             <strong class="heading6">History Orders</strong>
                         </a>
-                        <a th:href="@{#}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" th:data-item="${address}">
+                        <a th:href="@{/api/}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" th:data-item="${orders}">
+                            <span class="ph ph-package text-xl"></span>
+                            <strong class="heading6">Upcoming Reservations</strong>
+                        </a>
+                        <a th:href="@{/api/review/myList/1}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" th:data-item="${address}">
                             <span class="ph ph-tag text-xl"></span>
-                            <strong class="heading6">My Address</strong>
+                            <strong class="heading6">My Reviews</strong>
                         </a>
                         <a th:href="@{/api/user/profile/setting/1}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" th:data-item="${setting}">
                             <span class="ph ph-gear-six text-xl"></span>
@@ -1336,7 +1336,7 @@
                         </a>
                         <a href="login.html" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5">
                             <span class="ph ph-sign-out text-xl"></span>
-                            <strong class="heading6">Logout</strong>
+                            <strong class="heading6">WishList</strong>
                         </a>
                     </div>
                 </div>
@@ -1703,7 +1703,7 @@
                         </div>
                     </form>
                 </div>
-                    <div class="filter-item text-content w-full p-7 border border-line rounded-xl" th:data-item="${setting}">
+                <div class="filter-item text-content w-full p-7 border border-line rounded-xl" th:data-item="${setting}">
                     <form>
                         <div class="heading5 pb-4">Information</div>
                         <div class="upload_image col-span-full">

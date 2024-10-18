@@ -87,6 +87,20 @@ public class UserQueryDSLImpl implements UserQueryDSL {
     public Boolean exitsByEmail(String email){
         return jpaQueryFactory.selectFrom(qUser).where(qUser.email.eq(email)).fetchCount()>0;}
 
+    @Override
+    public void updateUserInfo(UserModel userData, String profileImageUrl) {
+        JPAUpdateClause updateClause = new JPAUpdateClause(entityManager, qUser);
+
+        updateClause
+                .where(qUser.id.eq(userData.getId()))
+                .set(qUser.email, userData.getEmail())
+                .set(qUser.password, userData.getPassword())
+                .set(qUser.nickname, userData.getNickname())
+                .set(qUser.gender, userData.getGender())
+                .set(qUser.tel, userData.getTel())
+                .set(qUser.profileImageUrl, profileImageUrl)  // 이미지 URL 업데이트
+                .execute();
+    }
 
 
 }

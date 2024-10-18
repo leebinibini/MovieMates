@@ -211,8 +211,8 @@
                 <div class="col-sm-6">
                     <div id="comments" class="comments-area">
                         <div class="comments-wrapper">
-                            <h2 class="comments-title">Comments (2)</h2>
-                                <ol class="comment-list" th:each="review:${reviewList}">
+                            <h2 class="comments-title">Comments</h2>
+                                <ol id="reviews" class="comment-list" th:each="review:${reviewList}">
                                     <li>
                                         <article>
                                             <div class="comment-avatar">
@@ -563,20 +563,56 @@
 
         // 서버로 JSON 데이터 전송 (Axios 사용)
         axios({
-            url:"/api/review/register",
+            url: "/api/review/register",
             method: 'post',
             data: reviewData
         })
 
-            .then(function(response) {
-                alert(response.data);
-                alert('Review submitted successfully!');
-                // 필요에 따라 페이지 리로드 또는 리디렉션
+            .then(function (response) {
+                console.log(response.data)
+                console.log(reviewData)
+                console.log(response.data.review)
+                if (response.data.success) {
+                    alert('리뷰를 등록해주셔서 감사합니다!');
+                    alert(response.data)
+                    alert(reviewData)
+                    alert(response.data.review)
+                    // 새로 등록된 리뷰 데이터를 이용해 새로운 리뷰 추가
+                    appendReviewToDOM(response.data)
+                }
             })
-            .catch(function(error) {
-                alert('Error submitting review: ' + error.message);
+            .catch(function (error) {
+                console.error('Error submitting review:', error)
             });
     });
+
+    function appendReviewToDOM(response) {
+        const reviewList = document.getElementById('review');  // 리뷰 리스트가 있는 요소
+
+        const newReview = document.createElement('ol');
+
+        newReview.innerHTML = `
+ <li>
+        <article>
+            <div class="comment-avatar">
+                <img alt="Image" src="/images/blog/user-1.jpg" class="avatar">
+            </div>
+            <div class="comment-body">
+                <div class="meta-data">
+                    <a href="#" class="comment-author">${review.writerId}</a>
+                </div>
+                <span class="review-rating">${review.rating != null ? review.rating : 'No rating'} / 5.0</span>
+                <div class="comment-content">
+                    ${review.content}
+                </div>
+            </div>
+        </article>
+        </li>
+    `;
+
+        reviewList.appendChild(newReview);  // 새 리뷰를 기존 리스트에 추가
+    }
+
 </script>
 </body>
 </html>

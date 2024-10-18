@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,14 +120,15 @@ public class UserController {
         return ResponseEntity.ok(service.save(user));
     }
     @ResponseBody
-    @PostMapping("/update")
-    public ResponseEntity<Boolean> update(@RequestPart("userData") UserModel userData, @RequestPart("password") String password) {
+    @PostMapping("/update/{userId}")
+    public ResponseEntity<Boolean> update(@RequestPart("userData") UserModel userData, @RequestPart("password") String password,
+                                          @RequestPart(value = "file", required = false) MultipartFile file) {
         System.out.println("넘어온 값" + userData);
         System.out.println("넘어온 값" + password);
         if(!service.existsByPassword(password)){
             return ResponseEntity.ok(false);
         }
-        return ResponseEntity.ok(service.update(userData));
+        return ResponseEntity.ok(service.updateUserInfo(userData, file));
     }
 
     @ResponseBody
