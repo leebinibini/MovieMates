@@ -75,6 +75,7 @@ public class ReservationController {
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody ReservationModel reservation) {
+        System.out.println("컨트롤러 진입");
         return ResponseEntity.ok(service.save(reservation));
     }
 
