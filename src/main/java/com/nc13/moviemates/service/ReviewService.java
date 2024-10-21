@@ -36,4 +36,6 @@ public interface ReviewService {
     List <ReviewEntity> getReviewsByWriterId(Long writerId);
 
     List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId);
+
+    List<MovieEntity> getWatchedMoviesByUserId(Long userId);
 }
