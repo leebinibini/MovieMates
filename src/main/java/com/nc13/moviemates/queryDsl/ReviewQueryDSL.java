@@ -7,6 +7,7 @@ import com.nc13.moviemates.entity.ReviewEntity;
 import com.querydsl.core.Tuple;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ReviewQueryDSL {
     List<ReviewEntity> getAll();
@@ -18,5 +19,5 @@ public interface ReviewQueryDSL {
     List<ReviewEntity> findAllByMovieId(Long movieId);
     List<String> findMovieTitlesByUserId(Long userId);
     List<ReviewEntity> getReviewsByWriterId(Long writerId);
-    List<Tuple> findReviewsWithMovieByUserId(Long userId);
+    List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId);
 }

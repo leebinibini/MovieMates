@@ -12,6 +12,8 @@ public interface HistoryService {
 
     List<MovieEntity> findMovieByUserId(Long userId);
 
+    Optional<HistoryEntity> findById(Long id);
+
     Boolean save(HistoryEntity email);
 
     Boolean existsById(Long id);

@@ -11,7 +11,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class ReviewQueryDSLImpl implements ReviewQueryDSL {
@@ -87,22 +90,37 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
     }
 
     @Override
-    public List<Tuple> findReviewsWithMovieByUserId(Long userId) {
-        return jpaQueryFactory
-                .select(
-                        qReview.id,
-                        qReview.movieId,
-                        qReview.writerId,
-                        qReview.date,
-                        qReview.content,
-                        qReview.rating,
-                        qMovie.title,        // 영화 제목
-                        qMovie.lengthPosterUrl     // 영화 포스터 URL
-                )
-                .from(qReview)
-                .leftJoin(qMovie).on(qReview.movieId.eq(qMovie.id))
-                .where(qReview.writerId.eq(userId))
-                .fetch();
+    public List<Map<String, Object>> findReviewsWithMovieByUserId (Long userId){
+        QMovieEntity qMovie = QMovieEntity.movieEntity;
+        List<Tuple> reviewWithMovie= jpaQueryFactory.
+
+                    select(
+                            qReview.id, qReview.movieId,
+                            qReview.writerId, qReview.date,
+                            qReview.content, qReview.rating,
+                            qMovie.title, qMovie.lengthPosterUrl     // 영화 포스터 URL
+                    )
+                    .from(qReview)
+                    .join(qMovie).on(qReview.movieId.eq(qMovie.id))
+                    .where(qReview.writerId.eq(userId))
+                    .fetch();
+        return reviewWithMovie.stream()
+                .map(tuple -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("reviewId", tuple.get(qReview.id));
+                    map.put("movieId", tuple.get(qReview.movieId));
+                    map.put("writerId", tuple.get(qReview.writerId));
+                    map.put("date", tuple.get(qReview.date));
+                    map.put("content", tuple.get(qReview.content));
+                    map.put("rating", tuple.get(qReview.rating));
+                    map.put("title", tuple.get(qMovie.title));
+                    map.put("posterUrl", tuple.get(qMovie.lengthPosterUrl)); // 영화 포스터 URL 추가
+                    return map;
+                })
+                .collect(Collectors.toList());
+    }
     }
 
-}
+
+
+

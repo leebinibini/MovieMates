@@ -8,6 +8,7 @@ import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.serviceImpl.UserServiceImpl;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,18 +26,18 @@ import java.util.Optional;
 public class UserController {
     private final UserService service;
     private final HistoryService historyService;
+    private final UserService userService;
 
-    @GetMapping("/mypage")
-    public String getList(Model model){
-        List<HistoryEntity> histories = historyService.findAll();
-        List<String> titles = new ArrayList<>();
-
-        for(int i=0; i<histories.size(); i++){
-            //System.out.println("히스토리 제목: "+histories.get(i).getTitle());
+    @GetMapping("/mypage/{id}")
+    public String getList(Model model, @PathVariable Long id){
+        Optional<UserEntity> userOptional = userService.findById(id);
+        if (userOptional.isPresent()) {
+            model.addAttribute("user", userOptional.get());  // 값이 있으면 ReviewEntity를 넘김
+        } else {
+            throw new RuntimeException("User not found");
         }
+        HistoryEntity histories = historyService.findById(id).orElse(null);
         model.addAttribute("histories", histories);
-
-
         return "profile/main";
     }
 

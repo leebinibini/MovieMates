@@ -3,8 +3,10 @@ package com.nc13.moviemates.serviceImpl;
 import com.nc13.moviemates.component.model.ReservationModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReservationEntity;
+import com.nc13.moviemates.queryDslImpl.ReservationQueryDSLImpl;
 import com.nc13.moviemates.repository.ReservationRepository;
 import com.nc13.moviemates.service.ReservationService;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +17,14 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ReservationServiceImpl implements ReservationService {
     private final ReservationRepository repository;
+
 
     @Override
     public List<ReservationEntity> findAll() {
@@ -47,11 +51,16 @@ public class ReservationServiceImpl implements ReservationService {
         Long id = ent.getId();
         return existsById(id);
     }
-
+    @Transactional
     @Override
     public Boolean deleteById(Long id) {
-        repository.deleteById(id);
-        return !existsById(id);
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        } else {
+            System.out.println("ID " + id + "는 존재하지 않습니다.");
+            return false;
+        }
     }
 
     @Override
@@ -99,5 +108,15 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Long deleteMany(List<Long> reservationIdList) {
         return repository.deleteMany(reservationIdList);
+    }
+
+    @Override
+    public List<Map<String, Object>> findReservationWithMovieByUserId(Long userId) {
+        return repository.findReservationWithMovieByUserId(userId);
+    }
+
+    @Override
+    public List<Map<String, Object>> findReservationWithScheduleByUserId(Long userId) {
+        return repository.findReservationWithScheduleByUserId(userId);
     }
 }

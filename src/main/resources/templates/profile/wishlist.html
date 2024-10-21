@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:hover="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>리뷰 리스트 보기</title>
+    <link rel="shortcut icon" th:href="@{/profile/images/fav.png}" type="image/x-icon"/>
+    <link rel="stylesheet" th:href="@{/profile/css/swiper-bundle.min.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/css/output-scss.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/css/output-tailwind.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/css/review.css}"/>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/movieLogo.jpg}"/>
+    <style>
+        .wishlist-icon .wishlist-heart i {
+            font-size: 24px;
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+        .wishlist-icon .wishlist-heart i.fa-solid {
+            color: #ff4d4d;
+        }
+        .wishlist-icon .wishlist-heart:hover i {
+            color: #ff4d4d;
+        }
+
+        .heart-button {
+            background-color: transparent;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .heart-button .fa-solid {
+            color: #ff4d4d;
+        }
+
+        .heart-button:hover {
+            border-color: #ff4d4d;
+            background-color: rgba(255, 77, 77, 0.1);
+        }
+
+        .heart-button i {
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .heart-button .fa-regular {
+            color: #ccc;
+        }
+
+        .heart-button:hover .fa-regular {
+            color: #ff4d4d;
+        }
+    </style>
+</head>
+<body>
+<div class="breadcrumb-block style-shared">
+    <div class="breadcrumb-main bg-linear overflow-hidden">
+        <div class="container lg:pt-[134px] pt-24 pb-10 relative">
+            <div class="main-content w-full h-full flex flex-col items-center justify-center relative z-[1]">
+                <div class="text-content">
+                    <div class="heading2 text-center">My Account</div>
+                    <div class="link flex items-center justify-center gap-1 caption1 mt-3">
+                        <a th:href="@{/}">Homepage</a>
+                        <i class="ph ph-caret-right text-sm text-secondary2"></i>
+                        <div class="text-secondary2 capitalize">My Account</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-account-block md:py-20 py-10">
+    <div class="container">
+        <div class="content-main lg:px-[60px] md:px-4 flex gap-y-8 max-md:flex-col w-full">
+            <div class="left md:w-1/3 w-full xl:pr-[3.125rem] lg:pr-[28px] md:pr-[16px]">
+                <div class="user-infor bg-surface md:px-8 px-5 md:py-10 py-6 md:rounded-[20px] rounded-xl">
+                    <div class="heading flex flex-col items-center justify-center">
+                        <div class="avatar">
+                            <img th:src="${user.getProfileImageUrl()}" alt="avatar"
+                                 class="md:w-[140px] w-[120px] md:h-[140px] h-[120px] rounded-full"/>
+                        </div>
+                        <div class="name heading6 mt-4 text-center"
+                             th:text="${user.getNickname()} + '님의 찜한 영화'">
+                        </div>
+                    </div>
+                    <div class="menu-tab list-category w-full max-w-none lg:mt-10 mt-6">
+                        <a th:href="@{/api/user/mypage/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active"
+                           th:data-item="${dashboard}">
+                            <span class="ph ph-house-line text-xl"></span>
+                            <strong class="heading6">History Orders</strong>
+                        </a>
+                        <a th:href="@{/api/reservation/list/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
+                           th:data-item="${orders}">
+                            <span class="ph ph-package text-xl"></span>
+                            <strong class="heading6">My Reservations</strong>
+                        </a>
+                        <a th:href="@{/api/review/myList/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
+                           th:data-item="${address}">
+                            <span class="ph ph-tag text-xl"></span>
+                            <strong class="heading6">My Reviews</strong>
+                        </a>
+                        <a th:href="@{/api/user/profile/setting/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
+                           th:data-item="${setting}">
+                            <span class="ph ph-gear-six text-xl"></span>
+                            <strong class="heading6">Setting</strong>
+                        </a>
+                        <a th:href="@{/api/wish/list/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5">
+                            <span class="ph ph-sign-out text-xl"></span>
+                            <strong class="heading6">WishList</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab text-content overflow-hidden w-full p-7 border border-line rounded-xl">
+                <h6 class="heading6" >내가 찜한 영화</h6>
+                <div class="list_order" th:each="wishMovie : ${wishMovie}">
+                    <div class="order_item mt-5 border border-line rounded-lg box-shadow-xs" >
+                        <div class="flex flex-wrap items-center justify-between gap-4 p-5 border-b border-line">
+                            <div class="flex items-center gap-8 ml-8">
+                                <strong class="text-title">Movie Title:</strong>
+                                <strong class="order_number text-button uppercase" th:text="${wishMovie['movieTitle']}">Movie Title</strong>
+                                <strong class="text-title">찜</strong>
+                                <span class="wishlist-icon">
+                                        <a href="javascript:void(0);" class="wishlist-heart" th:data-movie-id="${wishMovie['movieId']}">
+                                            <button class="heart-button" th:data-movie-id="${wishMovie['movieId']}">
+                                                <i class="fa-heart" th:classappend="${isWishlisted != null and isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+                                            </button>
+                                        </a>
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="list_prd px-5">
+                            <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
+                                <!--<Link th:href={'/product/default'} class="flex items-center gap-5">-->
+                                <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
+                                    <img
+                                            th:src="${wishMovie['posterUrl']}"
+                                            th:alt="${wishMovie['posterUrl']}"
+                                            width="100"
+                                            height="100"
+                                            class="object-cover"
+                                    />
+                                </div>
+                                <div>
+                                    <div class="prd_name text-title" th:data-id="${wishMovie['userId']}" id="reviewContent-${wishMovie['userId']}" th:data-content="${wishMovie['plot']}">
+                                        <strong class="text-title">Plot:</strong>
+                                        <span th:text="${wishMovie['plot']}">Plot</span>
+                                    </div>
+                                    <!--<div th:if="${reservationSchedule.size() > 0}">
+                                        <div class="caption1 text-secondary mt-2">
+                                            <span class="prd_size uppercase" th:text="${reservationSchedule[0]['showDate']}">Date</span>
+                                            <span>/</span>
+                                            <span class="prd_color capitalize" th:text="${reservationSchedule[0]['showTime']}">Time</span>
+                                        </div>
+                                    </div>-->
+                                </div>
+                                </Link>
+                                <!--<div class='text-title'>
+                                    <span class="prd_quantity">1</span>
+                                    <span> X </span>
+                                    <span class="prd_price">$69.00</span>
+                                </div>-->
+                            </div>
+                        </div>
+                       <!-- <div class="flex flex-wrap gap-4 p-5">
+                            <button class="button-main" th:onclick="deleteReservation([[${wishMovie['wishId']}]])">
+                                 취소하기
+                            </button>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- jQuery 로드 -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // 하트 아이콘 클릭 이벤트
+        $('.wishlist-heart').on('click', function() {
+            var $icon = $(this).find('i');
+            var movieId = $(this).data('movie-id');
+            var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
+
+            // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
+            if (isWishlisted) {
+                $icon.removeClass('fa-solid').addClass('fa-regular');  // 비어있는 하트로 변경
+            } else {
+                $icon.removeClass('fa-regular').addClass('fa-solid');  // 채워진 하트로 변경
+            }
+
+            // AJAX 요청을 통해 위시리스트에 추가/삭제
+            $.ajax({
+                url: '/api/wish/toggle',
+                method: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify({
+                    movieId: movieId,
+                    userId: 1
+                }),
+                success: function(response) {
+                    console.log('위시리스트 업데이트 성공', response);
+                },
+                error: function(error) {
+                    console.error('위시리스트 업데이트 실패', error);
+                }
+            });
+        });
+    });
+
+</script>
+</body>
+</html>
