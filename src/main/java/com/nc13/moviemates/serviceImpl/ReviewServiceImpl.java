@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -42,10 +43,16 @@ public class ReviewServiceImpl implements ReviewService {
         return existsById(id);
     }
 
+    @Transactional
     @Override
     public Boolean deleteById(Long id) {
-        repository.deleteById(id);
-        return !existsById(id);
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        } else {
+            System.out.println("ID " + id + "는 존재하지 않습니다.");
+            return false;
+        }
     }
 
     @Override
@@ -60,7 +67,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<ReviewModel> findAllByMovieId(Long movieId) {
-        List<ReviewEntity> entList =  repository.findAllByMovieId(movieId);
+        List<ReviewEntity> entList = repository.findAllByMovieId(movieId);
 
         // ReviewEntity 리스트를 ReviewModel 리스트로 변환
         List<ReviewModel> modelList = entList.stream()
@@ -98,23 +105,9 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewMovieEntity> findReviewsWithMovieByUserId(Long userId) {
-        List<Tuple> results = repository.findReviewsWithMovieByUserId(userId);
-
-        return results.stream().map(tuple -> {
-            Long id = null;
-            Long reviewId = tuple.get(qReview.id);
-            Long movieId = tuple.get(qReview.movieId);
-            Long writerId = tuple.get(qReview.writerId);
-            Date date = tuple.get(qReview.date);  // 필요에 따라 포맷 변경 가능
-            String content = tuple.get(qReview.content);
-            Float rating = tuple.get(qReview.rating);
-            String title = tuple.get(qMovie.title);
-            String posterUrl = tuple.get(qMovie.lengthPosterUrl);
-
-            return new ReviewMovieEntity(id, reviewId, movieId, writerId, date, content, rating, title, posterUrl);
-        }).collect(Collectors.toList());
+    public List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId) {
+        return repository.findReviewsWithMovieByUserId(userId);
     }
-    }
+}
 
 

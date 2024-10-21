@@ -8,6 +8,7 @@ import com.querydsl.core.Tuple;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ReviewService {
@@ -34,5 +35,5 @@ public interface ReviewService {
 
     List <ReviewEntity> getReviewsByWriterId(Long writerId);
 
-    List<ReviewMovieEntity> findReviewsWithMovieByUserId(Long userId);
+    List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId);
 }

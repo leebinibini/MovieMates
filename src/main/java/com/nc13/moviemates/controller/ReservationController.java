@@ -3,9 +3,12 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.component.model.ReservationModel;
 import com.nc13.moviemates.entity.HistoryEntity;
 import com.nc13.moviemates.entity.ReservationEntity;
+import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.HistoryService;
 import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.ReservationService;
+import com.nc13.moviemates.service.UserService;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.RegEx;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -23,11 +30,42 @@ import java.util.Optional;
 @RequestMapping("/api/reservation")
 public class ReservationController {
     private final ReservationService service;
+    private final UserService userService;
 
-    @GetMapping(("/list"))
-    public ResponseEntity<List<ReservationEntity>> getList() {
-        return ResponseEntity.ok(service.findAll());
-    }
+    @GetMapping(("/list/{userId}"))
+    public String getReservationWithMovieForUser(@PathVariable Long userId, Model model) {
+        Optional<UserEntity> optionalUser = userService.findById(userId);
+        if (optionalUser.isPresent()) {
+            model.addAttribute("user", optionalUser.get());
+        } else {
+            model.addAttribute("errorMessage", "User not found");
+        }
+        // Reservation Movie 정보 조회
+        List<Map<String, Object>> reservationMovies = service.findReservationWithMovieByUserId(userId);
+
+        // Reservation Schedule 정보 조회
+        List<Map<String, Object>> reservationSchedules = service.findReservationWithScheduleByUserId(userId);
+
+        // 날짜 및 시간 포맷터 설정
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        // 각 예약 스케줄에 대해 포맷팅 작업
+        reservationSchedules.forEach(schedule -> {
+            LocalDate showDate = (LocalDate) schedule.get("showDate");
+            LocalTime showTime = (LocalTime) schedule.get("showTime");
+
+            if (showDate != null) {
+                schedule.put("formattedShowDate", showDate.format(dateFormatter));
+            }
+            if (showTime != null) {
+                schedule.put("formattedShowTime", showTime.format(timeFormatter));
+            }
+        });
+        model.addAttribute("reservationMovie", service.findReservationWithMovieByUserId(userId));
+        model.addAttribute("reservationSchedule", service.findReservationWithScheduleByUserId(userId));
+        return "profile/reservation";
+        }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<ReservationEntity>> getById(@PathVariable("id") Long id) {
@@ -64,8 +102,9 @@ public class ReservationController {
         return "iamport";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/cancel/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+        System.out.println("삭제왔니");
         return ResponseEntity.ok(service.deleteById(id));
     }
 
@@ -78,6 +117,4 @@ public class ReservationController {
     public ResponseEntity<Boolean> existsById(@PathVariable Long id) {
         return ResponseEntity.ok(service.existsById(id));
     }
-
-
 }

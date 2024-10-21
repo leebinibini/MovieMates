@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -89,5 +90,10 @@ public class WishServiceImpl implements WishService {
         Optional<WishEntity> wishEntity = repository.findByUserIdAndMovieId(userId, movieId);
 
         return wishEntity != null;  // 존재하면 true, 없으면 false 반환
+    }
+
+    @Override
+    public List<Map<String, Object>> findWishesWithMovieDetails(Long userId) {
+        return repository.findWishesWithMovieDetails(userId);
     }
 }

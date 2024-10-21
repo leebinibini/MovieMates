@@ -1,14 +1,10 @@
 package com.nc13.moviemates.controller;
 
-import com.nc13.moviemates.component.model.MovieModel;
-import com.nc13.moviemates.component.model.ReviewModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
-import com.nc13.moviemates.entity.ScheduleEntity;
 import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -92,9 +88,23 @@ public class ReviewController {
     }
 
 
-    @PutMapping
-    public ResponseEntity<Boolean> update(@RequestBody ReviewEntity review){
-        return ResponseEntity.ok(service.save(review));
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Boolean> update(@RequestBody ReviewEntity review, @PathVariable Long id){
+        Optional<ReviewEntity> optionalReview = service.findById(id);
+
+        if (!optionalReview.isPresent()) {
+            return ResponseEntity.notFound().build(); // 리뷰가 없을 경우
+        }
+
+        ReviewEntity existingReview = optionalReview.get(); // Optional에서 ReviewEntity를 가져옴
+
+        // 내용만 업데이트
+        existingReview.setContent(review.getContent());
+
+        // 기존 리뷰의 다른 필드는 그대로 유지하고 저장
+        service.save(existingReview);
+
+        return ResponseEntity.ok(true);
     }
 
     @ResponseBody
@@ -103,7 +113,7 @@ public class ReviewController {
         return ResponseEntity.ok(service.deleteMany(reviewIdList));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         return ResponseEntity.ok(service.deleteById(id));
     }
@@ -120,12 +130,14 @@ public class ReviewController {
 
     @GetMapping("/myList/{userId}")
     public String showReviewList(Model model, @PathVariable Long userId) {
-        model.addAttribute("user", userService.findById(userId));
-        model.addAttribute("writerId", userId);
-        model.addAttribute("reviewList", service.getReviewsByWriterId(userId));
+        Optional<UserEntity> userOptional = userService.findById(userId);
+        if (userOptional.isPresent()) {
+            model.addAttribute("user", userOptional.get());  // 값이 있으면 ReviewEntity를 넘김
+        } else {
+            throw new RuntimeException("User not found");
+        }
         model.addAttribute("movieWithReview", service.findReviewsWithMovieByUserId(userId));
-        System.out.println(service.findReviewsWithMovieByUserId(userId));
-        System.out.println(service.getReviewsByWriterId(userId));
-        return "profile/myReviewList";
+
+        return "profile/myreviewlist";
     }
 }

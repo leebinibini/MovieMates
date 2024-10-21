@@ -26,6 +26,12 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    public Optional<HistoryEntity> findById(Long id) {
+        return repository.findByHistoryId(id);
+    }
+
+
+    @Override
     public Boolean save(HistoryEntity history) {
         HistoryEntity ent = repository.save(history);
         Long id = ent.getId();

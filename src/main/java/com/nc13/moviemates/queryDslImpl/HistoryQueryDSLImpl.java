@@ -71,6 +71,18 @@ public class HistoryQueryDSLImpl implements HistoryQueryDSL {
     public Long getRowCount() {
         return jpaQueryFactory.select(qHistory.id.count()).from(qHistory).fetchOne();
     }
+
+    @Override
+    public Optional<HistoryEntity> findByHistoryId(Long id) {
+        QHistoryEntity historyEntity = QHistoryEntity.historyEntity;
+
+        HistoryEntity history = jpaQueryFactory
+                .selectFrom(historyEntity)
+                .where(historyEntity.id.eq(id))
+                .fetchOne();
+
+        return Optional.ofNullable(history);
+    }
 /*
     @Override
     public Boolean deleteById(Long id) {

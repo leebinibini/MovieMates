@@ -34,22 +34,21 @@
                 <div class="user-infor bg-surface md:px-8 px-5 md:py-10 py-6 md:rounded-[20px] rounded-xl">
                     <div class="heading flex flex-col items-center justify-center">
                         <div class="avatar">
-                            <img th:src="@{user.profileImageUrl}" alt="avatar"
+                            <img th:src="${user.getProfileImageUrl()}" alt="avatar"
                                  class="md:w-[140px] w-[120px] md:h-[140px] h-[120px] rounded-full"/>
                         </div>
-                        <div class="name heading6 mt-4 text-center">Tony Nguyen</div>
-                        <div class="mail heading6 font-normal normal-case text-secondary text-center mt-1">
-                            hi.avitex@gmail.com
+                        <div class="name heading6 mt-4 text-center"
+                             th:text="${user.getNickname()} + '님의 예매 목록'">
                         </div>
                     </div>
                     <div class="menu-tab list-category w-full max-w-none lg:mt-10 mt-6">
-                        <a th:href="@{#}"
+                        <a th:href="@{/api/user/mypage/1}"
                            class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active"
                            th:data-item="${dashboard}">
                             <span class="ph ph-house-line text-xl"></span>
                             <strong class="heading6">History Orders</strong>
                         </a>
-                        <a th:href="@{/api/}"
+                        <a th:href="@{/api/reservation/list/1}"
                            class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
                            th:data-item="${orders}">
                             <span class="ph ph-package text-xl"></span>
@@ -67,7 +66,7 @@
                             <span class="ph ph-gear-six text-xl"></span>
                             <strong class="heading6">Setting</strong>
                         </a>
-                        <a href="login.html"
+                        <a th:href="@{/api/wish/list/1}"
                            class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5">
                             <span class="ph ph-sign-out text-xl"></span>
                             <strong class="heading6">WishList</strong>
@@ -76,49 +75,53 @@
                 </div>
             </div>
             <div class="tab text-content overflow-hidden w-full p-7 border border-line rounded-xl">
-                <h6 class="heading6">Your Orders</h6>
-                <div className="list_order">
-                    <div className="order_item mt-5 border border-line rounded-lg box-shadow-xs" th:each="review : ${movieWithReview}">
-                        <div className="flex flex-wrap items-center justify-between gap-4 p-5 border-b border-line">
-                            <div className="flex items-center gap-8 ml-2">
-                                <strong className="text-title">Movie Title:</strong>
-                                <strong className="order_number text-button uppercase" th:text="${review.title}">Movie Title</strong>
-                                <strong className="text-title">Rating:</strong>
-                                <span className="tag px-4 py-1.5 rounded-full bg-opacity-10 bg-yellow text-yellow caption1 font-semibold" th:text="${review.rating}">Pending</span>
+                <h6 class="heading6" >예매 목록</h6>
+                <div class="list_order" th:each="reservationMovie : ${reservationMovie}">
+                    <div class="order_item mt-5 border border-line rounded-lg box-shadow-xs" >
+                        <div class="flex flex-wrap items-center justify-between gap-4 p-5 border-b border-line">
+                            <div class="flex items-center gap-8 ml-8">
+                                <strong class="text-title">Movie Title:</strong>
+                                <strong class="order_number text-button uppercase" th:text="${reservationMovie['movieTitle']}">Movie Title</strong>
+                                <strong class="text-title">Payment status:</strong>
+                                <span class="tag px-4 py-1.5 rounded-full bg-opacity-10 bg-yellow text-yellow caption1 font-semibold" th:text="${reservationMovie['status']}">Pending</span>
                             </div>
                         </div>
-                        <div className="list_prd px-5">
-                            <div className="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
-                                <!--<Link th:href={'/product/default'} className="flex items-center gap-5">-->
-                                <div className="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
+                        <div class="list_prd px-5">
+                            <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
+                                <!--<Link th:href={'/product/default'} class="flex items-center gap-5">-->
+                                <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
                                     <img
-                                            th:src="${review.lengthPosterUrl}"
-                                            th:alt="${review.title}"
+                                            th:src="${reservationMovie['moviePosterUrl']}"
+                                            th:alt="${reservationMovie['moviePosterUrl']}"
                                             width="100"
                                             height="100"
                                             class="object-cover"
                                     />
                                 </div>
                                 <div>
-                                    <div className="prd_name text-title" id="reviewContent" th:text="${review.content}">Review Content</div>
-                                    <!--<div className="caption1 text-secondary mt-2">
-                                        <span className="prd_size uppercase">L</span>
-                                        <span>/</span>
-                                        <span className="prd_color capitalize">Pink</span>
-                                    </div>-->
+                                    <div class="prd_name text-title" th:data-id="${reservationMovie['userId']}" id="reviewContent-${reservationMovie['userId']}" th:data-content="${reservationMovie['plot']}">
+                                        <strong class="text-title">Plot:</strong>
+                                        <span th:text="${reservationMovie['plot']}">Plot</span>
+                                    </div>
+                                    <div th:if="${reservationSchedule.size() > 0}">
+                                        <div class="caption1 text-secondary mt-2">
+                                            <span class="prd_size uppercase" th:text="${reservationSchedule[0]['showDate']}">Date</span>
+                                            <span>/</span>
+                                            <span class="prd_color capitalize" th:text="${reservationSchedule[0]['showTime']}">Time</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 </Link>
-                                <!--<div className='text-title'>
-                                    <span className="prd_quantity">1</span>
+                                <!--<div class='text-title'>
+                                    <span class="prd_quantity">1</span>
                                     <span> X </span>
-                                    <span className="prd_price">$69.00</span>
+                                    <span class="prd_price">$69.00</span>
                                 </div>-->
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-4 p-5">
-                            <button class="button-main" onclick="editReview(this, '${review.content}', ${review.id})">리뷰 수정하기</button>
-                            <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white" onclick="deleteReview(${review.id})">
-                                리뷰 삭제하기
+                            <button class="button-main" th:onclick="deleteReservation([[${reservationMovie['reservationId']}]])">
+                                예매 취소하기
                             </button>
                         </div>
                     </div>
@@ -129,70 +132,29 @@
     </div>
 </div>
 </body>
-<script>
-    function editReview(button, currentContent, reviewId) {
-        const reviewContainer = button.closest('.order_item');
-        const reviewContentDiv = reviewContainer.querySelector('#reviewContent');
-
-        // 기존 내용을 인풋 필드로 변환
-        reviewContentDiv.innerHTML = `
-        <input type="text" id="editReviewInput" value="${currentContent}" class="input-field">
-        <button class="button-main mt-2" onclick="saveReview(${reviewId})">저장하기</button>
-    `;
-
-        // '리뷰 수정하기' 버튼을 비활성화하거나 숨김 처리
-        button.style.display = 'none';
-    }
-
-    function saveReview(reviewId) {
-        const newContent = document.getElementById('editReviewInput').value;
-
-        // 서버에 수정 요청 보내기
-        fetch(`/api/review/update/${reviewId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ content: newContent })
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('리뷰가 수정되었습니다.');
-
-                    // 수정된 내용을 화면에 다시 출력
-                    const reviewContentDiv = document.getElementById('reviewContent');
-                    reviewContentDiv.innerHTML = newContent;
-                } else {
-                    alert('리뷰 수정에 실패했습니다.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('리뷰 수정 중 오류가 발생했습니다.');
-            });
-    }
-
-    function deleteReview(reviewId) {
-        const confirmDelete = confirm('정말로 이 리뷰를 삭제하시겠습니까?');
+<script >
+    function deleteReservation(reservationId) {
+        const confirmDelete = confirm('정말로 이 예약을 취소하시겠습니까?');
         if (!confirmDelete) return;
 
-        fetch(`/api/review/delete/${reviewId}`, {
+        // 서버로 DELETE 요청을 보냅니다.
+        fetch(`/api/reservation/cancel/${reservationId}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             }
         })
             .then(response => {
                 if (response.ok) {
-                    alert('리뷰가 삭제되었습니다.');
-                    location.reload(); // 삭제 후 페이지 새로고침
+                    alert('예매가 취소되었습니다.');
+                    location.reload(); // 취소 후 페이지 새로고침
                 } else {
-                    alert('리뷰 삭제에 실패했습니다.');
+                    alert('예매 취소에 실패했습니다.');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('리뷰 삭제 중 오류가 발생했습니다.');
+                alert('예매 취소 중 오류가 발생했습니다.');
             });
     }
 </script>

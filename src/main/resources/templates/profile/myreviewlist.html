@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:hover="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>리뷰 리스트 보기</title>
+    <link rel="shortcut icon" th:href="@{/profile/images/fav.png}" type="image/x-icon"/>
+    <link rel="stylesheet" th:href="@{/profile/css/swiper-bundle.min.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/css/output-scss.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/css/output-tailwind.css}"/>
+    <link rel="stylesheet" th:href="@{/profile/css/review.css}"/>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="breadcrumb-block style-shared">
+    <div class="breadcrumb-main bg-linear overflow-hidden">
+        <div class="container lg:pt-[134px] pt-24 pb-10 relative">
+            <div class="main-content w-full h-full flex flex-col items-center justify-center relative z-[1]">
+                <div class="text-content">
+                    <div class="heading2 text-center">My Account</div>
+                    <div class="link flex items-center justify-center gap-1 caption1 mt-3">
+                        <a href="index.html">Homepage</a>
+                        <i class="ph ph-caret-right text-sm text-secondary2"></i>
+                        <div class="text-secondary2 capitalize">My Account</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-account-block md:py-20 py-10">
+    <div class="container">
+        <div class="content-main lg:px-[60px] md:px-4 flex gap-y-8 max-md:flex-col w-full">
+            <div class="left md:w-1/3 w-full xl:pr-[3.125rem] lg:pr-[28px] md:pr-[16px]">
+                <div class="user-infor bg-surface md:px-8 px-5 md:py-10 py-6 md:rounded-[20px] rounded-xl">
+                    <div class="heading flex flex-col items-center justify-center">
+                        <div class="avatar">
+                            <img th:src="${user.getProfileImageUrl()}" alt="avatar"
+                                 class="md:w-[140px] w-[120px] md:h-[140px] h-[120px] rounded-full"/>
+                        </div>
+                        <div class="name heading6 mt-4 text-center" th:text="${user.getNickname()}">Tony Nguyen</div>
+                        <div class="mail heading6 font-normal normal-case text-secondary text-center mt-1" th:text="${user.getEmail()}">
+                            hi.avitex@gmail.com
+                        </div>
+                    </div>
+                    <div class="menu-tab list-category w-full max-w-none lg:mt-10 mt-6">
+                        <a th:href="@{/api/user/mypage/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active"
+                           th:data-item="${dashboard}">
+                            <span class="ph ph-house-line text-xl"></span>
+                            <strong class="heading6">History Orders</strong>
+                        </a>
+                        <a th:href="@{/api/reservation/list/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
+                           th:data-item="${orders}">
+                            <span class="ph ph-package text-xl"></span>
+                            <strong class="heading6">Upcoming Reservations</strong>
+                        </a>
+                        <a th:href="@{/api/review/myList/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
+                           th:data-item="${address}">
+                            <span class="ph ph-tag text-xl"></span>
+                            <strong class="heading6">My Reviews</strong>
+                        </a>
+                        <a th:href="@{/api/user/profile/setting/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
+                           th:data-item="${setting}">
+                            <span class="ph ph-gear-six text-xl"></span>
+                            <strong class="heading6">Setting</strong>
+                        </a>
+                        <a th:href="@{/api/wish/list/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5">
+                            <span class="ph ph-sign-out text-xl"></span>
+                            <strong class="heading6">WishList</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab text-content overflow-hidden w-full p-7 border border-line rounded-xl">
+                <h6 class="heading6">나의 리뷰</h6>
+                <div class="list_order">
+                    <div class="order_item mt-5 border border-line rounded-lg box-shadow-xs" th:each="review : ${movieWithReview}">
+                        <div class="flex flex-wrap items-center justify-between gap-4 p-5 border-b border-line">
+                            <div class="flex items-center gap-8 ml-2">
+                                <strong class="text-title">Movie Title:</strong>
+                                <strong class="order_number text-button uppercase" th:text="${review['title']}">Movie Title</strong>
+                                <strong class="text-title">Rating:</strong>
+                                <span class="tag px-4 py-1.5 rounded-full bg-opacity-10 bg-yellow text-yellow caption1 font-semibold" th:text="${review.rating}">Pending</span>
+                            </div>
+                        </div>
+                        <div class="list_prd px-5">
+                            <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
+                                <!--<Link th:href={'/product/default'} class="flex items-center gap-5">-->
+                                <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
+                                    <img
+                                            th:src="${review['posterUrl']}"
+                                            th:alt="${review['title']}"
+                                            width="100"
+                                            height="100"
+                                            class="object-cover"
+                                    />
+                                </div>
+                                <div id="reviewContainer">
+                                    <div>
+                                        <div class="prd_name text-title" th:data-id="${review['reviewId']}"
+                                             id="reviewContent" th:data-content="${review['content']}">
+                                            <span th:text="${review['content']}">Review Content</span>
+                                        </div>
+                                    </div>
+                                    <!--<div class="caption1 text-secondary mt-2">
+                                        <span class="prd_size uppercase">L</span>
+                                        <span>/</span>
+                                        <span class="prd_color capitalize">Pink</span>
+                                    </div>-->
+                                </div>
+                                </Link>
+                                <!--<div class='text-title'>
+                                    <span class="prd_quantity">1</span>
+                                    <span> X </span>
+                                    <span class="prd_price">$69.00</span>
+                                </div>-->
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-4 p-5">
+                            <button class="button-main" th:data-id="${review['reviewId']}"
+                                    th:onclick="editReview(this)">
+                                리뷰 수정하기
+                            </button>
+                            <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white"
+                                    th:onclick="'deleteReview(' + ${review['reviewId']} + ')'">
+                                리뷰 삭제하기
+                            </button>
+                           <!-- th:data-id="${review.reviewId}"-->
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script >
+    /*document.querySelector(".button-main").addEventListener("click", function (evt) {
+        evt.preventDefault();
+
+        editReview();
+    })*/
+    function editReview(button) {
+        const reviewId = button.getAttribute('data-id');
+        const reviewContentDiv = document.querySelector(`#reviewContent[data-id="${reviewId}"]`);
+        const contentSpan = reviewContentDiv.querySelector('span');
+
+        // 기존 내용을 저장
+        const originalContent = contentSpan.textContent;
+
+        // 수정할 수 있도록 textarea로 변경
+        reviewContentDiv.innerHTML = `<textarea class="editContent" id="editContent" rows="5" cols="50" style="width: 100%; height: 150px;">${originalContent}</textarea>`;
+
+        // 버튼을 저장 버튼으로 변경
+        button.textContent = '저장하기';
+        button.setAttribute('onclick', `saveEditedReview(${reviewId}, this)`);
+    }
+
+    function saveEditedReview(reviewId, button) {
+        const editedContent = document.querySelector(`#editContent`).value;
+
+        // 예시로 Axios를 사용하여 서버로 수정된 데이터를 보냄
+        axios.put(`/api/review/update/${reviewId}`, {
+            content: editedContent
+        })
+            .then(response => {
+                // 성공적으로 업데이트되면 다시 내용을 span으로 보여줌
+                const reviewContentDiv = document.querySelector(`#reviewContent[data-id="${reviewId}"]`);
+                reviewContentDiv.innerHTML = `<span>${editedContent}</span>`;
+
+
+                // 버튼을 다시 "리뷰 수정하기"로 변경
+                button.textContent = '리뷰 수정하기';
+                button.setAttribute('onclick', `editReview(this)`);
+            })
+            .catch(error => {
+                console.error('Error updating review:', error);
+                alert('리뷰 수정에 실패했습니다.');
+            });
+    }
+
+
+    function deleteReview(reviewId) {
+
+
+        const confirmDelete = confirm('정말로 이 리뷰를 삭제하시겠습니까?');
+        if (!confirmDelete) return;
+
+        axios({
+            method: 'DELETE',
+            url: `/api/review/delete/${reviewId}`,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.data === true) {
+                    alert('리뷰가 삭제되었습니다.');
+                    location.reload(); // 삭제 후 페이지 새로고침
+                } else {
+                    alert('리뷰 삭제에 실패했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('리뷰 삭제 중 오류가 발생했습니다.');
+            });
+    }
+</script>
+</html>

@@ -5,6 +5,7 @@ import com.nc13.moviemates.entity.WishEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -28,4 +29,6 @@ public interface WishService {
     Boolean existsByMovieIdandUserId(Long movieId, Long userId);
 
     Boolean isWishlisted(Long movieId, Long userId);
+
+    List<Map<String, Object>> findWishesWithMovieDetails(Long userId);
 }

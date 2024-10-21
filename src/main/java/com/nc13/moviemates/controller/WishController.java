@@ -1,11 +1,14 @@
 package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.WishModel;
+import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.entity.WishEntity;
+import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,10 +20,19 @@ import java.util.Optional;
 @RequestMapping("/api/wish")
 public class WishController {
     private final WishService service;
+    private final UserService userService;
 
-    @GetMapping()
-    public ResponseEntity<List<?>> getList() {
-        return ResponseEntity.ok(service.findAll());
+    @GetMapping("/list/{userId}")
+    public String showWishList(Model model, @PathVariable("userId") Long userId) {
+        Optional<UserEntity> userOptional = userService.findById(userId);
+        if (userOptional.isPresent()) {
+            model.addAttribute("user", userOptional.get());  // 값이 있으면 ReviewEntity를 넘김
+        } else {
+            throw new RuntimeException("User not found");
+        }
+        model.addAttribute("wishMovie", service.findWishesWithMovieDetails(userId));
+
+        return "profile/wishlist";
     }
 
     @GetMapping("/{id}")

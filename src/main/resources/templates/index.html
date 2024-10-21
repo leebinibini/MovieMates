@@ -31,7 +31,8 @@
                             <a th:href="@{/api/user/login}">Login</a>
                         </div>
                         <div class="header_author">
-                            <a th:href="@{/api/user/mypage}">Mypage</a>
+                            <!--세션이 있다면 @{/api/user/mypage/{id}(id=${user.id})}-->
+                            <a th:href="@{/api/user/mypage/{id}(id=1)}">Mypage</a>
                         </div>
                         <div class="header_ticket">
                             <a th:href="@{/single}">Movie</a>

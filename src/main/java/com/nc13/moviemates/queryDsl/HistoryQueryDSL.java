@@ -17,4 +17,5 @@ public interface HistoryQueryDSL {
     Boolean exists(Long id);
 
     Long getRowCount();
+    Optional<HistoryEntity> findByHistoryId(Long id);
 }
