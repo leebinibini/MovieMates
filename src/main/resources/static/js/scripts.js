@@ -431,7 +431,7 @@
 
 
 
-    var price = 13; //price
+    var price = 13000; //price
     $(document).ready(function () {
         var $cart = $('#selected-seats'), // 선택된 좌석을 보여줄 영역
             $counter = $('#counter'),     // 선택된 좌석 수

@@ -9,6 +9,7 @@ import com.nc13.moviemates.serviceImpl.UserServiceImpl;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +44,7 @@ public class UserController {
 
 
 
+
     @GetMapping("/login")
     public String login() {
         return "admin/auth-login";
@@ -74,8 +76,13 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<UserEntity>> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.findById(id));
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        if (service.findById(id).isPresent()) {
+            return ResponseEntity.ok(service.findById(id).get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+
     }
 
     @GetMapping("/register")
