@@ -333,6 +333,104 @@
         }
     });
 
+    document.addEventListener("DOMContentLoaded", function () {
+        $(".btn-ticket").on('click', function(e) {
+            var movieId = $(e.target).data('id');
+            axios.get(`/api/movie/order/${movieId}`)
+                .then(function (res) {
+                    var theaterList = res.data.theater;
+                    var scheduleList = res.data.schedule;
+                    alert(scheduleList);
+                    var title = res.data.title;
+
+
+                    var locationSelect = $("select[name='location']");
+                    locationSelect.empty();
+                    theaterList.forEach(function (theater) {
+                        locationSelect.append(new Option(theater.name, theater.id));
+                    });
+                    $('#movie-selection').val(title);
+
+                    var dateInput = document.querySelector('.datetime');
+                    var availableDates = scheduleList.map(function(schedule) {
+                        return new Date(schedule.showDate).toISOString().split('T')[0];
+                    });
+                    var today = new Date().toISOString().split('T')[0];
+                    dateInput.setAttribute('min', today);
+                    dateInput.setAttribute('max', availableDates[availableDates.length - 1]);
+                    dateInput.value = today;
+
+                    dateInput.addEventListener('change', function() {
+                        var selectedDate = new Date(schedule.showDate).toISOString().split('T')[0];
+                        if (availableDates.includes(selectedDate)) {
+                            renderTimesForSelectedDate(selectedDate);
+                        } else {
+                            dateInput.value = '';
+                            alert('해당 날짜에 상영 정보가 없습니다.');
+                        }
+                    });
+
+                    function renderTimesForSelectedDate(selectedDate) {
+                        var filteredSchedules = scheduleList.filter(function(schedule) {
+                            var scheduleDate = new Date(schedule.showDate).toISOString().split('T')[0];
+                            return scheduleDate === selectedDate;
+                        });
+                        var timeList = $(".order-date");
+                        timeList.empty();
+                        if (filteredSchedules.length > 0) {
+                            filteredSchedules.forEach(function(schedule) {
+                                var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                                timeList.append('<li><a href="javascript:;" data-time="' + time + '"><i>' + time + '</i></a></li>');
+                            });
+                        } else {
+                            timeList.append('<li><a href="javascript:;"><i>해당 날짜에 상영 시간이 없습니다.</i></a></li>');
+                        }
+                    }
+                    renderTimesForSelectedDate(today);
+
+                    var timeList = $(".order-date");
+                    timeList.empty();
+                    scheduleList.forEach(function (schedule) {
+                        var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        timeList.append('<li><a href="javascript:;" data-value="' + time + '" data-schedule-id="' + schedule.id + '"><i>' + time + '</i></a></li>');
+                    });
+
+
+                    $('.order-date').off('click').on('click', 'a', function() {
+                        // 시간을 HH:mm 형식으로 변환
+                        var selectedTime = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+                        $('.order-date a').removeClass('selected');
+                        $(this).addClass('selected');
+
+
+                        var selectedLocation = $('select[name="location"]').val();
+                        var selectedMovie = $('#movie-selection').val();
+                        var selectedDate = $('.datetime').val();
+                        sessionStorage.setItem('selectedLocation', selectedLocation);
+                        sessionStorage.setItem('selectedMovie', selectedMovie);
+                        sessionStorage.setItem('selectedDate', selectedDate);
+                        sessionStorage.setItem('selectedTime', selectedTime);
+
+                        alert('Selected Time:', selectedTime);
+                        alert('Selected Location:', selectedLocation);
+                        alert('Selected Movie:', selectedMovie);
+                        alert('Selected Date:', selectedDate);
+
+                        alert('선택된 영화관: ' + selectedLocation +
+                            ' 선택된 영화: ' + selectedMovie +
+                            ' 선택된 날짜: ' + selectedDate +
+                            ' 선택된 시간: ' + selectedTime);
+                    });
+                })
+                .catch(function (error) {
+                    console.log("error data:", error);
+                });
+        });
+    });
+
+
+
     var price = 13; //price
     $(document).ready(function () {
         var $cart = $('#selected-seats'), // 선택된 좌석을 보여줄 영역

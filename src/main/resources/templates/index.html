@@ -272,7 +272,6 @@
                             <h3>box office</h3>
                             <ul class="wpc-box-list" >
                                 <li class="wpc-box-item" th:each="chart: ${charts}">
-                                    <script> console.log([[${charts}]])</script>
                                     <ol>
                                         <li class="bx-item-t"><img th:src="${chart.lengthPosterUrl}" alt="thumb" width="58" height="87"></li>
                                         <li class="bx-item-c">1</li>
@@ -392,8 +391,7 @@
                 </div>
             </div>
 
-            <!-- Google Maps API 스크립트 -->
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuuDwFAppkkrpOTWM-hmFwz_zCbP3u_PQ&callback=initMap"></script>
+
 
             <script>
                 function initMap() {
@@ -454,9 +452,9 @@
                         </div>
                         <div class="widget">
                             <div class="social-links">
-                                <a href="javascript:;"><i class="fa fa-facebook"></i></a>
-                                <a href="javascript:;"><i class="fa fa-twitter"></i></a>
-                                <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                                <a href="javascript:"><i class="fa fa-facebook"></i></a>
+                                <a href="javascript:"><i class="fa fa-twitter"></i></a>
+                                <a href="javascript:"><i class="fa fa-google-plus"></i></a>
                             </div>
                         </div>
                     </div>
@@ -518,7 +516,7 @@
             </button>
             </label>
         </form>
-        <a href="javascript:;" class="close-window"></a>
+        <a href="javascript:" class="close-window"></a>
     </div>
     <article id="order">
         <div class="container">
@@ -544,7 +542,7 @@
                                     <input type='date' class="datetime"/>
                                     <h3 class="mt3">TIME</h3>
                                     <ul class="order-date">
-                                        <li><a href="javascript:;" data-time="" data-schedule-id="1" ><i></i></a></li>
+                                        <li><a href="javascript:" data-time="" data-schedule-id="1" ><i></i></a></li>
                                     </ul>
 
                                 </div>
@@ -569,28 +567,28 @@
                         <span> Location:</span>
                         <p id="locationp">Tenguu Cinema Tysons corner</p>
                         <span>Time:</span>
-                        <p>2016.3.8 18:30</p>
+                        <p id="timep">2016.3.8 18:30</p>
                         <span>Seat: </span>
                         <ul id="selected-seats"></ul>
                         <div>Tickets: <span id="counter">0</span></div>
                         <div>Total: <b>$<span id="total">0</span></b></div>
                     </div>
-                    <a href="javascript:;" class="close-window"><i class="fa fa-times"></i></a>
+                    <a href="javascript:" class="close-window"><i class="fa fa-times"></i></a>
                 </div>
             </div>
         </div>
     </article>
     <!-- Include jQuery and Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{js/packages.min.js}"></script>
-    <script type="text/javascript" th:src="@{js/scripts.min.js}"></script>
-    <script type="text/javascript" th:src="@{js/scripts.js}"></script>
-    <script type="text/javascript" th:src="@{js/movie.api.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/packages.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/scripts.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+    <script type="text/javascript" th:src="@{/js/movie.api.js}"></script>
 
     <script type="text/javascript" th:src="@{js/order.js}" ></script>
     <script type="module">
-        import MovieApi from "/js/movie/movie.api.js";
+        //import MovieApi from "/js/movie/movie.api.js";
         import movieAPI from "/static/js/movie/movie.api";
 
         movieAPI.getMovieList()

@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.nc13.moviemates.component.model.ImageModel;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.config.BucketConfig;
+import com.nc13.moviemates.component.model.MovieModel;;
 import com.nc13.moviemates.entity.ImageEntity;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.repository.ImageRepository;
@@ -27,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
     private final ImageRepository repository;
-    private final MovieService movieService;
+    private final MovieServiceImpl movieService;
     private final MovieRepository movieRepository;
     private final AmazonS3 amazonS3;
     String uploadPath = "uploads/movies";
@@ -44,11 +45,9 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Boolean uploadFiles(long movieId, List<MultipartFile> multipartFiles) {
-        System.out.println("이미지 서비스 업로드파일 함수 진입!!!");
         // 파일 저장 공간을 리스트 형태로 만들겠다!
         List<ImageModel> s3files = new ArrayList<>();
 
-        // Find movie entity
         MovieEntity movieEntity = movieService.findEntityById(movieId);
         if (movieEntity == null) {
             throw new IllegalArgumentException("Invalid movieId: " + movieId);
@@ -74,17 +73,16 @@ public class ImageServiceImpl implements ImageService {
             try (InputStream inputStream = multipartFile.getInputStream()) {
                 String keyName = uploadPath + "/" + storedFileName;
 
-                amazonS3.putObject(new PutObjectRequest(bucketName, keyName, inputStream, objectMetadata));
-                System.out.println("keyName = " + keyName);
+                amazonS3.putObject(
+                        new PutObjectRequest(bucketName, keyName, inputStream, objectMetadata));
+                System.out.println("keyName = 은!!!!" + keyName);
 
-                // Generate the upload URL
                 uploadURL = "https://" + bucketName + ".s3.ap-northeast-2.amazonaws.com/" + keyName;
                 System.out.println("uploadURL = " + uploadURL);
             } catch (IOException e) {
                 throw new RuntimeException("파일 업로드 실패: " + e.getMessage());
             }
 
-            // Convert ImageModel to ImageEntity and save
             ImageModel imageModel = ImageModel.builder()
                     .originalFilename(originalFilename)
                     .storedFileName(storedFileName)
