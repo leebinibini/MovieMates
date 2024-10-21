@@ -38,10 +38,6 @@ public class HistoryServiceImpl implements HistoryService {
         return existsById(id);
     }
 
-
-
-
-
     @Override
     public Boolean existsById(Long id) {
         return repository.existsById(id);

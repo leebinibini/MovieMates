@@ -58,8 +58,6 @@ public class ReviewController {
         // 영화 제목 리스트 반환
     }
 
-
-
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<String> insert(@RequestBody ReviewEntity review) {
@@ -113,7 +111,7 @@ public class ReviewController {
         return ResponseEntity.ok(service.deleteMany(reviewIdList));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         return ResponseEntity.ok(service.deleteById(id));
     }
