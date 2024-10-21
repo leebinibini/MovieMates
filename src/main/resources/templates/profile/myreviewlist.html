@@ -17,11 +17,11 @@
         <div class="container lg:pt-[134px] pt-24 pb-10 relative">
             <div class="main-content w-full h-full flex flex-col items-center justify-center relative z-[1]">
                 <div class="text-content">
-                    <div class="heading2 text-center">My Account</div>
+                    <div class="heading2 text-center">My Profile</div>
                     <div class="link flex items-center justify-center gap-1 caption1 mt-3">
-                        <a href="index.html">Homepage</a>
+                        <a th:href="@{/}">Homepage</a>
                         <i class="ph ph-caret-right text-sm text-secondary2"></i>
-                        <div class="text-secondary2 capitalize">My Account</div>
+                      <!--  <div class="text-secondary2 capitalize">My Account</div>-->
                     </div>
                 </div>
             </div>
@@ -38,10 +38,8 @@
                             <img th:src="${user.getProfileImageUrl()}" alt="avatar"
                                  class="md:w-[140px] w-[120px] md:h-[140px] h-[120px] rounded-full"/>
                         </div>
-                        <div class="name heading6 mt-4 text-center" th:text="${user.getNickname()}">Tony Nguyen</div>
-                        <div class="mail heading6 font-normal normal-case text-secondary text-center mt-1" th:text="${user.getEmail()}">
-                            hi.avitex@gmail.com
-                        </div>
+                        <div class="name heading6 mt-4 text-center" th:text="${user.getNickname()}+'님의 리뷰들'">Tony Nguyen</div>
+
                     </div>
                     <div class="menu-tab list-category w-full max-w-none lg:mt-10 mt-6">
                         <a th:href="@{/api/user/mypage/1}"

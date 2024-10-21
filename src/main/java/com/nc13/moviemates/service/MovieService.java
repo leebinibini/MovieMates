@@ -9,6 +9,8 @@ import java.util.Optional;
 
 public interface MovieService {
 
+    List<MovieEntity> getWatchedMoviesByUserId(Long userId);
+
     MovieEntity findEntityById(Long id);
 
     List<MovieEntity> findAll();

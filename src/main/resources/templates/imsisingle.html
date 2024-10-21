@@ -13,7 +13,7 @@
       <div class="row">
         <p class="comment-form-author col-sm-6">
           <!-- 영화 제목을 서버에서 받아와 readonly 처리 -->
-        <div th:each="movie : ${movieTitles}">
+        <div th:each="movie : ${movieList}">
           <input id="movieTitle" name="movieTitle" type="text" th:value="${movie.title}" size="30" readonly>
           <input type="hidden" id="movieId" name="movieId" th:value="${movie.id}">
       </div>

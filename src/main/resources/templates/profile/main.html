@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My profile</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>지난 영화 목록</title>
     <link rel="shortcut icon" th:href="@{/profile/images/fav.png}" type="image/x-icon"/>
     <link rel="stylesheet" th:href="@{/profile/css/swiper-bundle.min.css}"/>
     <link rel="stylesheet" th:href="@{/profile/css/style.css}"/>
@@ -12,772 +12,22 @@
 
 </head>
 <body>
-<div contentEditable="true"></div>
-
-<div id="top-nav" class="top-nav style-one bg-black md:h-[44px] h-[30px]">
-    <div class="container mx-auto h-full">
-        <div class="top-nav-main flex justify-between max-md:justify-center h-full">
-            <div class="left-content flex items-center gap-5 max-md:hidden">
-                <div class="choose-type choose-language flex items-center gap-1.5">
-                    <div class="select relative">
-                        <p class="selected caption2 text-white">English</p>
-                        <ul class="list-option bg-white">
-                            <li data-item="English" class="caption2 active">English</li>
-                            <li data-item="Espana" class="caption2">Espana</li>
-                            <li data-item="France" class="caption2">France</li>
-                        </ul>
-                    </div>
-                    <i class="ph ph-caret-down text-xs text-white"></i>
-                </div>
-                <div class="choose-type choose-currency flex items-center gap-1.5">
-                    <div class="select relative">
-                        <p class="selected caption2 text-white">USD</p>
-                        <ul class="list-option bg-white">
-                            <li data-item="USD" class="caption2 active">USD</li>
-                            <li data-item="EUR" class="caption2">EUR</li>
-                            <li data-item="GBP" class="caption2">GBP</li>
-                        </ul>
-                    </div>
-                    <i class="ph ph-caret-down text-xs text-white"></i>
-                </div>
-            </div>
-            <div class="text-center text-button-uppercase text-white flex items-center">New customers save 10% with the code GET10</div>
-            <div class="right-content flex items-center gap-5 max-md:hidden">
-                <a href="https://www.facebook.com/" target="_blank">
-                    <i class="icon-facebook text-white"></i>
-                </a>
-                <a href="https://www.instagram.com/" target="_blank">
-                    <i class="icon-instagram text-white"></i>
-                </a>
-                <a href="https://www.youtube.com/" target="_blank">
-                    <i class="icon-youtube text-white"></i>
-                </a>
-                <a href="https://twitter.com/" target="_blank">
-                    <i class="icon-twitter text-white"></i>
-                </a>
-                <a href="https://pinterest.com/" target="_blank">
-                    <i class="icon-pinterest text-white"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="header" class="relative w-full">
-    <div class="header-menu style-one absolute top-0 left-0 right-0 w-full md:h-[74px] h-[56px] bg-transparent">
-        <div class="container mx-auto h-full">
-            <div class="header-main flex justify-between h-full">
-                <div class="menu-mobile-icon lg:hidden flex items-center">
-                    <i class="icon-category text-2xl"></i>
-                </div>
-                <div class="left flex items-center gap-16">
-                    <a href="index.html" class="flex items-center max-lg:absolute max-lg:left-1/2 max-lg:-translate-x-1/2">
-                        <div class="heading4">Anvogue</div>
-                    </a>
-                    <div class="menu-main h-full max-lg:hidden">
-                        <ul class="flex items-center gap-8 h-full">
-                            <li class="h-full relative">
-                                <a href="#!" class="text-button-uppercase duration-300 h-full flex items-center justify-center gap-1"> Demo </a>
-                                <div class="sub-menu py-3 px-5 -left-10 w-max absolute grid grid-cols-4 gap-5 bg-white rounded-b-xl">
-                                    <ul>
-                                        <li>
-                                            <a href="index.html" class="link text-secondary duration-300"> Home Fashion 1 </a>
-                                        </li>
-                                        <li>
-                                            <a href="fashion2.html" class="link text-secondary duration-300"> Home Fashion 2 </a>
-                                        </li>
-                                        <li>
-                                            <a href="fashion3.html" class="link text-secondary duration-300"> Home Fashion 3 </a>
-                                        </li>
-                                        <li>
-                                            <a href="fashion4.html" class="link text-secondary duration-300"> Home Fashion 4 </a>
-                                        </li>
-                                        <li>
-                                            <a href="fashion5.html" class="link text-secondary duration-300"> Home Fashion 5 </a>
-                                        </li>
-                                        <li>
-                                            <a href="fashion6.html" class="link text-secondary duration-300"> Home Fashion 6 </a>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li>
-                                            <a href="fashion7.html" class="link text-secondary duration-300"> Home Fashion 7 </a>
-                                        </li>
-                                        <li>
-                                            <a href="fashion8.html" class="link text-secondary duration-300"> Home Fashion 8 </a>
-                                        </li>
-                                        <li>
-                                            <a href="fashion9.html" class="link text-secondary duration-300"> Home Fashion 9 </a>
-                                        </li>
-                                        <li>
-                                            <a href="fashion10.html" class="link text-secondary duration-300"> Home Fashion 10 </a>
-                                        </li>
-                                        <li>
-                                            <a href="fashion11.html" class="link text-secondary duration-300"> Home Fashion 11 </a>
-                                        </li>
-                                        <li>
-                                            <a href="underwear.html" class="link text-secondary duration-300"> Home Underwear </a>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li>
-                                            <a href="cosmetic1.html" class="link text-secondary duration-300"> Home Cosmetic 1 </a>
-                                        </li>
-                                        <li>
-                                            <a href="cosmetic2.html" class="link text-secondary duration-300"> Home Cosmetic 2 </a>
-                                        </li>
-                                        <li>
-                                            <a href="cosmetic3.html" class="link text-secondary duration-300"> Home Cosmetic 3 </a>
-                                        </li>
-                                        <li>
-                                            <a href="pet.html" class="link text-secondary duration-300"> Home Pet Store </a>
-                                        </li>
-                                        <li>
-                                            <a href="jewelry.html" class="link text-secondary duration-300"> Home Jewelry </a>
-                                        </li>
-                                        <li>
-                                            <a href="furniture.html" class="link text-secondary duration-300"> Home Furniture </a>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li>
-                                            <a href="watch.html" class="link text-secondary duration-300"> Home Watch </a>
-                                        </li>
-                                        <li>
-                                            <a href="toys.html" class="link text-secondary duration-300"> Home Toys Kid </a>
-                                        </li>
-                                        <li>
-                                            <a href="yoga.html" class="link text-secondary duration-300"> Home Yoga </a>
-                                        </li>
-                                        <li>
-                                            <a href="organic.html" class="link text-secondary duration-300"> Home Organic </a>
-                                        </li>
-                                        <li>
-                                            <a href="marketplace.html" class="link text-secondary duration-300"> Home Marketplace </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="h-full">
-                                <a href="#!" class="text-button-uppercase duration-300 h-full flex items-center justify-center"> Features </a>
-                                <div class="mega-menu absolute top-[74px] left-0 bg-white w-screen">
-                                    <div class="container">
-                                        <div class="flex justify-between py-8">
-                                            <div class="nav-link basis-2/3 grid grid-cols-4 gap-y-8">
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">For Men</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Starting From 50% Off </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Outerwear | Coats </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Sweaters | Cardigans </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Shirt | Sweatshirts </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer view-all-btn"> View All </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">Massimo Dutti</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Shirt | Clothes </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Top | Overshirts </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> T-shirts | Clothes </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Swimwear | Underwear </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 view-all-btn"> View All </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">Skincare</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Faces Skin </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Eyes Makeup </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Lip Polish </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Hair Care </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 view-all-btn"> View All </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">Health</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Cented Candle </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Health Drinks </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Yoga Clothes </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Yoga Equipment </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 view-all-btn"> View All </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">For Women</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Starting From 60% Off </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Dresses | Jumpsuits </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> T-shirts | Sweatshirts </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Accessories | Jewelry </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 view-all-btn"> View All </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">For Kid</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Kids Bed </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Boy's Toy </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Baby Blanket </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Newborn Clothing </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 view-all-btn"> View All </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">For Home</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Furniture | Decor </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Table | Living Room </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Chair | Work Room </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 cursor-pointer"> Lighting | Bed Room </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300 view-all-btn"> View All </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="banner-ads-block pl-2.5 basis-1/3">
-                                                <a href="shop-breadcrumb1.html" class="banner-ads-item bg-linear rounded-2xl relative block overflow-hidden cursor-pointer">
-                                                    <div class="text-content py-14 pl-8 relative z-[1]">
-                                                        <div class="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Save $10</div>
-                                                        <div class="heading6 mt-2">Dive into Savings <br />on Swimwear</div>
-                                                        <div class="body1 mt-3 text-secondary">Starting at <span class="text-red">$59.99</span></div>
-                                                    </div>
-                                                    <img th:src="@{/profile/images/robot.jpg}"  alt="bg-img" class="h-full w-auto absolute right-0 top-0 duration-700" />
-                                                </a>
-                                                <a href="shop-breadcrumb1.html" class="banner-ads-item bg-linear rounded-2xl relative block overflow-hidden cursor-pointer mt-8">
-                                                    <div class="text-content py-14 pl-8 relative z-[1]">
-                                                        <div class="text-button-uppercase text-white bg-red px-2 py-0.5 inline-block rounded-sm">Save $10</div>
-                                                        <div class="heading6 mt-2">20% off <br />accessories</div>
-                                                        <div class="body1 mt-3 text-secondary">Starting at <span class="text-red">$59.99</span></div>
-                                                    </div>
-                                                    <img th:src="@{/profile/images/robot.jpg}"  alt="bg-img" class="h-full w-auto absolute right-0 top-0 duration-700" />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="h-full">
-                                <a href="#!" class="text-button-uppercase duration-300 h-full flex items-center justify-center active"> Shop </a>
-                                <div class="mega-menu absolute top-[74px] left-0 bg-white w-screen">
-                                    <div class="container">
-                                        <div class="flex justify-between py-8">
-                                            <div class="nav-link basis-2/3 flex justify-between pr-12">
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">Shop Features</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-breadcrumb-img.html" class="link text-secondary duration-300"> Shop Breadcrumb IMG </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb1.html" class="link text-secondary duration-300"> Shop Breadcrumb 1 </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-breadcrumb2.html" class="link text-secondary duration-300"> Shop Breadcrumb 2 </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-collection.html" class="link text-secondary duration-300"> Shop Collection </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">Shop Features</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-filter-canvas.html" class="link text-secondary duration-300"> Shop Filter Canvas </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-filter-options.html" class="link text-secondary duration-300"> Shop Filter Options </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-filter-dropdown.html" class="link text-secondary duration-300"> Shop Filter Dropdown </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-sidebar-list.html" class="link text-secondary duration-300"> Shop Sidebar List </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">Shop Layout</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop-default.html" class="link text-secondary duration-300 cursor-pointer"> Shop Default </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-default-grid.html" class="link text-secondary duration-300 cursor-pointer"> Shop Default Grid </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-default-list.html" class="link text-secondary duration-300 cursor-pointer"> Shop Default List </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-fullwidth.html" class="link text-secondary duration-300 cursor-pointer"> Shop Full Width </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-square.html" class="link text-secondary duration-300"> Shop Square </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-2">Products Pages</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" class="link text-secondary duration-300"> Wish List </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="search-result.html" class="link text-secondary duration-300"> Search Result </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" class="link text-secondary duration-300"> Shopping Cart </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="login.html" class="link text-secondary duration-300"> Login/Register </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="forgot-password.html" class="link text-secondary duration-300"> Forgot Password </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="order-tracking.html" class="link text-secondary duration-300"> Order Tracking </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="my-account.html" class="link text-secondary duration-300 active"> My Account </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="recent-product pl-2.5 basis-1/3">
-                                                <div class="text-button-uppercase pb-2">Recent Products</div>
-                                                <div class="list-product hide-product-sold grid grid-cols-2 gap-5 mt-3">
-                                                    <div class="product-item grid-type" data-item="1">
-                                                        <div class="product-main cursor-pointer block">
-                                                            <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
-                                                                <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">New</div>
-                                                                <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
-                                                                    <div class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
-                                                                        <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To Wishlist</div>
-                                                                        <i class="ph ph-heart text-lg"></i>
-                                                                    </div>
-                                                                    <div class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
-                                                                        <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Compare Product</div>
-                                                                        <i class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
-                                                                        <i class="ph ph-check-circle text-lg checked-icon"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-img w-full h-full aspect-[3/4]">
-                                                                    <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
-
-                                                                    <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
-                                                                </div>
-                                                                <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
-                                                                    <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">Quick View</div>
-                                                                    <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">Add To Cart</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="product-infor mt-4 lg:mb-7">
-                                                                <div class="product-sold sm:pb-4 pb-2">
-                                                                    <div class="progress bg-line h-1.5 w-full rounded-full overflow-hidden relative">
-                                                                        <div class="progress-sold bg-red absolute left-0 top-0 h-full"></div>
-                                                                    </div>
-                                                                    <div class="flex items-center justify-between gap-3 gap-y-1 flex-wrap mt-2">
-                                                                        <div class="text-button-uppercase">
-                                                                            <span class="text-secondary2 max-sm:text-xs">Sold: </span>
-                                                                            <span class="max-sm:text-xs">12</span>
-                                                                        </div>
-                                                                        <div class="text-button-uppercase">
-                                                                            <span class="text-secondary2 max-sm:text-xs">Available: </span>
-                                                                            <span class="max-sm:text-xs">88</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-name text-title duration-300">Faux-leather trousers</div>
-                                                                <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
-                                                                    <div class="color-item bg-black w-8 h-8 rounded-full duration-300 relative">
-                                                                        <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Black</div>
-                                                                    </div>
-                                                                    <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                                                        <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Green</div>
-                                                                    </div>
-                                                                    <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                                                        <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Red</div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
-                                                                    <div class="product-price text-title">$40.00</div>
-                                                                    <div class="product-origin-price caption1 text-secondary2">
-                                                                        <del>$50.00</del>
-                                                                    </div>
-                                                                    <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">-20%</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-item grid-type" data-item="3">
-                                                        <div class="product-main cursor-pointer block">
-                                                            <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
-                                                                <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">New</div>
-                                                                <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
-                                                                    <div class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
-                                                                        <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To Wishlist</div>
-                                                                        <i class="ph ph-heart text-lg"></i>
-                                                                    </div>
-                                                                    <div class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
-                                                                        <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Compare Product</div>
-                                                                        <i class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
-                                                                        <i class="ph ph-check-circle text-lg checked-icon"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-img w-full h-full aspect-[3/4]">
-                                                                    <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
-                                                                    <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
-                                                                </div>
-                                                                <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
-                                                                    <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">Quick View</div>
-                                                                    <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">Add To Cart</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="product-infor mt-4 lg:mb-7">
-                                                                <div class="product-sold sm:pb-4 pb-2">
-                                                                    <div class="progress bg-line h-1.5 w-full rounded-full overflow-hidden relative">
-                                                                        <div class="progress-sold bg-red absolute left-0 top-0 h-full"></div>
-                                                                    </div>
-                                                                    <div class="flex items-center justify-between gap-3 gap-y-1 flex-wrap mt-2">
-                                                                        <div class="text-button-uppercase">
-                                                                            <span class="text-secondary2 max-sm:text-xs">Sold: </span>
-                                                                            <span class="max-sm:text-xs">12</span>
-                                                                        </div>
-                                                                        <div class="text-button-uppercase">
-                                                                            <span class="text-secondary2 max-sm:text-xs">Available: </span>
-                                                                            <span class="max-sm:text-xs">88</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-name text-title duration-300">Off-the-Shoulder Blouse</div>
-                                                                <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
-                                                                    <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                                                        <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Red</div>
-                                                                    </div>
-                                                                    <div class="color-item bg-yellow w-8 h-8 rounded-full duration-300 relative">
-                                                                        <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">yellow</div>
-                                                                    </div>
-                                                                    <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                                                        <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">green</div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
-                                                                    <div class="product-price text-title">$40.00</div>
-                                                                    <div class="product-origin-price caption1 text-secondary2">
-                                                                        <del>$50.00</del>
-                                                                    </div>
-                                                                    <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">-20%</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="h-full">
-                                <a href="#!" class="text-button-uppercase duration-300 h-full flex items-center justify-center"> Product </a>
-                                <div class="mega-menu absolute top-[74px] left-0 bg-white w-screen">
-                                    <div class="container">
-                                        <div class="nav-link basis-2/3 flex justify-between py-8">
-                                            <div class="nav-item">
-                                                <div class="text-button-uppercase pb-2">Products Features</div>
-                                                <ul>
-                                                    <li>
-                                                        <a href="product-default.html" class="link text-secondary duration-300"> Products Defaults </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-sale.html" class="link text-secondary duration-300"> Products Sale </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-countdown-timer.html" class="link text-secondary duration-300"> Products Countdown Timer </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-grouped.html" class="link text-secondary duration-300"> Products Grouped </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-bought-together.html" class="link text-secondary duration-300"> Frequently Bought Together </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-out-of-stock.html" class="link text-secondary duration-300"> Products Out Of Stock </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-variable.html" class="link text-secondary duration-300"> Products Variable </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="nav-item">
-                                                <div class="text-button-uppercase pb-2">Products Features</div>
-                                                <ul>
-                                                    <li>
-                                                        <a href="product-external.html" class="link text-secondary duration-300"> Products External </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-on-sale.html" class="link text-secondary duration-300"> Products On Sale </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-discount.html" class="link text-secondary duration-300"> Products With Discount </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-sidebar.html" class="link text-secondary duration-300"> Products With Sidebar </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-fixed-price.html" class="link text-secondary duration-300"> Products Fixed Price </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="nav-item">
-                                                <div class="text-button-uppercase pb-2">Products Layout</div>
-                                                <ul>
-                                                    <li>
-                                                        <a href="product-thumbnail-left.html" class="link text-secondary duration-300 cursor-pointer"> Products Thumbnails Left </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-thumbnail-bottom.html" class="link text-secondary duration-300 cursor-pointer"> Products Thumbnails Bottom </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-one-scrolling.html" class="link text-secondary duration-300 cursor-pointer"> Products Grid 1 Scrolling </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-two-scrolling.html" class="link text-secondary duration-300 cursor-pointer"> Products Grid 2 Scrolling </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-combined-one.html" class="link text-secondary duration-300 cursor-pointer"> Products Combined 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="product-combined-two.html" class="link text-secondary duration-300 cursor-pointer"> Products Combined 2 </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="nav-item">
-                                                <div class="text-button-uppercase pb-2">Products Styles</div>
-                                                <ul>
-                                                    <li>
-                                                        <a href="/product-style1.html" class="link text-secondary duration-300 cursor-pointer"> Products Style 01 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/product-style2.html" class="link text-secondary duration-300 cursor-pointer"> Products Style 02 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/product-style3.html" class="link text-secondary duration-300 cursor-pointer"> Products Style 03 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/product-style4.html" class="link text-secondary duration-300 cursor-pointer"> Products Style 04 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/product-style5.html" class="link text-secondary duration-300 cursor-pointer"> Products Style 05 </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="h-full relative">
-                                <a href="#!" class="text-button-uppercase duration-300 h-full flex items-center justify-center"> Blog </a>
-                                <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
-                                    <ul class="w-full">
-                                        <li>
-                                            <a href="blog-default.html" class="link text-secondary duration-300"> Blog Default </a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-list.html" class="link text-secondary duration-300"> Blog List </a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-grid.html" class="link text-secondary duration-300"> Blog Grid </a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-detail1.html" class="link text-secondary duration-300"> Blog Detail 1 </a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-detail2.html" class="link text-secondary duration-300"> Blog Detail 2 </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="h-full relative">
-                                <a href="#!" class="text-button-uppercase duration-300 h-full flex items-center justify-center"> Pages </a>
-                                <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
-                                    <ul class="w-full">
-                                        <li>
-                                            <a href="about.html" class="link text-secondary duration-300"> About Us </a>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html" class="link text-secondary duration-300"> Contact Us </a>
-                                        </li>
-                                        <li>
-                                            <a href="store-list.html" class="link text-secondary duration-300"> Store List </a>
-                                        </li>
-                                        <li>
-                                            <a href="page-not-found.html" class="link text-secondary duration-300"> 404 </a>
-                                        </li>
-                                        <li>
-                                            <a href="faqs.html" class="link text-secondary duration-300"> FAQs </a>
-                                        </li>
-                                        <li>
-                                            <a href="coming-soon.html" class="link text-secondary duration-300"> Coming Soon </a>
-                                        </li>
-                                        <li>
-                                            <a href="customer-feedbacks.html" class="link text-secondary duration-300"> Customer Feedbacks </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="right flex gap-12 z-[1]">
-                    <div class="max-md:hidden search-icon flex items-center cursor-pointer relative">
-                        <i class="ph-bold ph-magnifying-glass text-2xl"></i>
-                        <div class="line absolute bg-line w-px h-6 -right-6"></div>
-                    </div>
-                    <div class="list-action flex items-center gap-4">
-                        <div class="user-icon flex items-center justify-center cursor-pointer">
-                            <i class="ph-bold ph-user text-2xl"></i>
-                            <div class="login-popup absolute top-[74px] w-[320px] p-7 rounded-xl bg-white box-shadow-sm">
-                                <a href="login.html" class="button-main w-full text-center">Login</a>
-                                <div class="text-secondary text-center mt-3 pb-4">
-                                    Don’t have an account?
-                                    <a href="register.html" class="text-black pl-1 hover:underline">Register </a>
-                                </div>
-                                <a href="my-account.html" class="button-main bg-white text-black border border-black w-full text-center">Dashboard</a>
-                                <div class="bottom mt-4 pt-4 border-t border-line"></div>
-                                <a href="#!" class="body1 hover:underline">Support</a>
-                            </div>
-                        </div>
-                        <div class="max-md:hidden wishlist-icon flex items-center relative cursor-pointer">
-                            <i class="ph-bold ph-heart text-2xl"></i>
-                            <span class="quantity wishlist-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
-                        </div>
-                        <div class="max-md:hidden cart-icon flex items-center relative cursor-pointer">
-                            <i class="ph-bold ph-handbag text-2xl"></i>
-                            <span class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Menu bar -->
-    <div class="menu_bar fixed bg-white bottom-0 left-0 w-full h-[70px] sm:hidden z-[101]">
-        <div class="menu_bar-inner grid grid-cols-4 items-center h-full">
-            <a href="index.html" class="menu_bar-link flex flex-col items-center gap-1">
-                <span class="ph-bold ph-house text-2xl block"></span>
-                <span class="menu_bar-title caption2 font-semibold">Home</span>
-            </a>
-            <a href="shop-filter-canvas.html" class="menu_bar-link flex flex-col items-center gap-1">
-                <span class="ph-bold ph-list text-2xl block"></span>
-                <span class="menu_bar-title caption2 font-semibold">Category</span>
-            </a>
-            <a href="search-result.html" class="menu_bar-link flex flex-col items-center gap-1">
-                <span class="ph-bold ph-magnifying-glass text-2xl block"></span>
-                <span class="menu_bar-title caption2 font-semibold">Search</span>
-            </a>
-            <a href="cart.html" class="menu_bar-link flex flex-col items-center gap-1">
-                <div class="cart-icon relative">
-                    <span class="ph-bold ph-handbag text-2xl block"></span>
-                    <span class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">0</span>
-                </div>
-                <span class="menu_bar-title caption2 font-semibold">Cart</span>
-            </a>
-        </div>
-    </div>
-
-    <div class="breadcrumb-block style-shared">
-        <div class="breadcrumb-main bg-linear overflow-hidden">
-            <div class="container lg:pt-[134px] pt-24 pb-10 relative">
-                <div class="main-content w-full h-full flex flex-col items-center justify-center relative z-[1]">
-                    <div class="text-content">
-                        <div class="heading2 text-center">My Account</div>
-                        <div class="link flex items-center justify-center gap-1 caption1 mt-3">
-                            <a href="index.html">Homepage</a>
-                            <i class="ph ph-caret-right text-sm text-secondary2"></i>
-                            <div class="text-secondary2 capitalize">My Account</div>
-                        </div>
+<div class="breadcrumb-block style-shared">
+    <div class="breadcrumb-main bg-linear overflow-hidden">
+        <div class="container lg:pt-[134px] pt-24 pb-10 relative">
+            <div class="main-content w-full h-full flex flex-col items-center justify-center relative z-[1]">
+                <div class="text-content">
+                    <div class="heading2 text-center">My Profile</div>
+                    <div class="link flex items-center justify-center gap-1 caption1 mt-3">
+                        <a th:href="@{/}">Homepage</a>
+                        <i class="ph ph-caret-right text-sm text-secondary2"></i>
+                        <!--<div class="text-secondary2 capitalize">My Account</div>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="my-account-block md:py-20 py-10">
     <div class="container">
         <div class="content-main lg:px-[60px] md:px-4 flex gap-y-8 max-md:flex-col w-full">
@@ -793,23 +43,32 @@
                         </div>
                     </div>
                     <div class="menu-tab list-category w-full max-w-none lg:mt-10 mt-6">
-                        <a th:href="@{/api/user/profile/mypage/1}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active" th:data-item="${dashboard}">
+                        <a th:href="@{/api/user/profile/mypage/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active"
+                           th:data-item="${dashboard}">
                             <span class="ph ph-house-line text-xl"></span>
                             <strong class="heading6">History Orders</strong>
                         </a>
-                        <a th:href="@{/api/reservation/list/1}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" th:data-item="${orders}">
+                        <a th:href="@{/api/reservation/list/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
+                           th:data-item="${orders}">
                             <span class="ph ph-package text-xl"></span>
                             <strong class="heading6">Upcoming Reservations</strong>
                         </a>
-                        <a th:href="@{/api/review/myList/1}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" th:data-item="${address}">
+                        <a th:href="@{/api/review/myList/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
+                           th:data-item="${address}">
                             <span class="ph ph-tag text-xl"></span>
                             <strong class="heading6">My Reviews</strong>
                         </a>
-                        <a th:href="@{/api/user/profile/setting/1}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5" th:data-item="${setting}">
+                        <a th:href="@{/api/user/profile/setting/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
+                           th:data-item="${setting}">
                             <span class="ph ph-gear-six text-xl"></span>
                             <strong class="heading6">Setting</strong>
                         </a>
-                        <a th:href="@{/api/wish/list/1}" class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5">
+                        <a th:href="@{/api/wish/list/1}"
+                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5">
                             <span class="ph ph-sign-out text-xl"></span>
                             <strong class="heading6">WishList</strong>
                         </a>
@@ -847,10 +106,22 @@
                             <table class="w-full max-[1400px]:w-[700px] max-md:w-[700px]">
                                 <thead class="border-b border-line">
                                 <tr>
-                                    <th scope="col" class="pb-3 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Room</th>
-                                    <th scope="col" class="pb-3 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Title</th>
-                                    <th scope="col" class="pb-3 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">Seat</th>
-                                    <th scope="col" class="pb-3 text-right text-sm font-bold uppercase text-secondary whitespace-nowrap">Number of people</th>
+                                    <th scope="col"
+                                        class="pb-3 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">
+                                        Room
+                                    </th>
+                                    <th scope="col"
+                                        class="pb-3 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">
+                                        Title
+                                    </th>
+                                    <th scope="col"
+                                        class="pb-3 text-left text-sm font-bold uppercase text-secondary whitespace-nowrap">
+                                        Seat
+                                    </th>
+                                    <th scope="col"
+                                        class="pb-3 text-right text-sm font-bold uppercase text-secondary whitespace-nowrap">
+                                        Number of people
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -860,10 +131,12 @@
                                     </th>
                                     <td class="py-3">
                                         <a href="product-default.html" class="product flex items-center gap-3">
-                                            <img th:src="${histories.poster}" alt="Contrasting sweatshirt" class="flex-shrink-0 w-12 h-12 rounded" />
+                                            <img th:src="${histories.poster}" alt="Contrasting sweatshirt"
+                                                 class="flex-shrink-0 w-12 h-12 rounded"/>
                                             <div class="info flex flex-col">
                                                 <strong class="product_name text-button" th:text="${histories.title}">title</strong>
-                                                <span class="product_tag caption1 text-secondary" th:text="${histories.date}">date</span>
+                                                <span class="product_tag caption1 text-secondary"
+                                                      th:text="${histories.date}">date</span>
                                             </div>
                                         </a>
                                     </td>
@@ -881,23 +154,34 @@
                     </div>
                 </div>
                 <script>
-                    let history = JSON.stringify(historys).map(function(element){
+                    let history = JSON.stringify(historys).map(function (element) {
                         alert(history);
                         document.getElementById('Hid').innerText = element.id;
                     })
                     console.log(historys);
                 </script>
 
-                <div class="filter-item tab_order text-content overflow-hidden w-full p-7 border border-line rounded-xl" th:data-item="${orders}">
+                <div class="filter-item tab_order text-content overflow-hidden w-full p-7 border border-line rounded-xl"
+                     th:data-item="${orders}">
                     <h6 class="heading6">Your Orders</h6>
                     <div class="w-full overflow-x-auto">
                         <div class="menu-tab relative grid grid-cols-5 max-lg:w-[500px] max-md:max-w-max border-b border-line mt-3">
                             <div class="indicator absolute bottom-0 w-1/5 h-0.5 bg-black duration-500"></div>
-                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black active">all</button>
-                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black">pending</button>
-                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black">delivery</button>
-                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black">completed</button>
-                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black">canceled</button>
+                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black active">
+                                all
+                            </button>
+                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black">
+                                pending
+                            </button>
+                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black">
+                                delivery
+                            </button>
+                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black">
+                                completed
+                            </button>
+                            <button class="tab-item relative px-3 py-2.5 text-button text-secondary text-center duration-300 hover:text-black">
+                                canceled
+                            </button>
                         </div>
                     </div>
                     <div class="list_order">
@@ -916,7 +200,9 @@
                                 <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
                                     <a href="product-default.html" class="flex items-center gap-5">
                                         <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
-                                            <img th:src="@{/profile/images/robot.jpg}" alt="Contrasting sheepskin sweatshirt" class="w-full h-full object-cover" />
+                                            <img th:src="@{/profile/images/robot.jpg}"
+                                                 alt="Contrasting sheepskin sweatshirt"
+                                                 class="w-full h-full object-cover"/>
                                         </div>
                                         <div>
                                             <div class="prd_name text-title">Contrasting sheepskin sweatshirt</div>
@@ -936,7 +222,9 @@
                                 <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
                                     <a href="product-default.html" class="flex items-center gap-5">
                                         <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
-                                            <img th:src="@{/profile/images/robot.jpg}" alt="Contrasting sheepskin sweatshirt" class="w-full h-full object-cover" />
+                                            <img th:src="@{/profile/images/robot.jpg}"
+                                                 alt="Contrasting sheepskin sweatshirt"
+                                                 class="w-full h-full object-cover"/>
                                         </div>
                                         <div>
                                             <div class="prd_name text-title">Contrasting sheepskin sweatshirt</div>
@@ -956,7 +244,9 @@
                             </div>
                             <div class="flex flex-wrap gap-4 p-5">
                                 <button class="button-main btn_order_detail">Order Details</button>
-                                <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white">Cancel Order</button>
+                                <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white">
+                                    Cancel Order
+                                </button>
                             </div>
                         </div>
                         <div class="order_item mt-5 border border-line rounded-lg box-shadow-xs">
@@ -974,7 +264,9 @@
                                 <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
                                     <a href="product-default.html" class="flex items-center gap-5">
                                         <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
-                                            <img th:src="@{/profile/images/robot.jpg}" alt="Contrasting sheepskin sweatshirt" class="w-full h-full object-cover" />
+                                            <img th:src="@{/profile/images/robot.jpg}"
+                                                 alt="Contrasting sheepskin sweatshirt"
+                                                 class="w-full h-full object-cover"/>
                                         </div>
                                         <div>
                                             <div class="prd_name text-title">Contrasting sheepskin sweatshirt</div>
@@ -994,7 +286,9 @@
                             </div>
                             <div class="flex flex-wrap gap-4 p-5">
                                 <button class="button-main btn_order_detail">Order Details</button>
-                                <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white">Cancel Order</button>
+                                <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white">
+                                    Cancel Order
+                                </button>
                             </div>
                         </div>
                         <div class="order_item mt-5 border border-line rounded-lg box-shadow-xs">
@@ -1012,7 +306,9 @@
                                 <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
                                     <a href="product-default.html" class="flex items-center gap-5">
                                         <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
-                                            <img th:src="@{/profile/images/robot.jpg}" alt="Contrasting sheepskin sweatshirt" class="w-full h-full object-cover" />
+                                            <img th:src="@{/profile/images/robot.jpg}"
+                                                 alt="Contrasting sheepskin sweatshirt"
+                                                 class="w-full h-full object-cover"/>
                                         </div>
                                         <div>
                                             <div class="prd_name text-title">Contrasting sheepskin sweatshirt</div>
@@ -1032,7 +328,9 @@
                             </div>
                             <div class="flex flex-wrap gap-4 p-5">
                                 <button class="button-main btn_order_detail">Order Details</button>
-                                <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white">Cancel Order</button>
+                                <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white">
+                                    Cancel Order
+                                </button>
                             </div>
                         </div>
                         <div class="order_item mt-5 border border-line rounded-lg box-shadow-xs">
@@ -1050,7 +348,9 @@
                                 <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
                                     <a href="product-default.html" class="flex items-center gap-5">
                                         <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
-                                            <img th:src="@{/profile/images/robot.jpg}" alt="Contrasting sheepskin sweatshirt" class="w-full h-full object-cover" />
+                                            <img th:src="@{/profile/images/robot.jpg}"
+                                                 alt="Contrasting sheepskin sweatshirt"
+                                                 class="w-full h-full object-cover"/>
                                         </div>
                                         <div>
                                             <div class="prd_name text-title">Contrasting sheepskin sweatshirt</div>
@@ -1070,106 +370,150 @@
                             </div>
                             <div class="flex flex-wrap gap-4 p-5">
                                 <button class="button-main btn_order_detail">Order Details</button>
-                                <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white">Cancel Order</button>
+                                <button class="button-main bg-surface border border-line hover:bg-black text-black hover:text-white">
+                                    Cancel Order
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="filter-item tab_address text-content w-full p-7 border border-line rounded-xl" th:data-item="${address}">
+                <div class="filter-item tab_address text-content w-full p-7 border border-line rounded-xl"
+                     th:data-item="${address}">
                     <form>
-                        <button type="button" class="tab_btn flex items-center justify-between w-full pb-1.5 border-b border-line active" data-item="billing">
+                        <button type="button"
+                                class="tab_btn flex items-center justify-between w-full pb-1.5 border-b border-line active"
+                                data-item="billing">
                             <strong class="heading6">Billing address</strong>
                             <span class="ph ph-caret-down text-2xl ic_down duration-300"></span>
                         </button>
                         <div class="form_address active" data-item="billing">
                             <div class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-5">
                                 <div class="first-name">
-                                    <label for="billingFirstName" class="caption1 capitalize">First Name <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingFirstName" type="text" required />
+                                    <label for="billingFirstName" class="caption1 capitalize">First Name <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingFirstName"
+                                           type="text" required/>
                                 </div>
                                 <div class="last-name">
-                                    <label for="billingLastName" class="caption1 capitalize">Last Name <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingLastName" type="text" required />
+                                    <label for="billingLastName" class="caption1 capitalize">Last Name <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingLastName"
+                                           type="text" required/>
                                 </div>
                                 <div class="company">
-                                    <label for="billingCompany" class="caption1 capitalize">Company name (optional)</label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingCompany" type="text" required />
+                                    <label for="billingCompany" class="caption1 capitalize">Company name
+                                        (optional)</label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingCompany"
+                                           type="text" required/>
                                 </div>
                                 <div class="country">
-                                    <label for="billingCountry" class="caption1 capitalize">Country / Region <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingCountry" type="text" required />
+                                    <label for="billingCountry" class="caption1 capitalize">Country / Region <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingCountry"
+                                           type="text" required/>
                                 </div>
                                 <div class="street">
-                                    <label for="billingStreet" class="caption1 capitalize">street address <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingStreet" type="text" required />
+                                    <label for="billingStreet" class="caption1 capitalize">street address <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingStreet"
+                                           type="text" required/>
                                 </div>
                                 <div class="city">
-                                    <label for="billingCity" class="caption1 capitalize">Town / city <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingCity" type="text" required />
+                                    <label for="billingCity" class="caption1 capitalize">Town / city <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingCity"
+                                           type="text" required/>
                                 </div>
                                 <div class="state">
-                                    <label for="billingState" class="caption1 capitalize">state <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingState" type="text" required />
+                                    <label for="billingState" class="caption1 capitalize">state <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingState"
+                                           type="text" required/>
                                 </div>
                                 <div class="zip">
-                                    <label for="billingZip" class="caption1 capitalize">ZIP <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingZip" type="text" required />
+                                    <label for="billingZip" class="caption1 capitalize">ZIP <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingZip"
+                                           type="text" required/>
                                 </div>
                                 <div class="phone">
-                                    <label for="billingPhone" class="caption1 capitalize">Phone <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingPhone" type="text" required />
+                                    <label for="billingPhone" class="caption1 capitalize">Phone <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingPhone"
+                                           type="text" required/>
                                 </div>
                                 <div class="email">
-                                    <label for="billingEmail" class="caption1 capitalize">Email <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingEmail" type="email" required />
+                                    <label for="billingEmail" class="caption1 capitalize">Email <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="billingEmail"
+                                           type="email" required/>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="tab_btn flex items-center justify-between w-full mt-10 pb-1.5 border-b border-line" data-item="shipping">
+                        <button type="button"
+                                class="tab_btn flex items-center justify-between w-full mt-10 pb-1.5 border-b border-line"
+                                data-item="shipping">
                             <strong class="heading6">Shipping address</strong>
                             <span class="ph ph-caret-down text-2xl ic_down duration-300"></span>
                         </button>
                         <div class="form_address" data-item="shipping">
                             <div class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-5">
                                 <div class="first-name">
-                                    <label for="shippingFirstName" class="caption1 capitalize">First Name <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingFirstName" type="text" required />
+                                    <label for="shippingFirstName" class="caption1 capitalize">First Name <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingFirstName"
+                                           type="text" required/>
                                 </div>
                                 <div class="last-name">
-                                    <label for="shippingLastName" class="caption1 capitalize">Last Name <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingLastName" type="text" required />
+                                    <label for="shippingLastName" class="caption1 capitalize">Last Name <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingLastName"
+                                           type="text" required/>
                                 </div>
                                 <div class="company">
-                                    <label for="shippingCompany" class="caption1 capitalize">Company name (optional)</label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingCompany" type="text" required />
+                                    <label for="shippingCompany" class="caption1 capitalize">Company name
+                                        (optional)</label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingCompany"
+                                           type="text" required/>
                                 </div>
                                 <div class="country">
-                                    <label for="shippingCountry" class="caption1 capitalize">Country / Region <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingCountry" type="text" required />
+                                    <label for="shippingCountry" class="caption1 capitalize">Country / Region <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingCountry"
+                                           type="text" required/>
                                 </div>
                                 <div class="street">
-                                    <label for="shippingStreet" class="caption1 capitalize">street address <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingStreet" type="text" required />
+                                    <label for="shippingStreet" class="caption1 capitalize">street address <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingStreet"
+                                           type="text" required/>
                                 </div>
                                 <div class="city">
-                                    <label for="shippingCity" class="caption1 capitalize">Town / city <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingCity" type="text" required />
+                                    <label for="shippingCity" class="caption1 capitalize">Town / city <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingCity"
+                                           type="text" required/>
                                 </div>
                                 <div class="state">
                                     <label for="shippingState" class="caption1 capitalize">state <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingState" type="text" required />
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingState"
+                                           type="text" required/>
                                 </div>
                                 <div class="zip">
-                                    <label for="shippingZip" class="caption1 capitalize">ZIP <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingZip" type="text" required />
+                                    <label for="shippingZip" class="caption1 capitalize">ZIP <span
+                                            class="text-red">*</span></label>
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingZip"
+                                           type="text" required/>
                                 </div>
                                 <div class="phone">
                                     <label for="shippingPhone" class="caption1 capitalize">Phone <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingPhone" type="text" required />
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingPhone"
+                                           type="text" required/>
                                 </div>
                                 <div class="email">
                                     <label for="shippingEmail" class="caption1 capitalize">Email <span class="text-red">*</span></label>
-                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingEmail" type="email" required />
+                                    <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="shippingEmail"
+                                           type="email" required/>
                                 </div>
                             </div>
                         </div>
@@ -1178,7 +522,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="filter-item text-content w-full p-7 border border-line rounded-xl" th:data-item="${setting}">
+                <div class="filter-item text-content w-full p-7 border border-line rounded-xl"
+                     th:data-item="${setting}">
                     <form>
                         <div class="heading5 pb-4">Information</div>
                         <div class="upload_image col-span-full">
@@ -1186,39 +531,53 @@
                             <div class="flex flex-wrap items-center gap-5 mt-3">
                                 <div class="bg_img flex-shrink-0 relative w-[7.5rem] h-[7.5rem] rounded-lg overflow-hidden bg-surface">
                                     <span class="ph ph-image text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-secondary"></span>
-                                    <img th:src="@{/profile/images/robot.jpg}" class="upload_img relative z-[1] w-full h-full object-cover" />
+                                    <img th:src="@{/profile/images/robot.jpg}"
+                                         class="upload_img relative z-[1] w-full h-full object-cover"/>
                                 </div>
                                 <div>
                                     <strong class="text-button">Upload File:</strong>
                                     <p class="caption1 text-secondary mt-1">JPG 120x120px</p>
                                     <div class="upload_file flex items-center gap-3 w-[220px] mt-3 px-3 py-2 border border-line rounded">
-                                        <label for="uploadImage" class="caption2 py-1 px-3 rounded bg-line whitespace-nowrap cursor-pointer">Choose File</label>
-                                        <input type="file" name="uploadImage" id="uploadImage" accept="image/*" class="caption2 cursor-pointer" required />
+                                        <label for="uploadImage"
+                                               class="caption2 py-1 px-3 rounded bg-line whitespace-nowrap cursor-pointer">Choose
+                                            File</label>
+                                        <input type="file" name="uploadImage" id="uploadImage" accept="image/*"
+                                               class="caption2 cursor-pointer" required/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-5">
                             <div class="first-name">
-                                <label for="firstName" class="caption1 capitalize">First Name <span class="text-red">*</span></label>
-                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="firstName" type="text" value="Tony" placeholder="First name" required />
+                                <label for="firstName" class="caption1 capitalize">First Name <span
+                                        class="text-red">*</span></label>
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="firstName" type="text"
+                                       value="Tony" placeholder="First name" required/>
                             </div>
                             <div class="last-name">
-                                <label for="lastName" class="caption1 capitalize">Last Name <span class="text-red">*</span></label>
-                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="lastName" type="text" value="Nguyen" placeholder="Last name" required />
+                                <label for="lastName" class="caption1 capitalize">Last Name <span
+                                        class="text-red">*</span></label>
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="lastName" type="text"
+                                       value="Nguyen" placeholder="Last name" required/>
                             </div>
                             <div class="phone-number">
-                                <label for="phoneNumber" class="caption1 capitalize">Phone Number <span class="text-red">*</span></label>
-                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="phoneNumber" type="text" value="(+12) 345 678 910" placeholder="Phone number" required />
+                                <label for="phoneNumber" class="caption1 capitalize">Phone Number <span
+                                        class="text-red">*</span></label>
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="phoneNumber" type="text"
+                                       value="(+12) 345 678 910" placeholder="Phone number" required/>
                             </div>
                             <div class="email">
-                                <label for="email" class="caption1 capitalize">Email Address <span class="text-red">*</span></label>
-                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="email" type="email" value="hi.avitex@gmail.com" placeholder="Email address" required />
+                                <label for="email" class="caption1 capitalize">Email Address <span
+                                        class="text-red">*</span></label>
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="email" type="email"
+                                       value="hi.avitex@gmail.com" placeholder="Email address" required/>
                             </div>
                             <div class="gender">
-                                <label for="gender" class="caption1 capitalize">Gender <span class="text-red">*</span></label>
+                                <label for="gender" class="caption1 capitalize">Gender <span
+                                        class="text-red">*</span></label>
                                 <div class="select-block mt-2">
-                                    <select class="border border-line px-4 py-3 w-full rounded-lg" id="gender" name="gender" value="default">
+                                    <select class="border border-line px-4 py-3 w-full rounded-lg" id="gender"
+                                            name="gender" value="default">
                                         <option value="default" disabled>Choose Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -1229,21 +588,28 @@
                             </div>
                             <div class="birth">
                                 <label for="birth" class="caption1">Day of Birth <span class="text-red">*</span></label>
-                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="birth" type="date" placeholder="Day of Birth" required />
+                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="birth" type="date"
+                                       placeholder="Day of Birth" required/>
                             </div>
                         </div>
                         <div class="heading5 pb-4 lg:mt-10 mt-6">Change Password</div>
                         <div class="pass">
-                            <label for="password" class="caption1">Current password <span class="text-red">*</span></label>
-                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="password" type="password" placeholder="Password *" required />
+                            <label for="password" class="caption1">Current password <span
+                                    class="text-red">*</span></label>
+                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="password" type="password"
+                                   placeholder="Password *" required/>
                         </div>
                         <div class="new-pass mt-5">
-                            <label for="newPassword" class="caption1">New password <span class="text-red">*</span></label>
-                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="newPassword" type="password" placeholder="New Password *" required />
+                            <label for="newPassword" class="caption1">New password <span
+                                    class="text-red">*</span></label>
+                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="newPassword" type="password"
+                                   placeholder="New Password *" required/>
                         </div>
                         <div class="confirm-pass mt-5">
-                            <label for="confirmPassword" class="caption1">Confirm new password <span class="text-red">*</span></label>
-                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="confirmPassword" type="password" placeholder="Confirm Password *" required />
+                            <label for="confirmPassword" class="caption1">Confirm new password <span
+                                    class="text-red">*</span></label>
+                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="confirmPassword"
+                                   type="password" placeholder="Confirm Password *" required/>
                         </div>
                         <div class="block-button lg:mt-10 mt-6">
                             <button class="button-main">Save Change</button>
@@ -1256,7 +622,6 @@
 </div>
 
 
-
 <a class="scroll-to-top-btn" href="#top-nav"><i class="ph-bold ph-caret-up"></i></a>
 
 <!-- Modal -->
@@ -1264,15 +629,24 @@
     <div class="modal-search-main md:p-10 p-6 rounded-[32px]">
         <div class="form-search relative w-full">
             <i class="ph ph-magnifying-glass absolute heading5 right-6 top-1/2 -translate-y-1/2 cursor-pointer"></i>
-            <input type="text" placeholder="Searching..." class="text-button-lg h-14 rounded-2xl border border-line w-full pl-6 pr-12" />
+            <input type="text" placeholder="Searching..."
+                   class="text-button-lg h-14 rounded-2xl border border-line w-full pl-6 pr-12"/>
         </div>
         <div class="keyword mt-8">
             <div class="heading5">Feature keywords Today</div>
             <div class="list-keyword flex items-center flex-wrap gap-3 mt-4">
-                <button class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">Dress</button>
-                <button class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">T-shirt</button>
-                <button class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">Underwear</button>
-                <button class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">Top</button>
+                <button class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
+                    Dress
+                </button>
+                <button class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
+                    T-shirt
+                </button>
+                <button class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
+                    Underwear
+                </button>
+                <button class="item px-4 py-1.5 border border-line rounded-full cursor-pointer duration-300 hover:bg-black hover:text-white">
+                    Top
+                </button>
             </div>
         </div>
         <div class="list-recent mt-8">
@@ -1281,25 +655,37 @@
                 <div class="product-item grid-type" data-item="14">
                     <div class="product-main cursor-pointer block">
                         <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
-                            <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">New</div>
+                            <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                New
+                            </div>
                             <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
                                 <div class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To Wishlist</div>
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To
+                                        Wishlist
+                                    </div>
                                     <i class="ph ph-heart text-lg"></i>
                                 </div>
                                 <div class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Compare Product</div>
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                        Compare Product
+                                    </div>
                                     <i class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
                                     <i class="ph ph-check-circle text-lg checked-icon"></i>
                                 </div>
                             </div>
                             <div class="product-img w-full h-full aspect-[3/4]">
-                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
-                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
+                                <img class="w-full h-full object-cover duration-700"
+                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
+                                <img class="w-full h-full object-cover duration-700"
+                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
                             </div>
                             <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
-                                <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">Quick View</div>
-                                <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">Add To Cart</div>
+                                <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
+                                    Quick View
+                                </div>
+                                <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
+                                    Add To Cart
+                                </div>
                             </div>
                         </div>
                         <div class="product-infor mt-4 lg:mb-7">
@@ -1321,13 +707,19 @@
                             <div class="product-name text-title duration-300">Faux-leather trousers</div>
                             <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
                                 <div class="color-item bg-black w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Black</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        Black
+                                    </div>
                                 </div>
                                 <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Green</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        Green
+                                    </div>
                                 </div>
                                 <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Red</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        Red
+                                    </div>
                                 </div>
                             </div>
 
@@ -1336,7 +728,9 @@
                                 <div class="product-origin-price caption1 text-secondary2">
                                     <del>$50.00</del>
                                 </div>
-                                <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">-20%</div>
+                                <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
+                                    -20%
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1345,25 +739,37 @@
                 <div class="product-item grid-type" data-item="13">
                     <div class="product-main cursor-pointer block">
                         <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
-                            <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">New</div>
+                            <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                New
+                            </div>
                             <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
                                 <div class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To Wishlist</div>
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To
+                                        Wishlist
+                                    </div>
                                     <i class="ph ph-heart text-lg"></i>
                                 </div>
                                 <div class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Compare Product</div>
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                        Compare Product
+                                    </div>
                                     <i class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
                                     <i class="ph ph-check-circle text-lg checked-icon"></i>
                                 </div>
                             </div>
                             <div class="product-img w-full h-full aspect-[3/4]">
-                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
-                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
+                                <img class="w-full h-full object-cover duration-700"
+                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
+                                <img class="w-full h-full object-cover duration-700"
+                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
                             </div>
                             <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
-                                <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">Quick View</div>
-                                <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">Add To Cart</div>
+                                <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
+                                    Quick View
+                                </div>
+                                <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
+                                    Add To Cart
+                                </div>
                             </div>
                         </div>
                         <div class="product-infor mt-4 lg:mb-7">
@@ -1385,13 +791,19 @@
                             <div class="product-name text-title duration-300">Faux-leather trousers</div>
                             <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
                                 <div class="color-item bg-black w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Black</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        Black
+                                    </div>
                                 </div>
                                 <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Green</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        Green
+                                    </div>
                                 </div>
                                 <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Red</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        Red
+                                    </div>
                                 </div>
                             </div>
 
@@ -1400,7 +812,9 @@
                                 <div class="product-origin-price caption1 text-secondary2">
                                     <del>$50.00</del>
                                 </div>
-                                <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">-20%</div>
+                                <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
+                                    -20%
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1409,25 +823,37 @@
                 <div class="product-item grid-type" data-item="12">
                     <div class="product-main cursor-pointer block">
                         <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
-                            <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">New</div>
+                            <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                New
+                            </div>
                             <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
                                 <div class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To Wishlist</div>
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To
+                                        Wishlist
+                                    </div>
                                     <i class="ph ph-heart text-lg"></i>
                                 </div>
                                 <div class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Compare Product</div>
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                        Compare Product
+                                    </div>
                                     <i class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
                                     <i class="ph ph-check-circle text-lg checked-icon"></i>
                                 </div>
                             </div>
                             <div class="product-img w-full h-full aspect-[3/4]">
-                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
-                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
+                                <img class="w-full h-full object-cover duration-700"
+                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
+                                <img class="w-full h-full object-cover duration-700"
+                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
                             </div>
                             <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
-                                <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">Quick View</div>
-                                <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">Add To Cart</div>
+                                <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
+                                    Quick View
+                                </div>
+                                <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
+                                    Add To Cart
+                                </div>
                             </div>
                         </div>
                         <div class="product-infor mt-4 lg:mb-7">
@@ -1449,13 +875,19 @@
                             <div class="product-name text-title duration-300">Off-the-Shoulder Blouse</div>
                             <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
                                 <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Red</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        Red
+                                    </div>
                                 </div>
                                 <div class="color-item bg-yellow w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">yellow</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        yellow
+                                    </div>
                                 </div>
                                 <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">green</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        green
+                                    </div>
                                 </div>
                             </div>
 
@@ -1464,7 +896,9 @@
                                 <div class="product-origin-price caption1 text-secondary2">
                                     <del>$50.00</del>
                                 </div>
-                                <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">-20%</div>
+                                <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
+                                    -20%
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1473,25 +907,37 @@
                 <div class="product-item grid-type" data-item="11">
                     <div class="product-main cursor-pointer block">
                         <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
-                            <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">New</div>
+                            <div class="product-tag text-button-uppercase bg-green px-3 py-0.5 inline-block rounded-full absolute top-3 left-3 z-[1]">
+                                New
+                            </div>
                             <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
                                 <div class="add-wishlist-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To Wishlist</div>
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Add To
+                                        Wishlist
+                                    </div>
                                     <i class="ph ph-heart text-lg"></i>
                                 </div>
                                 <div class="compare-btn w-[32px] h-[32px] flex items-center justify-center rounded-full bg-white duration-300 relative mt-2">
-                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">Compare Product</div>
+                                    <div class="tag-action bg-black text-white caption2 px-1.5 py-0.5 rounded-sm">
+                                        Compare Product
+                                    </div>
                                     <i class="ph ph-arrow-counter-clockwise text-lg compare-icon"></i>
                                     <i class="ph ph-check-circle text-lg checked-icon"></i>
                                 </div>
                             </div>
                             <div class="product-img w-full h-full aspect-[3/4]">
-                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
-                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
+                                <img class="w-full h-full object-cover duration-700"
+                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
+                                <img class="w-full h-full object-cover duration-700"
+                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
                             </div>
                             <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
-                                <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">Quick View</div>
-                                <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">Add To Cart</div>
+                                <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
+                                    Quick View
+                                </div>
+                                <div class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
+                                    Add To Cart
+                                </div>
                             </div>
                         </div>
                         <div class="product-infor mt-4 lg:mb-7">
@@ -1513,13 +959,19 @@
                             <div class="product-name text-title duration-300">Off-the-Shoulder Blouse</div>
                             <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
                                 <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Red</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        Red
+                                    </div>
                                 </div>
                                 <div class="color-item bg-yellow w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">yellow</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        yellow
+                                    </div>
                                 </div>
                                 <div class="color-item bg-green w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">green</div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        green
+                                    </div>
                                 </div>
                             </div>
 
@@ -1528,7 +980,9 @@
                                 <div class="product-origin-price caption1 text-secondary2">
                                     <del>$50.00</del>
                                 </div>
-                                <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">-20%</div>
+                                <div class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
+                                    -20%
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1549,7 +1003,9 @@
         <div class="list-product px-6"></div>
         <div class="footer-modal p-6 border-t bg-white border-line absolute bottom-0 left-0 w-full text-center">
             <a href="wishlist.html" class="button-main w-full text-center uppercase"> View All Wish List</a>
-            <div class="text-button-uppercase continue mt-4 text-center has-line-before cursor-pointer inline-block">Or continue shopping</div>
+            <div class="text-button-uppercase continue mt-4 text-center has-line-before cursor-pointer inline-block">Or
+                continue shopping
+            </div>
         </div>
     </div>
 </div>
@@ -1559,10 +1015,12 @@
         <div class="left w-1/2 border-r border-line py-6 max-md:hidden">
             <div class="heading5 px-6 pb-3">You May Also Like</div>
             <div class="list px-6">
-                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line" data-item="1">
+                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
+                     data-item="1">
                     <div class="infor flex items-center gap-5">
                         <div class="bg-img">
-                            <img th:src="@{/profile/images/robot.jpg}" alt="img" class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
+                            <img th:src="@{/profile/images/robot.jpg}" alt="img"
+                                 class="w-[100px] aspect-square flex-shrink-0 rounded-lg"/>
                         </div>
                         <div class="">
                             <div class="name text-button">Faux-leather trousers</div>
@@ -1574,12 +1032,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">QUICK VIEW</div>
+                    <div class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
+                        QUICK VIEW
+                    </div>
                 </div>
-                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line" data-item="2">
+                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
+                     data-item="2">
                     <div class="infor flex items-center gap-5">
                         <div class="bg-img">
-                            <img th:src="@{/profile/images/robot.jpg}" alt="img" class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
+                            <img th:src="@{/profile/images/robot.jpg}" alt="img"
+                                 class="w-[100px] aspect-square flex-shrink-0 rounded-lg"/>
                         </div>
                         <div class="">
                             <div class="name text-button">Faux-leather trousers</div>
@@ -1591,12 +1053,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">QUICK VIEW</div>
+                    <div class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
+                        QUICK VIEW
+                    </div>
                 </div>
-                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line" data-item="3">
+                <div class="product-item item py-5 flex items-center justify-between gap-3 border-b border-line"
+                     data-item="3">
                     <div class="infor flex items-center gap-5">
                         <div class="bg-img">
-                            <img th:src="@{/profile/images/robot.jpg}" alt="img" class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
+                            <img th:src="@{/profile/images/robot.jpg}" alt="img"
+                                 class="w-[100px] aspect-square flex-shrink-0 rounded-lg"/>
                         </div>
                         <div class="">
                             <div class="name text-button">Faux-leather trousers</div>
@@ -1608,12 +1074,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">QUICK VIEW</div>
+                    <div class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
+                        QUICK VIEW
+                    </div>
                 </div>
                 <div class="product-item item py-5 flex items-center justify-between gap-3" data-item="4">
                     <div class="infor flex items-center gap-5">
                         <div class="bg-img">
-                            <img th:src="@{/profile/images/robot.jpg}" alt="img" class="w-[100px] aspect-square flex-shrink-0 rounded-lg" />
+                            <img th:src="@{/profile/images/robot.jpg}" alt="img"
+                                 class="w-[100px] aspect-square flex-shrink-0 rounded-lg"/>
                         </div>
                         <div class="">
                             <div class="name text-button">Faux-leather trousers</div>
@@ -1625,7 +1094,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">QUICK VIEW</div>
+                    <div class="quick-view-btn button-main py-3 px-5 bg-black hover:bg-green text-white rounded-full whitespace-nowrap">
+                        QUICK VIEW
+                    </div>
                 </div>
             </div>
         </div>
@@ -1640,7 +1111,8 @@
                 <div class="flex items-center gap-3 px-5 py-3 bg-green rounded-lg">
                     <p class="text-3xl">🔥</p>
                     <div class="caption1">
-                        Your cart will expire in <span class="text-red caption1 font-semibold"><span class="minute">04</span>:<span class="second">59</span></span> minutes!<br />
+                        Your cart will expire in <span class="text-red caption1 font-semibold"><span
+                            class="minute">04</span>:<span class="second">59</span></span> minutes!<br/>
                         Please checkout now before your items sell out!
                     </div>
                 </div>
@@ -1677,10 +1149,14 @@
                 </div>
                 <div class="block-button text-center p-6">
                     <div class="flex items-center gap-4">
-                        <a href="cart.html" class="button-main basis-1/2 bg-white border border-black text-black text-center uppercase"> View cart </a>
+                        <a href="cart.html"
+                           class="button-main basis-1/2 bg-white border border-black text-black text-center uppercase">
+                            View cart </a>
                         <a href="checkout.html" class="button-main basis-1/2 text-center uppercase"> Check Out </a>
                     </div>
-                    <div class="text-button-uppercase continue mt-4 text-center has-line-before cursor-pointer inline-block">Or continue shopping</div>
+                    <div class="text-button-uppercase continue mt-4 text-center has-line-before cursor-pointer inline-block">
+                        Or continue shopping
+                    </div>
                 </div>
                 <div class="tab-item note-block">
                     <div class="px-6 py-4 border-b border-line">
@@ -1690,11 +1166,15 @@
                         </div>
                     </div>
                     <div class="form pt-4 px-6">
-                        <textarea name="form-note" id="form-note" rows="4" placeholder="Add special instructions for your order..." class="caption1 py-3 px-4 bg-surface border-line rounded-md w-full"></textarea>
+                        <textarea name="form-note" id="form-note" rows="4"
+                                  placeholder="Add special instructions for your order..."
+                                  class="caption1 py-3 px-4 bg-surface border-line rounded-md w-full"></textarea>
                     </div>
                     <div class="block-button text-center pt-4 px-6 pb-6">
                         <div class="button-main w-full text-center">Save</div>
-                        <div class="cancel-btn text-button-uppercase mt-4 text-center has-line-before cursor-pointer inline-block">Cancel</div>
+                        <div class="cancel-btn text-button-uppercase mt-4 text-center has-line-before cursor-pointer inline-block">
+                            Cancel
+                        </div>
                     </div>
                 </div>
                 <div class="tab-item shipping-block">
@@ -1708,7 +1188,8 @@
                         <div class="">
                             <label for="select-country" class="caption1 text-secondary">Country/region</label>
                             <div class="select-block relative mt-2">
-                                <select id="select-country" name="select-country" class="w-full py-3 pl-5 rounded-xl bg-white border border-line">
+                                <select id="select-country" name="select-country"
+                                        class="w-full py-3 pl-5 rounded-xl bg-white border border-line">
                                     <option value="Country/region">Country/region</option>
                                     <option value="France">France</option>
                                     <option value="Spain">Spain</option>
@@ -1721,7 +1202,8 @@
                         <div class="mt-3">
                             <label for="select-state" class="caption1 text-secondary">State</label>
                             <div class="select-block relative mt-2">
-                                <select id="select-state" name="select-state" class="w-full py-3 pl-5 rounded-xl bg-white border border-line">
+                                <select id="select-state" name="select-state"
+                                        class="w-full py-3 pl-5 rounded-xl bg-white border border-line">
                                     <option value="State">State</option>
                                     <option value="Paris">Paris</option>
                                     <option value="Madrid">Madrid</option>
@@ -1733,12 +1215,15 @@
                         </div>
                         <div class="mt-3">
                             <label for="select-code" class="caption1 text-secondary">Postal/Zip Code</label>
-                            <input class="border-line px-5 py-3 w-full rounded-xl mt-3" id="select-code" type="text" placeholder="Postal/Zip Code" />
+                            <input class="border-line px-5 py-3 w-full rounded-xl mt-3" id="select-code" type="text"
+                                   placeholder="Postal/Zip Code"/>
                         </div>
                     </div>
                     <div class="block-button text-center pt-4 px-6 pb-6">
                         <div class="button-main w-full text-center">Calculator</div>
-                        <div class="cancel-btn text-button-uppercase mt-4 text-center has-line-before cursor-pointer inline-block">Cancel</div>
+                        <div class="cancel-btn text-button-uppercase mt-4 text-center has-line-before cursor-pointer inline-block">
+                            Cancel
+                        </div>
                     </div>
                 </div>
                 <div class="tab-item coupon-block">
@@ -1751,12 +1236,15 @@
                     <div class="form pt-4 px-6">
                         <div class="">
                             <label for="select-discount" class="caption1 text-secondary">Enter Code</label>
-                            <input class="border-line px-5 py-3 w-full rounded-xl mt-3" id="select-discount" type="text" placeholder="Discount code" />
+                            <input class="border-line px-5 py-3 w-full rounded-xl mt-3" id="select-discount" type="text"
+                                   placeholder="Discount code"/>
                         </div>
                     </div>
                     <div class="block-button text-center pt-4 px-6 pb-6">
                         <div class="button-main w-full text-center">Apply</div>
-                        <div class="cancel-btn text-button-uppercase mt-4 text-center has-line-before cursor-pointer inline-block">Cancel</div>
+                        <div class="cancel-btn text-button-uppercase mt-4 text-center has-line-before cursor-pointer inline-block">
+                            Cancel
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1784,7 +1272,7 @@
                         <div class="progress"></div>
                     </div>
                     <div class="range-input">
-                        <input class="range-max" type="range" min="0" max="200" value="200" />
+                        <input class="range-max" type="range" min="0" max="200" value="200"/>
                     </div>
                 </div>
             </div>
@@ -1801,19 +1289,31 @@
                         <div class="progress"></div>
                     </div>
                     <div class="range-input">
-                        <input class="range-max" type="range" min="0" max="90" value="90" />
+                        <input class="range-max" type="range" min="0" max="90" value="90"/>
                     </div>
                 </div>
             </div>
         </div>
         <div class="heading6 mt-8">suggests for you:</div>
         <div class="list-size-block flex items-center gap-2 flex-wrap mt-3">
-            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">XS</div>
-            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">S</div>
-            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">M</div>
-            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">L</div>
-            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">XL</div>
-            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">2XL</div>
+            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
+                XS
+            </div>
+            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
+                S
+            </div>
+            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
+                M
+            </div>
+            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
+                L
+            </div>
+            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
+                XL
+            </div>
+            <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
+                2XL
+            </div>
         </div>
         <table>
             <tr>
@@ -1869,11 +1369,13 @@
         </div>
         <div class="container h-full flex items-center w-full">
             <div class="content-main flex items-center justify-between xl:gap-10 gap-6 w-full max-md:flex-wrap">
-                <div class="heading5 flex-shrink-0 max-md:w-full">Compare <br class="max-md:hidden" />Products</div>
+                <div class="heading5 flex-shrink-0 max-md:w-full">Compare <br class="max-md:hidden"/>Products</div>
                 <div class="list-product flex items-center w-full gap-4"></div>
                 <div class="block-button flex flex-col gap-4 flex-shrink-0">
                     <a href="compare.html" class="button-main whitespace-nowrap"> Compare Products</a>
-                    <div class="button-main clear whitespace-nowrap border border-black bg-white text-black">Clear All Products</div>
+                    <div class="button-main clear whitespace-nowrap border border-black bg-white text-black">Clear All
+                        Products
+                    </div>
                 </div>
             </div>
         </div>
@@ -1886,16 +1388,16 @@
             <div class="left lg:w-[388px] md:w-[300px] flex-shrink-0 px-6">
                 <div class="list-img max-md:flex items-center gap-4">
                     <div class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
-                        <img th:src="@{/profile/images/robot.jpg}" alt="item" class="w-full h-full object-cover" />
+                        <img th:src="@{/profile/images/robot.jpg}" alt="item" class="w-full h-full object-cover"/>
                     </div>
                     <div class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
-                        <img th:src="@{/profile/images/robot.jpg}" alt="item" class="w-full h-full object-cover" />
+                        <img th:src="@{/profile/images/robot.jpg}" alt="item" class="w-full h-full object-cover"/>
                     </div>
                     <div class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
-                        <img th:src="@{/profile/images/robot.jpg}" alt="item" class="w-full h-full object-cover" />
+                        <img th:src="@{/profile/images/robot.jpg}" alt="item" class="w-full h-full object-cover"/>
                     </div>
                     <div class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
-                        <img th:src="@{/profile/images/robot.jpg}" alt="item" class="w-full h-full object-cover" />
+                        <img th:src="@{/profile/images/robot.jpg}" alt="item" class="w-full h-full object-cover"/>
                     </div>
                 </div>
             </div>
@@ -1921,12 +1423,15 @@
                             <i class="ph-fill ph-star text-sm text-yellow"></i>
                             <i class="ph-fill ph-star text-sm text-yellow"></i>
                             <i class="ph-fill ph-star text-sm text-yellow"></i>
-                            <i class="ph-fill ph-star text-sm text-yellow"></i><i class="ph-fill ph-star text-sm text-yellow"></i>
+                            <i class="ph-fill ph-star text-sm text-yellow"></i><i
+                                class="ph-fill ph-star text-sm text-yellow"></i>
                         </div>
                         <span class="caption1 text-secondary">(1.234 reviews)</span>
                     </div>
                     <div class="flex items-center gap-1 gap-y-3 flex-wrap mt-3">
-                        <div class="text-xs font-semibold bg-black text-white uppercase py-1 px-3 rounded-full">best seller</div>
+                        <div class="text-xs font-semibold bg-black text-white uppercase py-1 px-3 rounded-full">best
+                            seller
+                        </div>
                         <div class="flex items-center gap-1">
                             <i class="ph-fill ph-lightning text-red text-xl"></i>
                             <div class="caption1 text-secondary">Selling fast! 22 people have this in their carts.</div>
@@ -1938,24 +1443,35 @@
                         <div class="product-origin-price font-normal text-secondary2">
                             <del>$32.00</del>
                         </div>
-                        <div class="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">-19%</div>
-                        <div class="desc text-secondary mt-3">Keep your clothes organized, yet elegant with storage cabinets by Onita Patio Furniture. Traditionally designed, they are perfect to be used in the any place where you need to store.</div>
+                        <div class="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
+                            -19%
+                        </div>
+                        <div class="desc text-secondary mt-3">Keep your clothes organized, yet elegant with storage
+                            cabinets by Onita Patio Furniture. Traditionally designed, they are perfect to be used in
+                            the any place where you need to store.
+                        </div>
                     </div>
                     <div class="list-action mt-6">
                         <div class="choose-color">
                             <div class="text-title">Colors: <span class="text-title color"></span></div>
                             <div class="list-color flex items-center gap-2 flex-wrap mt-3">
                                 <div class="color-item w-12 h-12 rounded-xl duration-300 relative active">
-                                    <img th:src="@{/profile/images/robot.jpg}" alt="color" class="rounded-xl" />
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">blue</div>
+                                    <img th:src="@{/profile/images/robot.jpg}" alt="color" class="rounded-xl"/>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        blue
+                                    </div>
                                 </div>
                                 <div class="color-item w-12 h-12 rounded-xl duration-300 relative">
-                                    <img th:src="@{/profile/images/robot.jpg}" alt="color" class="rounded-xl" />
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">red</div>
+                                    <img th:src="@{/profile/images/robot.jpg}" alt="color" class="rounded-xl"/>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        red
+                                    </div>
                                 </div>
                                 <div class="color-item w-12 h-12 rounded-xl duration-300 relative">
-                                    <img th:src="@{/profile/images/robot.jpg}" alt="color" class="rounded-xl" />
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">black</div>
+                                    <img th:src="@{/profile/images/robot.jpg}" alt="color" class="rounded-xl"/>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
+                                        black
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1965,10 +1481,18 @@
                                 <div class="caption1 size-guide text-red underline">Size Guide</div>
                             </div>
                             <div class="list-size flex items-center gap-2 flex-wrap mt-3">
-                                <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">S</div>
-                                <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line active">M</div>
-                                <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">L</div>
-                                <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">XL</div>
+                                <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
+                                    S
+                                </div>
+                                <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line active">
+                                    M
+                                </div>
+                                <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
+                                    L
+                                </div>
+                                <div class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line">
+                                    XL
+                                </div>
                             </div>
                         </div>
                         <div class="text-title mt-5">Quantity:</div>
@@ -1978,7 +1502,9 @@
                                 <div class="quantity body1 font-semibold">1</div>
                                 <i class="ph-bold ph-plus cursor-pointer body1"></i>
                             </div>
-                            <div class="add-cart-btn button-main w-full text-center bg-white text-black border border-black">Add To Cart</div>
+                            <div class="add-cart-btn button-main w-full text-center bg-white text-black border border-black">
+                                Add To Cart
+                            </div>
                         </div>
                         <div class="button-block mt-5">
                             <a href="checkout.html" class="button-main w-full text-center">Buy It Now</a>
@@ -2034,25 +1560,27 @@
                     </div>
                     <div class="list-payment mt-7">
                         <div class="main-content lg:pt-8 pt-6 lg:pb-6 pb-4 sm:px-4 px-3 border border-line rounded-xl relative max-md:w-2/3 max-sm:w-full">
-                            <div class="heading6 px-5 bg-white absolute -top-[14px] left-1/2 -translate-x-1/2 whitespace-nowrap">Guranteed safe checkout</div>
+                            <div class="heading6 px-5 bg-white absolute -top-[14px] left-1/2 -translate-x-1/2 whitespace-nowrap">
+                                Guranteed safe checkout
+                            </div>
                             <div class="list grid grid-cols-6">
                                 <div class="item flex items-center justify-center lg:px-3 px-1">
-                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full" />
+                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full"/>
                                 </div>
                                 <div class="item flex items-center justify-center lg:px-3 px-1">
-                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full" />
+                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full"/>
                                 </div>
                                 <div class="item flex items-center justify-center lg:px-3 px-1">
-                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full" />
+                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full"/>
                                 </div>
                                 <div class="item flex items-center justify-center lg:px-3 px-1">
-                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full" />
+                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full"/>
                                 </div>
                                 <div class="item flex items-center justify-center lg:px-3 px-1">
-                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full" />
+                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full"/>
                                 </div>
                                 <div class="item flex items-center justify-center lg:px-3 px-1">
-                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full" />
+                                    <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-full"/>
                                 </div>
                             </div>
                         </div>
@@ -2080,11 +1608,13 @@
                 </div>
                 <div class="info_item">
                     <strong class="text-button-uppercase text-secondary">Shipping address</strong>
-                    <h6 class="heading6 order_shipping_address mt-2">2163 Phillips Gap Rd, West Jefferson, North Carolina, US</h6>
+                    <h6 class="heading6 order_shipping_address mt-2">2163 Phillips Gap Rd, West Jefferson, North
+                        Carolina, US</h6>
                 </div>
                 <div class="info_item">
                     <strong class="text-button-uppercase text-secondary">Billing address</strong>
-                    <h6 class="heading6 order_billing_address mt-2">2163 Phillips Gap Rd, West Jefferson, North Carolina, US</h6>
+                    <h6 class="heading6 order_billing_address mt-2">2163 Phillips Gap Rd, West Jefferson, North
+                        Carolina, US</h6>
                 </div>
                 <div class="info_item">
                     <strong class="text-button-uppercase text-secondary">Company</strong>
@@ -2098,7 +1628,8 @@
                 <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
                     <a href="/product-default.html" class="flex items-center gap-5">
                         <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
-                            <img th:src="@{/profile/images/robot.jpg}" alt="Contrasting sheepskin sweatshirt" class="w-full h-full object-cover" />
+                            <img th:src="@{/profile/images/robot.jpg}" alt="Contrasting sheepskin sweatshirt"
+                                 class="w-full h-full object-cover"/>
                         </div>
                         <div>
                             <div class="prd_name text-title">Contrasting sheepskin sweatshirt</div>
@@ -2118,7 +1649,8 @@
                 <div class="prd_item flex flex-wrap items-center justify-between gap-3 py-5 border-b border-line">
                     <a href="/product-default.html" class="flex items-center gap-5">
                         <div class="bg-img flex-shrink-0 md:w-[100px] w-20 aspect-square rounded-lg overflow-hidden">
-                            <img th:src="@{/profile/images/robot.jpg}" alt="Contrasting sheepskin sweatshirt" class="w-full h-full object-cover" />
+                            <img th:src="@{/profile/images/robot.jpg}" alt="Contrasting sheepskin sweatshirt"
+                                 class="w-full h-full object-cover"/>
                         </div>
                         <div>
                             <div class="prd_name text-title">Contrasting sheepskin sweatshirt</div>
