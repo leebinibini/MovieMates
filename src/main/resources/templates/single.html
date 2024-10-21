@@ -61,7 +61,6 @@
             color: #ff4d4d;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body class="sticky-menu">
 <div id="loader">
@@ -169,7 +168,7 @@
                         <div class="swiper-container movie-images" id="singleslider" data-col="5">
                             <div class="swiper-wrapper" >
                                 <div class="swiper-slide" th:each="m: ${movieList}">
-                                    <div class="movie-image"  th:data-bg-image="${m.lengthPosterUrl}">
+                                    <div class="movie-image"  th:data-bg-image="${m.getLengthPosterUrl()}">
                                         <div class="entry-hover">
                                             <div class="entry-actions">
                                                 <a th:href="@{/api/movie/single/{movieId}(movieId=${m.id})}" class="btn fill">More</a>
@@ -211,25 +210,24 @@
                 <div class="col-sm-6">
                     <div id="comments" class="comments-area">
                         <div class="comments-wrapper">
-                            <h2 class="comments-title">Comments</h2>
-                                <ol id="reviews" class="comment-list" th:each="review:${reviewList}">
-                                    <li>
-                                        <article>
-                                            <div class="comment-avatar">
-                                                <img alt="Image" th:src="@{/images/blog/user-1.jpg}" class="avatar">
+                            <h2 class="comments-title">Comments (2)</h2>
+                            <ol class="comment-list" th:each="review:${reviewList}">
+                                <li>
+                                    <article>
+                                        <div class="comment-avatar">
+                                            <img alt="Image" th:src="@{/images/blog/user-1.jpg}" class="avatar">
+                                        </div>
+                                        <div class="comment-body">
+                                            <div class="meta-data">
+                                                <a href="#" class="comment-author" th:text="${review.writerId}"></a>
                                             </div>
-                                            <div class="comment-body">
-                                                <div class="meta-data">
-                                                    <a href="#" class="comment-author" th:text="${review.writerId}"></a>
-                                                </div>
-                                                <span class="review-rating" th:text="${review.rating != null ? review.rating : 'No rating'} + ' / 5.0'"></span>
-                                                <div class="comment-content" th:text="${review.content}">
-                                                    Progressively repurpose extensive partnerships and one-to-one technology. Competently impact market positioning solutions before user friendly alignments. Energistically deploy reliable process improvements via interdependent.
-                                                </div>
+                                            <div class="comment-content" th:text="${review.content}">
+                                                Progressively repurpose extensive partnerships and one-to-one technology. Competently impact market positioning solutions before user friendly alignments. Energistically deploy reliable process improvements via interdependent.
                                             </div>
-                                        </article>
-                                    </li>
-                                </ol>
+                                        </div>
+                                    </article>
+                                </li>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -239,29 +237,17 @@
                         <form id="commentform" class="comment-form" novalidate="">
                             <div class="row">
                                 <p class="comment-form-author col-sm-6">
-                                    <input id="movie" name="movie" type="text" th:value="${movie.title}" size="30" readonly style="color: black;">
-                                    <input type="hidden" id="movieId" name="movieId" th:value="${movie.id}">
+                                    <input id="author" name="author" type="text" value="" size="30" placeholder="Name *">
                                 </p>
                                 <p class="comment-form-email col-sm-6">
-                                    <label for="rating">Rating:</label>
-                                <div id="star-rating">
-                                    <span class="star" data-value="1">★</span>
-                                    <span class="star" data-value="2">★</span>
-                                    <span class="star" data-value="3">★</span>
-                                    <span class="star" data-value="4">★</span>
-                                    <span class="star" data-value="5">★</span>
-                                </div>
-                                <input type="hidden" id="rating" name="rating" value="">
+                                    <input id="email" name="email" type="email" value="" size="30" placeholder="E-mail *">
                                 </p>
                             </div>
                             <p class="comment-form-comment">
-                                <textarea id="content" name="content" placeholder="Write your review..."></textarea>
+                                <textarea id="comment" name="comment" placeholder="Comments"></textarea>
                             </p>
-                            <!-- 숨겨진 필드로 writerId 추가 -->
-                            <input type="hidden" id="writerId" name="writerId" th:value="${userId}"> <!-- 이 값은 세션이나 로그인 정보에서 가져올 수 있음 -->
-
                             <p class="form-submit">
-                                <button type="button" class="button fill rectangle" id="submitReview">Submit Review</button>
+                                <button type="submit" class="button fill rectangle">Send to us</button>
                             </p>
                         </form>
                     </div>
@@ -438,51 +424,51 @@
     </div>
 </div>
 
-<!-- Scripts -->
-<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/packages.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+    <!-- Scripts -->
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/packages.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
 
-<!-- Google Maps API -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuuDwFAppkkrpOTWM-hmFwz_zCbP3u_PQ&callback=initMap&libraries=marker"></script>
+    <!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuuDwFAppkkrpOTWM-hmFwz_zCbP3u_PQ&callback=initMap&libraries=marker"></script>
 
-<script>
-    function initMap() {
-        var mapOptions = {
-            zoom: 16,
-            center: { lat: 47.919311, lng: 106.917643 },
-            styles: []
-        };
+    <script>
+        function initMap() {
+            var mapOptions = {
+                zoom: 16,
+                center: { lat: 47.919311, lng: 106.917643 },
+                styles: []
+            };
 
-        var map = new google.maps.Map(document.getElementById('tt-google-map'), mapOptions);
+            var map = new google.maps.Map(document.getElementById('tt-google-map'), mapOptions);
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var userLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
 
-                map.setCenter(userLocation);
+                    map.setCenter(userLocation);
 
-                // 기본 마커로 변경
-                new google.maps.Marker({
-                    position: userLocation,
-                    map: map,
-                    title: "Your Location"
+                    // 기본 마커로 변경
+                    new google.maps.Marker({
+                        position: userLocation,
+                        map: map,
+                        title: "Your Location"
+                    });
+                }, function () {
+                    console.error("사용자의 위치를 가져올 수 없습니다.");
                 });
-            }, function () {
-                console.error("사용자의 위치를 가져올 수 없습니다.");
-            });
-        } else {
-            console.error("Geolocation이 지원되지 않습니다.");
+            } else {
+                console.error("Geolocation이 지원되지 않습니다.");
+            }
         }
-    }
 
-    window.onload = function() {
-        document.getElementById('loader').style.display = 'none';
-    }
-</script>
+        window.onload = function() {
+            document.getElementById('loader').style.display = 'none';
+        }
+    </script>
 <script type="text/javascript">
     $(document).ready(function() {
         // 하트 아이콘 클릭 이벤트
@@ -517,102 +503,6 @@
         });
     });
 </script>
-
-<script>
-    // 별점 클릭 시 선택된 값 저장
-    document.querySelectorAll('.star').forEach(function(star) {
-        star.addEventListener('click', function() {
-            let ratingValue = this.getAttribute('data-value');
-            document.getElementById('rating').value = ratingValue;
-
-            // 별 색상을 선택된 별까지 변경
-            document.querySelectorAll('.star').forEach(function(star) {
-                if (star.getAttribute('data-value') <= ratingValue) {
-                    star.style.color = 'gold';
-                } else {
-                    star.style.color = 'gray';
-                }
-            });
-        });
-    });
-
-    // 리뷰 제출 버튼 클릭 시
-    document.getElementById('submitReview').addEventListener('click', function() {
-        // 입력된 값 가져오기
-        const reviewData = {
-
-            movieId: document.getElementById('movieId').value,    // 영화 ID
-            writerId: document.getElementById('writerId').value,  // 작성자 ID (로그인된 사용자 ID)
-            rating: document.getElementById('rating').value,      // 별점
-            content: document.getElementById('content').value,    // 리뷰 내용
-            date: new Date().toISOString()                        // 현재 날짜를 ISO 형식으로 전달
-        };
-
-        if (!reviewData.writerId) {
-            alert("로그인 정보가 필요합니다. 로그인을 해주세요.");
-            return;
-        }
-        if (!reviewData.rating) {
-            alert("별점을 선택해 주세요.");
-            return;
-        }
-        if (!reviewData.content.trim()) {
-            alert("리뷰 내용을 입력해 주세요.");
-            return;
-        }
-
-        // 서버로 JSON 데이터 전송 (Axios 사용)
-        axios({
-            url: "/api/review/register",
-            method: 'post',
-            data: reviewData
-        })
-
-            .then(function (response) {
-                console.log(response.data)
-                console.log(reviewData)
-                console.log(response.data.review)
-                if (response.data.success) {
-                    alert('리뷰를 등록해주셔서 감사합니다!');
-                    alert(response.data)
-                    alert(reviewData)
-                    alert(response.data.review)
-                    // 새로 등록된 리뷰 데이터를 이용해 새로운 리뷰 추가
-                    appendReviewToDOM(response.data)
-                }
-            })
-            .catch(function (error) {
-                console.error('Error submitting review:', error)
-            });
-    });
-
-    function appendReviewToDOM(response) {
-        const reviewList = document.getElementById('review');  // 리뷰 리스트가 있는 요소
-
-        const newReview = document.createElement('ol');
-
-        newReview.innerHTML = `
- <li>
-        <article>
-            <div class="comment-avatar">
-                <img alt="Image" src="/images/blog/user-1.jpg" class="avatar">
-            </div>
-            <div class="comment-body">
-                <div class="meta-data">
-                    <a href="#" class="comment-author">${review.writerId}</a>
-                </div>
-                <span class="review-rating">${review.rating != null ? review.rating : 'No rating'} / 5.0</span>
-                <div class="comment-content">
-                    ${review.content}
-                </div>
-            </div>
-        </article>
-        </li>
-    `;
-
-        reviewList.appendChild(newReview);  // 새 리뷰를 기존 리스트에 추가
-    }
-
-</script>
+</div>
 </body>
 </html>

@@ -6,6 +6,7 @@ import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.web.JsonPath;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,7 @@ public class MovieController {
     }
 
     @GetMapping("/order/{movieId}")
-    public ResponseEntity<Map<String, Object>> getOrderList(@PathVariable Long movieId){
+    public ResponseEntity<Map<String, Object>> getOrderList(@PathVariable("movieId") Long movieId){
         Map<String, Object> map = new HashMap<>();
         System.out.println(movieId);
         String title = service.findById(movieId)
@@ -58,7 +59,7 @@ public class MovieController {
             model.addAttribute("movie", movie.get());
         } else {
             // 영화가 없을 경우 처리
-            return "admin/404";
+            return "index";
         }
 
         // Theater, Schedule, Review 리스트 추가

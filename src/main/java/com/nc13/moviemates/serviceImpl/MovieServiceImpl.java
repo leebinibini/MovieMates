@@ -149,6 +149,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<MovieEntity> getWatchedMoviesByUserId(Long userId) {
+        return List.of();
+    }
+
+    @Override
     public MovieEntity findEntityById(Long id) {
         return repository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Movie not Found with id: " +id));
