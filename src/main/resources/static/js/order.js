@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return $.ajax({
                     // 여기 부분 수정 필요!!
                     // 여기서 scheduleId 이용하고, 해당하는 scheduleId에 대한 reservation 리스트 정보를 갖고오게 해야함
+
                     url: '/api/reservation/list',
                     method: 'POST',
                     contentType: 'application/json',
