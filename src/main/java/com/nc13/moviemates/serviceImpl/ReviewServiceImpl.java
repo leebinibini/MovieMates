@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -76,6 +77,31 @@ public class ReviewServiceImpl implements ReviewService {
     public Long deleteMany(List<Long> reviewIdList) {
         return repository.deleteMany(reviewIdList);
     }
+
+    @Override
+    public List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId) {
+        return repository.findReviewsWithMovieByUserId(userId);
+    }
+
+    /*@Override
+    public List<String> findMovieTitlesByUserId(Long userId) {
+        return List.of();
+    }
+
+    @Override
+    public boolean hasUserWatchedMovie(Long userId, Long movieId) {
+        return false;
+    }
+
+    @Override
+    public List<ReviewEntity> getReviewsByWriterId(Long writerId) {
+        return List.of();
+    }
+
+    @Override
+    public List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId) {
+        return List.of();
+    }*/
 
     @Override
     public List<MovieEntity> getWatchedMoviesByUserId(Long userId) {

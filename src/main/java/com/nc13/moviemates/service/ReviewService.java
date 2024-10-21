@@ -29,11 +29,13 @@ public interface ReviewService {
 
     Long deleteMany(List<Long> reviewIdList);
 
-    List<String> findMovieTitlesByUserId(Long userId);
+    /*List<String> findMovieTitlesByUserId(Long userId);
 
     boolean hasUserWatchedMovie(Long userId, Long movieId);
 
     List <ReviewEntity> getReviewsByWriterId(Long writerId);
-
+*/
     List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId);
+
+    List<MovieEntity> getWatchedMoviesByUserId(Long userId);
 }
