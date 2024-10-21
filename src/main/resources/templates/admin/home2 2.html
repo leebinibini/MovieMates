@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/head :: headContent}">
+</head>
+    <body class="sb-nav-fixed">
+        <div th:replace="~{/admin/navbar-dark :: navbar}"></div>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" th:href="@{/api/admin}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Layouts
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/api/admin/movie}">Movie</a>
+                            <a class="nav-link" th:href="@{/api/admin/theater}">Theater</a>
+                            <a class="nav-link" th:href="@{/api/admin/schedule}">Schedule</a>
+                            <a class="nav-link" th:href="@{/api/admin/layout-sidenav-light}">Light Sidenav</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" th:href="@{/api/admin/user}">User</a>
+                                    <a class="nav-link" th:href="@{/api/admin/reservation}">Reservation</a>
+                                    <a class="nav-link" th:href="@{/api/admin/review}">Review</a>
+                                    <a class="nav-link" th:href="@{/api/admin/login}">Login</a>
+                                    <a class="nav-link" th:href="@{/api/admin/register}">Register</a>
+                                    <a class="nav-link" th:href="@{/api/admin/password}">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" th:href="@{/api/admin/401}">401 Page</a>
+                                    <a class="nav-link" th:href="@{/api/admin/404}">404 Page</a>
+                                    <a class="nav-link" th:href="@{/api/admin/500}">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading">Addons</div>
+                    <a class="nav-link" th:href="@{/api/admin/charts}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Charts
+                    </a>
+                    <a class="nav-link" th:href="@{/api/admin/tables}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Tables
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Start Bootstrap
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Dashboard</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+
+                <div th:insert="~{/admin/movie/chart :: chart-movie}"></div>
+                <div th:insert="~{admin/cards :: cards}"></div>
+                <div th:insert="~{admin/datatable-example :: datatable}"></div>
+            </div>
+        </main>
+    </div>
+</div>
+<script th:insert="~{admin/scripts :: scripts}"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // 2. Chart.js 차트 초기화
+                const movieReservations = [
+                    { "title": "Inception", "reservations": 150 },
+                    { "title": "Avatar", "reservations": 200 },
+                    { "title": "Interstellar", "reservations": 100 },
+                    { "title": "The Dark Knight", "reservations": 180 }
+                ];
+
+                const movieTitles = movieReservations.map(movie => movie.title);
+                const reservationCounts = movieReservations.map(movie => movie.reservations);
+
+                const ctx = document.getElementById('reservationChart').getContext('2d');
+                const reservationChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: movieTitles,
+                        datasets: [{
+                            label: '예매 횟수',
+                            data: reservationCounts,
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(153, 102, 255, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 50
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+</body>
+</html>
