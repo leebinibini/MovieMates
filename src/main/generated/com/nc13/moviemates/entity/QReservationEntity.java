@@ -29,6 +29,8 @@ public class QReservationEntity extends EntityPathBase<ReservationEntity> {
 
     public final NumberPath<Long> scheduleId = createNumber("scheduleId", Long.class);
 
+    public final NumberPath<Integer> seatNumber = createNumber("seatNumber", Integer.class);
+
     public final NumberPath<Long> seatId = createNumber("seatId", Long.class);
 
     public final StringPath status = createString("status");

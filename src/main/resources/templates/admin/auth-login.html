@@ -71,9 +71,9 @@
                                                 </div>
                                             </div>
                                             <div class="mb-0 text-start">
-                                                <button class="btn btn-soft-primary w-100" type="submit" onclick="submitForm()"><i
-                                                        class="ri-login-circle-fill me-1"></i> <span class="fw-bold">Log
-                                                        In</span> </button>
+                                                <button class="btn btn-soft-primary w-100" type="button" onclick="submitForm(event)">
+                                                    <i class="ri-login-circle-fill me-1"></i> <span class="fw-bold">Log In</span>
+                                                </button>
                                             </div>
 
                                             <div class="text-center mt-4">
@@ -126,6 +126,8 @@
     <!-- submit-form -->
     <script>
         function submitForm() {
+            event.preventDefault();
+
             const email = document.getElementById('emailaddress').value;
             const password = document.getElementById('password').value;
 
@@ -162,7 +164,9 @@
                             alert("로그인 실패!"); // 로그인 실패 시 알림
                         }
                     })
-
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
             }
         }
     </script>

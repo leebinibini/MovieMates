@@ -45,7 +45,7 @@ public class QMovieEntity extends EntityPathBase<MovieEntity> {
 
     public final StringPath title = createString("title");
 
-    public final StringPath widthPosterUrl = createString("widthPosterUrl");
+    public final StringPath WidthPosterUrl = createString("WidthPosterUrl");
 
     public QMovieEntity(String variable) {
         super(MovieEntity.class, forVariable(variable));

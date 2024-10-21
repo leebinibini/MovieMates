@@ -93,4 +93,9 @@ public class HomeController {
         return  "admin/icons-remixicons";
     }
 
+    @GetMapping("/api/test")
+    public String toCheck8() {
+            return "test";
+    }
+
 }

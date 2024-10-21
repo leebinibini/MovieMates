@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Setting</title>
     <link rel="shortcut icon" th:href="@{/profile/images/fav.png}" type="image/x-icon"/>
     <link rel="stylesheet" th:href="@{/profile/css/swiper-bundle.min.css}"/>
@@ -11,155 +11,200 @@
     <link rel="stylesheet" th:href="@{/profile/css/output-tailwind.css}"/>
 </head>
 <body>
-<div class="breadcrumb-block style-shared">
-    <div class="breadcrumb-main bg-linear overflow-hidden">
-        <div class="container lg:pt-[134px] pt-24 pb-10 relative">
-            <div class="main-content w-full h-full flex flex-col items-center justify-center relative z-[1]">
-                <div class="text-content">
-                    <div class="heading2 text-center">My Account</div>
-                    <div class="link flex items-center justify-center gap-1 caption1 mt-3">
-                        <a href="index.html">Homepage</a>
-                        <i class="ph ph-caret-right text-sm text-secondary2"></i>
-                        <div class="text-secondary2 capitalize">My Account</div>
+<div class="filter-item text-content w-full p-7 border border-line rounded-xl" th:data-item="${setting}">
+    <form>
+        <div class="heading5 pb-4">Information</div>
+        <div class="upload_image col-span-full">
+            <label for="uploadImage">Upload Avatar: <span class="text-red">*</span></label>
+            <div class="flex flex-wrap items-center gap-5 mt-3">
+                <div class="bg_img flex-shrink-0 relative w-[7.5rem] h-[7.5rem] rounded-lg overflow-hidden bg-surface">
+                    <span class="ph ph-image text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-secondary"></span>
+                    <img th:src="@{/profile/images/robot.jpg}" class="upload_img relative z-[1] w-full h-full object-cover" />
+                </div>
+                <div>
+                    <strong class="text-button">Upload File:</strong>
+                    <p class="caption1 text-secondary mt-1">JPG 120x120px</p>
+                    <div class="upload_file flex items-center gap-3 w-[220px] mt-3 px-3 py-2 border border-line rounded">
+                        <label for="uploadImage" class="caption2 py-1 px-3 rounded bg-line whitespace-nowrap cursor-pointer">Choose File</label>
+                        <input type="file" name="uploadImage" id="uploadImage" accept="image/*" class="caption2 cursor-pointer" required />
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-5">
+            <div class="phone-number">
+                <label for="phoneNumber" class="caption1 capitalize">Phone Number <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="phoneNumber" type="text" th:value="${user.getTel()}" placeholder="Phone number" required />
+            </div>
+            <div class="email">
+                <label for="email" class="caption1 capitalize">Email Address <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="email" type="email" th:value="${user.getEmail()}" placeholder="Email address" required />
+            </div>
+            <div class="gender">
+                <label for="gender" class="caption1 capitalize">Gender <span class="text-red">*</span></label>
+                <div class="select-block mt-2">
+                    <select class="border border-line px-4 py-3 w-full rounded-lg" id="gender" name="gender">
+                        <option value="default" disabled>Choose Gender</option>
+                        <option value="Male" th:selected="${user.gender == 'Male'}">Male</option>
+                        <option value="Female" th:selected="${user.gender == 'Female'}">Female</option>
+                    </select>
+                    <span class="ph ph-caret-down arrow-down text-lg"></span>
+                </div>
+            </div>
+            <div class="nick-name">
+                <label for="nickName" class="caption1 capitalize">Nick Name <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="nickName" type="text"  th:value="${user.getNickname()}" placeholder="NickName" required />
+            </div>
+        <!--    <div class="birth">
+                <label for="birth" class="caption1">Day of Birth <span class="text-red">*</span></label>
+                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="birth" type="date" placeholder="Day of Birth" required
+                       th:value="${user.birthDate}"/>
+            </div>-->
+        </div>
+        <div class="heading5 pb-4 lg:mt-10 mt-6">Change Password</div>
+        <div class="pass">
+            <label for="password" class="caption1">Current password <span class="text-red">*</span></label>
+            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="password" type="password" placeholder="Password *" required />
+        </div>
+        <div class="new-pass mt-5">
+            <label for="newPassword" class="caption1">New password <span class="text-red">*</span></label>
+            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="newPassword" type="password" placeholder="New Password *" required />
+        </div>
+        <div class="confirm-pass mt-5">
+            <label for="confirmPassword" class="caption1">Confirm new password <span class="text-red">*</span></label>
+            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="confirmPassword" type="password" placeholder="Confirm Password *" required />
+        </div>
+        <div class="block-button-container lg:mt-10 mt-6 flex justify-between">
+        <div class="block-button w-full">
+            <button class="button-main">Save Change</button>
+        </div>
+            <div class="block-button w-full">
+                <button class="button-main" onclick="secession()">Secession</button>
+            </div>
+        </div>
+    </form>
 </div>
-<div class="my-account-block md:py-20 py-10">
-    <div class="container">
-        <div class="content-main lg:px-[60px] md:px-4 flex gap-y-8 max-md:flex-col w-full">
-            <div class="left md:w-1/3 w-full xl:pr-[3.125rem] lg:pr-[28px] md:pr-[16px]">
-                <div class="user-infor bg-surface md:px-8 px-5 md:py-10 py-6 md:rounded-[20px] rounded-xl">
-                    <div class="heading flex flex-col items-center justify-center">
-                        <div class="avatar">
-                            <img th:src="${user.getProfileImageUrl()}" alt="avatar"
-                                 class="md:w-[140px] w-[120px] md:h-[140px] h-[120px] rounded-full"/>
+<div id="footer" class="footer">
+    <div class="footer-main bg-surface">
+        <div class="container">
+            <div class="content-footer md:py-[60px] py-10 flex justify-between flex-wrap gap-y-8">
+                <div class="company-infor basis-1/4 max-lg:basis-full pr-7">
+                    <a href="index.html" class="logo inline-block">
+                        <div class="heading3 w-fit">Anvogue</div>
+                    </a>
+                    <div class="flex gap-3 mt-3">
+                        <div class="flex flex-col">
+                            <span class="text-button">Mail:</span>
+                            <span class="text-button mt-3">Phone:</span>
+                            <span class="text-button mt-3">Address:</span>
                         </div>
-                        <div class="name heading6 mt-4 text-center"
-                             th:text="${user.getNickname()} + '님의 프로필'">
+                        <div class="flex flex-col">
+                            <span class="">hi.avitex@gmail.com</span>
+                            <span class="mt-[14px]">1-333-345-6868</span>
+                            <span class="mt-3 pt-1">549 Oak St.Crystal Lake, IL 60014</span>
                         </div>
                     </div>
-                    <div class="menu-tab list-category w-full max-w-none lg:mt-10 mt-6">
-                        <a th:href="@{/api/user/mypage/1}"
-                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active"
-                           th:data-item="${dashboard}">
-                            <span class="ph ph-house-line text-xl"></span>
-                            <strong class="heading6">History Orders</strong>
-                        </a>
-                        <a th:href="@{/api/reservation/list/1}"
-                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
-                           th:data-item="${orders}">
-                            <span class="ph ph-package text-xl"></span>
-                            <strong class="heading6">Upcoming Reservations</strong>
-                        </a>
-                        <a th:href="@{/api/review/myList/1}"
-                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
-                           th:data-item="${address}">
-                            <span class="ph ph-tag text-xl"></span>
-                            <strong class="heading6">My Reviews</strong>
-                        </a>
-                        <a th:href="@{/api/user/profile/setting/1}"
-                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
-                           th:data-item="${setting}">
-                            <span class="ph ph-gear-six text-xl"></span>
-                            <strong class="heading6">Setting</strong>
-                        </a>
-                        <a th:href="@{/api/wish/list/1}"
-                           class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5">
-                            <span class="ph ph-sign-out text-xl"></span>
-                            <strong class="heading6">WishList</strong>
-                        </a>
+                </div>
+                <div class="right-content flex flex-wrap gap-y-8 basis-3/4 max-lg:basis-full">
+                    <div class="list-nav flex justify-between basis-2/3 max-md:basis-full gap-4">
+                        <div class="item flex flex-col basis-1/3">
+                            <div class="text-button-uppercase pb-3">Infomation</div>
+                            <a class="caption1 has-line-before duration-300 w-fit" href="contact.html">Contact us </a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="#!"> Career </a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="my-account.html"> My Account</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="order-tracking.html"> Order & Returns</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="faqs.html">FAQs </a>
+                        </div>
+                        <div class="item flex flex-col basis-1/3">
+                            <div class="text-button-uppercase pb-3">Quick Shop</div>
+                            <a class="caption1 has-line-before duration-300 w-fit" href="shop-breadcrumb1.html">Women</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="shop-breadcrumb1.html">Men </a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="shop-breadcrumb1.html">Clothes </a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="shop-breadcrumb1.html"> Accessories </a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="blog-default.html">Blog </a>
+                        </div>
+                        <div class="item flex flex-col basis-1/3">
+                            <div class="text-button-uppercase pb-3">Customer Services</div>
+                            <a class="caption1 has-line-before duration-300 w-fit" href="faqs.html">FAQs </a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="faqs.html">Shipping </a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="faqs.html">Privacy Policy</a>
+                            <a class="caption1 has-line-before duration-300 w-fit pt-2" href="order-tracking.html">Return & Refund</a>
+                        </div>
+                    </div>
+                    <div class="newsletter basis-1/3 pl-7 max-md:basis-full max-md:pl-0">
+                        <div class="text-button-uppercase">Newletter</div>
+                        <div class="caption1 mt-3">Sign up for our newsletter and get 10% off your first purchase</div>
+                        <div class="input-block w-full h-[52px] mt-4">
+                            <form class="w-full h-full relative" action="post">
+                                <input type="email" placeholder="Enter your e-mail" class="caption1 w-full h-full pl-4 pr-14 rounded-xl border border-line" required />
+                                <button class="w-[44px] h-[44px] bg-black flex items-center justify-center rounded-xl absolute top-1 right-1">
+                                    <i class="ph ph-arrow-right text-xl text-white"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="list-social flex items-center gap-6 mt-4">
+                            <a href="https://www.facebook.com/" target="_blank">
+                                <div class="icon-facebook text-2xl text-black"></div>
+                            </a>
+                            <a href="https://www.instagram.com/" target="_blank">
+                                <div class="icon-instagram text-2xl text-black"></div>
+                            </a>
+                            <a href="https://www.twitter.com/" target="_blank">
+                                <div class="icon-twitter text-2xl text-black"></div>
+                            </a>
+                            <a href="https://www.youtube.com/" target="_blank">
+                                <div class="icon-youtube text-2xl text-black"></div>
+                            </a>
+                            <a href="https://www.pinterest.com/" target="_blank">
+                                <div class="icon-pinterest text-2xl text-black"></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="filter-item text-content w-full p-7 border border-line rounded-xl" th:data-item="${setting}">
-                <form>
-                    <div class="heading5 pb-4">Information</div>
-                    <div class="upload_image col-span-full">
-                        <label for="uploadImage">Upload Avatar: <span class="text-red">*</span></label>
-                        <div class="flex flex-wrap items-center gap-5 mt-3">
-                            <div class="bg_img flex-shrink-0 relative w-[7.5rem] h-[7.5rem] rounded-lg overflow-hidden bg-surface">
-                                <span class="ph ph-image text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-secondary"></span>
-                                <img th:src="${user.getProfileImageUrl()}"
-                                     class="upload_img relative z-[1] w-full h-full object-cover"/>
-                            </div>
-                            <div>
-                                <strong class="text-button">Upload File:</strong>
-                                <p class="caption1 text-secondary mt-1">JPG 120x120px</p>
-                                <div class="upload_file flex items-center gap-3 w-[220px] mt-3 px-3 py-2 border border-line rounded">
-                                    <label for="uploadImage"
-                                           class="caption2 py-1 px-3 rounded bg-line whitespace-nowrap cursor-pointer">Choose
-                                        File</label>
-                                    <input type="file" name="uploadImage" id="uploadImage" accept="image/*"
-                                           class="caption2 cursor-pointer" required/>
-                                </div>
-                            </div>
+            <div class="footer-bottom py-3 flex items-center justify-between gap-5 max-lg:justify-center max-lg:flex-col border-t border-line">
+                <div class="left flex items-center gap-8">
+                    <div class="copyright caption1 text-secondary">©2024 Anvogue. All Rights Reserved.</div>
+                    <div class="select-block flex items-center gap-5 max-md:hidden">
+                        <div class="choose-language flex items-center gap-1.5">
+                            <select name="language" id="chooseLanguageFooter" class="caption2 bg-transparent">
+                                <option value="English">English</option>
+                                <option value="Espana">Espana</option>
+                                <option value="France">France</option>
+                            </select>
+                            <i class="ph ph-caret-down text-xs text-[#1F1F1F]"></i>
+                        </div>
+                        <div class="choose-currency flex items-center gap-1.5">
+                            <select name="currency" id="chooseCurrencyFooter" class="caption2 bg-transparent">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                            <i class="ph ph-caret-down text-xs text-[#1F1F1F]"></i>
                         </div>
                     </div>
-                    <div class="grid sm:grid-cols-2 gap-4 gap-y-5 mt-5">
-                        <div class="phone-number">
-                            <label for="phoneNumber" class="caption1 capitalize">Phone Number <span
-                                    class="text-red">*</span></label>
-                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="phoneNumber" type="text"
-                                   th:value="${user.getTel()}" placeholder="Phone number" required/>
-                        </div>
-                        <div class="email">
-                            <label for="email" class="caption1 capitalize">Email Address <span class="text-red">*</span></label>
-                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="email" type="email"
-                                   th:value="${user.getEmail()}" placeholder="Email address" required/>
-                        </div>
-                        <div class="gender">
-                            <label for="gender" class="caption1 capitalize">Gender <span
-                                    class="text-red">*</span></label>
-                            <div class="select-block mt-2">
-                                <select class="border border-line px-4 py-3 w-full rounded-lg" id="gender"
-                                        name="gender">
-                                    <option value="default" disabled>Choose Gender</option>
-                                    <option value="Male" th:selected="${user.gender == 'Male'}">Male</option>
-                                    <option value="Female" th:selected="${user.gender == 'Female'}">Female</option>
-                                </select>
-                                <span class="ph ph-caret-down arrow-down text-lg"></span>
-                            </div>
-                        </div>
-                        <div class="nick-name">
-                            <label for="nickName" class="caption1 capitalize">Nick Name <span class="text-red">*</span></label>
-                            <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="nickName" type="text"
-                                   th:value="${user.getNickname()}" placeholder="NickName" required/>
-                        </div>
-                        <!--    <div class="birth">
-                                <label for="birth" class="caption1">Day of Birth <span class="text-red">*</span></label>
-                                <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="birth" type="date" placeholder="Day of Birth" required
-                                       th:value="${user.birthDate}"/>
-                            </div>-->
+                </div>
+                <div class="right flex items-center gap-2">
+                    <div class="caption1 text-secondary">Payment:</div>
+                    <div class="payment-img">
+                        <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-9" />
                     </div>
-                    <div class="heading5 pb-4 lg:mt-10 mt-6">Change Password</div>
-                    <div class="pass">
-                        <label for="password" class="caption1">Current password <span class="text-red">*</span></label>
-                        <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="password" type="password"
-                               placeholder="Password *" required/>
+                    <div class="payment-img">
+                        <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-9" />
                     </div>
-                    <div class="new-pass mt-5">
-                        <label for="newPassword" class="caption1">New password <span class="text-red">*</span></label>
-                        <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="newPassword" type="password"
-                               placeholder="New Password *" required/>
+                    <div class="payment-img">
+                        <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-9" />
                     </div>
-                    <div class="confirm-pass mt-5">
-                        <label for="confirmPassword" class="caption1">Confirm new password <span
-                                class="text-red">*</span></label>
-                        <input class="border-line mt-2 px-4 py-3 w-full rounded-lg" id="confirmPassword" type="password"
-                               placeholder="Confirm Password *" required/>
+                    <div class="payment-img">
+                        <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-9" />
                     </div>
-                    <div class="block-button-container lg:mt-10 mt-6 flex justify-between">
-                        <div class="block-button w-full">
-                            <button class="button-main">Save Change</button>
-                        </div>
-                        <div class="block-button w-full">
-                            <button class="button-main" onclick="secession()">Secession</button>
-                        </div>
+                    <div class="payment-img">
+                        <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-9" />
                     </div>
-                </form>
+                    <div class="payment-img">
+                        <img th:src="@{/profile/images/robot.jpg}" alt="payment" class="w-9" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -172,8 +217,7 @@
 
         update();
     })
-
-    function update() {
+    function update()  {
 
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
@@ -183,45 +227,38 @@
             return;
         }
 
-        var userId = [[${user.id}]];
+        var userId= [[${user.id}]];
         const userData = {
             id: userId = [[${user.id}]],
             tel: document.getElementById('phoneNumber').value,
             email: document.getElementById('email').value,
             gender: document.getElementById('gender').value,
-            password: document.getElementById('newPassword').value,
-            nickname: document.getElementById('nickName').value,
+            password:document.getElementById('newPassword').value,
+            nickname:document.getElementById('nickName').value,
         }
         const password = document.getElementById('password').value;
 
-
         const frm = new FormData();
-        frm.append('userData', new Blob([JSON.stringify(userData)], {
-            type: "application/json"
-        }));
+        frm.append('userData',new Blob([JSON.stringify(userData)], {
+            type: "application/json"}));
         frm.append('password', password);
-
-        const fileInput = document.getElementById('uploadImage');  // 파일 입력 필드
-        if (fileInput.files[0]) {
-            frm.append('file', fileInput.files[0]);  // 파일이 있으면 추가
-        }
 
 
         console.log(frm);
 
-        axios.post('/api/user/update/1', frm, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
+        axios({
+            url: "/api/user/update",
+            method: 'post',
+            data: frm
             }
-        })
+        )
             .then((res) => {
-                if (res.data === true) {
+                if(res.data === true){
                     alert("회원 수정이 완료되었습니다! 감사합니다!");
-                } else {
+                }else{
                     alert("현재 비밀번호가 일치하지 않습니다. 다시 시도해주세요");
-                }
-            })
-            .catch((err) => console.log(err));
+                }})
+            .catch((err)=> console.log(err));
     };
 
     function secession() {

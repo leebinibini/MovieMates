@@ -43,6 +43,8 @@ public class QPaymentEntity extends EntityPathBase<PaymentEntity> {
 
     public final NumberPath<Long> userId = createNumber("userId", Long.class);
 
+    public final NumberPath<Long> reservation_id = createNumber("reservation_id", Long.class);
+
     public QPaymentEntity(String variable) {
         super(PaymentEntity.class, forVariable(variable));
     }
