@@ -23,7 +23,6 @@ public class ReviewController {
     private final HistoryService historyService;
     private final TheaterService theaterService;
     private final ScheduleService scheduleService;
-    private final ReviewService reviewService;
     private final WishService wishService;
     private final MovieService movieService;
     private final UserService userService;
@@ -46,7 +45,7 @@ public class ReviewController {
             model.addAttribute("isWishlisted", isWishlisted);
             model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
             model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
-            model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
+            model.addAttribute("reviewList", service.findAllByMovieId(movieId));
             model.addAttribute("movieList", movieService.findAll());
             model.addAttribute("movie", movie.get());  // 영화 정보를 모델에 추가
             model.addAttribute("userId", userId);// 유저 아이디도 모델에 추가
@@ -57,8 +56,6 @@ public class ReviewController {
         }
         // 영화 제목 리스트 반환
     }
-
-
 
     @ResponseBody
     @PostMapping("/register")

@@ -6,6 +6,7 @@ import com.nc13.moviemates.entity.ReservationEntity;
 import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.HistoryService;
 import com.nc13.moviemates.service.MovieService;
+import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.ReservationService;
 import com.nc13.moviemates.service.UserService;
 import com.querydsl.core.Tuple;
@@ -75,6 +76,7 @@ public class ReservationController {
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody ReservationModel reservation) {
+        System.out.println("컨트롤러 진입");
         return ResponseEntity.ok(service.save(reservation));
     }
 
@@ -104,7 +106,6 @@ public class ReservationController {
 
     @DeleteMapping("/cancel/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        System.out.println("삭제왔니");
         return ResponseEntity.ok(service.deleteById(id));
     }
 

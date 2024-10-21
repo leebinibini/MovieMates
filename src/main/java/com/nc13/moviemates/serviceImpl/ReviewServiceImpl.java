@@ -83,7 +83,7 @@ public class ReviewServiceImpl implements ReviewService {
         return repository.findReviewsWithMovieByUserId(userId);
     }
 
-    /*@Override
+    @Override
     public List<String> findMovieTitlesByUserId(Long userId) {
         return List.of();
     }
@@ -98,10 +98,6 @@ public class ReviewServiceImpl implements ReviewService {
         return List.of();
     }
 
-    @Override
-    public List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId) {
-        return List.of();
-    }*/
 
     @Override
     public List<MovieEntity> getWatchedMoviesByUserId(Long userId) {
