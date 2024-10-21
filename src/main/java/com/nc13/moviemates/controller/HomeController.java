@@ -43,11 +43,6 @@ public class HomeController {
             return "index";
     }
 
-    @GetMapping("/single")
-    public String toSingle() {
-        return "single";
-    }
-
     @GetMapping("details")
     public String Details(){
         return  "details";
@@ -97,10 +92,5 @@ public class HomeController {
     public String toCheck7(){
         return  "admin/icons-remixicons";
     }
-
-//    @GetMapping("/api/movie/single")
-//    public String toMovieSingle() {
-//            return "single";
-//    }
 
 }

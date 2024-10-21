@@ -17,7 +17,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AdminController {
     private final UserService userService;
-    private final UserRepository userRepository;
 
     @GetMapping()
     public String showAdmin() {
