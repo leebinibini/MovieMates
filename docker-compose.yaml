@@ -1,0 +1,65 @@
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    volumes:
+      - ./mysql/demo/etc/mysql/conf.d:/etc/mysql/conf.d:ro
+      - ./mysql/demo/var/lib/mysql:/var/lib/mysql
+      - ./mysql/demo/var/log/mysql:/var/log/mysql
+    environment:
+      - MYSQL_DATABASE=moviemates
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_ROOT_HOST=%
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - moviemates-network
+
+  mongodb:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=1234
+      - MONGO_INITDB_DATABASE=moviemates
+    restart: always
+    networks:
+      - moviemates-network
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - 6379:6379
+    command: redis-server --requirepass moviemates
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf/redis.conf:/usr/local/conf/redis.conf
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    restart: always
+    networks:
+      - moviemates-network
+
+networks:
+  moviemate-network:
+    driver: bridge
+  default:
+    external: true
+
+
+
+
+
+
+
+
+
+

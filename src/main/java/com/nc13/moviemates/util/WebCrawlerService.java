@@ -1,4 +1,4 @@
-package com.nc13.moviemates.component.proxy;
+package com.nc13.moviemates.util;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

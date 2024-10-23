@@ -1,13 +1,20 @@
 package com.nc13.moviemates.component.model;
 
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
-import lombok.Data;
+import com.nc13.moviemates.enums.Provider;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import com.nc13.moviemates.enums.Role;
 
 @Component
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserModel {
     private Long id;
     private String fName;
@@ -16,16 +23,9 @@ public class UserModel {
     private String password;
     private String nickname;
     private Role role;
-    private int tel;
+    private String tel;
     private String gender;
     private String profileImageUrl;
-
-    public enum Role {
-        ADMIN,
-        USER,
-
-        @JsonEnumDefaultValue
-        UNKNOWN;
-    }
+    private Provider provider;
 
 }

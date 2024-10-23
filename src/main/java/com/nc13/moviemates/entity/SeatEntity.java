@@ -18,8 +18,8 @@ public class SeatEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long scheduleId;
-    private int row;
-    private int column;
+    private int row_index;
+    private int column_index;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
