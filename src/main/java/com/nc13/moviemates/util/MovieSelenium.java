@@ -1,4 +1,4 @@
-package com.nc13.moviemates.component.proxy;
+package com.nc13.moviemates.util;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import lombok.RequiredArgsConstructor;

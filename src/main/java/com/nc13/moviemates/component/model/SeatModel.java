@@ -13,6 +13,6 @@ import org.springframework.stereotype.Component;
 public class SeatModel {
     private Long id;
     private Long scheduleId;
-    private int row;
-    private int column;
+    private int row_index;
+    private int column_index;
 }

@@ -5,6 +5,7 @@ import com.nc13.moviemates.entity.PosterEntity;
 import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.PosterService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.sql.ast.tree.expression.Star;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class HomeController {
@@ -23,11 +25,11 @@ public class HomeController {
     //홈페이지 화면 가져오기
         @GetMapping("/")
         public String home(Model model) {
+            log.info("top5 크게보기");
             // top5 크게보기
             List<MovieEntity> movie = movieService.findAll();
 
-            // 현재 상영중인 영화 세로 포스터
-
+            log.info("현재 상영중인 영화 세로 포스터");
             //movie chart
 
             List<String> star = new ArrayList<>() {{

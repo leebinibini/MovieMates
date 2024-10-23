@@ -1,6 +1,6 @@
 package com.nc13.moviemates.serviceImpl;
 
-import com.nc13.moviemates.component.proxy.MovieSelenium;
+import com.nc13.moviemates.util.MovieSelenium;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.repository.MovieRepository;

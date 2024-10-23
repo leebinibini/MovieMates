@@ -160,6 +160,11 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public UserEntity login(UserEntity user) {
+        return repository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+    }
+
     // 파일 이름 생성 메서드
     private String getFileName(String fileName) {
         String ext = fileName.substring(fileName.lastIndexOf("."));

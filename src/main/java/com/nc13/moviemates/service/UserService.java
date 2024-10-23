@@ -37,4 +37,5 @@ public interface UserService {
 
     Boolean updateUserInfo(UserModel userData, MultipartFile file);
 
+    UserEntity login(UserEntity user);
 }

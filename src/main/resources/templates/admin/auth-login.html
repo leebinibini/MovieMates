@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8" />
@@ -87,7 +87,10 @@
                                                             class="ri-twitter-fill"></i></a>
                                                     <a href="javascript: void(0);" class="btn btn-soft-dark"><i
                                                             class="ri-github-fill"></i></a>
-                                                </div>
+                                                    <a href="/auth/naver" class="btn btn-soft-info">
+                                                        <img th:src="@{/images/naver_icon.png}" alt="네이버 로그인" style="width: 18px; height: 20px;">
+                                                    </a>
+                                                  </div>
                                             </div>
                                         </form>
                                         <!-- end form-->
@@ -143,25 +146,32 @@
                 };
 
                 // 서버에 POST 요청 보내기
-                fetch('/api/admin/login', {
+                fetch('/api/user/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(formData),
+                    body: JSON.stringify(formData),  // formData는 로그인 요청 데이터
                 })
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
                         }
-                        return response.json();
+                        return response.json();  // 서버 응답을 JSON으로 파싱
                     })
                     .then(data => {
-                        console.log(data);
-                        if (data === true) {
-                            window.location.href = "/api/admin"; // 로그인 성공 시 리다이렉트
+                        console.log(data);  // 서버 응답 데이터 확인
+
+                        // 응답 데이터에서 loginUser 변수로 접근하려면 서버에서 제대로 전달되어야 함
+                        if (data.status === 'success') {
+                            alert("로그인 성공!");
+
+                            // 리다이렉트 URL이 있는 경우 리다이렉트
+                            if (data.redirectUrl) {
+                                window.location.href = data.redirectUrl;  // 서버에서 전달된 리다이렉트 URL로 이동
+                            }
                         } else {
-                            alert("로그인 실패!"); // 로그인 실패 시 알림
+                            alert(data.message || "로그인 실패!");
                         }
                     })
                     .catch(error => {

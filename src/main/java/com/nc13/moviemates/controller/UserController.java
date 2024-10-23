@@ -6,8 +6,11 @@ import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.HistoryService;
 import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.serviceImpl.UserServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +19,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+@Slf4j
 @Controller
 @CrossOrigin
 @RequiredArgsConstructor
@@ -50,22 +52,46 @@ public class UserController {
         return "admin/auth-login";
     }
 
-    /*@GetMapping("/")
-    public String loginSuccess(@AuthenticationPrincipal OAuth2User principal, Model model) {
-        model.addAttribute("name", principal.getAttribute("name"));
-        model.addAttribute("email", principal.getAttribute("email"));
-        return "admin/login"; // loginSuccess.html 뷰를 반환
-    }*/
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user, HttpServletRequest request) {
+        System.out.println("유저는!!" + user);
+        Map<String, Object> response = new HashMap<>();
+        UserEntity loginUser = service.login(user);
+        System.out.println("유저는!!" + loginUser);
+        log.info("##### 로그인 사용자 정보 : {}", loginUser);
 
+        if (loginUser != null) {
+            // 세션에 사용자 정보 저장
+            HttpSession session = request.getSession();
+            session.setAttribute("loginUser", loginUser);
+            log.info("##### 로그인 세션 정보 : {}", session.getAttribute("loginUser"));
 
+            // 로그인 성공 처리
+            response.put("status", "success");
+            response.put("user", loginUser);
+            System.out.println("역할출력" + loginUser.getRole());
+            if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+                response.put("redirectUrl", "/api/admin");  // 관리자 로그인 페이지로 리다이렉트
+            } else {
+                response.put("redirectUrl", "/");  // 일반 사용자는 메인 페이지로 리다이렉트
+            }
 
-    @GetMapping("/login/oauth2/code/google")
-    public String loginOAuth() {
-        return "login";
+            return ResponseEntity.ok(response);  // 200 OK와 함께 성공 응답
+        } else {
+            // 로그인 실패 처리
+            response.put("status", "error");
+            response.put("message", "로그인 실패: 잘못된 사용자 정보입니다.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);  // 401 Unauthorized 응답
+        }
     }
 
+
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session != null) {
+            session.invalidate();
+        }
         return "redirect:/";
     }
 

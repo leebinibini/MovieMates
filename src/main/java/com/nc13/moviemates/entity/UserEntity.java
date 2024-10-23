@@ -1,17 +1,22 @@
 package com.nc13.moviemates.entity;
 
 import com.nc13.moviemates.component.model.UserModel;
+import com.nc13.moviemates.enums.Provider;
 import jakarta.persistence.*;
 import lombok.*;
+import com.nc13.moviemates.enums.Role;
+
 
 import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
+@ToString
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table (name="users")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -20,12 +25,9 @@ public class UserEntity {
     private String password;
     private String nickname;
     private Role role;
-    private int tel;
+    private String tel;
     private String gender;
     private String profileImageUrl;
+    private Provider provider;
 
-
-    public enum Role {
-        ADMIN, USER
-    }
 }
