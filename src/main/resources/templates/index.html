@@ -26,15 +26,21 @@
                     <a href="/" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
                 </div>
                 <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
-                    <div class="header_author">
+                    <div class="header_ticket" th:if="${session.loginUser != null}">
+                        <a th:href="@{/logout}">Logout</a>
+                    </div>
+                    <div class="header_ticket" th:if="${session.loginUser == null}">
                         <a th:href="@{/api/user/login}">Login</a>
                     </div>
-                    <div class="header_ticket">
-                        <a th:href="@{/api/user/mypage/1}">Mypage</a>
+                    <div class="header_ticket" th:if="${session.loginUser != null}">
+                        <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}">Mypage</a>
                     </div>
                     <div class="header_ticket">
                         <a href="#order" class="order_btn">Order</a>
                         <span>3</span>
+                    </div>
+                    <div class="overlay" id="overlay">
+                        <a href="javascript:;" id="header-search"></a>
                     </div>
                 </div>
             </div>

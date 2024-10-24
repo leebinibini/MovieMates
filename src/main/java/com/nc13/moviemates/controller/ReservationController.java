@@ -10,6 +10,8 @@ import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.ReservationService;
 import com.nc13.moviemates.service.UserService;
 import com.querydsl.core.Tuple;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,17 @@ public class ReservationController {
     private final UserService userService;
 
     @GetMapping(("/list/{userId}"))
-    public String getReservationWithMovieForUser(@PathVariable Long userId, Model model) {
+    public String getReservationWithMovieForUser(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity  loginUser  = (UserEntity) session.getAttribute("loginUser");
+        if (loginUser == null || loginUser.getId() == null) {
+            model.addAttribute("errorMessage", "User not logged in");
+            return "error";  // 로그인하지 않은 경우 에러 페이지로 이동
+        }
+
+        Long userId = loginUser.getId();
+        System.out.println("예약:"+loginUser );
+        System.out.println(loginUser.getId());
         Optional<UserEntity> optionalUser = userService.findById(userId);
         if (optionalUser.isPresent()) {
             model.addAttribute("user", optionalUser.get());

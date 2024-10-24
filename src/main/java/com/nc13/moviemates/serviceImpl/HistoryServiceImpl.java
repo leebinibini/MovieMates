@@ -57,4 +57,9 @@ public class HistoryServiceImpl implements HistoryService {
     public Optional<MovieEntity> findMovieForReview(Long userId, Long movieId) {
         return repository.findMovieForReview(userId, movieId);
     }
+
+    @Override
+    public List<HistoryEntity> findByUserId(Long id) {
+        return repository.findByUserId(id);
+    }
 }

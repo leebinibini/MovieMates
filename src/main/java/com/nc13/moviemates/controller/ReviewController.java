@@ -4,6 +4,8 @@ import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
 import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +39,13 @@ public class ReviewController {
     }
 
     @GetMapping("/register")
-    public String getMoviesByUserId(@RequestParam Long userId, @RequestParam Long movieId, Model model) {
+    public String getMoviesByUserId(@RequestParam("movieId") Long movieId,
+                                    Model model, HttpSession session) {
+        Long userId = (Long) session.getAttribute("loginUser.id");
+        System.out.println(userId);
+        if (userId == null) {
+            return "error/404";  // 유저 아이디가 없으면 에러 페이지로 이동
+        }
         Optional<MovieEntity> movie = historyService.findMovieForReview(userId, movieId);
         if (movie.isPresent()) {
             boolean isWishlisted = wishService.existsByMovieIdandUserId(movieId, userId);
@@ -126,7 +134,15 @@ public class ReviewController {
     }
 
     @GetMapping("/myList/{userId}")
-    public String showReviewList(Model model, @PathVariable Long userId) {
+    public String showReviewList(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity  loginUser  = (UserEntity) session.getAttribute("loginUser");
+        if (loginUser == null || loginUser.getId() == null) {
+            model.addAttribute("errorMessage", "User not logged in");
+            return "error";  // 로그인하지 않은 경우 에러 페이지로 이동
+        }
+
+        Long userId = loginUser.getId();
         Optional<UserEntity> userOptional = userService.findById(userId);
         if (userOptional.isPresent()) {
             model.addAttribute("user", userOptional.get());  // 값이 있으면 ReviewEntity를 넘김

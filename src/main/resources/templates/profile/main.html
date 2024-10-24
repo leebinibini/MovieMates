@@ -19,7 +19,7 @@
                 <div class="text-content">
                     <div class="heading2 text-center">My Profile</div>
                     <div class="link flex items-center justify-center gap-1 caption1 mt-3">
-                        <a th:href="@{/}">Homepage</a>
+                        <a th:href="@{/{id}(id=${session.loginUser.id})}">Homepage</a>
                         <i class="ph ph-caret-right text-sm text-secondary2"></i>
                         <!--<div class="text-secondary2 capitalize">My Account</div>-->
                     </div>
@@ -43,31 +43,31 @@
                         </div>
                     </div>
                     <div class="menu-tab list-category w-full max-w-none lg:mt-10 mt-6">
-                        <a th:href="@{/api/user/profile/mypage/1}"
+                        <a th:href="@{/api/user/profile/mypage/{id}(id=${session.loginUser.id})}"
                            class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white active"
                            th:data-item="${dashboard}">
                             <span class="ph ph-house-line text-xl"></span>
                             <strong class="heading6">History Orders</strong>
                         </a>
-                        <a th:href="@{/api/reservation/list/1}"
+                        <a th:href="@{/api/reservation/list/{id}(id=${session.loginUser.id})}"
                            class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
                            th:data-item="${orders}">
                             <span class="ph ph-package text-xl"></span>
                             <strong class="heading6">Upcoming Reservations</strong>
                         </a>
-                        <a th:href="@{/api/review/myList/1}"
+                        <a th:href="@{/api/review/myList/{id}(id=${session.loginUser.id})}"
                            class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
                            th:data-item="${address}">
                             <span class="ph ph-tag text-xl"></span>
                             <strong class="heading6">My Reviews</strong>
                         </a>
-                        <a th:href="@{/api/user/profile/setting/1}"
+                        <a th:href="@{/api/user/profile/setting/{id}(id=${session.loginUser.id})}"
                            class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5"
                            th:data-item="${setting}">
                             <span class="ph ph-gear-six text-xl"></span>
                             <strong class="heading6">Setting</strong>
                         </a>
-                        <a th:href="@{/api/wish/list/1}"
+                        <a th:href="@{/api/wish/list/{id}(id=${session.loginUser.id})}"
                            class="category-item flex items-center gap-3 w-full px-5 py-4 rounded-lg cursor-pointer duration-300 hover:bg-white mt-1.5">
                             <span class="ph ph-sign-out text-xl"></span>
                             <strong class="heading6">WishList</strong>
@@ -125,25 +125,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="item duration-300 border-b border-line">
+                                <tr class="item duration-300 border-b border-line" th:each="history : ${histories}">
                                     <th scope="row" class="py-3 text-left">
-                                        <strong class="text-title" th:text="${histories.room}">room</strong>
+                                        <strong class="text-title" th:if="${history != null}" th:text="${history.room}">room</strong>
                                     </th>
                                     <td class="py-3">
                                         <a href="product-default.html" class="product flex items-center gap-3">
-                                            <img th:src="${histories.poster}" alt="Contrasting sweatshirt"
+                                            <img th:if="${history != null}" th:src="${history.poster}" alt="Contrasting sweatshirt"
                                                  class="flex-shrink-0 w-12 h-12 rounded"/>
                                             <div class="info flex flex-col">
-                                                <strong class="product_name text-button" th:text="${histories.title}">title</strong>
+                                                <strong class="product_name text-button" th:text="${history.title}">title</strong>
                                                 <span class="product_tag caption1 text-secondary"
-                                                      th:text="${histories.date}">date</span>
+                                                      th:text="${history.date}">date</span>
                                             </div>
                                         </a>
                                     </td>
-                                    <td class="py-3 price" th:text="${histories.seat}">seat</td>
+                                    <td class="py-3 price" th:text="${history.seat}">seat</td>
                                     <td class="py-3 text-right">
                                         <!--<a th:href="@{/api/review/register(userId=${history.userId})}">-->
-                                        <a th:href="@{/api/review/register(userId=${histories.userId}, movieId=${histories.movieId})}">
+                                        <a th:href="@{/api/review/register(movieId=${history.movieId})}">
                                             <span class="tag px-4 py-1.5 rounded-full bg-opacity-10 bg-yellow text-yellow caption1 font-semibold">review 쓰러가기</span>
                                         </a>
                                     </td>

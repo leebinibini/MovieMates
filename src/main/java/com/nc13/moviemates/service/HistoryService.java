@@ -23,4 +23,6 @@ public interface HistoryService {
     Boolean deleteById(Long id);
 
     Optional<MovieEntity> findMovieForReview(Long userId, Long movieId);
+
+    List<HistoryEntity> findByUserId(Long id);
 }

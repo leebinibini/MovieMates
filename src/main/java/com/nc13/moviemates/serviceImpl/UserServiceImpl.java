@@ -10,6 +10,7 @@ import com.nc13.moviemates.service.UserService;
 import io.jsonwebtoken.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +24,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final AmazonS3 amazonS3;
-
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public boolean authenticate(String email, String password) {
@@ -91,6 +92,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean insert(UserEntity user){
+
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
 
         UserEntity ent = repository.save(user);
         System.out.println("서비스 진입, ent: " + ent);
@@ -162,7 +166,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity login(UserEntity user) {
-        return repository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        // 이메일로 유저를 찾음
+        UserEntity foundUser = repository.findByEmail(user.getEmail());
+
+        // 유저가 존재하고, 비밀번호가 일치하는지 확인
+        if (foundUser != null && passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
+            return foundUser;  // 로그인 성공
+        }
+        return null;  // 로그인 실패
     }
 
     // 파일 이름 생성 메서드

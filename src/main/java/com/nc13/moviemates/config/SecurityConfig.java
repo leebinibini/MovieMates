@@ -1,6 +1,9 @@
 package com.nc13.moviemates.config;
 
+import com.nc13.moviemates.absent.UserPrincipal;
+import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.util.PrincipalOauth2UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.nc13.moviemates.serviceImpl.UserDetailsServiceImpl;
@@ -52,10 +56,21 @@ public class SecurityConfig {
                                 "/loginForm"
                         ).permitAll()
                         .requestMatchers("/**").authenticated()
+                        .requestMatchers("/api/user/**").hasRole("USER")
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/loginForm")  // Custom login page URL
+                        .loginPage("/api/user/login")  // Custom login page URL
                         .successHandler((request, response, authentication) -> {
+                            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+                            UserEntity userEntity = userPrincipal.getUser();
+                            // 사용자 정보를 세션에 저장
+                            HttpSession session = request.getSession();
+                            session.setAttribute("loginUser", userEntity);
+                            log.info("오어스 로그인 세션 ID: {}", session.getId());
+                            log.info("세션에 저장된 사용자 이메일: {}", userEntity.getEmail());
+                            log.info("세션에 저장된 사용자 닉네임: {}", userEntity.getNickname());
+
+
                             // 로그인한 사용자 정보 가져오기
                             String role = authentication.getAuthorities().stream()
                                     .map(grantedAuthority -> grantedAuthority.getAuthority())
@@ -77,6 +92,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
+
                 )
                 .userDetailsService(userDetailsServiceImpl)
                 .exceptionHandling(exception -> exception

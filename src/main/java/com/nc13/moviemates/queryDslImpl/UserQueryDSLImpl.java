@@ -21,9 +21,8 @@ public class UserQueryDSLImpl implements UserQueryDSL {
 
     @Override
     public UserEntity findByEmail(String email) {
-        return jpaQueryFactory
-                .selectFrom(qUser)
-                .where(qUser.email.eq(email))
+        return jpaQueryFactory.selectFrom(QUserEntity.userEntity)
+                .where(email != null ? QUserEntity.userEntity.email.eq(email) : QUserEntity.userEntity.email.isNull())  // null 값을 isNull()로 비교
                 .fetchOne();
     }
 

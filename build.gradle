@@ -22,16 +22,19 @@ ext {
     set('springModulithVersion', "1.2.3")
 }
 
+
+
 dependencies {
 //
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  //  implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
 
 //    implementation 'com.siot.Iamport:iamport-rest-client-java:0.2.6'
     implementation 'com.github.iamport:iamport-rest-client-java:0.2.6'
+
 
 
    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -86,8 +89,7 @@ dependencies {
 // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
     implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '3.3.3'
 
-    //oauth2
-   // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
 
 
 //    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.522'

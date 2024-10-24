@@ -1,8 +1,10 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.absent.UserPrincipal;
 import com.nc13.moviemates.component.model.UserModel;
 import com.nc13.moviemates.entity.HistoryEntity;
 import com.nc13.moviemates.entity.UserEntity;
+import com.nc13.moviemates.enums.Role;
 import com.nc13.moviemates.service.HistoryService;
 import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.serviceImpl.UserServiceImpl;
@@ -14,6 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,17 +35,30 @@ public class UserController {
     private final UserService service;
     private final HistoryService historyService;
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/mypage/{id}")
-    public String getList(Model model, @PathVariable Long id){
+    public String getList(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserEntity  loginUser  = (UserEntity) session.getAttribute("loginUser");
+        if (loginUser == null || loginUser.getId() == null) {
+            model.addAttribute("errorMessage", "User not logged in");
+            return "error";  // 로그인하지 않은 경우 에러 페이지로 이동
+        }
+
+        Long id = loginUser.getId();
         Optional<UserEntity> userOptional = userService.findById(id);
         if (userOptional.isPresent()) {
             model.addAttribute("user", userOptional.get());  // 값이 있으면 ReviewEntity를 넘김
         } else {
             throw new RuntimeException("User not found");
         }
-        HistoryEntity histories = historyService.findById(id).orElse(null);
-        model.addAttribute("histories", histories);
+        List<HistoryEntity> histories = historyService.findByUserId(id);
+
+            model.addAttribute("histories", histories);  // 값이 있으면 ReviewEntity를 넘김
+
+        System.out.println(histories);
+        System.out.println(userOptional.get());
         return "profile/main";
     }
 
@@ -57,7 +75,6 @@ public class UserController {
         System.out.println("유저는!!" + user);
         Map<String, Object> response = new HashMap<>();
         UserEntity loginUser = service.login(user);
-        System.out.println("유저는!!" + loginUser);
         log.info("##### 로그인 사용자 정보 : {}", loginUser);
 
         if (loginUser != null) {
@@ -71,9 +88,15 @@ public class UserController {
             response.put("user", loginUser);
             System.out.println("역할출력" + loginUser.getRole());
             if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+               Role role = loginUser.getRole();
+                System.out.println(role);
                 response.put("redirectUrl", "/api/admin");  // 관리자 로그인 페이지로 리다이렉트
             } else {
-                response.put("redirectUrl", "/");  // 일반 사용자는 메인 페이지로 리다이렉트
+                response.put("redirectUrl", "/");
+                Role role = loginUser.getRole();
+               String key= loginUser.getRole().getKey();
+                System.out.println(key);
+                System.out.println(role);// 일반 사용자는 메인 페이지로 리다이렉트
             }
 
             return ResponseEntity.ok(response);  // 200 OK와 함께 성공 응답
@@ -85,13 +108,22 @@ public class UserController {
         }
     }
 
+    @ResponseBody
+    @GetMapping("/")
+    public String user(Authentication authentication) {
+        UserPrincipal principalDetail = (UserPrincipal) authentication.getPrincipal();
+        // ...
+        return "user";
+    }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
+        log.info("로그아웃 전: {}", session);
         if (session != null) {
             session.invalidate();
         }
+        log.info("로그아웃 후:{}" , session);
         return "redirect:/";
     }
 
@@ -119,13 +151,22 @@ public class UserController {
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user) {
-        System.out.println(user);
-        return ResponseEntity.ok(service.insert(user));
+        System.out.println(user);  // 유저 정보 로그 출력
+        Boolean isRegistered = service.insert(user);  // 서비스 호출
+        return ResponseEntity.ok(isRegistered);  // true/false 반환
     }
 
     @GetMapping("/profile/setting/{id}")
-    public String getProfile(Model model, @PathVariable Long id)
+    public String getProfile(Model model, HttpServletRequest request)
     {
+        HttpSession session = request.getSession();
+        UserEntity  loginUser  = (UserEntity) session.getAttribute("loginUser");
+        if (loginUser == null || loginUser.getId() == null) {
+            model.addAttribute("errorMessage", "User not logged in");
+            return "error";  // 로그인하지 않은 경우 에러 페이지로 이동
+        }
+
+        Long id = loginUser.getId();
         Optional<UserEntity> userOptional = service.findById(id);
         if(userOptional.isPresent()) {
             UserEntity user = userOptional.get();
