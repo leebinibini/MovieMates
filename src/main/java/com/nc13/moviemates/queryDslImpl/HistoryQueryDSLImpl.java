@@ -83,6 +83,15 @@ public class HistoryQueryDSLImpl implements HistoryQueryDSL {
 
         return Optional.ofNullable(history);
     }
+
+    @Override
+    public List<HistoryEntity> findByUserId(Long id) {
+        return jpaQueryFactory
+                .selectFrom(qHistory)
+                .where(qHistory.userId.eq(id))
+                .fetch();  // fetch()를 사용하여 여러 결과를 가져옵니다.
+    }
+
 /*
     @Override
     public Boolean deleteById(Long id) {

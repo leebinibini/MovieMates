@@ -98,7 +98,7 @@
                         <a href="javascript:;" class="close-window"></a>
                         <nav class="overlay-menu">
                             <ul>
-                                <li><a th:href="@{/}">Home</a></li>
+                                <li><a th:href="@{/{id}(id=${session.loginUser.id})}">Home</a></li>
                                 <li><a href="blog.html">Blog</a></li>
                                 <li><a href="single.html">Single</a></li>
                                 <li><a href="#order" class="order_btn">Order</a></li>
@@ -220,7 +220,7 @@
                                         </div>
                                         <div class="comment-body">
                                             <div class="meta-data">
-                                                <a href="#" class="comment-author" th:text="${review.writerId}"></a>
+                                                <a href="#" class="comment-author" th:text="${userId}"></a>
                                             </div>
                                             <div class="comment-content" th:text="${review.content}">
                                                 Progressively repurpose extensive partnerships and one-to-one technology. Competently impact market positioning solutions before user friendly alignments. Energistically deploy reliable process improvements via interdependent.
@@ -240,7 +240,6 @@
                                 <p class="comment-form-author col-sm-6">
                                     <input id="movie" name="movie" type="text" th:value="${movie.title}" size="30" readonly>
                                     <input type="hidden" id="movieId" name="movieId" th:value="${movie.id}">
-                                </div>
                                 </p>
 
                                 <!-- 별점 입력 -->
@@ -256,16 +255,19 @@
                                 <input type="hidden" id="rating" name="rating" value="">
                                 </p>
                             </div>
+
                             <p class="comment-form-comment">
                                 <textarea id="content" name="content" placeholder="Write your review..."></textarea>
                             </p>
+
                             <!-- 숨겨진 필드로 writerId 추가 -->
-                            <input type="hidden" id="writerId" name="writerId" th:value="${userId}"> <!-- 이 값은 세션이나 로그인 정보에서 가져올 수 있음 -->
+                            <input type="hidden" id="writerId" name="writerId" th:value="${userId}"> <!-- 세션이나 로그인 정보에서 가져온 값 -->
 
                             <p class="form-submit">
                                 <button type="button" class="button fill rectangle" id="submitReview">Submit Review</button>
                             </p>
                         </form>
+
                     </div>
                 </div>
             </div>

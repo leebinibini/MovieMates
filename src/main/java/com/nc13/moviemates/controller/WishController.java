@@ -5,6 +5,8 @@ import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.service.WishService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,15 @@ public class WishController {
     private final UserService userService;
 
     @GetMapping("/list/{userId}")
-    public String showWishList(Model model, @PathVariable("userId") Long userId) {
+    public String showWishList(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity  loginUser  = (UserEntity) session.getAttribute("loginUser");
+        if (loginUser == null || loginUser.getId() == null) {
+            model.addAttribute("errorMessage", "User not logged in");
+            return "error";  // 로그인하지 않은 경우 에러 페이지로 이동
+        }
+
+        Long userId = loginUser.getId();
         Optional<UserEntity> userOptional = userService.findById(userId);
         if (userOptional.isPresent()) {
             model.addAttribute("user", userOptional.get());  // 값이 있으면 ReviewEntity를 넘김

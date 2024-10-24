@@ -2,6 +2,8 @@ package com.nc13.moviemates.component.model;
 
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.nc13.moviemates.enums.Provider;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 import org.springframework.stereotype.Component;
 

@@ -22,7 +22,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     //구글로 부터 받은 userRequest 데이터에 대한 후처리 되는 함수
     //함수종료시 @AuthenticationPrincipal 어노테이션이 만들어진다.
@@ -81,7 +81,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         } else {
             System.out.println(oAuth2UserInfo.provider() +" 로그인을 이미 한 적이 있습니다.");
         }
-
+        System.out.println("구글 로그인 완료");
         return new UserPrincipal(userEntity,oAuth2User.getAttributes());
+
     }
 }
