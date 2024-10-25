@@ -74,7 +74,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             userEntity = UserEntity.builder()
                     .nickname(nickname)
                     .email(email)
-                    .role(Role.USER)
+                    .role(Role.ROLE_USER)
                     .provider(oAuth2UserInfo.provider())
                     .build();
             userRepository.save(userEntity);

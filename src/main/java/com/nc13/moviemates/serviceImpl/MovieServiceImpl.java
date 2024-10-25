@@ -134,6 +134,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<MovieEntity> findSearchList(String searchStr) {
+        return repository.getListBySearch(searchStr);
+    }
+
+    @Override
     public List<MovieEntity> getWatchedMoviesByUserId(Long userId) {
         return List.of();
     }
