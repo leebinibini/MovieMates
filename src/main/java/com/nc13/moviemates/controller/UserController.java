@@ -62,9 +62,6 @@ public class UserController {
         return "profile/main";
     }
 
-
-
-
     @GetMapping("/login")
     public String login() {
         return "admin/auth-login";
@@ -72,7 +69,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user, HttpServletRequest request) {
-        System.out.println("유저는!!" + user);
+        System.out.println("로그인 시도 정보는!!" + user);
         Map<String, Object> response = new HashMap<>();
         UserEntity loginUser = service.login(user);
         log.info("##### 로그인 사용자 정보 : {}", loginUser);
@@ -80,6 +77,7 @@ public class UserController {
         if (loginUser != null) {
             // 세션에 사용자 정보 저장
             HttpSession session = request.getSession();
+            System.out.println("session = " + session);
             session.setAttribute("loginUser", loginUser);
             log.info("##### 로그인 세션 정보 : {}", session.getAttribute("loginUser"));
 
@@ -157,8 +155,7 @@ public class UserController {
     }
 
     @GetMapping("/profile/setting/{id}")
-    public String getProfile(Model model, HttpServletRequest request)
-    {
+    public String getProfile(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         UserEntity  loginUser  = (UserEntity) session.getAttribute("loginUser");
         if (loginUser == null || loginUser.getId() == null) {

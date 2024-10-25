@@ -308,7 +308,7 @@ header#header .header_ticket:after {
 }
 header#header #header-search {
   display: inline-block;
-  font-size: 14px;
+  font-size: 30px;
   color: #fff;
   float: right;
   padding-right: 8px;
@@ -319,7 +319,6 @@ header#header #header-search {
   transition: all 0.25s ease;
 }
 header#header #header-search:before {
-  content: url(../images/search.png);
   width: 30px;
   height: 30px;
   display: block;

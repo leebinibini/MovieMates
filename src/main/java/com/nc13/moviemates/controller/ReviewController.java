@@ -114,7 +114,10 @@ public class ReviewController {
 
     @ResponseBody
     @PostMapping("/deleteMany")
-    public ResponseEntity<Long> deleteMany(@RequestBody List<Long> reviewIdList){
+    public ResponseEntity<Long> deleteMany(@RequestBody List<Long> reviewIdList, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserEntity user = (UserEntity) session.getAttribute("loginUser");
+
         return ResponseEntity.ok(service.deleteMany(reviewIdList));
     }
 

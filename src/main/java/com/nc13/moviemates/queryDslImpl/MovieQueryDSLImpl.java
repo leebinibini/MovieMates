@@ -9,6 +9,9 @@ import com.querydsl.jpa.impl.JPAUpdateClause;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -96,5 +99,26 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
                 .where(qMovie.title.eq(name))
                 .fetchOne();
     }
+
+    @Override
+    public Page<MovieEntity> findByTitleContaining(String searchStr, Pageable pageable) {
+        List<MovieEntity> movieEntities = jpaQueryFactory
+                .selectFrom(qMovie)
+                .where(qMovie.director.contains(searchStr).or(qMovie.title.contains(searchStr)))
+                .orderBy(qMovie.id.desc())
+                .offset(pageable.getOffset())  // 페이징의 시작점
+                .limit(pageable.getPageSize()) // 한 페이지에 보여줄 항목 수
+                .fetch();
+
+        // 전체 개수 조회 (페이징에 필요한 총 항목 수)
+        long total = jpaQueryFactory
+                .selectFrom(qMovie)
+                .where(qMovie.director.contains(searchStr).or(qMovie.title.contains(searchStr)))
+                .fetchCount();
+
+        // Page 객체로 변환하여 반환
+        return new PageImpl<>(movieEntities, pageable, total);
+    }
+
 
 }

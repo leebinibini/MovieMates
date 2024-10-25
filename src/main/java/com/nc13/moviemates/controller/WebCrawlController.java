@@ -20,8 +20,8 @@ public class WebCrawlController {
 //        this.webCrawlerService = webCrawlerService;
 //    }
 
-    @GetMapping("")
-    public List<String> crawl(){
-        return webCrawlerService.crawl();
-    }
+//    @GetMapping("")
+//    public List<String> crawl(){
+//        return webCrawlerService.crawl();
+//    }
 }

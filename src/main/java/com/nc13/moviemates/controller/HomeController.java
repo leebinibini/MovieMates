@@ -4,6 +4,7 @@ import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.PosterEntity;
 import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.PosterService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.sql.ast.tree.expression.Star;
@@ -24,7 +25,7 @@ public class HomeController {
 
     //홈페이지 화면 가져오기
         @GetMapping("/")
-        public String home(Model model) {
+        public String home(Model model, HttpServletRequest request) {
             log.info("top5 크게보기");
             // top5 크게보기
             List<MovieEntity> movie = movieService.findAll();
@@ -45,54 +46,5 @@ public class HomeController {
             return "index";
     }
 
-    @GetMapping("details")
-    public String Details(){
-        return  "details";
-    }
-
-    @GetMapping("/test")
-    @ResponseBody
-    public Map<String, String> test() {
-
-        var map = new HashMap<String, String>();
-        map.put("test", "안녕 ");
-
-        return map;
-    }
-
-    @GetMapping("/api/form-elements")
-    public String toCheck(){
-        return  "admin/form-advanced";
-    }
-
-    @GetMapping("/api/form-fileuploads")
-    public String toCheck2(){
-        return  "admin/form-fileuploads";
-    }
-
-    @GetMapping("/api/admin/index")
-    public String toCheck3(){
-        return  "admin/home";
-    }
-
-    @GetMapping("/api/admin/tables-basic")
-    public String toCheck4(){
-        return  "admin/tables-basic";
-    }
-
-    @GetMapping("/api/admin/tables-datatable")
-    public String toCheck5(){
-        return  "admin/tables-datatable";
-    }
-
-    @GetMapping("/api/admin/ui-buttons")
-    public String toCheck6(){
-        return  "admin/ui-buttons";
-    }
-
-    @GetMapping("/api/admin/icons-remixicons")
-    public String toCheck7(){
-        return  "admin/icons-remixicons";
-    }
 
 }

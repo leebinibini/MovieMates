@@ -45,25 +45,23 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             oAuth2UserInfo = OAuth2UserInfo.builder()
                     .provider(Provider.FACEBOOK)
                     .build();
-        } else if (userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
             System.out.println("네이버 로그인 요청");
             oAuth2UserInfo = OAuth2UserInfo.builder()
-                    .provider(Provider.FACEBOOK)
+                    .provider(Provider.NAVER)
                     .build();
-        } else if (userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
             System.out.println("카카오 로그인 요청");
             oAuth2UserInfo = OAuth2UserInfo.builder()
-                    .provider(Provider.FACEBOOK)
+                    .provider(Provider.KAKAO)
                     .build();
         }  else {
             System.out.println("우리는 구글과 페이스 북만 지원해요");
             return null;
         }
 
-
         String nickname = oAuth2UserInfo.nickname();
         String email = oAuth2UserInfo.email();
-
 
         UserEntity userEntity = userRepository.findByEmail(email);
         if (userEntity == null) {
@@ -74,7 +72,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             userEntity = UserEntity.builder()
                     .nickname(nickname)
                     .email(email)
-                    .role(Role.USER)
+                    .role(Role.ROLE_USER)
                     .provider(oAuth2UserInfo.provider())
                     .build();
             userRepository.save(userEntity);
