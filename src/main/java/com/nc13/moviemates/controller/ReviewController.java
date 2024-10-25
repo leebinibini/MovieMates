@@ -41,7 +41,8 @@ public class ReviewController {
 
     @GetMapping("/register")
     public String getMoviesByUserId(@RequestParam("movieId") Long movieId,
-                                    Model model, HttpSession session) {
+                                    Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         UserEntity loginUser  = (UserEntity) session.getAttribute("loginUser");
         Long userId = loginUser.getId();
         System.out.println(userId);
@@ -49,7 +50,6 @@ public class ReviewController {
         if (movie.isPresent()) {
             boolean isWishlisted = wishService.existsByMovieIdandUserId(movieId, userId);
             System.out.println("isWishlisted 값: " + isWishlisted);
-
             model.addAttribute("isWishlisted", isWishlisted);
             model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
             model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
@@ -99,12 +99,15 @@ public class ReviewController {
 
         Long userId = loginUser.getId();
         review.setWriterId(userId); // 리뷰 작성자 정보 설정
-
+        boolean hasWatched = historyService.hasWatchedMovie(userId, review.getMovieId());
         System.out.println("리뷰 등록 컨트롤러 진입");
         System.out.println("리뷰 정보: " + review);
+        if (!hasWatched) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("영화를 본 사용자만 리뷰를 작성할 수 있습니다.");
+        }
 
-        // 리뷰 저장
         boolean result = service.save(review);
+        // 리뷰 저장
         if (result) {
             return ResponseEntity.ok("리뷰가 성공적으로 등록되었습니다.");
         } else {

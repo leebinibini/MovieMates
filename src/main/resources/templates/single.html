@@ -80,13 +80,19 @@
                     <a th:href="@{/}" id="logo" title="MovieMates" class="logo-image-white" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
                 </div>
                 <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
+                    <div th:if="${userData != null}">
                     <div class="header_author">
-                        <a href="#">User</a>
-                        <img th:src="@{/images/user.png}" class="user" alt="user">
+                        <a th:text="${userData['nickname']}">User</a>
+                        <img th:src="${userData['profileImageUrl']}" class="user" alt="user">
                     </div>
                     <div class="header_ticket">
-                        <a href="#order" class="order_btn">My tickets</a>
+                        <a th:href="@{/api/user/mypage{id}(id=${session.loginUser.id})}" class="order_btn">Mypage</a>
                         <span>3</span>
+                    </div>
+                    </div>
+                    <div th:if="${userData == null}">
+                        <!-- User is not logged in -->
+                        <a th:href="@{/api/user/login}" class="btn btn-primary">Login</a>
                     </div>
                     <a href="javascript:;" id="header-search"></a>
                     <div class="button_container" id="toggle">
@@ -262,7 +268,7 @@
 
                             <!-- 숨겨진 필드로 writerId 추가 -->
                             <input type="hidden" id="writerId" name="writerId" th:value="${userId}"> <!-- 세션이나 로그인 정보에서 가져온 값 -->
-
+                            <input type="hidden" id="movieId2" name="movieId2" th:value="${movie.id}">
                             <p class="form-submit">
                                 <button type="button" class="button fill rectangle" id="submitReview">Submit Review</button>
                             </p>
@@ -493,6 +499,7 @@
         // 하트 아이콘 클릭 이벤트
         $('.wishlist-heart').on('click', function() {
             var $icon = $(this).find('i');
+            var userId = [[${session.loginUser.id}]]
             var movieId = [[${movie.id}]]
             var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
 
@@ -510,7 +517,7 @@
                 contentType: "application/json",
                 data: JSON.stringify({
                     movieId: movieId,
-                    userId: 1
+                    userId: userId
                 }),
                 success: function(response) {
                     console.log('위시리스트 업데이트 성공', response);
@@ -566,7 +573,7 @@
                 // 필요에 따라 페이지 리로드 또는 리디렉션
             })
             .catch(function(error) {
-                alert('Error submitting review: ' + error.message);
+                alert('영화를 보고 오셨나요?');
             });
     });
     </script>

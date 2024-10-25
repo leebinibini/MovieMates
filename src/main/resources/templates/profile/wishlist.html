@@ -131,7 +131,7 @@
                                 <span class="wishlist-icon">
                                         <a href="javascript:void(0);" class="wishlist-heart" th:data-movie-id="${wishMovie['movieId']}">
                                             <button class="heart-button" th:data-movie-id="${wishMovie['movieId']}">
-                                                <i class="fa-heart" th:classappend="${isWishlisted != null and isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+                                                <i class="fa-heart" th:classappend="${isWishlisted != null and isWishlisted ? 'fa-regular' : 'fa-solid'}"></i>
                                             </button>
                                         </a>
                                     </span>
@@ -191,7 +191,9 @@
         $('.wishlist-heart').on('click', function() {
             var $icon = $(this).find('i');
             var movieId = $(this).data('movie-id');
-            var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
+            var isWishlisted = $icon.hasClass('fa-solid');
+            var userId = [[${session.loginUser.id}]]
+            // 이미 위시리스트에 있는지 확인
 
             // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
             if (isWishlisted) {
@@ -207,7 +209,7 @@
                 contentType: "application/json",
                 data: JSON.stringify({
                     movieId: movieId,
-                    userId: 1
+                    userId: userId
                 }),
                 success: function(response) {
                     console.log('위시리스트 업데이트 성공', response);

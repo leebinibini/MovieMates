@@ -1,8 +1,10 @@
 package com.nc13.moviemates.controller;
 
 import com.nc13.moviemates.component.model.WishModel;
+import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.entity.WishEntity;
+import com.nc13.moviemates.service.HistoryService;
 import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.service.WishService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -23,6 +26,7 @@ import java.util.Optional;
 public class WishController {
     private final WishService service;
     private final UserService userService;
+    private final HistoryService historyService;
 
     @GetMapping("/list/{userId}")
     public String showWishList(Model model, HttpServletRequest request) {
@@ -34,6 +38,11 @@ public class WishController {
         }
 
         Long userId = loginUser.getId();
+        List<Map<String, Object>> wishMovie = service.findWishesWithMovieDetails(userId);
+        Long movieId = null;
+        if(!wishMovie.isEmpty()){
+            movieId = (Long)wishMovie.get(0).get("movieId");
+        }
         Optional<UserEntity> userOptional = userService.findById(userId);
         if (userOptional.isPresent()) {
             model.addAttribute("user", userOptional.get());  // 값이 있으면 ReviewEntity를 넘김
@@ -41,7 +50,13 @@ public class WishController {
             throw new RuntimeException("User not found");
         }
         model.addAttribute("wishMovie", service.findWishesWithMovieDetails(userId));
+        Optional<MovieEntity> movie = historyService.findMovieForReview(userId, movieId);
+        if (movie.isPresent()) {
+            boolean isWishlisted = service.existsByMovieIdandUserId(movieId, userId);
+            System.out.println("isWishlisted 값: " + isWishlisted);
 
+            model.addAttribute("isWishlisted", isWishlisted);
+        }
         return "profile/wishlist";
     }
 
