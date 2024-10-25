@@ -60,7 +60,7 @@ public class WishQueryDSLImpl implements WishQueryDSL {
     @Override
     public List<Map<String, Object>> findWishesWithMovieDetails(Long userId) {
         List<Tuple> results = jpaQueryFactory
-                .select(qWish.id, qWish.userId, qWish.movieId, qmovie.title, qmovie.lengthPosterUrl, qmovie.plot)
+                .select(qWish.id, qWish.userId, qWish.movieId, qmovie.title, qmovie.lengthPosterUrl, qmovie.plot, qmovie.id)
                 .from(qWish)
                 .join(qmovie).on(qWish.movieId.eq(qmovie.id))  // movieId로 조인
                 .where(qWish.userId.eq(userId))
@@ -77,6 +77,7 @@ public class WishQueryDSLImpl implements WishQueryDSL {
             map.put("movieTitle", tuple.get(qmovie.title));
             map.put("posterUrl", tuple.get(qmovie.lengthPosterUrl));
             map.put("plot", tuple.get(qmovie.plot));
+
 
             wishMovie.add(map);  // 변환된 Map을 리스트에 추가
         }

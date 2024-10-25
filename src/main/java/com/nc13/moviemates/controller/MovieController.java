@@ -3,8 +3,11 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.component.model.WishModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.service.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.web.JsonPath;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,7 @@ public class MovieController {
     private final ScheduleService scheduleService;
     private final ReviewService reviewService;
     private final WishService wishService;
+    private final UserService userService;
 
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
@@ -53,7 +57,14 @@ public class MovieController {
     }
 
     @GetMapping("/single/{movieId}")
-    public String getSingle(@PathVariable("movieId") Long movieId, Model model) {
+    public String getSingle(@PathVariable("movieId") Long movieId,
+                            Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser  = (UserEntity) session.getAttribute("loginUser");
+        Long userId = loginUser.getId();
+
+        System.out.println("userData:" + userService.findById(userId));
+        model.addAttribute("userData", userService.findById(userId));
         Optional<MovieModel> movie = service.findById(movieId);
         if (movie.isPresent()) {
             model.addAttribute("movie", movie.get());

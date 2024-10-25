@@ -5,6 +5,7 @@ import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.QHistoryEntity;
 import com.nc13.moviemates.entity.QMovieEntity;
 import com.nc13.moviemates.queryDsl.HistoryQueryDSL;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -36,13 +37,21 @@ public class HistoryQueryDSLImpl implements HistoryQueryDSL {
         QMovieEntity qMovie = QMovieEntity.movieEntity;
         QHistoryEntity qHistory = QHistoryEntity.historyEntity;
 
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(qHistory.userId.eq(userId));
+
+        if (movieId != null) {
+            builder.and(qHistory.movieId.eq(movieId));
+        } else {
+            builder.and(qHistory.movieId.isNull());
+        }
+
         MovieEntity movie = jpaQueryFactory
                 .select(qMovie)
                 .from(qHistory)
-                .join(qMovie).on(qHistory.movieId.eq(qMovie.id))  // 히스토리의 movieId와 영화 테이블의 id를 조인
-                .where(qHistory.userId.eq(userId)  // 히스토리에서 유저 아이디가 일치하고
-                        .and(qHistory.movieId.eq(movieId)))  // 히스토리에서 movieId가 일치하는 경우
-                .fetchOne();  // 단일 결과 반환
+                .join(qMovie).on(qHistory.movieId.eq(qMovie.id))
+                .where(builder)
+                .fetchFirst();  // 첫 번째 결과만 반환
 
         return Optional.ofNullable(movie);
     }
@@ -52,10 +61,6 @@ public class HistoryQueryDSLImpl implements HistoryQueryDSL {
         return jpaQueryFactory.selectFrom(qHistory).fetch();
     }
 
-  /*  @Override
-    public Boolean save(HistoryEntity email) {
-        return null;
-    }*/
 
     @Override
     public Optional<HistoryEntity> findById(Long id) {
@@ -91,10 +96,14 @@ public class HistoryQueryDSLImpl implements HistoryQueryDSL {
                 .where(qHistory.userId.eq(id))
                 .fetch();  // fetch()를 사용하여 여러 결과를 가져옵니다.
     }
+    public boolean hasWatchedMovie(Long userId, Long movieId) {
+        return jpaQueryFactory
+                .selectFrom(qHistory)
+                .where(
+                        qHistory.userId.eq(userId),
+                        qHistory.movieId.eq(movieId)
+                )
+                .fetchCount() > 0; // 관람 기록이 1개 이상이면 true 반환
+    }
 
-/*
-    @Override
-    public Boolean deleteById(Long id) {
-        return null;
-    }*/
 }
