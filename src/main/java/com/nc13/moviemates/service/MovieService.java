@@ -2,8 +2,11 @@ package com.nc13.moviemates.service;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,11 +36,10 @@ public interface MovieService {
 
     Boolean deleteById(Long id);
 
-   Long findMovieIdByName(String name);
+    Long findMovieIdByName(String name);
 
+    Page<MovieModel> findSearchList(String searchStr, Pageable pageable);
 
-
-
-   // void crawlMovies() throws IOException;
+//    void crawlMovies() throws IOException;
 
 }

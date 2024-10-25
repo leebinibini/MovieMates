@@ -22,8 +22,6 @@ ext {
     set('springModulithVersion', "1.2.3")
 }
 
-
-
 dependencies {
 //
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
@@ -31,13 +29,9 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-
-//    implementation 'com.siot.Iamport:iamport-rest-client-java:0.2.6'
     implementation 'com.github.iamport:iamport-rest-client-java:0.2.6'
 
-
-
-   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
 
     compileOnly("org.springframework.boot:spring-boot-devtools")
@@ -51,7 +45,7 @@ dependencies {
 //	testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.jsoup:jsoup:1.17.2'
-   // implementation 'mysql:mysql-connector-java:8.0.32'
+    // implementation 'mysql:mysql-connector-java:8.0.32'
     implementation 'mysql:mysql-connector-java'
 
     //ncloud
@@ -88,9 +82,6 @@ dependencies {
 
 // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
     implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '3.3.3'
-
-
-
 
 //    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.522'
 
@@ -139,5 +130,4 @@ tasks.withType(JavaCompile) {
 clean {
     delete file(querydslSrcDir)
 }
-
 

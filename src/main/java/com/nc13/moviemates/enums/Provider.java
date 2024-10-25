@@ -5,5 +5,5 @@ import lombok.RequiredArgsConstructor;
 
 public enum Provider {
 
-    GOOGLE, NAVER, KAKAO, FACEBOOK;
+    GOOGLE, NAVER, KAKAO, FACEBOOK
 }

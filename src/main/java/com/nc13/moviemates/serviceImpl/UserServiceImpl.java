@@ -46,12 +46,6 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-   /* @Override
-    public Boolean update(UserModel userData) {
-        System.out.println("user정보: " + userData);
-        repository.update(userData);
-        return true;
-    }*/
     @Transactional
     @Override
     public Boolean deleteMany(List<Long> userIdList) {

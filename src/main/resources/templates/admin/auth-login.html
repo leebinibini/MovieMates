@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Log In | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
+    <title>Log In | MovieMates</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" th:href="@{/admin/assets/images/favicon.ico}">
+    <link rel="shortcut icon" th:href="@{/images/movieLogo.jpg}">
 
     <!-- Theme Config Js -->
     <script th:src="@{/admin/assets/js/config.js}"></script>
@@ -35,10 +35,10 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="auth-brand p-4">
                                         <a href="index.html" class="logo-light">
-                                            <img th:src="@{/admin/assets/images/logo.png}" alt="logo" height="22">
+                                            <img th:src="@{/images/movieLogo.jpg}" alt="logo" height="60">
                                         </a>
                                         <a href="index.html" class="logo-dark">
-                                            <img th:src="@{/admin/assets/images/logo-dark.png}" alt="dark logo" height="22">
+                                            <img th:src="@{/images/movieLogo.jpg}" alt="dark logo" height="60">
                                         </a>
                                     </div>
                                     <div class="p-4 my-auto">
@@ -162,13 +162,11 @@
                     .then(data => {
                         console.log(data);  // 서버 응답 데이터 확인
 
-                        // 응답 데이터에서 loginUser 변수로 접근하려면 서버에서 제대로 전달되어야 함
                         if (data.status === 'success') {
                             alert("로그인 성공!");
 
-                            // 리다이렉트 URL이 있는 경우 리다이렉트
                             if (data.redirectUrl) {
-                                window.location.href = data.redirectUrl;  // 서버에서 전달된 리다이렉트 URL로 이동
+                                window.location.href = data.redirectUrl;
                             }
                         } else {
                             alert(data.message || "로그인 실패!");

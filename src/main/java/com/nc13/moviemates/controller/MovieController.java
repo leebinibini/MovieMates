@@ -3,9 +3,15 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.component.model.WishModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import com.nc13.moviemates.entity.QMovieEntity;
 import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.service.*;
+import com.nc13.moviemates.util.WebCrawlerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.JsonPath;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,6 +30,7 @@ public class MovieController {
     private final ScheduleService scheduleService;
     private final ReviewService reviewService;
     private final WishService wishService;
+    private final WebCrawlerService webCrawlerService;
 
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
@@ -91,23 +98,11 @@ public class MovieController {
         return "admin/movie/register";
     }
 
-    @GetMapping("/register2")
-    public String toMovieRegister2(Model model){
-        model.addAttribute("movieList", service.findAll());
-        model.addAttribute("theaterList", theaterService.findAll());
-        return "admin/movie/register2";
-    }
-
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
         return ResponseEntity.ok(service.save(movie));
     }
-
-//    @PutMapping
-//    public ResponseEntity<Boolean> update(@RequestBody MovieModel movie){
-//        return ResponseEntity.ok(service.save(movie));
-//    }
 
     @ResponseBody
     @PostMapping("/updateMany")
@@ -144,15 +139,38 @@ public class MovieController {
     public long count() {
         return service.count();}
 
-    /*@GetMapping("/crawl")
-    public String crawlMovies() {
-        try {
-            service.crawlMovies();
-            return "Crawling complete!";
-        } catch (Exception e) {
-            return "Error occurred: " + e.getMessage();
-        }
-    }*/
+
+    @GetMapping("/search")
+    public String getSearchList(@RequestParam String searchStr,
+                                @RequestParam(value = "page", defaultValue = "0") int page,
+                                @RequestParam(value = "size", defaultValue = "7") int size,
+                                Model model) {
+
+        // PageRequest 생성
+        PageRequest pageRequest = PageRequest.of(page, size);
+
+        // 페이징된 검색 결과 가져오기
+        Page<MovieModel> searchResults = service.findSearchList(searchStr, pageRequest);
+
+        // 검색 결과 및 페이지네이션 정보 추가
+        model.addAttribute("searchMovieList", searchResults.getContent()); // 현재 페이지의 영화 리스트
+
+        System.out.println("searchResults = " + searchResults.getContent());
+        model.addAttribute("totalPages", searchResults.getTotalPages());   // 총 페이지 수
+        model.addAttribute("currentPage", page);                           // 현재 페이지 번호
+
+        return "/search";
+    }
+
+//    @GetMapping("/crawl")
+//    public String crawlMovies() {
+//        try {
+//            webCrawlerService.crawl();
+//            return "Crawling complete!";
+//        } catch (Exception e) {
+//            return "Error occurred: " + e.getMessage();
+//        }
+//    }
 
 }
 
