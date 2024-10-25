@@ -3,9 +3,15 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.component.model.WishModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import com.nc13.moviemates.entity.QMovieEntity;
 import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.service.*;
+import com.nc13.moviemates.util.WebCrawlerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.JsonPath;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,6 +30,7 @@ public class MovieController {
     private final ScheduleService scheduleService;
     private final ReviewService reviewService;
     private final WishService wishService;
+    private final WebCrawlerService webCrawlerService;
 
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
@@ -42,8 +49,8 @@ public class MovieController {
         Map<String, Object> map = new HashMap<>();
         System.out.println(movieId);
         String title = service.findById(movieId)
-                        .orElseThrow(()-> new RuntimeException("Movie not found"))
-                                .getTitle();
+                .orElseThrow(()-> new RuntimeException("Movie not found"))
+                .getTitle();
 
         map.put("theater", theaterService.findByMovieId(movieId));
         map.put("schedule", scheduleService.findByMovieId(movieId));
@@ -91,23 +98,11 @@ public class MovieController {
         return "admin/movie/register";
     }
 
-    @GetMapping("/register2")
-    public String toMovieRegister2(Model model){
-        model.addAttribute("movieList", service.findAll());
-        model.addAttribute("theaterList", theaterService.findAll());
-        return "admin/movie/register2";
-    }
-
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
         return ResponseEntity.ok(service.save(movie));
     }
-
-//    @PutMapping
-//    public ResponseEntity<Boolean> update(@RequestBody MovieModel movie){
-//        return ResponseEntity.ok(service.save(movie));
-//    }
 
     @ResponseBody
     @PostMapping("/updateMany")
@@ -144,15 +139,23 @@ public class MovieController {
     public long count() {
         return service.count();}
 
-    /*@GetMapping("/crawl")
-    public String crawlMovies() {
-        try {
-            service.crawlMovies();
-            return "Crawling complete!";
-        } catch (Exception e) {
-            return "Error occurred: " + e.getMessage();
-        }
-    }*/
+
+    @GetMapping("/search")
+    public String getSearchList(@RequestParam String searchStr, Model model) {
+        model.addAttribute("searchMovieList", service.findSearchList(searchStr));
+
+        return "/search";
+    }
+
+//    @GetMapping("/crawl")
+//    public String crawlMovies() {
+//        try {
+//            webCrawlerService.crawl();
+//            return "Crawling complete!";
+//        } catch (Exception e) {
+//            return "Error occurred: " + e.getMessage();
+//        }
+//    }
 
 }
 

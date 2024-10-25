@@ -97,4 +97,13 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
                 .fetchOne();
     }
 
+    @Override
+    public List<MovieEntity> getListBySearch(String searchStr) {
+        return jpaQueryFactory
+                .selectFrom(qMovie)
+                .where(qMovie.director.contains(searchStr).or(qMovie.title.contains(searchStr)))
+                .orderBy(qMovie.id.desc())
+                .fetch();
+    }
+
 }

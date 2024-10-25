@@ -45,7 +45,7 @@ public record OAuth2UserInfo(
         return UserEntity.builder()
                 .nickname(nickname)
                 .email(email)
-                .role(Role.USER)
+                .role(Role.ROLE_USER)
                 .build();
     }
 }

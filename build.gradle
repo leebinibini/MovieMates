@@ -22,8 +22,6 @@ ext {
     set('springModulithVersion', "1.2.3")
 }
 
-
-
 dependencies {
 //
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
