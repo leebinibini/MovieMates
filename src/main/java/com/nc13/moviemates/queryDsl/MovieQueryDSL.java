@@ -16,4 +16,6 @@ public interface MovieQueryDSL {
     List<MovieEntity> findWatchedMoviesByUserId(Long userId);
     List<MovieEntity> findChart();
     Long findMovieIdByName(String name);
+
+    List<MovieEntity> findIsShowingMovie();
 }

@@ -37,7 +37,6 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
 
     @Override
     public void update(MovieModel movie) {
-        QMovieEntity qMovie = QMovieEntity.movieEntity;
 
         JPAUpdateClause updateClause = new JPAUpdateClause(entityManager, qMovie);
         updateClause
@@ -62,7 +61,7 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
 
     @Override
     public Boolean exists(Long id) {
-        return jpaQueryFactory.selectFrom(qMovie).where(qMovie.id.eq(id)).fetchCount()>0;
+        return jpaQueryFactory.selectFrom(qMovie).where(qMovie.id.eq(id)).fetchCount() > 0;
     }
 
 
@@ -79,7 +78,7 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
         return List.of();
     }
 
-    public List<MovieEntity> findChart(){
+    public List<MovieEntity> findChart() {
         QMovieEntity movie = QMovieEntity.movieEntity;
         return jpaQueryFactory
                 .selectFrom(movie)  // movie 엔티티 전체 선택
@@ -97,4 +96,10 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
                 .fetchOne();
     }
 
+    @Override
+    public List<MovieEntity> findIsShowingMovie() {
+        return jpaQueryFactory.selectFrom(qMovie)
+                .where(qMovie.isShowing.eq(0)) // 상영 중인 영화만 필터링
+                .fetch();
+    }
 }

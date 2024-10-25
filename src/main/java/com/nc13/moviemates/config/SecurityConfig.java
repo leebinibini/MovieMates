@@ -55,8 +55,6 @@ public class SecurityConfig {
                                 "/api/wish/**",
                                 "/loginForm"
                         ).permitAll()
-                        .requestMatchers("/**").authenticated()
-                        .requestMatchers("/api/user/**").hasRole("USER")
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/api/user/login")  // Custom login page URL

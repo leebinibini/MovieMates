@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class PaymentController {
         // API 키와 시크릿 키로 결제 클라이언트를 초기화하고 빈으로 등록
         this.iamportClient = new IamportClient(apiKey, secretKey);
     }
-
+    @Transactional
     @PostMapping("/validation/{imp_uid}")
     public ResponseEntity<?> validatePayment(@PathVariable String imp_uid, @RequestBody Map<String, Object> requestData) {
         try {
@@ -50,7 +51,7 @@ public class PaymentController {
             if (paymentResponse.getResponse() != null) {
                 // 결제 상태 출력
                 System.out.println("결제 상태: " + paymentResponse.getResponse().getStatus());
-
+                System.out.println(requestData);
                 if ("paid".equals(paymentResponse.getResponse().getStatus())) {
                     // 결제 성공
                     boolean saveResult = service.processPaymentAndSave(paymentResponse.getResponse(), requestData);

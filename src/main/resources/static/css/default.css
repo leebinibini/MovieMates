@@ -308,7 +308,7 @@ header#header .header_ticket:after {
 }
 header#header #header-search {
   display: inline-block;
-  font-size: 14px;
+  font-size: 30px;
   color: #fff;
   float: right;
   padding-right: 8px;
@@ -319,7 +319,6 @@ header#header #header-search {
   transition: all 0.25s ease;
 }
 header#header #header-search:before {
-  content: url(../images/search.png);
   width: 30px;
   height: 30px;
   display: block;
@@ -1187,14 +1186,12 @@ body.sticky-menu.stick #header.menu-top-left #header-search {
   padding: 0 55px;
 }
 .wpc-testimonails .testimonial:before {
-  content: url(../images/qte-t.png);
   position: absolute;
   top: 185px;
   left: 70px;
   z-index: -1;
 }
 .wpc-testimonails .testimonial:after {
-  content: url(../images/qte-b.png);
   position: absolute;
   bottom: -25px;
   right: 60px;

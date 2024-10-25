@@ -32,5 +32,6 @@ public class MovieEntity{
     private String widthPosterUrl;
     private String lengthPosterUrl;
     private String posterUrl;
+    private int isShowing;
 
 }

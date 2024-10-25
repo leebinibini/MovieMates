@@ -43,7 +43,6 @@ public class ReservationController {
             model.addAttribute("errorMessage", "User not logged in");
             return "error";  // 로그인하지 않은 경우 에러 페이지로 이동
         }
-
         Long userId = loginUser.getId();
         System.out.println("예약:"+loginUser );
         System.out.println(loginUser.getId());
@@ -75,6 +74,7 @@ public class ReservationController {
                 schedule.put("formattedShowTime", showTime.format(timeFormatter));
             }
         });
+        model.addAttribute("userId", userId);
         model.addAttribute("reservationMovie", service.findReservationWithMovieByUserId(userId));
         model.addAttribute("reservationSchedule", service.findReservationWithScheduleByUserId(userId));
         return "profile/reservation";
@@ -112,7 +112,9 @@ public class ReservationController {
     }
 
     @GetMapping("/iamport")
-    public String goPayment(){
+    public String goPayment(HttpServletRequest request){
+        UserEntity userEntity = (UserEntity) request.getSession();
+        Long id = userEntity.getId();
         return "iamport";
     }
 

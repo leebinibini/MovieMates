@@ -1,9 +1,6 @@
 package com.nc13.moviemates.queryDslImpl;
 
-import com.nc13.moviemates.entity.MovieEntity;
-import com.nc13.moviemates.entity.QMovieEntity;
-import com.nc13.moviemates.entity.QReviewEntity;
-import com.nc13.moviemates.entity.ReviewEntity;
+import com.nc13.moviemates.entity.*;
 import com.nc13.moviemates.queryDsl.ReviewQueryDSL;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -23,6 +20,7 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
     private final JPAQueryFactory jpaQueryFactory;
     private final QReviewEntity qReview = QReviewEntity.reviewEntity;
     private final QMovieEntity qMovie = QMovieEntity.movieEntity;
+
     @Override
     public List<ReviewEntity> getAll() {
         return jpaQueryFactory.selectFrom(qReview).fetch();
@@ -50,7 +48,7 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
 
     @Override
     public Boolean exists(Long id) {
-        return jpaQueryFactory.selectFrom(qReview).where(qReview.id.eq(id)).fetchCount()>0;
+        return jpaQueryFactory.selectFrom(qReview).where(qReview.id.eq(id)).fetchCount() > 0;
     }
 
     @Override
@@ -81,8 +79,9 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
                 .where(review.writerId.eq(userId))  // 리뷰의 writerId가 userId와 일치하는 경우
                 .fetch();
     }
+
     @Override
-    public List<ReviewEntity> getReviewsByWriterId(Long writerId){
+    public List<ReviewEntity> getReviewsByWriterId(Long writerId) {
         return jpaQueryFactory
                 .selectFrom(qReview)
                 .where(qReview.writerId.eq(writerId))
@@ -90,20 +89,20 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
     }
 
     @Override
-    public List<Map<String, Object>> findReviewsWithMovieByUserId (Long userId){
+    public List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId) {
         QMovieEntity qMovie = QMovieEntity.movieEntity;
-        List<Tuple> reviewWithMovie= jpaQueryFactory.
+        List<Tuple> reviewWithMovie = jpaQueryFactory.
 
-                    select(
-                            qReview.id, qReview.movieId,
-                            qReview.writerId, qReview.date,
-                            qReview.content, qReview.rating,
-                            qMovie.title, qMovie.lengthPosterUrl     // 영화 포스터 URL
-                    )
-                    .from(qReview)
-                    .join(qMovie).on(qReview.movieId.eq(qMovie.id))
-                    .where(qReview.writerId.eq(userId))
-                    .fetch();
+                select(
+                        qReview.id, qReview.movieId,
+                        qReview.writerId, qReview.date,
+                        qReview.content, qReview.rating,
+                        qMovie.title, qMovie.lengthPosterUrl     // 영화 포스터 URL
+                )
+                .from(qReview)
+                .join(qMovie).on(qReview.movieId.eq(qMovie.id))
+                .where(qReview.writerId.eq(userId))
+                .fetch();
         return reviewWithMovie.stream()
                 .map(tuple -> {
                     Map<String, Object> map = new HashMap<>();
@@ -119,8 +118,73 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
                 })
                 .collect(Collectors.toList());
     }
+    @Override
+    public List<Map<String, Object>> findTop5MoviesWithLongestReview() {
+        QMovieEntity qMovie = QMovieEntity.movieEntity;
+
+        List<Tuple> movieWithReview = jpaQueryFactory
+                .select(
+                        qMovie.id, qMovie.title, qMovie.lengthPosterUrl,  // 영화 정보
+                        qReview.id,                                // 리뷰 ID
+                        qReview.writerId,
+                        qReview.date,                              // 리뷰 날짜
+                        qReview.content,
+                        qReview.rating                             // 리뷰 평점
+                )
+                .from(qMovie)
+                .leftJoin(qReview).on(qReview.movieId.eq(qMovie.id))
+                .where(qReview.id.isNotNull())                 // 리뷰가 있는 영화만
+                .groupBy(qMovie.id, qMovie.title, qMovie.lengthPosterUrl, qReview.id, qReview.writerId, qReview.date, qReview.content, qReview.rating)  // 필요한 모든 필드 그룹화
+                .orderBy(qMovie.booking.desc())                // 예매율 기준 내림차순
+                .limit(5)                                      // 상위 5개 영화만
+                .fetch();
+
+        // 결과를 Map으로 변환하여 반환
+        return movieWithReview.stream()
+                .map(tuple -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("movieId", tuple.get(qMovie.id));
+                    map.put("movieTitle", tuple.get(qMovie.title));
+                    map.put("posterUrl", tuple.get(qMovie.lengthPosterUrl));  // 영화 포스터 URL
+                    map.put("reviewId", tuple.get(qReview.id));
+                    map.put("writerId", tuple.get(qReview.writerId));
+                    map.put("reviewDate", tuple.get(qReview.date));
+                    map.put("reviewContent", tuple.get(qReview.content));
+                    map.put("reviewRating", tuple.get(qReview.rating));
+                    return map;
+                })
+                .collect(Collectors.toList());
     }
 
+
+
+    @Override
+    public List<Map<String, Object>> findReviewsWithUserImage(Long movieId) {
+        QUserEntity qUser = QUserEntity.userEntity;
+
+        List<Tuple> results = jpaQueryFactory
+                .select(
+                        qReview, qReview.content, // 리뷰 정보
+                        qUser.profileImageUrl// 유저의 프로필 이미지
+                )
+                .from(qReview)
+                .join(qUser).on(qReview.writerId.eq(qUser.id)) // 리뷰 작성자와 유저 조인
+                .where(qReview.movieId.eq(movieId)) // 특정 영화 ID에 해당하는 리뷰
+                .fetch();
+
+        // 결과를 Map으로 변환하여 반환
+        return results.stream()
+                .map(tuple -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("review", tuple.get(qReview)); // 리뷰 엔티티
+                    map.put("content", tuple.get(qReview.content));
+                    map.put("profileImageUrl", tuple.get(qUser.profileImageUrl)); // 프로필 이미지 URL
+                    return map;
+                })
+                .collect(Collectors.toList());
+    }
+
+}
 
 
 

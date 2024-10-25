@@ -26,6 +26,7 @@ public class MovieModel {
     private String widthPosterUrl;
     private String lengthPosterUrl;
     private String posterUrl;
+    private int isShowing;
 
     public MovieModel(String title, Date releaseDate, String runningTime, String information, String genre, String director) {
     }

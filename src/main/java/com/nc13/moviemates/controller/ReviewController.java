@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -41,15 +42,14 @@ public class ReviewController {
     @GetMapping("/register")
     public String getMoviesByUserId(@RequestParam("movieId") Long movieId,
                                     Model model, HttpSession session) {
-        Long userId = (Long) session.getAttribute("loginUser.id");
+        UserEntity loginUser  = (UserEntity) session.getAttribute("loginUser");
+        Long userId = loginUser.getId();
         System.out.println(userId);
-        if (userId == null) {
-            return "error/404";  // 유저 아이디가 없으면 에러 페이지로 이동
-        }
         Optional<MovieEntity> movie = historyService.findMovieForReview(userId, movieId);
         if (movie.isPresent()) {
             boolean isWishlisted = wishService.existsByMovieIdandUserId(movieId, userId);
             System.out.println("isWishlisted 값: " + isWishlisted);
+
             model.addAttribute("isWishlisted", isWishlisted);
             model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
             model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
@@ -65,25 +65,45 @@ public class ReviewController {
         // 영화 제목 리스트 반환
     }
 
+    @GetMapping("/history/register")
+    public String getMoviesByHistoryUserId(@RequestParam("movieId") Long movieId,
+                                    Model model, HttpSession session) {
+        UserEntity loginUser  = (UserEntity) session.getAttribute("loginUser");
+        Long userId = loginUser.getId();
+        System.out.println(userId);
+        Optional<MovieEntity> movie = historyService.findMovieForReview(userId, movieId);
+
+            model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
+            model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
+           // model.addAttribute("reviewList", service.findAllByMovieId(movieId));
+            model.addAttribute("movieList", movieService.findAll());
+            model.addAttribute("movie", movie.get());  // 영화 정보를 모델에 추가
+            model.addAttribute("userId", userId);// 유저 아이디도 모델에 추가
+            model.addAttribute("reviewList", service.findReviewsWithUserImage(movieId));
+        System.out.println(service.findReviewsWithUserImage(movieId));
+            return  "review";  // 리뷰 작성 페이지로 이동
+
+    }
+
     @ResponseBody
     @PostMapping("/register")
-    public ResponseEntity<String> insert(@RequestBody ReviewEntity review) {
+    public ResponseEntity<String> insert(@RequestBody ReviewEntity review, HttpSession session) {
+        // 세션에서 로그인한 유저 정보 가져오기
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
 
-       /* 영화를 본 사람만 볼 수 작성할 수 있도록
-       boolean hasWatched = reviewService.hasUserWatchedMovie(review.getWriterId(), review.getMovieId());
-        if (!hasWatched) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("리뷰를 작성하려면 먼저 영화를 보셔야 합니다.");
-        }*/
-        // 유저 아이디가 있는지 확인
-        if (review.getWriterId() == null) {
+        // 유저가 로그인되어 있지 않다면
+        if (loginUser == null || loginUser.getId() == null) {
             System.out.println("유저 아이디가 없습니다.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유저 아이디가 필요합니다.");
         }
 
-        System.out.println("등록 컨트롤러 왔니");
-        System.out.println("review: " + review);
+        Long userId = loginUser.getId();
+        review.setWriterId(userId); // 리뷰 작성자 정보 설정
 
-        // 리뷰 저장 성공 시 true 반환, 실패 시 false 반환
+        System.out.println("리뷰 등록 컨트롤러 진입");
+        System.out.println("리뷰 정보: " + review);
+
+        // 리뷰 저장
         boolean result = service.save(review);
         if (result) {
             return ResponseEntity.ok("리뷰가 성공적으로 등록되었습니다.");
@@ -94,7 +114,9 @@ public class ReviewController {
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Boolean> update(@RequestBody ReviewEntity review, @PathVariable Long id){
+    public ResponseEntity<Boolean> update(@RequestBody ReviewEntity review, @PathVariable Long id, HttpSession session){
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+        Long userId = loginUser.getId();
         Optional<ReviewEntity> optionalReview = service.findById(id);
 
         if (!optionalReview.isPresent()) {
@@ -150,7 +172,7 @@ public class ReviewController {
             throw new RuntimeException("User not found");
         }
         model.addAttribute("movieWithReview", service.findReviewsWithMovieByUserId(userId));
-
         return "profile/myreviewlist";
     }
+
 }

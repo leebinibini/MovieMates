@@ -19,5 +19,7 @@ public interface ReviewQueryDSL {
     List<ReviewEntity> findAllByMovieId(Long movieId);
     List<String> findMovieTitlesByUserId(Long userId);
     List<ReviewEntity> getReviewsByWriterId(Long writerId);
+    List<Map<String, Object>> findTop5MoviesWithLongestReview();
+    List<Map<String, Object>> findReviewsWithUserImage(Long movieId);
     List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId);
 }
