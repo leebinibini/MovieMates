@@ -27,7 +27,7 @@ spring:
           google:
             client-id: 57356930204-dusjt6grmleqhi0tk8lsaeo0d3plglh3.apps.googleusercontent.com
             client-secret: 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
-            redirect-uri: https://localhost:8080
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
             scope:
               - profile
               - email
@@ -38,8 +38,30 @@ spring:
       init-mode: always
   server:
     port: 8080
-naver:
-  storage:
-    accessKey: D5C89E2205CAE7D4830F
-    secretKey: 77E98C140672BEF42A6BFED104A4550C6885C9CB
-    bucketName: moviemates.storage
+#naver:
+#  storage:
+#    accessKey: 32C6E2545595B9B2A738
+#    secretKey: 31568AFBC27617FD1700410F779DFC6967015A14
+#    bucket: moviemates-storage
+#    region: kr-standard
+#    endPoint: https://kr.object.ncloudstorage.com  # 엔드포인트 URL
+#    uploadPath: uploads/movies  # 파일 업로드 경로
+cloud:
+  aws:
+    s3:
+      bucket: moviemates-bucket # {버킷명}
+    credentials:
+      access-key: AKIAW3MEC2C4SDP5HBBC
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: moviemates-bucket
+iamport:
+  apiKey: '2518023361718300'
+  secretKey: 'IDbZ0iVylgvocP8iBjE5l2Mzg34JRvtY4IiStSxBWk0K5f1NejlIbEu1YeBkOwQhGJDM840JHDZMlg7C'
