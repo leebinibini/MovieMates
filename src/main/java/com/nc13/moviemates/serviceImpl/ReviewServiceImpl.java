@@ -78,10 +78,10 @@ public class ReviewServiceImpl implements ReviewService {
         return repository.deleteMany(reviewIdList);
     }
 
-    @Override
+  /*  @Override
     public List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId) {
         return repository.findReviewsWithMovieByUserId(userId);
-    }
+    }*/
 
     @Override
     public List<String> findMovieTitlesByUserId(Long userId) {
@@ -98,10 +98,26 @@ public class ReviewServiceImpl implements ReviewService {
         return List.of();
     }
 
+    @Override
+    public List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId) {
+        return repository.findReviewsWithMovieByUserId(userId);
+    }
+
 
     @Override
     public List<MovieEntity> getWatchedMoviesByUserId(Long userId) {
         // 유저가 본 영화 목록을 데이터베이스에서 조회
         return movieRepository.findWatchedMoviesByUserId(userId);
     }
+
+    @Override
+    public List<Map<String, Object>> findTop5MoviesWithLongestReview() {
+        return repository.findTop5MoviesWithLongestReview();
+    }
+
+
+    @Override
+    public List<Map<String, Object>> findReviewsWithUserImage(Long movieId){
+        return repository.findReviewsWithUserImage(movieId);
+    };
 }

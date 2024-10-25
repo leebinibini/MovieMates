@@ -124,14 +124,6 @@
                                 <div class="content-meta">
                                     <h2 class="entry-title" th:text="${movie != null ? movie.title : '영화 정보를 찾을 수 없습니다'}"></h2>
 
-                                    <!-- Wishlist Heart Icon -->
-                                    <span class="wishlist-icon">
-                                        <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
-                                            <button class="heart-button">
-                                                <i class="fa-heart" th:classappend="${isWishlisted != null and isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
-                                            </button>
-                                        </a>
-                                    </span>
                                     <div class="social-links">
                                         <a href="javascript:;"><i class="fa fa-facebook"></i></a>
                                         <a href="javascript:;"><i class="fa fa-twitter"></i></a>
@@ -163,46 +155,6 @@
                     </article>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 mt4">
-                    <div class="single-slider">
-                        <div class="swiper-container movie-images" id="singleslider" data-col="5">
-                            <div class="swiper-wrapper" >
-                                <div class="swiper-slide" th:each="m: ${movieList}">
-                                    <div class="movie-image"  th:data-bg-image="${m.lengthPosterUrl}">
-                                        <div class="entry-hover">
-                                            <div class="entry-actions">
-                                                <a th:href="@{/api/movie/single/{movieId}(movieId=${m.id})}" class="btn fill">More</a>
-                                            </div>
-                                        </div>
-                                        <div class="entry-desc">
-                                            <div class="rating">
-                                                <input name="stars" type="radio" th:checked="${m.rate >= 1}">
-                                                <label>☆</label>
-                                                <input name="stars" type="radio" th:checked="${m.rate >= 2}">
-                                                <label>☆</label>
-                                                <input name="stars" type="radio" th:checked="${m.rate >= 3}">
-                                                <label>☆</label>
-                                                <input name="stars" type="radio" th:checked="${m.rate >= 4}">
-                                                <label>☆</label>
-                                                <input name="stars" type="radio" th:checked="${m.rate >= 5}">
-                                                <label>☆</label>
-                                            </div>
-                                            <h3 class="entry-title" th:text="${m.title}"></h3>
-                                            <ul class="entry-date" th:text="${m.releaseDate}">
-                                                <li>5 May 2017</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <div class="section-content pvb0">
@@ -222,7 +174,7 @@
                                             <div class="meta-data">
                                                 <a href="#" class="comment-author" th:text="${userId}"></a>
                                             </div>
-                                            <div class="comment-content" th:text="${review.content}">
+                                            <div class="comment-content" th:text="${review['content']}">
                                                 Progressively repurpose extensive partnerships and one-to-one technology. Competently impact market positioning solutions before user friendly alignments. Energistically deploy reliable process improvements via interdependent.
                                             </div>
                                         </div>
@@ -488,41 +440,6 @@
         document.getElementById('loader').style.display = 'none';
     }
 </script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        // 하트 아이콘 클릭 이벤트
-        $('.wishlist-heart').on('click', function() {
-            var $icon = $(this).find('i');
-            var movieId = [[${movie.id}]]
-            var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
-
-            // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
-            if (isWishlisted) {
-                $icon.removeClass('fa-solid').addClass('fa-regular');  // 비어있는 하트로 변경
-            } else {
-                $icon.removeClass('fa-regular').addClass('fa-solid');  // 채워진 하트로 변경
-            }
-
-            // AJAX 요청을 통해 위시리스트에 추가/삭제
-            $.ajax({
-                url: '/api/wish/toggle',
-                method: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify({
-                    movieId: movieId,
-                    userId: 1
-                }),
-                success: function(response) {
-                    console.log('위시리스트 업데이트 성공', response);
-                },
-                error: function(error) {
-                    console.error('위시리스트 업데이트 실패', error);
-                }
-            });
-        });
-    });
-</script>
-
 <script>
     // 별점 클릭 시 선택된 값 저장
     document.querySelectorAll('.star').forEach(function(star) {
@@ -562,14 +479,12 @@
 
             .then(function(response) {
                 alert(response.data);
-                alert('Review submitted successfully!');
-                // 필요에 따라 페이지 리로드 또는 리디렉션
             })
             .catch(function(error) {
                 alert('Error submitting review: ' + error.message);
             });
     });
-    </script>
+</script>
 
 </body>
 </html>

@@ -65,9 +65,9 @@ public class MovieController {
         // Theater, Schedule, Review 리스트 추가
         model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
         model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
-        model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
-        model.addAttribute("movieList", service.findAll());
-        model.addAttribute("reviewMovie", movie.get());
+       // model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
+        model.addAttribute("movieList", service.findIsShowingMovie());
+        model.addAttribute("reviewList", reviewService.findReviewsWithUserImage(movieId));
         System.out.println(movie.get());
 
         // 위시리스트 여부 확인

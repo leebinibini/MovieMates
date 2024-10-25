@@ -35,9 +35,9 @@ public interface MovieService {
 
    Long findMovieIdByName(String name);
 
+    List<MovieEntity> findIsShowingMovie();
 
 
-
-   // void crawlMovies() throws IOException;
+    // void crawlMovies() throws IOException;
 
 }

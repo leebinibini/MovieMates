@@ -38,4 +38,8 @@ public interface ReviewService {
     List<Map<String, Object>> findReviewsWithMovieByUserId(Long userId);
 
     List<MovieEntity> getWatchedMoviesByUserId(Long userId);
+
+    List<Map<String, Object>> findTop5MoviesWithLongestReview();
+
+    List<Map<String, Object>> findReviewsWithUserImage(Long movieId);
 }

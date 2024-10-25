@@ -23,21 +23,165 @@
 
 
     //order popup
+    $('.entry-order-content').each(function(){
+        var selectedLocation = sessionStorage.getItem('selectedLocation');
+        var selectedMovie = sessionStorage.getItem('selectedMovie');
+        var selectedDate = sessionStorage.getItem('selectedDate');
+        var selectedTime = sessionStorage.getItem('selectedTime');
 
-    $('.order_btn').magnificPopup({
-        type: 'inline',
-        removalDelay: 500,
-        mainClass: 'mfp-zoom-in',
-        callbacks: {
-            beforeOpen: function () {
-                this.st.mainClass = this.st.el.attr('data-effect');
+        axios.get(`/api/theater/findTheaterIdByName?name=${encodeURIComponent(selectedLocation)}`)
+            .then(function (theaterResponse) {
+                theaterId = theaterResponse.data;  // theaterId를 변수에 저장
+                return axios.get(`/api/movies/findMovieIdByName?name=${encodeURIComponent(selectedMovie)}`);
+            })
+            .then(function (movieResponse) {
+                movieId = movieResponse.data.id;  // movieId를 변수에 저장
+                return $.ajax({
+                    // 여기 부분 수정 필요!!
+                    // 여기서 scheduleId 이용하고, 해당하는 scheduleId에 대한 reservation 리스트 정보를 갖고오게 해야함
+
+                    url: '/api/reservation/list',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        userId: 1,
+                        theaterId: theaterId,
+                        movieId: movieId,
+                        location: selectedLocation,
+                        movie: selectedMovie,
+                        date: selectedDate,
+                        time: selectedTime
+                    }),
+                    success: function (response) {
+                        updateSeatMap(response.seats);
+                    },
+                    error: function (error) {
+                        console.error("좌석 데이터 전송 오류:", error);
+                    }
+                });
+            })
+            .catch(function (error) {
+                console.error("에러 발생:", error);
+            });
+
+        function updateSeatMap(seats) {
+            if (sc) {
+                $('#seat-map').empty();
             }
-        },
-        midClick: true
 
+            sc = $('#seat-map').seatCharts({
+                map: [
+                    'aaaaaaa_aaaaaaa_aaaaaaa',
+                    'aaaaaaa_aaaaaaa_aaaaaaa',
+                    'aaaaaaa_aaaaaaa_aaaaaaa',
+                    'aaaaaaa_aaaaaaa_aaaaaaa',
+                    'aaaaaaa_aaaaaaa_aaaaaaa'
+                ],
+                naming: {
+                    top: false,
+                    getLabel: function (character, row, column) {
+                        return column;
+                    }
+                },
+                legend: {
+                    node: $('#legend'),
+                    items: [
+                        ['a', 'available', 'Available'],
+                        ['a', 'unavailable', 'Unavailable'],
+                        ['a', 'selected', 'Selected'],
+                    ]
+                },
+                click: function () {
+                    if (this.status() == 'available') {
+                        $('<li>R' + (this.settings.row + 1) + ' S' + this.settings.label + '</li>')
+                            .attr('id', 'cart-item-' + this.settings.id)
+                            .data('seatId', this.settings.id)
+                            .appendTo($cart);
+
+                        selectedSeats.push({
+                            row: this.settings.row,
+                            column: this.settings.label
+                        });
+
+                        $counter.text(sc.find('selected').length);
+                        $total.text(recalculateTotal(sc));
+
+                        return 'selected';
+                    } else if (this.status() == 'selected') {
+                        selectedSeats = selectedSeats.filter(seat => seat.row !== this.settings.row || seat.column !== this.settings.label);
+
+                        $counter.text(sc.find('selected').length - 1);
+                        $total.text(recalculateTotal(sc));
+                        $('#cart-item-' + this.settings.id).remove();
+                        return 'available';
+                    } else if (this.status() == 'unavailable') {
+                        return 'unavailable';
+                    } else {
+                        return this.style();
+                    }
+                }
+            });
+
+            seats.forEach(function (seat) {
+                sc.get([seat.row + '_' + seat.column]).status('unavailable');
+            });
+        }
     });
-    $('.close-window').on('click', function () {
-        $.magnificPopup.close();
+
+    $('.submit').on('click', function () {
+        var selectedLocation = "gangnam";        // 영화관
+        var selectedMovie = "대도시의 사랑법";  // 영화 제목
+        var selectedDate = "2024-11-29";         // 상영 날짜
+        var selectedTime = "12:30";              // 상영 시간
+        var totalPrice = 26000;                  // 총 결제 금액
+        var seats = [
+            { row: 1, column: 1 },
+            { row: 1, column: 2 }
+        ];  // 선택된 좌석 (하드코딩)
+
+        var scheduleId = 1; // 스케줄 ID (하드코딩)
+        var userId = 31;
+        var seatId = 2;
+
+        if (totalPrice === 0) {
+            alert("결제 금액이 0원입니다. 좌석을 선택해주세요.");
+            return;  // 결제 금액이 0원이면 결제를 중지
+        }
+
+        axios.post(`/api/payments/validation/{imp_uid}`)
+            .then(function (response) {
+                var buyerName = response.data.nickname;
+                IMP.request_pay({
+                    pg: "danal_tpay",          // PG사 설정
+                    pay_method: "card",        // 결제 방법
+                    name: selectedMovie,       // 상품 이름 (영화 제목)
+                    amount: totalPrice,        // 결제 금액 (총 티켓 가격)
+                    buyer_name: buyerName,
+                    custom_data: {             // 커스텀 데이터
+                        location: selectedLocation,
+                        movie: selectedMovie,
+                        date: selectedDate,
+                        time: selectedTime,
+                        seatId: seatId,
+                        scheduleId: scheduleId
+                    }
+                }, function (res) {
+                    if (res.success) {
+                        var impUid = res.imp_uid;
+                        var merchantUid = res.merchant_uid;
+                        // 결제가 성공했을 때
+                        alert("결제가 성공적으로 완료되었습니다!");
+                        // 예약과 결제 저장은 나중에 처리
+                    } else {
+                        // 결제가 실패했을 때
+                        alert("결제에 실패했습니다. 다시 시도해주세요!");
+                        console.error("Payment failed:", res.error_msg);
+                    }
+                });
+            })
+            .catch(function (error) {
+                console.error("닉네임 조회 실패:", error);
+            });
     });
 
 
@@ -243,340 +387,6 @@
 
         });
     });
-    $('.entry-order-content').each(function () {
-        //jQuery time
-        var current_fs, next_fs, previous_fs; //fieldsets
-        var left, opacity, scale; //fieldset properties which we will animate
-        var animating; //flag to prevent quick multi-click glitches
-
-        $(".next").on('click', function () {
-            if (animating) return false;
-            animating = true;
-
-            current_fs = $(this).parent();
-            next_fs = $(this).parent().next();
-
-            //show the next fieldset
-            next_fs.show();
-            //hide the current fieldset with style
-            current_fs.animate({opacity: 0}, {
-                step: function (now, mx) {
-                    //as the opacity of current_fs reduces to 0 - stored in "now"
-                    //1. scale current_fs down to 80%
-                    scale = 1 - (1 - now) * 0.2;
-                    //2. bring next_fs from the right(50%)
-                    left = (now * 50) + "%";
-                    //3. increase opacity of next_fs to 1 as it moves in
-                    opacity = 1 - now;
-                    current_fs.css({'transform': 'scale(' + scale + ')'});
-                    next_fs.css({'left': left, 'opacity': opacity});
-                },
-                duration: 800,
-                complete: function () {
-                    current_fs.hide();
-                    animating = false;
-                },
-                //this comes from the custom easing plugin
-                easing: 'easeInOutBack'
-            });
-        });
-
-        $(".previous").on('click', function () {
-            if (animating) return false;
-            animating = true;
-
-            current_fs = $(this).parent();
-            previous_fs = $(this).parent().prev();
-
-            //show the previous fieldset
-            previous_fs.show();
-            //hide the current fieldset with style
-            current_fs.animate({opacity: 0}, {
-                step: function (now, mx) {
-                    //as the opacity of current_fs reduces to 0 - stored in "now"
-                    //1. scale previous_fs from 80% to 100%
-                    scale = 0.8 + (1 - now) * 0.2;
-                    //2. take current_fs to the right(50%) - from 0%
-                    left = ((1 - now) * 50) + "%";
-                    //3. increase opacity of previous_fs to 1 as it moves in
-                    opacity = 1 - now;
-                    current_fs.css({'left': left});
-                    previous_fs.css({'transform': 'scale(' + scale + ')', 'opacity': opacity});
-                },
-                duration: 800,
-                complete: function () {
-                    current_fs.hide();
-                    animating = false;
-                },
-                //this comes from the custom easing plugin
-                easing: 'easeInOutBack'
-            });
-        });
-
-        $(".submit").on('click', function () {
-            return false;
-        });
-
-    });
-
-    $(document).keydown(function (e) {
-        if (e.keyCode === 27) {
-            if ($('#toggle').hasClass('active')) {
-                $('#toggle').removeClass('active');
-            }
-            if ($('.overlay').hasClass('open')) {
-                $('.overlay').removeClass('open');
-            }
-            if ($('#overlay-search').hasClass('active')) {
-                $('#overlay-search').removeClass('active');
-            }
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-        $(".btn-ticket").on('click', function(e) {
-            var movieId = $(e.target).data('id');
-            axios.get(`/api/movie/order/${movieId}`)
-                .then(function (res) {
-                    var theaterList = res.data.theater;
-                    var scheduleList = res.data.schedule;
-                    alert(scheduleList);
-                    var title = res.data.title;
-
-
-                    var locationSelect = $("select[name='location']");
-                    locationSelect.empty();
-                    theaterList.forEach(function (theater) {
-                        locationSelect.append(new Option(theater.name, theater.id));
-                    });
-                    $('#movie-selection').val(title);
-
-                    var dateInput = document.querySelector('.datetime');
-                    var availableDates = scheduleList.map(function(schedule) {
-                        return new Date(schedule.showDate).toISOString().split('T')[0];
-                    });
-                    var today = new Date().toISOString().split('T')[0];
-                    dateInput.setAttribute('min', today);
-                    dateInput.setAttribute('max', availableDates[availableDates.length - 1]);
-                    dateInput.value = today;
-
-                    dateInput.addEventListener('change', function() {
-                        var selectedDate = new Date(schedule.showDate).toISOString().split('T')[0];
-                        if (availableDates.includes(selectedDate)) {
-                            renderTimesForSelectedDate(selectedDate);
-                        } else {
-                            dateInput.value = '';
-                            alert('해당 날짜에 상영 정보가 없습니다.');
-                        }
-                    });
-
-                    function renderTimesForSelectedDate(selectedDate) {
-                        var filteredSchedules = scheduleList.filter(function(schedule) {
-                            var scheduleDate = new Date(schedule.showDate).toISOString().split('T')[0];
-                            return scheduleDate === selectedDate;
-                        });
-                        var timeList = $(".order-date");
-                        timeList.empty();
-                        if (filteredSchedules.length > 0) {
-                            filteredSchedules.forEach(function(schedule) {
-                                var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                                timeList.append('<li><a href="javascript:;" data-time="' + time + '"><i>' + time + '</i></a></li>');
-                            });
-                        } else {
-                            timeList.append('<li><a href="javascript:;"><i>해당 날짜에 상영 시간이 없습니다.</i></a></li>');
-                        }
-                    }
-                    renderTimesForSelectedDate(today);
-
-                    var timeList = $(".order-date");
-                    timeList.empty();
-                    scheduleList.forEach(function (schedule) {
-                        var time = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                        timeList.append('<li><a href="javascript:;" data-value="' + time + '" data-schedule-id="' + schedule.id + '"><i>' + time + '</i></a></li>');
-                    });
-
-
-                    $('.order-date').off('click').on('click', 'a', function() {
-                        // 시간을 HH:mm 형식으로 변환
-                        var selectedTime = new Date(schedule.showTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-                        $('.order-date a').removeClass('selected');
-                        $(this).addClass('selected');
-
-
-                        var selectedLocation = $('select[name="location"]').val();
-                        var selectedMovie = $('#movie-selection').val();
-                        var selectedDate = $('.datetime').val();
-                        sessionStorage.setItem('selectedLocation', selectedLocation);
-                        sessionStorage.setItem('selectedMovie', selectedMovie);
-                        sessionStorage.setItem('selectedDate', selectedDate);
-                        sessionStorage.setItem('selectedTime', selectedTime);
-
-                        alert('Selected Time:', selectedTime);
-                        alert('Selected Location:', selectedLocation);
-                        alert('Selected Movie:', selectedMovie);
-                        alert('Selected Date:', selectedDate);
-
-                        alert('선택된 영화관: ' + selectedLocation +
-                            ' 선택된 영화: ' + selectedMovie +
-                            ' 선택된 날짜: ' + selectedDate +
-                            ' 선택된 시간: ' + selectedTime);
-                    });
-                })
-                .catch(function (error) {
-                    console.log("error data:", error);
-                });
-        });
-    });
-
-
-
-    var price = 13000; //price
-    $(document).ready(function () {
-        var $cart = $('#selected-seats'), // 선택된 좌석을 보여줄 영역
-            $counter = $('#counter'),     // 선택된 좌석 수
-            $total = $('#total');         // 총 가격 표시
-
-        var sc; // seatCharts 객체 선언
-
-        // "Next" 버튼 클릭 시
-        $('.next').on('click', function () {
-            // 선택한 정보 가져오기
-            var selectedLocation = sessionStorage.getItem('selectedLocation');
-            var selectedMovie = sessionStorage.getItem('selectedMovie');
-            var selectedDate = sessionStorage.getItem('selectedDate');
-            var selectedTime = sessionStorage.getItem('selectedTime');
-
-            var theaterId = 0;
-            var movieId = 0;
-
-            // 1. Theater ID 요청 (selectedLocation으로)
-            axios({
-                url: `/api/theater/findTheaterIdByName?name=${encodeURIComponent(selectedLocation)}`, // 쿼리 파라미터로 전달
-                method: 'GET',
-                contentType: 'application/json',
-            })
-                .then(function (theaterResponse) {
-                    theaterId = theaterResponse.data; // 받아온 Theater ID 저장
-                    console.log("Theater ID:", theaterId);
-
-                    // 2. Movie ID 요청 (selectedMovie로)
-                    return axios({
-                        url: `/api/movies/findMovieIdByName?name=${encodeURIComponent(sessionStorage.getItem('selectedMovie'))}`,
-                        method: 'GET',
-                        data: JSON.stringify({
-                            selectedMovie: sessionStorage.getItem('selectedMovie')
-                        }),
-                        contentType: 'application/json',
-                    });
-                })
-                .then(function (movieResponse) {
-                    movieId = movieResponse.data.id; // 받아온 Movie ID 저장
-                    console.log("Movie ID:", movieId);
-
-                    // 3. 좌석 정보 요청 (theaterId와 movieId 함께 전달)
-                    return $.ajax({
-                        url: '/api/seat', // 좌석 상태 조회를 위한 API 경로
-                        method: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            theaterId: theaterId, // 받아온 Theater ID
-                            movieId: movieId,     // 받아온 Movie ID
-                            location: selectedLocation,
-                            movie: selectedMovie,
-                            date: selectedDate,
-                            time: selectedTime
-                        }),
-                        success: function (response) {
-                            // 서버에서 좌석 상태를 받아 좌석 선택 UI를 렌더링
-                            updateSeatMap(response.seats); // 좌석 데이터로 좌석 맵 업데이트
-                        },
-                        error: function (error) {
-                            console.error("좌석 데이터 전송 오류:", error);
-                        }
-                    });
-                })
-                .catch(function (error) {
-                    console.error("에러 발생:", error);
-                });
-
-            // 좌석 맵을 업데이트하는 함수
-            function updateSeatMap(seats) {
-                // 기존 좌석 맵이 있으면 초기화
-                if (sc) {
-                    $('#seat-map').empty(); // 기존 좌석 UI 제거
-                }
-
-                // 새로운 좌석맵을 seatCharts로 렌더링
-                sc = $('#seat-map').seatCharts({
-                    map: [  // 좌석 배열
-                        'aaaaaaa_aaaaaaa_aaaaaaa',
-                        'aaaaaaa_aaaaaaa_aaaaaaa',
-                        'aaaaaaa_aaaaaaa_aaaaaaa',
-                        'aaaaaaa_aaaaaaa_aaaaaaa',
-                        'aaaaaaa_aaaaaaa_aaaaaaa'
-                    ],
-                    naming: {
-                        top: false,
-                        getLabel: function (character, row, column) {
-                            return column;
-                        }
-                    },
-                    legend: { // 좌석 설명 (Available, Unavailable, Selected)
-                        node: $('#legend'),
-                        items: [
-                            ['a', 'available', 'Available'],
-                            ['a', 'unavailable', 'Unavailable'],
-                            ['a', 'selected', 'Selected'],
-                        ]
-                    },
-                    click: function () { // 좌석 클릭 이벤트
-                        if (this.status() == 'available') { // 선택 가능한 좌석
-                            $('<li>R' + (this.settings.row + 1) + ' S' + this.settings.label + '</li>')
-                                .attr('id', 'cart-item-' + this.settings.id)
-                                .data('seatId', this.settings.id)
-                                .appendTo($cart);
-
-                            // 좌석 선택 후 카운터와 총 금액 업데이트
-                            $counter.text(sc.find('selected').length);
-                            $total.text(recalculateTotal(sc));
-
-                            return 'selected';
-                        } else if (this.status() == 'selected') { // 선택된 좌석을 다시 선택하면 선택 해제
-                            $counter.text(sc.find('selected').length - 1);
-                            $total.text(recalculateTotal(sc));
-
-                            // 선택 해제된 좌석을 카트에서 제거
-                            $('#cart-item-' + this.settings.id).remove();
-
-                            return 'available';
-                        } else if (this.status() == 'unavailable') { // 선택 불가능한 좌석
-                            return 'unavailable';
-                        } else {
-                            return this.style();
-                        }
-                    }
-                });
-
-                // 서버에서 받은 좌석 상태를 반영 (좌석 상태가 'unavailable'인 좌석 표시)
-                seats.forEach(function (seat) {
-                    if (seat.status === 'unavailable') {
-                        sc.get([seat.row + '_' + seat.column]).status('unavailable');
-                    }
-                });
-            }
-
-            // 좌석 선택에 따른 총 금액을 계산하는 함수
-            function recalculateTotal(sc) {
-                var total = 0;
-                sc.find('selected').each(function () {
-                    total += price; // price 변수는 좌석당 가격을 나타냄
-                });
-                return total;
-            }
-        });
-    });
-
 
     //sold seat
     //sc.get(['2_9', '2_11', '2_12','2_13','2_14','2_15','2_10','3_11','3_12','3_13',]).status('unavailable');

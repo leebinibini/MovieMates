@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +60,11 @@ public class UserController {
 
         System.out.println(histories);
         System.out.println(userOptional.get());
+        if (loginUser == null) {
+            System.out.println("Session has no loginUser attribute. Redirecting to login page.");
+        } else {
+            System.out.println("Session loginUser: " + loginUser.getId());
+        }
         return "profile/main";
     }
 
@@ -151,7 +157,9 @@ public class UserController {
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user) {
-        System.out.println(user);  // 유저 정보 로그 출력
+        System.out.println(user);
+        String encodePassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodePassword);
         Boolean isRegistered = service.insert(user);  // 서비스 호출
         return ResponseEntity.ok(isRegistered);  // true/false 반환
     }
@@ -172,7 +180,7 @@ public class UserController {
             UserEntity user = userOptional.get();
             // user의 필드를 다루는 로직을 추가할 수 있습니다.
         }
-        model.addAttribute("userId", 1);
+        model.addAttribute("userId", id);
         model.addAttribute("user", userOptional.orElse(null));
         System.out.println(userOptional.get());
         System.out.println(userOptional);
@@ -191,12 +199,23 @@ public class UserController {
     @ResponseBody
     @PostMapping("/update/{userId}")
     public ResponseEntity<Boolean> update(@RequestPart("userData") UserModel userData, @RequestPart("password") String password,
-                                          @RequestPart(value = "file", required = false) MultipartFile file) {
-        System.out.println("넘어온 값" + userData);
-        System.out.println("넘어온 값" + password);
-        if(!service.existsByPassword(password)){
-            return ResponseEntity.ok(false);
+                                          @RequestPart(value = "file", required = false) MultipartFile file,
+                                          HttpSession session
+    ) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        // 기존 비밀번호가 일치하는지 확인
+        if (!passwordEncoder.matches(password, loginUser.getPassword())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false); // 기존 비밀번호가 일치하지 않음
         }
+
+        if (userData.getPassword() != null && !userData.getPassword().isEmpty()) {
+            String encodedNewPassword = passwordEncoder.encode(userData.getPassword());
+            userData.setPassword(encodedNewPassword); // 새로운 비밀번호 암호화 후 설정
+        }
+        System.out.println("현재 비밀번호 값" + password);
+        System.out.println("변경된 값 값" + userData.getPassword());
+
         return ResponseEntity.ok(service.updateUserInfo(userData, file));
     }
 

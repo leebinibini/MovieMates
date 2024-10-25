@@ -40,7 +40,7 @@
                         <span>3</span>
                     </div>
                     <div class="overlay" id="overlay">
-                        <a href="javascript:;" id="header-search"></a>
+                        <a href="javascript:;" id="header-search"><i class="fa fa-search"></i></a>
                     </div>
                 </div>
             </div>
@@ -296,73 +296,13 @@
                             <div class="wpc-testimonails">
                                 <div class="swiper-container carousel-container">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
+                                        <div class="swiper-slide" th:each="topMovieReview:${topMovieReviews}">
                                             <div class="testimonial">
-                                                <img th:src="@{images/author.png}" alt="testimonials author">
+                                                <img th:src="@{${topMovieReview['posterUrl']}}" alt="Movie Poster">
                                                 <div class="entry-meta">
-                                                    <h4>Shela Mathews</h4>
+                                                    <h4 th:text="${topMovieReview['movieTitle']}">Movie Title</h4>
                                                 </div>
-                                                <p>
-                                                    Enthusiastically monetize plug-and-play scenarios through quality
-                                                    manufactured products. Monotonectally streamline standardized
-                                                    portals after proactive innovation. Energistically promote market
-                                                    positioning.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="testimonial">
-                                                <img th:src="@{images/author.png}" alt="testimonials author">
-                                                <div class="entry-meta">
-                                                    <h4>Shela Mathews</h4>
-                                                </div>
-                                                <p>
-                                                    Enthusiastically monetize plug-and-play scenarios through quality
-                                                    manufactured products. Monotonectally streamline standardized
-                                                    portals after proactive innovation. Energistically promote market
-                                                    positioning.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="testimonial">
-                                                <img th:src="@{images/author.png}" alt="testimonials author">
-                                                <div class="entry-meta">
-                                                    <h4>Shela Mathews</h4>
-                                                </div>
-                                                <p>
-                                                    Enthusiastically monetize plug-and-play scenarios through quality
-                                                    manufactured products. Monotonectally streamline standardized
-                                                    portals after proactive innovation. Energistically promote market
-                                                    positioning.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="testimonial">
-                                                <img th:src="@{images/author.png}" alt="testimonials author">
-                                                <div class="entry-meta">
-                                                    <h4>Shela Mathews</h4>
-                                                </div>
-                                                <p>
-                                                    Enthusiastically monetize plug-and-play scenarios through quality
-                                                    manufactured products. Monotonectally streamline standardized
-                                                    portals after proactive innovation. Energistically promote market
-                                                    positioning.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="testimonial">
-                                                <img th:src="@{images/author.png}" alt="testimonials author">
-                                                <div class="entry-meta">
-                                                    <h4>Shela Mathews</h4>
-                                                </div>
-                                                <p>
-                                                    Enthusiastically monetize plug-and-play scenarios through quality
-                                                    manufactured products. Monotonectally streamline standardized
-                                                    portals after proactive innovation. Energistically promote market
-                                                    positioning.
+                                                <p th:text="${topMovieReview['reviewContent']}">
                                                 </p>
                                             </div>
                                         </div>

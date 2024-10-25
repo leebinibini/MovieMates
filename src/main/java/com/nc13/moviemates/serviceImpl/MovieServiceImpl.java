@@ -134,6 +134,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<MovieEntity> findIsShowingMovie() {
+        return repository.findIsShowingMovie();
+    }
+
+    @Override
     public List<MovieEntity> getWatchedMoviesByUserId(Long userId) {
         return List.of();
     }
