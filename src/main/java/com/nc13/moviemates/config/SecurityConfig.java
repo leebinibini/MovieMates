@@ -53,8 +53,13 @@ public class SecurityConfig {
                                 "/api/user/**",
                                 "/api/crawl/**",
                                 "/api/wish/**",
-                                "/loginForm"
+                                "/loginForm",
+                                "/api/user/login",
+                                "/api/user/register"
                         ).permitAll()
+                        .requestMatchers("/**").authenticated()
+                        .requestMatchers("/api/user/**").hasRole("USER")
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/api/user/login")  // Custom login page URL

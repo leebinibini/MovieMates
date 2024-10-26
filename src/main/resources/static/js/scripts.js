@@ -209,6 +209,7 @@
     });
 
     // header search action
+    // header search action
     $('#header-search').on('click', function () {
         $('#overlay-search').addClass('active');
 
@@ -220,6 +221,19 @@
         $('#overlay-search').removeClass('active');
 
     });
+    $('#overlay-search').find('.fa-search').on('click', () => {
+        const searchStr = document.getElementById('searchStr');
+        axios.get({
+            url: '/api/movie/search',
+            params: {searchStr}
+        })
+            .then(response => {
+                const movieList = response.data.searchMovieList;
+            })
+            .catch(error => {
+                console.log("error: " + error);
+            })
+    })
 
 
     /* Modal video player */

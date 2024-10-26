@@ -26,15 +26,6 @@ public class UserServiceImpl implements UserService {
     private final AmazonS3 amazonS3;
     private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public boolean authenticate(String email, String password) {
-        System.out.println("서비스 진입 완료!");
-        UserEntity user = repository.findByEmail(email);
-        if (user != null && password.equals(user.getPassword())) {
-            return true;
-        }
-        return false;
-    }
 
 
     @Transactional
