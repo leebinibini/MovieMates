@@ -28,8 +28,6 @@ public interface UserService {
 
     Boolean insert(UserEntity user);
 
-    boolean authenticate(String email, String password);
-
     //Boolean update(UserModel userData);
     Boolean update(List<UserModel> userList);
 

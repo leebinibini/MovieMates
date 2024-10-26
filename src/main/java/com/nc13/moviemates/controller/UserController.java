@@ -114,13 +114,13 @@ public class UserController {
         }
     }
 
-    @ResponseBody
+    /*@ResponseBody
     @GetMapping("/")
     public String user(Authentication authentication) {
         UserPrincipal principalDetail = (UserPrincipal) authentication.getPrincipal();
         // ...
         return "user";
-    }
+    }*/
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {

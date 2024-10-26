@@ -17,5 +17,7 @@ public interface MovieQueryDSL {
     List<MovieEntity> findChart();
     Long findMovieIdByName(String name);
 
+    List<MovieEntity> getListBySearch(String searchStr);
+
     List<MovieEntity> findIsShowingMovie();
 }

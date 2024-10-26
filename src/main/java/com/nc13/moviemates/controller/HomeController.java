@@ -40,7 +40,7 @@ public class HomeController {
                     model.addAttribute("userId", userId); // 모델에 userId 추가
                 }
             }
-            List<MovieEntity> movie = movieService.findAll();
+            List<MovieEntity> movie = movieService.findIsShowingMovie();
             List<String> star = new ArrayList<>() {{
                 add("☆☆☆☆☆");
             }
@@ -51,7 +51,7 @@ public class HomeController {
             List<MovieEntity> chart = movieService.findChart();
             model.addAttribute("charts", chart);
             model.addAttribute("movies", movie);
-            model.addAttribute("movieInfos", movieService.findAll());
+            model.addAttribute("movieInfos", movieService.findIsShowingMovie());
             return "index";
     }
 
