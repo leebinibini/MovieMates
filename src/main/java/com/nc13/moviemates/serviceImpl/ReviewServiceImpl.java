@@ -7,6 +7,8 @@ import com.nc13.moviemates.repository.MovieRepository;
 import com.nc13.moviemates.repository.ReviewRepository;
 import com.nc13.moviemates.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,6 +74,7 @@ public class ReviewServiceImpl implements ReviewService {
         return modelList;
     }
 
+
     @Transactional
     @Override
     public Long deleteMany(List<Long> reviewIdList) {
@@ -119,5 +122,12 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Map<String, Object>> findReviewsWithUserImage(Long movieId){
         return repository.findReviewsWithUserImage(movieId);
-    };
+    }
+
+    @Override
+    public Page<ReviewEntity> findAllPageByMovieId(Long movieId, Pageable pageable) {
+        return repository.findAllPageByMovieId(movieId, pageable);
+    }
+
+    ;
 }

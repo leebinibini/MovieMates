@@ -5,6 +5,8 @@ import com.nc13.moviemates.entity.MovieEntity;
 import com.nc13.moviemates.entity.ReviewEntity;
 import com.nc13.moviemates.entity.ReviewMovieEntity;
 import com.querydsl.core.Tuple;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,4 +44,6 @@ public interface ReviewService {
     List<Map<String, Object>> findTop5MoviesWithLongestReview();
 
     List<Map<String, Object>> findReviewsWithUserImage(Long movieId);
+
+    Page<ReviewEntity> findAllPageByMovieId(Long movieId, Pageable pageable);
 }

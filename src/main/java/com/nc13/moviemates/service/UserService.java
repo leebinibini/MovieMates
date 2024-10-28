@@ -2,6 +2,7 @@ package com.nc13.moviemates.service;
 
 import com.nc13.moviemates.component.model.UserModel;
 import com.nc13.moviemates.entity.UserEntity;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +27,7 @@ public interface UserService {
 
     Boolean existsById(Long id);
 
-    Boolean insert(UserEntity user);
+    UserEntity insert(UserEntity user);
 
     //Boolean update(UserModel userData);
     Boolean update(List<UserModel> userList);
@@ -36,4 +37,6 @@ public interface UserService {
     Boolean updateUserInfo(UserModel userData, MultipartFile file);
 
     UserEntity login(UserEntity user);
+
+    UserEntity findByEmail(String email);
 }

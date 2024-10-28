@@ -7,6 +7,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -165,7 +168,7 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
         List<Tuple> results = jpaQueryFactory
                 .select(
                         qReview, qReview.content, // 리뷰 정보
-                        qUser.profileImageUrl// 유저의 프로필 이미지
+                        qUser.profileImageUrl, qUser.nickname
                 )
                 .from(qReview)
                 .join(qUser).on(qReview.writerId.eq(qUser.id)) // 리뷰 작성자와 유저 조인
@@ -176,12 +179,29 @@ public class ReviewQueryDSLImpl implements ReviewQueryDSL {
         return results.stream()
                 .map(tuple -> {
                     Map<String, Object> map = new HashMap<>();
-                    map.put("review", tuple.get(qReview)); // 리뷰 엔티티
+                    map.put("reviews", tuple.get(qReview)); // 리뷰 엔티티
                     map.put("content", tuple.get(qReview.content));
-                    map.put("profileImageUrl", tuple.get(qUser.profileImageUrl)); // 프로필 이미지 URL
+                    map.put("profileImageUrl", tuple.get(qUser.profileImageUrl));
+                    map.put("nickname", tuple.get(qUser.nickname));
                     return map;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<ReviewEntity> findAllPageByMovieId(Long movieId, Pageable pageable) {
+
+        List<ReviewEntity> reviews = jpaQueryFactory.selectFrom(qReview)
+                .where(qReview.movieId.eq(movieId))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        long total = jpaQueryFactory.selectFrom(qReview)
+                .where(qReview.movieId.eq(movieId))
+                .fetchCount();
+
+        return new PageImpl<>(reviews, pageable, total);
     }
 
 }

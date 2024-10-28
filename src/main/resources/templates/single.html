@@ -63,6 +63,26 @@
         .heart-button:hover .fa-regular {
             color: #ff4d4d;
         }
+        .header_user_info {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* 요소 간격 조정 */
+        }
+
+        .header_nickname {
+            margin-right: 10px;
+        }
+
+        .header_link {
+            color: inherit;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+
+        .row.align-items-center {
+            align-items: center;
+        }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
@@ -80,30 +100,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-4">
-                    <a th:href="@{/}" id="logo" title="MovieMates" class="logo-image-white"
-                       th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
+                    <a th:href="@{/}" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
                 </div>
                 <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
-                    <div th:if="${userData != null}">
-                        <!-- 로그인한 경우 사용자 정보와 마이페이지 링크 표시 -->
-                        <div class="header_author">
-                            <a th:text="${userData.nickname + '님'}">User</a>
-                            <img th:src="${userData.profileImageUrl}" class="user" alt="user"
-                                 style="width: 40px; height: 40px; border-radius: 50%;">
-
-                        </div>
-                        <div class="header_ticket">
-                            <a th:href="@{/api/user/mypage/{id}(id=${userData.id})}" class="order_btn">Mypage</a>
-                        </div>
+                    <div class="header_ticket"  th:if="${userData != null}">
+                        <a th:text="${userData.nickname + '님'}" class="header_nickname">User</a>
+                        <img th:src="${userData.profileImageUrl}" class="user" alt="user"
+                             style="width: 40px; height: 40px; border-radius: 50%;">
+                        <a th:href="@{/logout}">Logout</a>
                     </div>
-                    <div th:if="${userData == null}">
-                        <!-- 로그인하지 않은 경우 로그인 버튼 표시 -->
-                        <a th:href="@{/api/user/login}" class="btn btn-primary">Login</a>
+                    <div class="header_ticket" th:if="${userData == null}">
+                        <a th:href="@{/api/user/login}">Login</a>
                     </div>
+                    <div class="header_ticket" th:if="${userData != null}">
+                        <a th:href="@{/api/user/mypage/{id}(id=${userData.id})}">Mypage</a>
+                    </div>
+                    <a href="javascript:;" id="header-search">
+                        <i class="fa fa-search"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </header>
+
 
     <!-- Single Page Section -->
     <section class="section-content pv12 bg-cover" th:data-bg-image="${movie.widthPosterUrl}">
@@ -133,7 +152,11 @@
     </div>
     <div th:if="${userData == null}">
         <!-- 로그인하지 않은 경우 로그인 안내 메시지 또는 로그인 버튼 표시 -->
-        <a th:href="@{/api/user/login}" class="btn btn-primary">로그인 후 위시리스트 사용</a>
+        <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
+            <button class="heart-button">
+                <i class="fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+            </button>
+        </a>
     </div>
 </span>
                                     <div class="social-links">
@@ -517,7 +540,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        var isLoggedIn = [[${userData != null}]];
+        var isLoggedIn = [[${userData != null ? 'true' : 'false'}]]; // Thymeleaf 표현식
+        var userId = isLoggedIn ? [[${userData != null ? userData.id : 'null'}]] : null; // 로그인 시에만 userId 설정
+
+
         // 하트 아이콘 클릭 이벤트
         $('.wishlist-heart').on('click', function () {
 
@@ -528,7 +554,6 @@
             }
 
             var $icon = $(this).find('i');
-            var userId = [[${userData.id}]]
             var movieId = [[${movie.id}]]
             var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
 
