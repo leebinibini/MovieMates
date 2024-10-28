@@ -37,8 +37,6 @@ public class PosterController {
         return ResponseEntity.ok(service.save(file));
     }
 
-
-
     @DeleteMapping("/{id}")
     public Boolean deleteById(@PathVariable Long id){
         return service.deleteById(id);

@@ -1,16 +1,21 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.repository.UserRepository;
 import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.serviceImpl.UserServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Controller
 @CrossOrigin
 @RequestMapping("/api/admin")
@@ -23,8 +28,14 @@ public class AdminController {
         return "admin/home";
     }
 
-    @GetMapping("/")
-    public String adminLogout() {
+    @GetMapping("/logout")
+    public String adminLogout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        log.info("관리자 로그아웃 전: {}", session);
+        if (session != null) {
+            session.invalidate();
+        }
+        log.info("관리자 로그아웃 후:{}" , session);
         return "redirect:/";
     }
 
