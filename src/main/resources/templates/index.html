@@ -18,7 +18,6 @@
     </div>
 </div>
 <div class="wrapper">
-
     <header id="header" class="menu-top-left">
         <div class="container">
             <div class="row">
@@ -27,15 +26,19 @@
                        th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
                 </div>
                 <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
-
-                    <div class="header_ticket" th:if="${session.loginUser != null}">
+                    <div th:if="${session.loginUser != null}">
+                        <div class="header_author">
+                            <span th:text="${userData.nickname + '님'}">User</span>
+                            <img th:src="${userData.profileImageUrl}" class="user" alt="user"
+                                 style="width: 40px; height: 40px; border-radius: 50%;">
+                        </div>
                         <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}">Mypage</a>
+                        <div class="header_ticket" >
+                            <a th:href="@{/logout}" class="order_btn">Logout</a>
+                        </div>
                     </div>
                     <div class="header_ticket" th:if="${session.loginUser == null}">
                         <a th:href="@{/api/user/login}">Login</a>
-                    </div>
-                    <div class="header_ticket" th:if="${session.loginUser != null}">
-                        <a th:href="@{/logout}">Logout</a>
                     </div>
                     <a href="javascript:;" id="header-search">
                         <i class="fa fa-search"></i>
@@ -44,7 +47,6 @@
             </div>
         </div>
     </header>
-
     <div class="fullwidth-slider">
         <div id="headerslider" class="carousel slide">
             <ol class="carousel-indicators">

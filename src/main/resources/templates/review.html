@@ -163,18 +163,18 @@
                 <div class="col-sm-6">
                     <div id="comments" class="comments-area">
                         <div class="comments-wrapper">
-                            <h2 class="comments-title">Comments (2)</h2>
+                            <h2 class="comments-title">Comments</h2>
                             <ol class="comment-list" th:each="review:${reviewList}">
                                 <li>
                                     <article>
                                         <div class="comment-avatar">
-                                            <img alt="Image" th:src="@{${review['profileImageUrl']}}" class="avatar">
+                                            <img alt="Image" th:src="${review.profileImageUrl}" class="avatar">
                                         </div>
                                         <div class="comment-body">
                                             <div class="meta-data">
-                                                <a href="#" class="comment-author" th:text="${userId}"></a>
+                                                <a href="#" class="comment-author" th:text="${review.nickname}"></a>
                                             </div>
-                                            <div class="comment-content" th:text="${review['content']}">
+                                            <div class="comment-content" th:text="${review.content}">
                                                 Progressively repurpose extensive partnerships and one-to-one technology. Competently impact market positioning solutions before user friendly alignments. Energistically deploy reliable process improvements via interdependent.
                                             </div>
                                         </div>
