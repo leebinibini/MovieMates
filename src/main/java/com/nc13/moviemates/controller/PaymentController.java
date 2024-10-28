@@ -34,8 +34,6 @@ public class PaymentController {
     @Value("${iamport.secretKey}")
     private String secretKey;
 
-
-
     @PostConstruct
     public void init() {
         // API 키와 시크릿 키로 결제 클라이언트를 초기화하고 빈으로 등록
@@ -77,8 +75,6 @@ public class PaymentController {
         }
     }
 
-
-
     @GetMapping()
     public ResponseEntity<List<?>> getList() {
         return ResponseEntity.ok(service.findAll());
@@ -108,7 +104,6 @@ public class PaymentController {
     public ResponseEntity<Boolean> existsById(@PathVariable Long id) {
         return ResponseEntity.ok(service.existsById(id));
     }
-
 
 
 }
