@@ -69,9 +69,6 @@ public class UserController {
         return "profile/main";
     }
 
-
-
-
     @GetMapping("/login")
     public String login() {
         return "admin/auth-login";
@@ -142,7 +139,6 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
-
     }
 
     @GetMapping("/register")
