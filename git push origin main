@@ -1,0 +1,1636 @@
+[33mcommit edbb65d9b09a6729048c44e1f8f1a4013940970d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 28 18:31:39 2024 +0900
+
+    20241028 1831 - 프로젝트 마무리 수정중 머지
+
+[33mcommit f32ada431b55658d65f486f0432074dbe6499840[m
+Merge: 31fa0c2 75a3f07
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 28 18:29:51 2024 +0900
+
+    Merge branch 'main' of https://github.com/leebinibini/MovieMates
+
+[33mcommit 31fa0c29b5d70657772ed2ac9c6a3591d3038c49[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Oct 26 17:17:08 2024 +0900
+
+    20241026 1716 - 파일 푸시
+
+[33mcommit 75a3f07951254de822194e7247d120420e390b68[m
+Merge: dedcde7 6c6e46e
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 26 09:15:05 2024 +0900
+
+    241026 0926 "이넘, 및 머지 후 권한 확인 수정중"
+
+[33mcommit 8a36db20dcb4bf9f9d1fd0b2eb7e9f496d32cfdc[m
+Merge: 858e008 dda12d6
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 26 09:15:05 2024 +0900
+
+    241026 0926 "이넘, 및 머지 후 권한 확인 수정중"
+
+[33mcommit dedcde7ce94a9cfbb84923ab5507e018a0c01dd9[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 26 00:20:10 2024 +0900
+
+    241026 1212 "헤더 맞추고 마이페이지 디테일 살리기"
+
+[33mcommit 858e0084e8d156aeefae9071b54cf8bf63913391[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 26 00:13:44 2024 +0900
+
+    241026 1212 "헤더 맞추고 마이페이지 디테일 살리기"
+
+[33mcommit 97287a2f809b26b29dcf28bc010c07e727392d25[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 26 00:13:44 2024 +0900
+
+    241026 1212 "헤더 맞추고 마이페이지 디테일 살리기"
+
+[33mcommit 6c6e46ecf80352b2545d0bfbb8bbcedc60c4f001[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 25 23:48:38 2024 +0900
+
+    20241025 2347 - single 부분수정 및 search 페이지 생성 및 기능 연결
+
+[33mcommit dda12d64517ccc7538aa26f3434938cef9652416[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 25 23:48:38 2024 +0900
+
+    20241025 2347 - single 부분수정 및 search 페이지 생성 및 기능 연결
+
+[33mcommit e8cd10b3b39973bbe5573bd724d6ec87608da2f3[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Oct 25 19:23:53 2024 +0900
+
+    20241025 1200 "오더 수정, 리뷰쓰기 페이지 추가 작업"
+
+[33mcommit 39303453b694421ddf46db742de8fcd7c8501b59[m[33m ([m[1;31morigin/user[m[33m, [m[1;32muser[m[33m)[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Oct 25 19:23:53 2024 +0900
+
+    20241025 1200 "오더 수정, 리뷰쓰기 페이지 추가 작업"
+
+[33mcommit 5bbf33250af7e2a7d410ee9ba5a38b11a6313b8d[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Oct 24 12:01:25 2024 +0900
+
+    20241024 1200 "시큐리티 수정, oauth 로그인, 세션 마이페이지"
+
+[33mcommit dc85a200695f0e6e640467db516463885fe0aef6[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Oct 24 12:01:25 2024 +0900
+
+    20241024 1200 "시큐리티 수정, oauth 로그인, 세션 마이페이지"
+
+[33mcommit fbe619895b0c1f1f900128346b7f2512d37e4479[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Oct 23 10:44:32 2024 +0900
+
+    20241023 1044 - 시큐리티 추가 및 로그인 기능 수정
+
+[33mcommit 024dc1b551d5169b53af95a878636e26dfca4444[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Oct 23 10:44:32 2024 +0900
+
+    20241023 1044 - 시큐리티 추가 및 로그인 기능 수정
+
+[33mcommit 49110ef43dd7b674a3471836d8c531e97fb0120e[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 22 03:28:40 2024 +0900
+
+    20241022 0328 "오더 기능 + 결제 연결"
+
+[33mcommit f6442414d23dc079cdfb32bc23ffae875896b58e[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 22 03:28:40 2024 +0900
+
+    20241022 0328 "오더 기능 + 결제 연결"
+
+[33mcommit 314644d4956a06272e2b3484f28e188132d73ebe[m
+Merge: 7187fc6 d20e01e
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 22 00:07:08 2024 +0900
+
+    20241021 2315 "user + admin merge"
+
+[33mcommit 650fca055477baef1f1e55c24311ba89fd9e92a2[m
+Merge: eef983f d20e01e
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 22 00:07:08 2024 +0900
+
+    20241021 2315 "user + admin merge"
+
+[33mcommit 7187fc683ca00421911ac8fd30961bf20937617d[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Oct 21 21:06:36 2024 +0900
+
+    20241021 2103 "local main에서 추가 작업"
+
+[33mcommit eef983f0c58a4b5d9dce7af130f62a2c35677ccc[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Oct 21 21:06:36 2024 +0900
+
+    20241021 2103 "local main에서 추가 작업"
+
+[33mcommit d20e01e700fc085a7b2ec0be5338f39eee3b81c5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 1 17:21:25 2024 +0900
+
+    241001 1720 aws s3 버킷에 이미지 저장 완료 - 경로를 movie model에 저장하는 기능 추가 필요
+
+[33mcommit a6a04f255d78972299a66e8318b26d4a47289a80[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 21 16:27:48 2024 +0900
+
+    1006 1627 - 중간 커밋 및 푸시
+
+[33mcommit 9befb1296a15eda002ed88c1b7b80261b668725d[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 21 16:10:55 2024 +0900
+
+    작업중인 변경사항 커밋
+
+[33mcommit 4a46b134f73dc9a7ec0a2023b30c6062189164a9[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 21 14:34:13 2024 +0900
+
+    241021 1433 - (1) 로그인 오류 수정 완료 (2) 예매 좌석 살리기 및 선택옵션 화면에 띄우기 완료
+
+[33mcommit fd9fa9fcb339f22ccf592bec2a1a8e97fd5bbe62[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 21 20:10:25 2024 +0900
+
+    1021 2010 - Admin merge
+
+[33mcommit 64f850c0f5b8deb42c9df1cd8654473224a35274[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 21 18:22:13 2024 +0900
+
+    Add changes excluding application.yaml
+
+[33mcommit be8eb7e2246e5d59b7192ead4b5d04baa057c771[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 21 18:16:07 2024 +0900
+
+    1021 1815 - 어드민 머지 결과 푸시
+
+[33mcommit 89fb06ef76d7fb01c5e52b64807b3211ac295688[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 15 11:02:21 2024 +0900
+
+    241015 1101 - 관리자페이지 sidenav 맞춤
+
+[33mcommit 9200533c5938425984978034105749c85dfd6cb5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 21 17:32:18 2024 +0900
+
+    1021 1732 머지 후 푸시
+
+[33mcommit 160c76e8cb48308bca188085853e1b236669653a[m
+Merge: 3344cc6 93c354e
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Oct 21 15:29:45 2024 +0900
+
+    20241021 1528 "local main에 origin main pull"
+
+[33mcommit df0c39138e50891368c314ca9a3694f23b9547b1[m
+Merge: 4e60121 ca85799
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Oct 21 15:29:45 2024 +0900
+
+    20241021 1528 "local main에 origin main pull"
+
+[33mcommit 3344cc6125edb44ad9baaba10b60de7415560b8d[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Oct 21 14:35:27 2024 +0900
+
+    20241021 1435 "profile 내부 페이지들 만들기"
+
+[33mcommit 4e6012196cd8d63361f55c1ce4ff278a0b9060fb[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Oct 21 14:35:27 2024 +0900
+
+    20241021 1435 "profile 내부 페이지들 만들기"
+
+[33mcommit 9c6ab7e654c4269758459287ff074b71f2f421c9[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 19 03:06:57 2024 +0900
+
+    20241019 0304 "결제 api, 예약 저장하기, 리뷰 권한 설정, 유저 파일 업로드,마이페이지 수정중"
+
+[33mcommit a58c5b877f63c58227b577adb307c81afde7262f[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 19 03:06:57 2024 +0900
+
+    20241019 0304 "결제 api, 예약 저장하기, 리뷰 권한 설정, 유저 파일 업로드,마이페이지 수정중"
+
+[33mcommit dc471c79533abe0dae2e7e34eedcccd50c0a1cc6[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Oct 17 23:42:53 2024 +0900
+
+    20241017 2341 "결제 api, 예약 저장하기, 리뷰 권한 설정"
+
+[33mcommit 5b519e943ba129459092004a00184e4071aaed35[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Oct 17 23:42:53 2024 +0900
+
+    20241017 2341 "결제 api, 예약 저장하기, 리뷰 권한 설정"
+
+[33mcommit 93c354e7ececc4dbff4fcbcb7119936eba9b2ad4[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 14 12:07:53 2024 +0900
+
+    241014 1207 - admin main에 푸시
+
+[33mcommit ca85799e4f1f34a190daa22bd50f9b0403e75a14[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 14 12:07:53 2024 +0900
+
+    241014 1207 - admin main에 푸시
+
+[33mcommit eb349a88bd73ea45670269e5a5cebfd03dc14a2b[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sun Oct 13 23:25:56 2024 +0900
+
+    20241013 2321 "임시 페이지에서 리뷰 등록하기"
+
+[33mcommit 2bdd4a96c78e23c3468497ad76581c7318648299[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sun Oct 13 23:25:56 2024 +0900
+
+    20241013 2321 "임시 페이지에서 리뷰 등록하기"
+
+[33mcommit 08eda363e84a110d83535e9d39f9b55c994ec6da[m
+Merge: 1c38e66 080cdaa
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sun Oct 13 01:02:07 2024 +0900
+
+    20241013 0100 "유저+메인과 remote main과 머지한 것"
+
+[33mcommit beac278fbbdf7e0276422ca4ad3e2386c7a10b18[m
+Merge: 5c4e297 6814d65
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sun Oct 13 01:02:07 2024 +0900
+
+    20241013 0100 "유저+메인과 remote main과 머지한 것"
+
+[33mcommit 1c38e667b59c825e08d5978f9464eed6a6d61dda[m
+Merge: 752da8f 325389a
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sun Oct 13 00:02:27 2024 +0900
+
+    user, main merge
+
+[33mcommit 5c4e297c9dcfff1902eb177f0b7cf368bc700e1b[m
+Merge: 0ef96ab 598a039
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sun Oct 13 00:02:27 2024 +0900
+
+    user, main merge
+
+[33mcommit 325389afdca540e3168d232bf756192973bdd64b[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 12 21:37:23 2024 +0900
+
+    review
+
+[33mcommit 598a03967bc730bc22602033205a77400c59b259[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 12 21:37:23 2024 +0900
+
+    review
+
+[33mcommit 080cdaa3d0f9b67b33c6c198ffdd57bb92bfd0e5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Oct 12 21:11:14 2024 +0900
+
+    241012 2111 - index 수정
+
+[33mcommit 6814d65fb9021001d7972e922fbb359830911c25[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Oct 12 21:11:14 2024 +0900
+
+    241012 2111 - index 수정
+
+[33mcommit a04f8506d465979768cb0c1fdc7375dd2e24cf39[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 12 21:09:34 2024 +0900
+
+    20241012 2110 "리뷰 화면 구현중"
+
+[33mcommit 5a4750b605bc9bc0bfc07ce584fae0eda8ac4f7d[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 12 21:09:34 2024 +0900
+
+    20241012 2110 "리뷰 화면 구현중"
+
+[33mcommit 304b6513195a0586d8ab2211b0455ebbc2b0fa62[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Oct 12 20:51:08 2024 +0900
+
+    241012 2050 - index에서 single로 연결 완료
+
+[33mcommit 2e22d325810560edcec17e8a6f63b07d66818ff5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Oct 12 20:51:08 2024 +0900
+
+    241012 2050 - index에서 single로 연결 완료
+
+[33mcommit 7d5a27c5251af522a4b59d5be623c21202ba1e78[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Oct 12 20:15:23 2024 +0900
+
+    241012 2014 - 위시리스트 기능, 화면 완료
+
+[33mcommit b9e40fb73d263de76708ec3b37ea89b003e69ccc[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Oct 12 20:15:23 2024 +0900
+
+    241012 2014 - 위시리스트 기능, 화면 완료
+
+[33mcommit 3dcaa931de23251c6250d3c43ff6c936fc8fa41a[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 12 19:01:52 2024 +0900
+
+    20241012 1901 "회원 업데이트, 딜리트 수정완료, 회원가입 완료"
+
+[33mcommit 95c8be010b3bf7518e606f84f8c5a94370505cf4[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Oct 12 19:01:52 2024 +0900
+
+    20241012 1901 "회원 업데이트, 딜리트 수정완료, 회원가입 완료"
+
+[33mcommit 38de82bccc37030b1b55b62aa9d3f7a5cc8b6c98[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Oct 12 13:17:45 2024 +0900
+
+    241012 1317 싱글페이지 하트모양 추가함 - 컨트롤러랑 연결해야함
+
+[33mcommit e5b3234344c26eeb71d2abccaadca4fb8dbaa0d1[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Oct 12 13:17:45 2024 +0900
+
+    241012 1317 싱글페이지 하트모양 추가함 - 컨트롤러랑 연결해야함
+
+[33mcommit 86a6bd0bb2225df19675c83ee2273b2097b5b73a[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Oct 11 21:51:05 2024 +0900
+
+    20241011 2150 "회원 업데이트 및 삭제 기능, 비밀번호 확인로직 구현중, 스크립트 나누기 연습"
+
+[33mcommit 2ac5a8b4c82e49501efafe65136f2d7e5221d541[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Oct 11 21:51:05 2024 +0900
+
+    20241011 2150 "회원 업데이트 및 삭제 기능, 비밀번호 확인로직 구현중, 스크립트 나누기 연습"
+
+[33mcommit 5b70f2bf0478fee71887b1aba1c3a7b86775f9b0[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 11 21:50:49 2024 +0900
+
+    241011 2150 wish 관련 기능 구현해놓음.. 싱글페이지에 하트모양 안들어감
+
+[33mcommit 24d2cf63ece1c31ead4a433ac512af07ad18c792[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 11 21:50:49 2024 +0900
+
+    241011 2150 wish 관련 기능 구현해놓음.. 싱글페이지에 하트모양 안들어감
+
+[33mcommit 604c7a776ffd966859c32b7f3d087cffc6feb0b5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 11 16:51:59 2024 +0900
+
+    241011 1651 싱글페이지 랜더링 및 구글 지도 살리기 완료, comment(리뷰)띄우기 완료 - 리뷰(CRUD 해야함!)
+
+[33mcommit f072c8b700cf04692350aef6ec6930880668391f[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 11 16:51:59 2024 +0900
+
+    241011 1651 싱글페이지 랜더링 및 구글 지도 살리기 완료, comment(리뷰)띄우기 완료 - 리뷰(CRUD 해야함!)
+
+[33mcommit d65803f2177af51730d9592346bc7f0d1a5ed609[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Oct 10 21:51:53 2024 +0900
+
+    20241010 2150 "security 일단 중지, 예매 다시 복구중"
+
+[33mcommit 4aff1f17246657af68c5865eff6ab33641b18a21[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Oct 10 21:51:53 2024 +0900
+
+    20241010 2150 "security 일단 중지, 예매 다시 복구중"
+
+[33mcommit ae9b7717a32313fe283d6196e72089134e14cf94[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Oct 10 18:01:08 2024 +0900
+
+    20241010 1800 "security 구현중"
+
+[33mcommit cb092c83305f1796dbe8e28928743df41b6a0eeb[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Oct 10 18:01:08 2024 +0900
+
+    20241010 1800 "security 구현중"
+
+[33mcommit 0b7cd76e1567dd010d40a93be4f5e4acbfbef31f[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Oct 10 12:55:10 2024 +0900
+
+    241010 1254 관리자페이지와 변경한 페이지 템플릿 연결 완료
+
+[33mcommit 532f0de851251218948098b1d42c7313fcaf248e[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Oct 10 12:55:10 2024 +0900
+
+    241010 1254 관리자페이지와 변경한 페이지 템플릿 연결 완료
+
+[33mcommit 3ada4803b1b0234319410eb4f0d0bcffc81203af[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Oct 10 12:16:11 2024 +0900
+
+    241010 1216 관리자페이지 - review 페이지 완성, 수정하기 기능 추가 필요
+
+[33mcommit eff1d532ec5817984d59d51d2b9ddc21c74df30f[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Oct 10 12:16:11 2024 +0900
+
+    241010 1216 관리자페이지 - review 페이지 완성, 수정하기 기능 추가 필요
+
+[33mcommit ccf05a7846f5306cc5a822574f645a7a1e628b7f[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Oct 10 11:56:00 2024 +0900
+
+    241010 1154 관리자페이지 - user, 예매(reservation) 페이지 완성 및 연결
+
+[33mcommit 19336f4cc955693bbf00794a21b2e1cfe4dfbfb5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Oct 10 11:56:00 2024 +0900
+
+    241010 1154 관리자페이지 - user, 예매(reservation) 페이지 완성 및 연결
+
+[33mcommit 0e38159eaf9d2c342ee7240c8196b30c1aa4ca50[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Oct 10 09:53:01 2024 +0900
+
+    241010 0952 관리자페이지 - 극장 및 스케줄 완성
+
+[33mcommit 1a76e41025cbdc033df21cd0c6bbd0c4cc81f766[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Oct 10 09:53:01 2024 +0900
+
+    241010 0952 관리자페이지 - 극장 및 스케줄 완성
+
+[33mcommit f3e1191f90b0e1b64e5f5bd9a913d63ac5815aea[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Wed Oct 9 21:48:51 2024 +0900
+
+    20241009 2150 "jwt구현중"
+
+[33mcommit c4a278a0323fd5f5281219c0148696e02ff0e4e3[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Wed Oct 9 21:48:51 2024 +0900
+
+    20241009 2150 "jwt구현중"
+
+[33mcommit c5f895336103e8f7d31ce88cd782e651cffb9b48[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Oct 9 21:22:56 2024 +0900
+
+    241009 2121 관리자페이지 - 영화리스트 페이지 템플릿 변경 및 연결 완료
+
+[33mcommit 50e32ee6ae241382b06a91e7db979f5027cb642e[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Oct 9 21:22:56 2024 +0900
+
+    241009 2121 관리자페이지 - 영화리스트 페이지 템플릿 변경 및 연결 완료
+
+[33mcommit 575702eb6f2e760f458aa0477a8c534b2a89a1fc[m
+Merge: 6239f25 752da8f
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 8 20:32:05 2024 +0900
+
+    241008 2031 user merge후 내용 반영 admin push
+
+[33mcommit ad8752f5f10e953cd58c92309b3ef3201765f802[m
+Merge: 1b194ec 0ef96ab
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 8 20:32:05 2024 +0900
+
+    241008 2031 user merge후 내용 반영 admin push
+
+[33mcommit 6239f25f0bd6501318f5c87e8ca94b00a57a0e8d[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 8 20:17:39 2024 +0900
+
+    241008 2017 원격 main pull 전 커밋
+
+[33mcommit 1b194ec758d5b16f5afcf3d6c46d7e4f7b7d246c[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 8 20:17:39 2024 +0900
+
+    241008 2017 원격 main pull 전 커밋
+
+[33mcommit 752da8f9a2e02924417212c45de20ef707eabd0f[m
+Merge: 58fe967 85f24ad
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 8 20:13:39 2024 +0900
+
+    20241008 2012 "admin+user merge"
+
+[33mcommit 0ef96abacd32132fbc5aca9ce98644ffd1a214f1[m
+Merge: 67bff8f c62ee9e
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 8 20:13:39 2024 +0900
+
+    20241008 2012 "admin+user merge"
+
+[33mcommit 85f24ad17362b2043b0c95a44270c21127634d17[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 8 18:04:16 2024 +0900
+
+    20241008 1550 "wish 수정"
+
+[33mcommit c62ee9e726b4d86f7aa46fd3ea74d20503f4b371[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 8 18:04:16 2024 +0900
+
+    20241008 1550 "wish 수정"
+
+[33mcommit 58fe967429d60b6d9cba8f10e83d88354a36f2d1[m
+Merge: afd19ee 220f6f6
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 8 17:52:19 2024 +0900
+
+    241008 1748 admin merge - schedule localdate, localtime 반영
+
+[33mcommit 67bff8fe18cb39fc69ae452bd645b16068e36209[m
+Merge: d272c7f a7f07b4
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 8 17:52:19 2024 +0900
+
+    241008 1748 admin merge - schedule localdate, localtime 반영
+
+[33mcommit f2405fde4bea8f20767c0ab5107f1280a7c0c585[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 8 15:53:14 2024 +0900
+
+    20241008 1550 "예매 진행 중, 유저 로그인 폼 하기"
+
+[33mcommit 4a00c280ceb64d9949523d4745ae72e5a9fb70f7[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 8 15:53:14 2024 +0900
+
+    20241008 1550 "예매 진행 중, 유저 로그인 폼 하기"
+
+[33mcommit 220f6f63dd9dc717fe877ae211f468a89b05cda2[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 8 15:47:28 2024 +0900
+
+    241008 1547 theater register 연결 완료
+
+[33mcommit a7f07b485cd25c5468278e79d7d30576d95196dd[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 8 15:47:28 2024 +0900
+
+    241008 1547 theater register 연결 완료
+
+[33mcommit 607deb4675f5aa5ed416e7d91f645f0773b833a2[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 7 19:06:05 2024 +0900
+
+    241007 1905 theater, movie register 템플릿 새로 연결중
+
+[33mcommit 73187dd37fb2e6cf85443df8bd98366d8e78ec38[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 7 19:06:05 2024 +0900
+
+    241007 1905 theater, movie register 템플릿 새로 연결중
+
+[33mcommit 65d1c973a47c230566657674f92912a21d3b0c0e[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 7 15:59:11 2024 +0900
+
+    241007 1558 스케줄 정보 등록 템플릿 새로 만들고 컨트롤러 연결함
+
+[33mcommit fe12839720bf069c8e4c5de559fd4d51b8a8ad81[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 7 15:59:11 2024 +0900
+
+    241007 1558 스케줄 정보 등록 템플릿 새로 만들고 컨트롤러 연결함
+
+[33mcommit 6221f577b87d970b5d2dd82e5cad9b2b3866bda8[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 7 10:27:06 2024 +0900
+
+    241007 1026 admin/movie/list 재연결
+
+[33mcommit 9616b5970978ec871305a96e8295ca2e73d9412b[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 7 10:27:06 2024 +0900
+
+    241007 1026 admin/movie/list 재연결
+
+[33mcommit 12b12705014e7c9beb5451641c3fcb04b63104f8[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 7 09:45:48 2024 +0900
+
+    241007 0944 reservation 정리
+
+[33mcommit 8e31876366bd61056cda6078f38fe497a5195792[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Oct 7 09:45:48 2024 +0900
+
+    241007 0944 reservation 정리
+
+[33mcommit a08ba2b3b4efc7d7f3a9d82d826e20261b57f273[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 4 18:15:36 2024 +0900
+
+    241004 1815 스케줄 등록 기능 완성
+
+[33mcommit 502c6632d158983d7185feaeb8c160fbb10cbcd5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 4 18:15:36 2024 +0900
+
+    241004 1815 스케줄 등록 기능 완성
+
+[33mcommit 1d6054d6ff1e7fb995e88fa8f2afbd58b33494a9[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 4 12:20:34 2024 +0900
+
+    241004 1219 어드민 페이지 템플릿 전면 수정 전, 스케줄(상영시간) 등록 작성 중
+
+[33mcommit 5bcdc545c0b485229acc6349d0a8717f90825752[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Oct 4 12:20:34 2024 +0900
+
+    241004 1219 어드민 페이지 템플릿 전면 수정 전, 스케줄(상영시간) 등록 작성 중
+
+[33mcommit afd19ee36257c5f0af9998f6a647ade58a869413[m
+Merge: d7d37b8 0050203
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Oct 4 09:51:02 2024 +0900
+
+    20241004 0950, merge
+
+[33mcommit d272c7f2316fdefdcce70ac35333c71df09ba5ff[m
+Merge: ab84bf2 f30f32e
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Oct 4 09:51:02 2024 +0900
+
+    20241004 0950, merge
+
+[33mcommit d7d37b8358ae2e7dc2c0bc397db6ee4e1f94df88[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Oct 4 09:36:01 2024 +0900
+
+    20241004 0935 예매 기능 진행중
+
+[33mcommit ab84bf275927b5f3aadf57b9926d6a10a797a046[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Oct 4 09:36:01 2024 +0900
+
+    20241004 0935 예매 기능 진행중
+
+[33mcommit c6c9943ded153e364e189b3b5db16a895d389b35[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Wed Oct 2 21:46:52 2024 +0900
+
+    20241002 2146, 예매 수정중
+
+[33mcommit f80e977f93904a69b2be604498de4c96e01e45f1[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Wed Oct 2 21:46:52 2024 +0900
+
+    20241002 2146, 예매 수정중
+
+[33mcommit 005020393d81f473331ca89c99c537db5e25cbb4[m
+Merge: 3b18c9e 481f684
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Oct 2 16:55:09 2024 +0900
+
+    241002 1654 깃허브 merge 충돌 해결 및 결과 푸시
+
+[33mcommit f30f32ea452f0adf2456d1bfc8f90f9767be1a9a[m
+Merge: 3986a2d d19aa6f
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Oct 2 16:55:09 2024 +0900
+
+    241002 1654 깃허브 merge 충돌 해결 및 결과 푸시
+
+[33mcommit 3b18c9eb0cc09ebe8b6b9249ec6ff25f14059bd2[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Oct 2 15:11:12 2024 +0900
+
+    241002 1510 관리자페이지 - 리뷰페이지 완성, 스케줄페이지 진행중
+
+[33mcommit 3986a2dd55f6be288cf543d031f29b70dad41f81[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Oct 2 15:11:12 2024 +0900
+
+    241002 1510 관리자페이지 - 리뷰페이지 완성, 스케줄페이지 진행중
+
+[33mcommit 481f6845cc8e54833921e77c87ae76a13858f580[m
+Merge: 85b5a7e 140100f
+Author: bini <qpdjvn0601@naver.com>
+Date:   Wed Oct 2 09:49:39 2024 +0900
+
+    2024 1002 0942 merge local main and local user
+
+[33mcommit d19aa6f17c880fb8572f25fefe4611232ccacac4[m
+Merge: 2aeebd6 c576a61
+Author: bini <qpdjvn0601@naver.com>
+Date:   Wed Oct 2 09:49:39 2024 +0900
+
+    2024 1002 0942 merge local main and local user
+
+[33mcommit 140100fcc3bbeb19a519ac667cb62bada88fe2bb[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 1 21:44:44 2024 +0900
+
+    2024 1001 2144, order modal update
+
+[33mcommit c576a6106ce5da22792cbf33126a01cc52a9f8c9[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 1 21:44:44 2024 +0900
+
+    2024 1001 2144, order modal update
+
+[33mcommit c3aa848d93678929d793b2491cdc782efae9676f[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 1 20:35:53 2024 +0900
+
+    241001 2031 AWS S3 이미지 업로드 완료/ movie에 postUrl 저장 완료
+
+[33mcommit c7b180e275c28c33d680262e50910d6272af5940[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 1 20:35:53 2024 +0900
+
+    241001 2031 AWS S3 이미지 업로드 완료/ movie에 postUrl 저장 완료
+
+[33mcommit 15dcea3cbbf3739013b7636f313e9cddac18d02f[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 1 09:45:51 2024 +0900
+
+    240930 2026 유저관리페이지 생성 중
+
+[33mcommit 0351f6c9bdb259899c8fbdf3d17e03a07107fe46[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Oct 1 09:45:51 2024 +0900
+
+    240930 2026 유저관리페이지 생성 중
+
+[33mcommit 30fa70845750daf423fecefe25be72fe261db77b[m
+Merge: 491ea30 f3fa5fa
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 1 08:10:24 2024 +0900
+
+    2024 1001 0810 Resolve merge confilt
+
+[33mcommit 52d96325765b81335ad3315836fed7add7b5b1cc[m
+Merge: 598d1bd ba481a3
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Oct 1 08:10:24 2024 +0900
+
+    2024 1001 0810 Resolve merge confilt
+
+[33mcommit 491ea3095ec247c9aca45b3920a5a0c285eece80[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Sep 30 21:30:51 2024 +0900
+
+    2024 0930 21:30, 예매 시도, 스케줄 컨트롤러 및 querydsl 수정
+
+[33mcommit 598d1bd5b841a6d6edd4b3157ec13f32c70881fd[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Sep 30 21:30:51 2024 +0900
+
+    2024 0930 21:30, 예매 시도, 스케줄 컨트롤러 및 querydsl 수정
+
+[33mcommit 137af66d0ad62c41b392c9519c124b5751d17aca[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 30 12:37:38 2024 +0900
+
+    240930 1237 차트띄우기 성공!
+
+[33mcommit 44f7d6bc0cb825294d5c2b7b67657f57a492af18[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 30 12:37:38 2024 +0900
+
+    240930 1237 차트띄우기 성공!
+
+[33mcommit 5360ff97716cf99d3538eb0aa3ad580d11e8055e[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sun Sep 29 19:22:36 2024 +0900
+
+    file update
+
+[33mcommit bad915aac9f9c4cfc1d9955af5f50b4057a5114a[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sun Sep 29 19:22:36 2024 +0900
+
+    file update
+
+[33mcommit d3c81764b785e9356052dd594096e9298de2eefc[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sun Sep 29 17:50:22 2024 +0900
+
+    240929 1749 극장 정보 수정 기능 완료 - jspreadsheet 활용
+
+[33mcommit 6882a8263a71a2495b564bb3b57a9448ecc6a304[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sun Sep 29 17:50:22 2024 +0900
+
+    240929 1749 극장 정보 수정 기능 완료 - jspreadsheet 활용
+
+[33mcommit 192bb34db67c1e9471854b48a98fa2211cfdbac9[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 28 23:33:58 2024 +0900
+
+    240928 2333 영화 수정 기능 완료 - jspreadsheet를 활용한 수정
+
+[33mcommit 659ec390153921db933308927cd0ff4fe639010a[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 28 23:33:58 2024 +0900
+
+    240928 2333 영화 수정 기능 완료 - jspreadsheet를 활용한 수정
+
+[33mcommit 41a991df1e10475ef552f66122472d9fd2bbbab0[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Sep 28 12:19:06 2024 +0900
+
+    240928 index-nowplaying, boxoffice 수정
+
+[33mcommit d0a42e3b1613b9513ce88f0ba52c1d7b2e6f7d02[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Sat Sep 28 12:19:06 2024 +0900
+
+    240928 index-nowplaying, boxoffice 수정
+
+[33mcommit db158b31fa6f7003b819508b4b94e6ff283bb0e7[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 27 21:05:55 2024 +0900
+
+    rendering homepage
+
+[33mcommit 862895ab615e637294a2607edf4cd8936afe31f2[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 27 21:05:55 2024 +0900
+
+    rendering homepage
+
+[33mcommit e050af6acbb7e007f9d2a22c78d7e5792db98faf[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 27 19:04:00 2024 +0900
+
+    240927 1903 극장 지도 api 활용 등록 기능 및 삭제 기능 완성
+
+[33mcommit d0721e2a5bb5e4c0f63fbb0292a0800fe92201e5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 27 19:04:00 2024 +0900
+
+    240927 1903 극장 지도 api 활용 등록 기능 및 삭제 기능 완성
+
+[33mcommit 5ef07970a836c553b0ea23ef33024b25c342ea1b[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 27 14:25:44 2024 +0900
+
+    240927 1424 영화 삭제 기능 수정 - 체크박스 활용 삭제 완성
+
+[33mcommit 5567859323e4729c6564c790bf6d283abc863731[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 27 14:25:44 2024 +0900
+
+    240927 1424 영화 삭제 기능 수정 - 체크박스 활용 삭제 완성
+
+[33mcommit 6180d3834054599e48801f14defdccc84234b4c4[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 27 09:48:07 2024 +0900
+
+    240927 0947 아침 커밋
+
+[33mcommit 2ce8c0d42402c1c5950139764fd94a604b965256[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 27 09:48:07 2024 +0900
+
+    240927 0947 아침 커밋
+
+[33mcommit 072087dedd5430ad996cd79530db0e9cc297b17f[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 26 14:35:23 2024 +0900
+
+    240926 1434 영화 정보 등록(register) 기능 완성, 영화 정보 보여주기(layout-static) 성공, 영화정보 delete기능 완성
+
+[33mcommit de6e735e0cc73d44ea4e3057ec40cafbd53c0e76[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 26 14:35:23 2024 +0900
+
+    240926 1434 영화 정보 등록(register) 기능 완성, 영화 정보 보여주기(layout-static) 성공, 영화정보 delete기능 완성
+
+[33mcommit cba97d0f04e0149a8c2f4a1a4594321bdbcc0b6e[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Sep 25 17:23:31 2024 +0900
+
+    240925 1722 로그인 간단 구현(시큐리티, 토큰 적용 전) 및 jspreadsheet 예시 구현 적용
+
+[33mcommit 448ff03291e35cf8579c2820f8fa1bc9d7d50a4c[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Wed Sep 25 17:23:31 2024 +0900
+
+    240925 1722 로그인 간단 구현(시큐리티, 토큰 적용 전) 및 jspreadsheet 예시 구현 적용
+
+[33mcommit 77d417324ee954d279071e05c494a18a2e5611e2[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Sep 24 21:52:21 2024 +0900
+
+    20240924 2154 new map api + new templeate
+
+[33mcommit 21cd2ba43fe9fc3227181187ef3f58446fd2ad50[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Tue Sep 24 21:52:21 2024 +0900
+
+    20240924 2154 new map api + new templeate
+
+[33mcommit c3e85baae886a255e9e3a371a3f832159b9b11be[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Sep 24 21:06:48 2024 +0900
+
+    240924 2106 로그인을 통해 관리자페이지로 넘어가는 기능 구현
+
+[33mcommit d354302311840a6a07e95a903596535fc4512a1f[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Sep 24 21:06:48 2024 +0900
+
+    240924 2106 로그인을 통해 관리자페이지로 넘어가는 기능 구현
+
+[33mcommit 35572635fd2cb49007b464fa3d719ca26c321c46[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Sep 24 16:35:14 2024 +0900
+
+    240924 1634 이미지 서버스토리지에 업로드 다시 커밋
+
+[33mcommit 0e18c91a835010afeface09533c1f56157222a9d[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Sep 24 16:35:14 2024 +0900
+
+    240924 1634 이미지 서버스토리지에 업로드 다시 커밋
+
+[33mcommit b460397fc60db8d56f53139260b47e16e2d810e2[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Sep 24 14:50:12 2024 +0900
+
+    240924 1450 서버 스토리지에 영화이미지 저장 기능 완료
+
+[33mcommit 47bc8cdcb902fb5b8c126510a0f1c7fa6386e52b[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Sep 24 14:50:12 2024 +0900
+
+    240924 1450 서버 스토리지에 영화이미지 저장 기능 완료
+
+[33mcommit d7c4ea05896d61013434e14bd76c6b08e63f4b58[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Sep 24 14:43:48 2024 +0900
+
+    240924 1443 서버 스토리지에 영화이미지 저장 기능 완료
+
+[33mcommit a956c14913dfa4cd3e077022dc1c937963c1eac1[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Tue Sep 24 14:43:48 2024 +0900
+
+    240924 1443 서버 스토리지에 영화이미지 저장 기능 완료
+
+[33mcommit 0b6146867e619be54aaf1bfa30337d924ba45926[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 21:53:10 2024 +0900
+
+    240923 2152 image storage에 저장하려고 하는 중
+
+[33mcommit fad95ff9007b7510e5c2f9a0d46e809fa7864b65[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 21:53:10 2024 +0900
+
+    240923 2152 image storage에 저장하려고 하는 중
+
+[33mcommit 2b18182c157dd26f174143c8275c832dbe0b37f7[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 21:46:54 2024 +0900
+
+    240923 1939 병합 후, 에러 정리 후, 템플릿 내꺼 적용하고 어드민 반영
+
+[33mcommit cb42b1117a9bf559da9bd98e7099f67954b68e95[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 21:46:54 2024 +0900
+
+    240923 1939 병합 후, 에러 정리 후, 템플릿 내꺼 적용하고 어드민 반영
+
+[33mcommit fa8b87a852207cee1cd8f3657b80846ec2af8ebb[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 19:39:34 2024 +0900
+
+    240923 1939 병합 후, 에러 정리 후, 템플릿 내꺼 적용하고 어드민 반영
+
+[33mcommit 827aedfc0a080d61faba6ec8e8a5f0958eede61b[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 19:39:34 2024 +0900
+
+    240923 1939 병합 후, 에러 정리 후, 템플릿 내꺼 적용하고 어드민 반영
+
+[33mcommit f3fa5fa6ef58887f45d7ebd0b31d6b7ac4bd805f[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 19:25:35 2024 +0900
+
+    240923 1925 메인 병합 정리함
+
+[33mcommit ba481a35d403e6c5eec490c7926344d2aa871d6d[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 19:25:35 2024 +0900
+
+    240923 1925 메인 병합 정리함
+
+[33mcommit 9d024b7cbcf03a0bd6c9fb138d958ab8a55481dc[m
+Merge: a83f853 b69b8f1
+Author: wjdwltn0909 <141000991+wjdwltn0909@users.noreply.github.com>
+Date:   Mon Sep 23 18:13:04 2024 +0900
+
+    Merge pull request #4 from leebinibini/admin
+    
+    240923 1812 머지
+
+[33mcommit c60c161524413cb1f2c31edbc3039427cd7602ee[m
+Merge: 292b3dd 06a00c4
+Author: wjdwltn0909 <141000991+wjdwltn0909@users.noreply.github.com>
+Date:   Mon Sep 23 18:13:04 2024 +0900
+
+    Merge pull request #4 from leebinibini/admin
+    
+    240923 1812 머지
+
+[33mcommit b69b8f1e08b3b162e3530b1b87cb7debddf89fba[m
+Merge: 89c7dca a83f853
+Author: wjdwltn0909 <141000991+wjdwltn0909@users.noreply.github.com>
+Date:   Mon Sep 23 17:39:26 2024 +0900
+
+    Merge branch 'main' into admin
+
+[33mcommit 06a00c42c48e8f70469d5cd9bfa911127aff81f4[m
+Merge: 97ac47e 292b3dd
+Author: wjdwltn0909 <141000991+wjdwltn0909@users.noreply.github.com>
+Date:   Mon Sep 23 17:39:26 2024 +0900
+
+    Merge branch 'main' into admin
+
+[33mcommit a83f8534099dcb620d6a2a882a80c8ec50f2e342[m
+Merge: 58ce113 a7a63c9
+Author: leebinibini <qpdjvn0601@naver.com>
+Date:   Mon Sep 23 17:16:46 2024 +0900
+
+    Merge pull request #5 from leebinibini/user
+    
+    User
+
+[33mcommit 292b3dd01f5f1d6bae3a3ed8d69498348540b4da[m
+Merge: 218b505 a7c11c0
+Author: leebinibini <qpdjvn0601@naver.com>
+Date:   Mon Sep 23 17:16:46 2024 +0900
+
+    Merge pull request #5 from leebinibini/user
+    
+    User
+
+[33mcommit a7a63c997a79f91f3e9f4e363711dc7bc8c7609c[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Sep 23 17:11:32 2024 +0900
+
+    crawling complete, oath study
+
+[33mcommit a7c11c0daf94b70572e9d77c882724dd1ea1a21c[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Sep 23 17:11:32 2024 +0900
+
+    crawling complete, oath study
+
+[33mcommit 89c7dca8fb3a48ec04775669e33d239674aeb0de[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 17:10:37 2024 +0900
+
+    240923 1710 머지 이전 커밋
+
+[33mcommit 97ac47e4496d6f16c4ef041edbb989753b7d787e[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 17:10:37 2024 +0900
+
+    240923 1710 머지 이전 커밋
+
+[33mcommit 549e9cec84058b42be1976530ce2487f95ef94b4[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 15:47:54 2024 +0900
+
+    240923 1547 영화포스터 저장 기능 완료
+
+[33mcommit 694ecb53d6a2fc7072915ec96ed2cf7f8f33c54b[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 15:47:54 2024 +0900
+
+    240923 1547 영화포스터 저장 기능 완료
+
+[33mcommit d5a37baacd42ef659c68910fc91d4630616b81cb[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 09:34:18 2024 +0900
+
+    240923 0934 수정전 커밋
+
+[33mcommit 958b4090fcd5a81552a52b5b03bb590f8ebeab26[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Mon Sep 23 09:34:18 2024 +0900
+
+    240923 0934 수정전 커밋
+
+[33mcommit e992c4af74d53da8a546ffd3b345b9acd927ac7a[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sun Sep 22 22:34:21 2024 +0900
+
+    240922 2234 중간커밋
+
+[33mcommit 51c8cb589366075e19bb435d591b9b98ace4f3ae[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sun Sep 22 22:34:21 2024 +0900
+
+    240922 2234 중간커밋
+
+[33mcommit 2cf0d9aa9a8aab1ffb82b4e64e832140edcd8baf[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 21 22:04:47 2024 +0900
+
+    240921 2203 moviecontroller-insert작성
+
+[33mcommit d539c3a37483a5b4f98260e65be2fd0a06930d48[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 21 22:04:47 2024 +0900
+
+    240921 2203 moviecontroller-insert작성
+
+[33mcommit c0025d198fb227b5b9cd620efaaba0ad129d20e5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 21 19:32:14 2024 +0900
+
+    240921 1931 컨트롤러 생성 전 커밋
+
+[33mcommit 117a100c0b0ebb2d46b7321684df34c34c9fcaeb[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 21 19:32:14 2024 +0900
+
+    240921 1931 컨트롤러 생성 전 커밋
+
+[33mcommit 540bf86c8a91a8d93481afa0ff34ba4a36818c60[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 21 16:52:21 2024 +0900
+
+    240921 1652 커밋 2차
+
+[33mcommit 1303a27f4039a242e48d657560572cffe7bc255e[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 21 16:52:21 2024 +0900
+
+    240921 1652 커밋 2차
+
+[33mcommit 96fb462be64a335fbaf6a14d82aeafdf67dede1e[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 21 10:50:21 2024 +0900
+
+    200921 1049 임시커밋
+
+[33mcommit 4b4b97456385172268ceade1016213a0397cfbe6[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Sat Sep 21 10:50:21 2024 +0900
+
+    200921 1049 임시커밋
+
+[33mcommit 76e73b1a0d2314ef8a68b59abe7f0245b69b5715[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 20 21:41:25 2024 +0900
+
+    240920 2140 crawling
+
+[33mcommit b19dcff76a0dc463b398bc84a0014b6c4c5d434b[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 20 21:41:25 2024 +0900
+
+    240920 2140 crawling
+
+[33mcommit ea5aaae298ece21d6e04ea010208c82172b02326[m
+Merge: eb70a5a be44748
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 20 16:06:42 2024 +0900
+
+    Merge remote-tracking branch 'origin/admin' into admin
+
+[33mcommit e1bd6ed11da86764820ef5c421b71e3e6c1cb4f8[m
+Merge: 31517b9 0b9c75a
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 20 16:06:42 2024 +0900
+
+    Merge remote-tracking branch 'origin/admin' into admin
+
+[33mcommit eb70a5a2f40a3c1f0d160efc872ba746652b0421[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 20 16:03:45 2024 +0900
+
+    240920 1606 어드민페이지 파일 분리 저장1
+
+[33mcommit 31517b9ac19bc2380efd5161f41dbdd19abb7936[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 20 16:03:45 2024 +0900
+
+    240920 1606 어드민페이지 파일 분리 저장1
+
+[33mcommit be447487da12b3df50fb55e0a6c4cc54aa12da7e[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 20 16:03:45 2024 +0900
+
+    240920 1002 어드민페이지 파일 분리 저장1
+
+[33mcommit 0b9c75aba75d91e6ffc9c90fe3f0c67b3bde1aab[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 20 16:03:45 2024 +0900
+
+    240920 1002 어드민페이지 파일 분리 저장1
+
+[33mcommit 131b0bd59bef3c773078a043e604500a8faf36bf[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 21:47:30 2024 +0900
+
+    20240919 2147, fragment modify
+
+[33mcommit bdb712f2537c6c87c10dc609b1c5f26e5ecd3c75[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 21:47:30 2024 +0900
+
+    20240919 2147, fragment modify
+
+[33mcommit 58ce113a0ced1eb318c0a3a6d5e4f1c13b602f30[m
+Merge: 9d7335e 4f6f5cb
+Author: wjdwltn0909 <141000991+wjdwltn0909@users.noreply.github.com>
+Date:   Thu Sep 19 17:31:48 2024 +0900
+
+    Merge pull request #3 from leebinibini/admin
+    
+    240919 1730 관리자페이지 다시 추가
+
+[33mcommit 218b505bab91fed4f3c5a285907cdb0661a01f0a[m
+Merge: ff9d377 9caa263
+Author: wjdwltn0909 <141000991+wjdwltn0909@users.noreply.github.com>
+Date:   Thu Sep 19 17:31:48 2024 +0900
+
+    Merge pull request #3 from leebinibini/admin
+    
+    240919 1730 관리자페이지 다시 추가
+
+[33mcommit 4f6f5cbee114fc186bc6e0beb114a1ba2b33d7ac[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 17:30:45 2024 +0900
+
+    240919 1730 관리자페이지 다시 추가
+
+[33mcommit 9caa263b32f7d712aaae9c5a8bd82592e8786f81[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 17:30:45 2024 +0900
+
+    240919 1730 관리자페이지 다시 추가
+
+[33mcommit 9d7335efb77532814a875f18bf33e8368d43d1bf[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:55:04 2024 +0900
+
+    240919 1654 머지시도7
+
+[33mcommit ff9d377e44be7c1520e5ba0e7253e261541a4608[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:55:04 2024 +0900
+
+    240919 1654 머지시도7
+
+[33mcommit 85b5a7ef6848cbc754cc155bc77040f8dde3ef61[m
+Merge: 3bb1c87 3d7f3cf
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 16:49:29 2024 +0900
+
+    20240919 1649
+
+[33mcommit 2aeebd623c7f6786b56c7c014f6e0d688b005944[m
+Merge: 0691fb7 65f0d00
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 16:49:29 2024 +0900
+
+    20240919 1649
+
+[33mcommit 3d7f3cfba81a948744bb034a6f4f1ad8a90a14f7[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:26:50 2024 +0900
+
+    240919 1626 머지시도6
+
+[33mcommit 65f0d003cc9d970b27bfa74285aa110bc7c085a5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:26:50 2024 +0900
+
+    240919 1626 머지시도6
+
+[33mcommit f45b2c1f3c0b09b5df1103a3469caa012469ca28[m
+Merge: d1b56d8 7cf576e
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:26:37 2024 +0900
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/nc13/moviemates/repository/UserRepository.java
+
+[33mcommit 6487274e573f512bbc3f6e6b728396dd18b63e3d[m
+Merge: 071801a d6d4c20
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:26:37 2024 +0900
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/nc13/moviemates/repository/UserRepository.java
+
+[33mcommit d1b56d8bcd543a68928bcb8a4d0d039efbb5f16f[m
+Merge: 469df79 52cbe0b
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:25:51 2024 +0900
+
+    240919 1616 머지시도5
+
+[33mcommit 071801a33c70e5524c6f5e3cda9b60f70beecfd5[m
+Merge: 469df79 161461e
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:25:51 2024 +0900
+
+    240919 1616 머지시도5
+
+[33mcommit 3bb1c875d1773a1f029624b26ae4a07d802cf9ef[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 16:24:54 2024 +0900
+
+    20240919 1624
+
+[33mcommit 0691fb7c49e9d3b6ff650c6fdc41eb442978951b[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 16:24:54 2024 +0900
+
+    20240919 1624
+
+[33mcommit 7cf576ee43ed60528190f3da791a3d4cb4e226ca[m
+Merge: 7ee0bec 576f8f5
+Author: leebinibini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 16:11:12 2024 +0900
+
+    Merge pull request #2 from leebinibini/admin
+    
+    Admin
+
+[33mcommit d6d4c206a337c6fa1f66dce1dfb4889a74780e70[m
+Merge: f6b2d61 2189301
+Author: leebinibini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 16:11:12 2024 +0900
+
+    Merge pull request #2 from leebinibini/admin
+    
+    Admin
+
+[33mcommit 576f8f50e462203630eafb76adb5fadb56c2e017[m
+Merge: 52cbe0b 7ee0bec
+Author: leebinibini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 16:11:00 2024 +0900
+
+    Merge branch 'main' into admin
+
+[33mcommit 2189301b6c99dc41048b80068bc8fd2399eb3330[m
+Merge: 161461e f6b2d61
+Author: leebinibini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 16:11:00 2024 +0900
+
+    Merge branch 'main' into admin
+
+[33mcommit 52cbe0b3f390d64eceeed7c7120ac1fa51060453[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:08:12 2024 +0900
+
+    240919 1606 머지시도3
+
+[33mcommit 161461e2da6b6b99bb096267b6c480d7d006c6ba[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:08:12 2024 +0900
+
+    240919 1606 머지시도3
+
+[33mcommit f2aec90629253fa527db4f489cad18a39cea426c[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:05:09 2024 +0900
+
+    240919 1605 머지시도2
+
+[33mcommit 738d8fa9d4daa5a6e4c807f72eacaeb969b6d5ce[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 16:05:09 2024 +0900
+
+    240919 1605 머지시도2
+
+[33mcommit b0a785835bf85d732c5ef010eec102bb87426c28[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 15:28:45 2024 +0900
+
+    240919 1527 머지시도1
+
+[33mcommit 48400cfa8c769445bfd3c3e55f26518559ad2a86[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 15:28:45 2024 +0900
+
+    240919 1527 머지시도1
+
+[33mcommit 15c2b5549f081499047f074d4179196d79a25ba3[m
+Merge: 79487ac fa8879c
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 15:27:42 2024 +0900
+
+    240919 1527 머지시도1
+
+[33mcommit 7912dda62ac080d5665f334396462bd9afba136f[m
+Merge: 3e64991 811059d
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 15:27:42 2024 +0900
+
+    240919 1527 머지시도1
+
+[33mcommit 7ee0bec867f880079809d4b260007dfd0a926b25[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 14:54:41 2024 +0900
+
+    240913 1454
+
+[33mcommit f6b2d6158a6a741dd0af831322f2609a03c9c5f5[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 14:54:41 2024 +0900
+
+    240913 1454
+
+[33mcommit 79487ac9a84c349a657f57abf601896096e9fd70[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 13:24:19 2024 +0900
+
+    240919 1323 템플릿 부분수정 및 관리자페이지 추가
+
+[33mcommit 3e649916ff193e937a62459b53c0768993d72ad9[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 13:24:19 2024 +0900
+
+    240919 1323 템플릿 부분수정 및 관리자페이지 추가
+
+[33mcommit 53b874e51d9ddc5733424184183426b6bd5acdea[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 13:09:58 2024 +0900
+
+    file modify
+
+[33mcommit 47aa25794c3bba3f8ea2cb81bc8e3d08fe5ea342[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 13:09:58 2024 +0900
+
+    file modify
+
+[33mcommit f8b395de03935b80c91b666da9253b562511b009[m
+Merge: d880c8f fa8879c
+Author: leebinibini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 12:11:44 2024 +0900
+
+    Merge pull request #1 from leebinibini/admin
+    
+    Admin
+
+[33mcommit dfc395d49880f08c39d3d237f1203423d61a7fb6[m
+Merge: d880c8f 811059d
+Author: leebinibini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 12:11:44 2024 +0900
+
+    Merge pull request #1 from leebinibini/admin
+    
+    Admin
+
+[33mcommit fa8879c0c0e09128d789fc74025498c646f98460[m[33m ([m[1;31morigin/admin[m[33m, [m[1;32madmin[m[33m)[m
+Merge: 4256f74 cb7f4c8
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 12:00:24 2024 +0900
+
+    resolve merge conflicts
+
+[33mcommit 811059d750cb22ed79ba770d77925c84d209466e[m
+Merge: 19294dd 1e4e0e3
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 12:00:24 2024 +0900
+
+    resolve merge conflicts
+
+[33mcommit cb7f4c8d4e35980cf783c1240bec6f5888beab14[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 10:07:26 2024 +0900
+
+    240917 1007
+
+[33mcommit 1e4e0e306c1fbf662d9620d6762e2d3427a6fa5d[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Thu Sep 19 10:07:26 2024 +0900
+
+    240917 1007
+
+[33mcommit 4256f741b70ef307a9c4e2d71690c44e902bbf57[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 10:07:16 2024 +0900
+
+    240919 1006 - template 합본
+
+[33mcommit 19294dd0bf5fe8703663140c6edf46cd64afcac5[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Thu Sep 19 10:07:16 2024 +0900
+
+    240919 1006 - template 합본
+
+[33mcommit 53daaf66718950cea33f2616324b66b048e6b3f9[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Sep 16 23:34:47 2024 +0900
+
+    240916 2333 front Split file
+
+[33mcommit ebe2254ad7a7587367f547a87b680687f3bae17a[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Mon Sep 16 23:34:47 2024 +0900
+
+    240916 2333 front Split file
+
+[33mcommit ad03cbfaf0e0dadd1581d597aced4a75bc64f0cb[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 13 20:54:22 2024 +0900
+
+    240913 2152 - QClass, QueryDSL파일 생성 및 페이지네이션 코드 파일
+
+[33mcommit 97a1e2293d2f36cadd44c9c0e50b70412b41af2d[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 13 20:54:22 2024 +0900
+
+    240913 2152 - QClass, QueryDSL파일 생성 및 페이지네이션 코드 파일
+
+[33mcommit 072073b54cc54e9c90587ea515fa6b9a0acec5eb[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 13 20:51:08 2024 +0900
+
+    24092048-queryDSL, templates add
+
+[33mcommit 8203e03b01872668a8f75e5a3a57f2246fcf0eaa[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 13 20:51:08 2024 +0900
+
+    24092048-queryDSL, templates add
+
+[33mcommit 5fd6956de09963c73ae9d6e7142791f99556f099[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 6 20:48:26 2024 +0900
+
+    240906 2106
+
+[33mcommit 1507d3815fb23b557f4786419706dc5c95494f2d[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 6 20:48:26 2024 +0900
+
+    240906 2106
+
+[33mcommit 58b257784aff561181bbe3de7dacf1fdde97f8ae[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 6 20:44:18 2024 +0900
+
+    240906 2044
+
+[33mcommit d349bd7f1f51a792c5b6ea76bbdef159413789c9[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 6 20:44:18 2024 +0900
+
+    240906 2044
+
+[33mcommit ade62ae59a2c7bc4e851b41a47c71466578e929a[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 6 18:15:11 2024 +0900
+
+    240906 1814
+
+[33mcommit 469df796a30c25ce1627c1db362b5200e02d2e12[m
+Author: Jisue_Jung <wjdwltn0909@gmail.com>
+Date:   Fri Sep 6 17:51:20 2024 +0900
+
+    240906 1751
+
+[33mcommit d880c8f18c80dae5739f7629b7e89723557d33f2[m
+Author: bini <qpdjvn0601@naver.com>
+Date:   Fri Sep 6 13:10:38 2024 +0900
+
+    first commit
