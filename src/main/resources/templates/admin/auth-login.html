@@ -171,6 +171,7 @@
 
                             // 리다이렉트 URL이 있는 경우 리다이렉트
                             if (data.redirectUrl) {
+                                alert(data.redirectUrl);
                                 window.location.href = data.redirectUrl;  // 서버에서 전달된 리다이렉트 URL로 이동
                             }
                         } else {

@@ -76,8 +76,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user, HttpServletRequest request) {
-
-
         System.out.println("유저는!!" + user);
         Map<String, Object> response = new HashMap<>();
         UserEntity loginUser = service.login(user);
@@ -100,7 +98,7 @@ public class UserController {
             } else {
                 response.put("redirectUrl", "/");
                 Role role = loginUser.getRole();
-               String key= loginUser.getRole().getKey();
+                String key= loginUser.getRole().getKey();
                 System.out.println(key);
                 System.out.println(role);// 일반 사용자는 메인 페이지로 리다이렉트
             }
