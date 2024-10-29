@@ -9,6 +9,30 @@
     <link rel="stylesheet" th:href="@{/assets/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/dist/output-scss.css}"/>
     <link rel="stylesheet" th:href="@{/dist/output-tailwind.css}"/>
+    <style>
+        #header .container {
+            display: flex;
+            align-items: center;
+        }
+        #header a {
+            color: white;
+        }
+        #header .header_author {
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        #header .header_ticket,
+        #header .header_author a {
+            margin-right: 15px;
+        }
+
+        #header #header-search {
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body class="sticky-menu">
 <div id="loader">
@@ -20,24 +44,26 @@
 <div class="wrapper">
     <header id="header" class="menu-top-left">
         <div class="container">
-            <div class="row">
+            <div class="row" style="display: flex; align-items: center;">
                 <div class="col-md-6 col-sm-6 col-xs-4">
                     <a href="/" id="logo" title="Moviemates" class="logo-image"
                        th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
                 </div>
-                <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
-                    <div th:if="${session.loginUser != null}">
-                        <div class="header_author">
-                            <span th:text="${userData.nickname + '님'}">User</span>
+                <div class="col-md-6 col-sm-6 col-xs-8 phl0" style="display: flex; align-items: center; justify-content: flex-end;">
+                    <div th:if="${session.loginUser != null}" style="display: flex; align-items: center;">
+                        <div class="header_author" style="margin-right: 15px;">
+                            <span th:text="${userData.nickname + '님'}" style="color: white;">User</span>
                             <img th:src="${userData.profileImageUrl}" class="user" alt="user"
-                                 style="width: 40px; height: 40px; border-radius: 50%;">
+                                 style="width: 40px; height: 40px; border-radius: 50%; margin-left: 5px;">
                         </div>
-                        <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}">Mypage</a>
-                        <div class="header_ticket" >
-                            <a th:href="@{/logout}" class="order_btn">Logout</a>
+                        <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}" style="color: white; margin-right: 15px;">Mypage</a>
+                        <span class="divider"></span>
+                        <div class="header_ticket" style="margin-left: 15px;">
+                            <a th:href="@{/logout}" class="order_btn" style="margin-right: 15px;">Logout</a>
                         </div>
+                        <span class="divider"></span>
                     </div>
-                    <div class="header_ticket" th:if="${session.loginUser == null}">
+                    <div class="header_ticket" th:if="${session.loginUser == null}" style="margin-right: 15px;">
                         <a th:href="@{/api/user/login}">Login</a>
                     </div>
                     <a href="javascript:;" id="header-search">
@@ -47,6 +73,8 @@
             </div>
         </div>
     </header>
+
+
     <div class="fullwidth-slider">
         <div id="headerslider" class="carousel slide">
             <ol class="carousel-indicators">
@@ -72,10 +100,10 @@
                                         <div class="slide_right" data-animation="animated bounceInRight">
                                             <a href="javascript:;" class="btn-trailer">watch trailer</a>
 
-                                            <div class="header_ticket">
+                                            <!--<div class="header_ticket">
                                                 <a>Movie</a>
                                                 <span>3</span>
-                                            </div>
+                                            </div>-->
                                             <a
                                                     href="#order" class="btn-ticket order_btn" th:data-id="${movie.id}">buy
                                                 ticket</a>

@@ -53,7 +53,6 @@ public class SecurityConfig {
                                 "/api/user/**",
                                 "/api/crawl/**",
                                 "/api/wish/**",
-                                "/loginForm",
                                 "/api/user/login",
                                 "/api/user/register"
                         ).permitAll()

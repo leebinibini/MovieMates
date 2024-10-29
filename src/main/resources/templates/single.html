@@ -9,8 +9,6 @@
     <meta name="author" content="Themeton">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/movieLogo.jpg}"/>
-
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900'
           rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
@@ -63,26 +61,28 @@
         .heart-button:hover .fa-regular {
             color: #ff4d4d;
         }
-        .header_user_info {
+        #header .container {
             display: flex;
             align-items: center;
-            gap: 15px; /* 요소 간격 조정 */
         }
-
-        .header_nickname {
-            margin-right: 10px;
+        #header a {
+            color: white;
         }
-
-        .header_link {
-            color: inherit;
-            text-decoration: none;
-            padding: 0 10px;
-        }
-
-        .row.align-items-center {
+        #header .header_author {
+            color: white;
+            display: flex;
             align-items: center;
+            margin-right: 15px;
         }
 
+        #header .header_ticket,
+        #header .header_author a {
+            margin-right: 15px;
+        }
+
+        #header #header-search {
+            font-size: 18px;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
@@ -97,28 +97,29 @@
 
     <!-- Header Section -->
     <header id="header" class="menu-top-left">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-4">
-                    <a th:href="@{/}" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
-                </div>
-                <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
-                    <div class="header_ticket"  th:if="${userData != null}">
-                        <a th:text="${userData.nickname + '님'}" class="header_nickname">User</a>
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="logo-container" style="flex: 1;">
+                <a href="/" id="logo" title="Moviemates" class="logo-image"
+                   th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
+            </div>
+            <div class="menu-container" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px; flex: 1;">
+                <div th:if="${session.loginUser != null}" style="display: flex; align-items: center;">
+                    <div class="header_author" style="display: flex; align-items: center; gap: 5px;">
+                        <span th:text="${userData.nickname + '님'}">User</span>
                         <img th:src="${userData.profileImageUrl}" class="user" alt="user"
                              style="width: 40px; height: 40px; border-radius: 50%;">
-                        <a th:href="@{/logout}">Logout</a>
                     </div>
-                    <div class="header_ticket" th:if="${userData == null}">
-                        <a th:href="@{/api/user/login}">Login</a>
+                    <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}" style="margin-right: 20px;">Mypage</a>
+                    <div class="header_ticket">
+                        <a th:href="@{/logout}" class="order_btn">Logout</a>
                     </div>
-                    <div class="header_ticket" th:if="${userData != null}">
-                        <a th:href="@{/api/user/mypage/{id}(id=${userData.id})}">Mypage</a>
-                    </div>
-                    <a href="javascript:;" id="header-search">
-                        <i class="fa fa-search"></i>
-                    </a>
                 </div>
+                <div th:if="${session.loginUser == null}" class="header_ticket">
+                    <a th:href="@{/api/user/login}">Login</a>
+                </div>
+                <a href="javascript:;" id="header-search">
+                    <i class="fa fa-search"></i>
+                </a>
             </div>
         </div>
     </header>
@@ -247,7 +248,7 @@
                 <div class="col-sm-6">
                     <div id="comments" class="comments-area">
                         <div class="comments-wrapper">
-                            <h2 class="comments-title">Comments (2)</h2>
+                            <h2 class="comments-title">Comments</h2>
                             <ol class="comment-list" th:each="review:${reviewList}">
                                 <li>
                                     <article>
