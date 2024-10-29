@@ -114,6 +114,7 @@ public class MovieController {
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
+        System.out.println("입력 영화 정보 확인 :  " + movie);
         return ResponseEntity.ok(service.save(movie));
     }
 

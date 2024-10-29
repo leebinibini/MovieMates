@@ -9,7 +9,7 @@
     <meta content="Techzaa" name="author" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" th:href="@{/admin/assets/images/favicon.ico}">
+    <link rel="shortcut icon" th:href="@{/images/movieLogo.jpg}">
 
     <!-- Select2 css -->
     <link th:href="@{/admin/assets/vendor/select2/css/select2.min.css}" rel="stylesheet" type="text/css" />
@@ -45,7 +45,6 @@
     <!-- jQuery UI (datepicker에 필요) -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
 
 </head>
 <body>
@@ -530,9 +529,16 @@
 
                                                 <h5 class="mb-3">Director</h5>
                                                 <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" id="inputDirector"
+                                                    <input type="text" class="form-control" id="inputDirector"
                                                            placeholder="Director">
                                                     <label for="inputDirector">Director</label>
+                                                </div>
+
+                                                <h5 class="mb-3">Actors</h5>
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="inputActors"
+                                                           placeholder="Actors">
+                                                    <label for="inputActors">Actors</label>
                                                 </div>
 
                                                 <h5 class="mb-3 mt-4">Plot</h5>
@@ -557,11 +563,32 @@
                                                     </select>
                                                 </div> <!-- end col -->
 
-                                                <h5 class="mb-3">Poster</h5>
+                                                <h5 class="mb-3 mt-4">Age Class</h5>
+                                                <div class="form-floating mb-4">
+                                                    <select id="inputAgeClass" class="form-control select2" data-toggle="select2">
+                                                        <optgroup label="AgeClass">
+                                                            <option value="전체연령가">전체연령가</option>
+                                                            <option value="12세이상">12세이상</option>
+                                                            <option value="15세이상">15세이상</option>
+                                                            <option value="19세이상">19세이상</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div> <!-- end col -->
 
-                                        </div> <!-- end col -->
-                                    </div>
-                                    <!-- end row-->
+                                                <h5 class="mb-3 mt-4">Release Date</h5>
+                                                <div class="form-floating mb-4">
+                                                    <input class="form-control" id="inputReleaseDate" type="date"
+                                                           name="release">
+                                                </div>
+
+                                                <h5 class="mb-3">Running Time</h5>
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="inputRunningTime"
+                                                           placeholder="Running Time">
+                                                    <label for="inputRunningTime">Running Time</label>
+                                                </div>
+
+                                                <h5 class="mb-3">Poster</h5>
 
                                     <div class="row">
                                         <div class="col-12">
@@ -576,14 +603,13 @@
                                                         <div class="dz-message needsclick">
                                                             <i class="h1 text-muted ri-upload-cloud-2-line"></i>
                                                             <h3>Drop files here or click to upload.</h3>
-                                                            <span class="text-muted fs-13">(This is just a demo dropzone. Selected files are
-                                                    <strong>not</strong> actually uploaded.)</span>
                                                         </div>
                                                     </div>
 
                                                     <!-- Preview -->
                                                     <div class="dropzone-previews mt-3" id="file-previews"></div>
-
+                                                </div>
+                                                </div>
                                                 </div>
                                                 <!-- end card-body -->
                                             </div>
@@ -893,9 +919,22 @@
             const title = document.getElementById('inputTitle').value;
             const plot = document.getElementById('inputPlot').value;
             const selectImages = document.getElementById('inputPoster').files;
+            const actors = document.getElementById('inputActors').value;
+            const director = document.getElementById('inputDirector').value;
+            const ageClass = document.getElementById('inputAgeClass').value;
+            const releaseDate = document.getElementById('inputReleaseDate').value;
+            const runningTime = document.getElementById('inputRunningTime').value;
             const genres = Array.from(document.getElementById('inputGenre').selectedOptions)
                 .map(option => option.value)
                 .join(' | '); // 선택된 장르 배열
+
+            const formattedDate = `개봉일 ${new Date(releaseDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/-/g, '.')}`;
+
+            // runningTime 유효성 검사
+            if (!/^[1-9]\d*$/.test(runningTime)) {
+                alert("Running Time(상영시간)을 0 이상의 정수로 입력해 주세요.");
+                return;
+            }
 
             let multipartFiles = new FormData();
 
@@ -911,7 +950,13 @@
             axios.post('/api/movie/register', {
                 title: title,
                 plot: plot,
-                genre: genres
+                genre: genres,
+                director: director,
+                actors: actors,
+                ageClass: ageClass,
+                releaseDate: formattedDate,
+                runningTime: runningTime,
+                genres: genres
             }).then(res => {
                 if (res.status === 200) {
                     const movieId = res.data;
