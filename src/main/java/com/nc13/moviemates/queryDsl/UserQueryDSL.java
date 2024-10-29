@@ -12,7 +12,6 @@ public interface UserQueryDSL {
     Boolean exists(Long id);
     Long getRowCount();
     Boolean existsByPassword(String password);
-    void insert (UserEntity user);
     void update(UserModel user);
     void updateUserInfo(UserModel userData, String profileImageUrl);
 

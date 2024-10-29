@@ -49,16 +49,6 @@ public class UserQueryDSLImpl implements UserQueryDSL {
                 .fetchFirst() != null;
     }
 
-    @Override
-    public void insert(UserEntity user){
-
-        QUserEntity qUser = QUserEntity.userEntity;
-        jpaQueryFactory
-                .insert(qUser)
-                .columns(qUser.email, qUser.password, qUser.nickname, qUser.tel, qUser.gender)
-                .values(user.getEmail(), user.getPassword(), user.getNickname(), user.getTel(), user.getGender())
-                .execute();
-    }
 
 
     @Override

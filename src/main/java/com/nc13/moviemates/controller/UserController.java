@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -75,6 +76,8 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user, HttpServletRequest request) {
+
+
         System.out.println("유저는!!" + user);
         Map<String, Object> response = new HashMap<>();
         UserEntity loginUser = service.login(user);
@@ -111,13 +114,6 @@ public class UserController {
         }
     }
 
-    /*@ResponseBody
-    @GetMapping("/")
-    public String user(Authentication authentication) {
-        UserPrincipal principalDetail = (UserPrincipal) authentication.getPrincipal();
-        // ...
-        return "user";
-    }*/
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
@@ -152,11 +148,19 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/register")
-    public ResponseEntity<Boolean> insert(@RequestBody UserEntity user) {
-        System.out.println(user);
+    public ResponseEntity<Boolean> insert(@RequestBody UserEntity user, HttpServletRequest request) {
+        System.out.println("등록 컨트롤러 진입!:"+user);
         String encodePassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePassword);
-        Boolean isRegistered = service.insert(user);  // 서비스 호출
+        UserEntity savedUser = service.insert(user);  // 서비스 호출
+        Boolean isRegistered = (savedUser != null && savedUser.getId() != null);
+
+        if (isRegistered) {
+            // 세션에 새 사용자 설정
+            HttpSession session = request.getSession();
+            session.setAttribute("loginUser", user);
+        }
+        System.out.println("savedUser:"+savedUser);
         return ResponseEntity.ok(isRegistered);  // true/false 반환
     }
 

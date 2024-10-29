@@ -19,7 +19,8 @@ import java.time.LocalDate;
 @Table (name="users")
 public class UserEntity {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String email;
     private String password;

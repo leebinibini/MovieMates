@@ -68,7 +68,6 @@ public class MovieController {
                             Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         UserEntity loginUser  = (UserEntity) session.getAttribute("loginUser");
-        Long userId = loginUser.getId();
 
         if (loginUser != null) {
             Optional<UserEntity> user = userService.findById(loginUser.getId());

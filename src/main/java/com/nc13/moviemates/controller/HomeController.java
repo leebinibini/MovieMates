@@ -6,6 +6,7 @@ import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.service.MovieService;
 import com.nc13.moviemates.service.PosterService;
 import com.nc13.moviemates.service.ReviewService;
+import com.nc13.moviemates.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class HomeController {
     private final MovieService movieService;
     private final PosterService posterService;
     private final ReviewService reviewService;
+    private final UserService userService;
 
     //홈페이지 화면 가져오기
         @GetMapping("/")
@@ -38,6 +40,8 @@ public class HomeController {
                 if (loginUser != null) {
                     userId = loginUser.getId(); // 로그인한 유저의 ID를 가져옴
                     model.addAttribute("userId", userId); // 모델에 userId 추가
+                    Optional<UserEntity> user = userService.findById(userId);
+                    user.ifPresent(value -> model.addAttribute("userData", value));
                 }
             }
             List<MovieEntity> movie = movieService.findIsShowingMovie();
