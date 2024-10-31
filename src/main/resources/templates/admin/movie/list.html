@@ -551,16 +551,7 @@
                             <div class="collapse" id="sidebarPagesAuth">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a th:href="@{/api/admin/auth-login}">Login</a>
-                                    </li>
-                                    <li>
-                                        <a href="auth-register.html">Register</a>
-                                    </li>
-                                    <li>
                                         <a th:href="@{/api/admin/logout}">Logout</a>
-                                    </li>
-                                    <li>
-                                        <a href="auth-forgotpw.html">Forgot Password</a>
                                     </li>
                                     <li>
                                         <a href="auth-lock-screen.html">Lock Screen</a>
@@ -624,6 +615,9 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 차트를 그리기 위한 canvas 요소 -->
+                <canvas id="reservationChart" width="400" height="200"></canvas>
 
 
                 <!-- Footer Start -->
@@ -888,29 +882,13 @@
                                 {type: 'text', title: 'Actors', width: 100},
                                 {
                                     type: 'image',
-                                    title: 'lengthPosterUrl',
-                                    width: 100,
-                                    render: function (cell, value) {
-                                        // URL이 유효하고 이미지를 표시하고 싶은 경우
-                                        if (value) {
-                                            cell.innerHTML = `<img src="${value}" alt="Poster" style="width:100px;height:auto;">`;
-                                        } else {
-                                            cell.innerHTML = '이미지 없음';
-                                        }
-                                    }
+                                    title: 'Length Poster',
+                                    width: 100
                                 },
                                 {
                                     type: 'image',
-                                    title: 'widthPosterUrl',
-                                    width: 100,
-                                    render: function (cell, value) {
-                                        // URL이 유효하고 이미지를 표시하고 싶은 경우
-                                        if (value) {
-                                            cell.innerHTML = `<img src="${value}" alt="Poster" style="width:100px;height:auto;">`;
-                                        } else {
-                                            cell.innerHTML = '이미지 없음';
-                                        }
-                                    }
+                                    title: 'Width Poster',
+                                    width: 100
                                 },
                                 {type: 'text', title: 'Genre', width: 100},
                                 {type: 'text', title: 'Plot', width: 100},

@@ -148,8 +148,6 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user, HttpServletRequest request) {
         System.out.println("등록 컨트롤러 진입!:"+user);
-        String encodePassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodePassword);
         UserEntity savedUser = service.insert(user);  // 서비스 호출
         Boolean isRegistered = (savedUser != null && savedUser.getId() != null);
 
