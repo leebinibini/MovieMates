@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{/admin/head :: headContent}"></head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspreadsheet-ce/dist/jspreadsheet.min.css" type="text/css" />
-<!-- App favicon -->
-<link rel="shortcut icon" th:href="@{/admin/assets/images/favicon.ico}">
+<head th:insert="~{/admin/head :: headContent}">
+    <title>Movie List | MovieMates Administor Page </title>
 
-<!-- Theme Config Js -->
-<script th:src="@{/admin/assets/js/config.js}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspreadsheet-ce/dist/jspreadsheet.min.css" type="text/css" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/images/movieLogo.jpg}">
 
-<!-- Icons css -->
-<link th:href="@{/admin/assets/css/icons.min.css}" rel="stylesheet" type="text/css" />
+    <!-- Theme Config Js -->
+    <script th:src="@{/admin/assets/js/config.js}"></script>
+
+    <!-- Icons css -->
+    <link th:href="@{/admin/assets/css/icons.min.css}" rel="stylesheet" type="text/css" />
+</head>
 <!-- Custom CSS for table styling -->
 <style>
     /* 전체 레이아웃 및 색상 설정 */
@@ -118,7 +121,7 @@
     }
 </style>
     <head>
-        <title>Admin Page - Movie</title>
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- App favicon -->
@@ -548,16 +551,7 @@
                             <div class="collapse" id="sidebarPagesAuth">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a th:href="@{/api/admin/auth-login}">Login</a>
-                                    </li>
-                                    <li>
-                                        <a href="auth-register.html">Register</a>
-                                    </li>
-                                    <li>
                                         <a th:href="@{/api/admin/logout}">Logout</a>
-                                    </li>
-                                    <li>
-                                        <a href="auth-forgotpw.html">Forgot Password</a>
                                     </li>
                                     <li>
                                         <a href="auth-lock-screen.html">Lock Screen</a>
@@ -621,6 +615,9 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 차트를 그리기 위한 canvas 요소 -->
+                <canvas id="reservationChart" width="400" height="200"></canvas>
 
 
                 <!-- Footer Start -->
@@ -863,39 +860,42 @@
                         const movieData = movies.map(movie => [
                             movie.id,
                             movie.title,
-                            movie.posterUrl,
-                            movie.genre || '',
                             movie.director || '',
+                            movie.actors || '',
+                            movie.lengthPosterUrl,
+                            movie.widthPosterUrl,
+                            movie.genre || '',
                             movie.plot || '',
                             movie.runningTime || 0,
+                            movie.ageClass || '',
                             movie.rate || 0,
+                            movie.booking || 0
                         ]);
 
                         const table = jspreadsheet(document.getElementById('responseText'), {
                             data: movieData,
 
-
                             columns: [
                                 {type: 'text', title: 'ID', width: 50},
-                                {type: 'text', title: 'Title', width: 150},
+                                {type: 'text', title: 'Title', width: 100},
+                                {type: 'text', title: 'Director', width: 100},
+                                {type: 'text', title: 'Actors', width: 100},
                                 {
                                     type: 'image',
-                                    title: 'Poster',
-                                    width: 100,
-                                    render: function (cell, value) {
-                                        // URL이 유효하고 이미지를 표시하고 싶은 경우
-                                        if (value) {
-                                            cell.innerHTML = `<img src="${value}" alt="Poster" style="width:100px;height:auto;">`;
-                                        } else {
-                                            cell.innerHTML = '이미지 없음';
-                                        }
-                                    }
+                                    title: 'Length Poster',
+                                    width: 100
+                                },
+                                {
+                                    type: 'image',
+                                    title: 'Width Poster',
+                                    width: 100
                                 },
                                 {type: 'text', title: 'Genre', width: 100},
-                                {type: 'text', title: 'Director', width: 150},
-                                {type: 'text', title: 'Plot', width: 200},
-                                {type: 'text', title: 'Running Time', width: 100},
+                                {type: 'text', title: 'Plot', width: 100},
+                                {type: 'text', title: 'Running Time', width: 50},
+                                {type: 'text', title: 'Age Class', width: 50},
                                 {type: 'text', title: 'Rate', width: 50},
+                                {type: 'text', title: 'Booking', width: 50},
                                 {type: 'checkbox', title: 'Delete', width: 100}
                             ],
                             search: true,
@@ -919,13 +919,17 @@
                                         return {
                                             id: row[0],
                                             title: row[1],
-                                            posterUrl: row[2],
-                                            genre: row[3],
-                                            director: row[4],
-                                            plot: row[5],
-                                            runningTime: row[6],
-                                            rate: row[7],
-                                            delete: row[8]
+                                            director: row[2],
+                                            actors: row[3],
+                                            lengthPosterUrl: row[4],
+                                            widthPosterUrl: row[5],
+                                            genre: row[6],
+                                            plot: row[7],
+                                            runningTime: row[8],
+                                            ageClass: row[9],
+                                            rate: row[10],
+                                            booking: row[11],
+                                            delete: row[12]
                                         };
 
                                     });
@@ -940,7 +944,7 @@
                                     const data = table.getData();
 
                                     data.forEach((row, index) => {
-                                        const isChecked = table.getValueFromCoords(8, index);
+                                        const isChecked = table.getValueFromCoords(11, index);
                                         const movieId = table.getValueFromCoords(0, index);
 
                                         if (isChecked === true) {

@@ -76,9 +76,11 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user, HttpServletRequest request) {
+
+
+        System.out.println("유저는!!" + user);
         Map<String, Object> response = new HashMap<>();
         UserEntity loginUser = service.login(user);
-        System.out.println("로그인서비스에서 받아온 로그인 유저, loginUSer:" + loginUser);
         log.info("##### 로그인 사용자 정보 : {}", loginUser);
 
         if (loginUser != null) {
@@ -148,11 +150,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user, HttpServletRequest request) {
         System.out.println("등록 컨트롤러 진입!:"+user);
-
-
-        System.out.println(user.getPassword());
-        UserEntity savedUser = service.insert(user);
-        System.out.println(savedUser.getPassword());// 서비스 호출
+        UserEntity savedUser = service.insert(user);  // 서비스 호출
         Boolean isRegistered = (savedUser != null && savedUser.getId() != null);
 
         if (isRegistered) {
