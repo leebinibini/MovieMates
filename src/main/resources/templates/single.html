@@ -107,9 +107,9 @@
                     <div class="header_ticket">
                         <a th:href="@{/logout}" class="order_btn">Logout</a>
                     </div>
-                </div>
-                <div th:if="${session.loginUser == null}" class="header_ticket">
-                    <a th:href="@{/api/user/login}">Login</a>
+                    <div th:if="${session.loginUser == null}" class="header_ticket">
+                        <a th:href="@{/api/user/login}" class="btn btn-primary">Login</a>
+                    </div>
                 </div>
                 <a href="javascript:;" id="header-search">
                     <i class="fa fa-search"></i>
@@ -580,13 +580,13 @@
 
 <script>
     // 별점 클릭 시 선택된 값 저장
-    document.querySelectorAll('.star').forEach(function (별) {
+    document.querySelectorAll('.star').forEach(function (star) {
         star.addEventListener('click', function () {
             let ratingValue = this.getAttribute('data-value');
             document.getElementById('rating').value = ratingValue;
 
             // 별 색상을 선택된 별까지 변경
-            document.querySelectorAll('.star').forEach(function (별) {
+            document.querySelectorAll('.star').forEach(function (star) {
                 if (star.getAttribute('data-value') <= ratingValue) {
                     star.style.color = 'gold';
                 } else {

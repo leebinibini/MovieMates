@@ -89,6 +89,7 @@ dependencies {
 
 
 
+
 //    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.522'
 
     //aws 버킷에 올리려는 설정
@@ -108,6 +109,10 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
     implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+
+    //.env 파일
+    implementation 'io.github.cdimascio:dotenv-java:2.3.1'
+
 
 }
 
