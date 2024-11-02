@@ -87,6 +87,10 @@ public class UserServiceImpl implements UserService {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
+        if (user.getProfileImageUrl() == null) {
+            user.setProfileImageUrl("https://moviemates-bucket.s3.ap-northeast-2.amazonaws.com/uploads/users/default_profile.png");
+        }
+
         UserEntity savedUser = repository.save(user);
         System.out.println("회원가입 서비스 진입, ent: " + savedUser);
         Long id = savedUser.getId();
