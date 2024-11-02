@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+<head th:insert="~{fragments/head.html::headFragment}">
     <title>MovieMates - Single</title>
-    <meta name="keywords" content="HTML5,CSS3,HTML,Template,Themeton">
-    <meta name="description" content="Tenguu Cinema - Movie Theater Template">
-    <meta name="author" content="Themeton">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/movieLogo.jpg}"/>
@@ -15,8 +10,6 @@
           rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/packages.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/default.css}">
 
     <style>
         .wishlist-icon .wishlist-heart i {
@@ -36,7 +29,6 @@
         .heart-button {
             background-color: transparent;
             border: 2px solid #ccc;
-            border-radius: 5px;
             padding: 10px 15px;
             cursor: pointer;
             transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -63,10 +55,12 @@
         .heart-button:hover .fa-regular {
             color: #ff4d4d;
         }
+
         #header .container {
             display: flex;
             align-items: center;
         }
+
         #header a {
             color: white;
         }
@@ -87,7 +81,7 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
+
 <body class="sticky-menu">
 <div id="loader">
     <div class="loader-ring">
@@ -97,33 +91,39 @@
 </div>
 <div class="wrapper">
 
-    <!-- Header Section -->
     <header id="header" class="menu-top-left">
-        <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
-            <div class="logo-container" style="flex: 1;">
-                <a th:href="@{/}" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
-            </div>
-            <div class="menu-container" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px; flex: 1;">
-                <div th:if="${session.loginUser != null}" style="display: flex; align-items: center;">
-                    <div class="header_author" style="display: flex; align-items: center; gap: 5px;">
-                        <span th:text="${userData.nickname + '님'}">User</span>
-                        <img th:src="${userData.profileImageUrl}" class="user" alt="user"
-                             style="width: 40px; height: 40px; border-radius: 50%;">
-                    </div>
-                    <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}" style="margin-right: 20px;">Mypage</a>
-                    <div class="header_ticket">
-                        <a th:href="@{/logout}" class="order_btn">Logout</a>
-                    </div>
-                    <div th:if="${session.loginUser == null}" class="header_ticket">
-                        <a th:href="@{/api/user/login}" class="btn btn-primary">Login</a>
-                    </div>
+        <div class="container">
+            <div class="row" style="display: flex; align-items: center;">
+                <div class="col-md-6 col-sm-6 col-xs-4">
+                    <a href="/" id="logo" title="Moviemates" class="logo-image"
+                       th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
                 </div>
-                <a href="javascript:;" id="header-search">
-                    <i class="fa fa-search"></i>
-                </a>
+                <div class="col-md-6 col-sm-6 col-xs-8 phl0" style="display: flex; align-items: center; justify-content: flex-end;">
+                    <div th:if="${session.loginUser != null}" style="display: flex; align-items: center;">
+                        <div class="header_author" style="margin-right: 15px;">
+                            <span th:text="${userData.nickname + '님'}" style="color: white;">User</span>
+                            <img th:src="${userData.profileImageUrl}" class="user" alt="user"
+                                 style="width: 40px; height: 40px; border-radius: 50%; margin-left: 5px;">
+                        </div>
+                        <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}" style="color: white; margin-right: 15px;">Mypage</a>
+                        <span class="divider"></span>
+                        <div class="header_ticket" style="margin-left: 15px;">
+                            <a th:href="@{/logout}" style="margin-right: 15px;">Logout</a>
+                        </div>
+                        <span class="divider"></span>
+                    </div>
+                    <div class="header_ticket" th:if="${session.loginUser == null}" style="margin-right: 15px;">
+                        <a th:href="@{/api/user/login}">Login</a>
+                    </div>
+                    <a href="javascript:;" id="header-search">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </header>
+
+
 
     <!-- Single Page Section -->
     <section class="section-content pv12 bg-cover" th:data-bg-image="${movie.widthPosterUrl}">
@@ -142,20 +142,12 @@
                                         th:text="${movie != null ? movie.title : '영화 정보를 찾을 수 없습니다'}"></h2>
 
                                     <!-- Wishlist Heart Icon -->
+                                    <!-- 하트 버튼 부분 -->
                                     <span class="wishlist-icon">
     <div th:if="${userData != null}">
-        <!-- 로그인한 경우에만 하트 아이콘 표시 -->
         <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
             <button class="heart-button">
-                <i class="fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
-            </button>
-        </a>
-    </div>
-    <div th:if="${userData == null}">
-        <!-- 로그인하지 않은 경우 로그인 안내 메시지 또는 로그인 버튼 표시 -->
-        <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
-            <button class="heart-button">
-                <i class="fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+                <i class="fa fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
             </button>
         </a>
     </div>
@@ -495,6 +487,7 @@
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/packages.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+<script type="text/javascript" th:src="@{/js/scripts.min.js}"></script>
 
 <!-- Google Maps API -->
 <script async defer
@@ -558,11 +551,15 @@
             var movieId = [[${movie.id}]]
             var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
 
+            // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
             if (isWishlisted) {
                 $icon.removeClass('fa-solid').addClass('fa-regular');  // 비어있는 하트로 변경
+                $icon.css("color", "#ccc");  // 색상 회색으로 변경
             } else {
                 $icon.removeClass('fa-regular').addClass('fa-solid');  // 채워진 하트로 변경
+                $icon.css("color", "#ff4d4d");  // 색상 빨간색으로 변경
             }
+
 
             // AJAX 요청을 통해 위시리스트에 추가/삭제
             $.ajax({
@@ -586,13 +583,13 @@
 
 <script>
     // 별점 클릭 시 선택된 값 저장
-    document.querySelectorAll('.star').forEach(function (star) {
+    document.querySelectorAll('.star').forEach(function (별) {
         star.addEventListener('click', function () {
             let ratingValue = this.getAttribute('data-value');
             document.getElementById('rating').value = ratingValue;
 
             // 별 색상을 선택된 별까지 변경
-            document.querySelectorAll('.star').forEach(function (star) {
+            document.querySelectorAll('.star').forEach(function (별) {
                 if (star.getAttribute('data-value') <= ratingValue) {
                     star.style.color = 'gold';
                 } else {
