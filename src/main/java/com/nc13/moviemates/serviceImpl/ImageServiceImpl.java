@@ -93,7 +93,6 @@ public class ImageServiceImpl implements ImageService {
                     .build();
 
             ImageEntity imageEntity = convertToEntity(imageModel);
-            imageEntity.setMovie(movieEntity);
 
             ImageEntity savedEntity = repository.save(imageEntity);
             imageModel.setId(savedEntity.getId());
@@ -117,6 +116,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     private ImageEntity convertToEntity(ImageModel model) {
+        System.out.println("convertToEntity 진입" + model + "model.getMovieId" + model.getMovieId());
         MovieEntity movieEntity = movieService.findEntityById(model.getMovieId());
         System.out.println("convertToEntity의 movieEntity : " + movieEntity);
 
@@ -126,6 +126,7 @@ public class ImageServiceImpl implements ImageService {
                 .extension(model.getExtension())
                 .uploadPath(model.getUploadPath())
                 .uploadURL(model.getUploadURL())
+                .movieId(movieEntity.getId())
                 .build();
     }
 
