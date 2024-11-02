@@ -67,36 +67,37 @@ public class MovieController {
     public String getSingle(@PathVariable("movieId") Long movieId,
                             Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        UserEntity loginUser  = (UserEntity) session.getAttribute("loginUser");
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
 
         if (loginUser != null) {
             Optional<UserEntity> user = userService.findById(loginUser.getId());
-            user.ifPresent(value -> model.addAttribute("userData", value));
+            user.ifPresentOrElse(
+                    value -> model.addAttribute("userData", value),
+                    () -> model.addAttribute("userData", null)
+            );
+
             model.addAttribute("isWishlisted", wishService.existsByMovieIdandUserId(movieId, loginUser.getId()));
         } else {
             model.addAttribute("userData", null);
-            model.addAttribute("isWishlisted", false); // 로그인하지 않은 경우 기본값 설정
+            model.addAttribute("isWishlisted", false);
         }
-
 
         Optional<MovieModel> movie = service.findById(movieId);
         if (movie.isPresent()) {
             model.addAttribute("movie", movie.get());
         } else {
-            // 영화가 없을 경우 처리
-            return "index";
+            // 영화가 없을 경우 index 페이지로 리다이렉트
+            return "redirect:/index";
         }
 
         // Theater, Schedule, Review 리스트 추가
         model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
         model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
-       // model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
         model.addAttribute("movieList", service.findIsShowingMovie());
         model.addAttribute("reviewList", reviewService.findReviewsWithUserImage(movieId));
-        System.out.println(movie.get());
+
         return "single";
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity <Optional<MovieModel>> getById(@PathVariable Long id){
