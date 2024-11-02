@@ -63,6 +63,7 @@ public class UserQueryDSLImpl implements UserQueryDSL {
                 .set(qUser.password, user.getPassword())
                 .set(qUser.nickname, user.getNickname())
                 .set(qUser.gender, user.getGender())
+                .set(qUser.role, user.getRole())
                 .set(qUser.tel, user.getTel())
                 .execute();
     }
