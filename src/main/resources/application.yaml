@@ -27,7 +27,7 @@ spring:
           google:
             client-id: 57356930204-dusjt6grmleqhi0tk8lsaeo0d3plglh3.apps.googleusercontent.com
             client-secret: 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
-            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            redirect-uri: https://localhost:8080
             scope:
               - profile
               - email
@@ -38,6 +38,9 @@ spring:
       init-mode: always
   server:
     port: 8080
+    servlet:
+      session:
+        tracking-modes: cookie
 
 cloud:
   aws:
@@ -59,5 +62,3 @@ application:
 iamport:
   apiKey: '2518023361718300'
   secretKey: 'IDbZ0iVylgvocP8iBjE5l2Mzg34JRvtY4IiStSxBWk0K5f1NejlIbEu1YeBkOwQhGJDM840JHDZMlg7C'
-
-

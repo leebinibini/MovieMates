@@ -84,6 +84,7 @@ public class MovieController {
 
         Optional<MovieModel> movie = service.findById(movieId);
         if (movie.isPresent()) {
+            System.out.println(movie);
             model.addAttribute("movie", movie.get());
         } else {
             // 영화가 없을 경우 index 페이지로 리다이렉트
