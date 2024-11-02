@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Sign Up | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully responsive admin theme which can be used to build CRM, CMS, ERP etc." name="description" />
-    <meta content="Techzaa" name="author" />
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS, ERP etc." name="description"/>
+    <meta content="Techzaa" name="author"/>
 
     <!-- App favicon -->
     <link rel="shortcut icon" th:href="@{/admin/assets/images/favicon.ico}">
 
     <!-- App css -->
-    <link th:href="@{/admin/assets/css/app.min.css}" rel="stylesheet" type="text/css" id="app-style" />
-    <link th:href="@{/admin/assets/css/icons.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/admin/assets/css/app.min.css}" rel="stylesheet" type="text/css" id="app-style"/>
+    <link th:href="@{/admin/assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
 
     <style>
         body {
             background-color: #f0f8ff; /* 하늘색 배경 */
         }
+
         .signup-container {
             background-color: white; /* 흰색 배경 */
             padding: 40px;
@@ -64,7 +65,8 @@
         </div>
         <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input class="form-control" type="password" id="confirmPassword" required placeholder="Confirm your password">
+            <input class="form-control" type="password" id="confirmPassword" required
+                   placeholder="Confirm your password">
         </div>
         <div class="mb-3 text-start">
             <button class="btn btn-soft-primary w-100" type="submit">
@@ -135,7 +137,7 @@
 
         // 서버에 POST 요청 보내기
         axios({
-            url:'/api/user/register',
+            url: '/api/user/register',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

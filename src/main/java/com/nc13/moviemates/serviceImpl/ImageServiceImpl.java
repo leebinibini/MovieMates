@@ -93,7 +93,6 @@ public class ImageServiceImpl implements ImageService {
                     .build();
 
             ImageEntity imageEntity = convertToEntity(imageModel);
-            imageEntity.setMovie(movieEntity);
 
             ImageEntity savedEntity = repository.save(imageEntity);
             imageModel.setId(savedEntity.getId());

@@ -1,6 +1,7 @@
 package com.nc13.moviemates;
 
 import com.nc13.moviemates.service.MovieService;
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +12,20 @@ public class MoviematesApplication {
     private MovieService movieService;
 
     public static void main(String[] args) {
+        Dotenv dotenv = Dotenv.load();
+
+        // 환경 변수 설정, 없으면 기본값 또는 오류 메시지
+        String iamportApiKey = dotenv.get("IAMPORT_API_KEY");
+        String iamportSecretKey = dotenv.get("IAMPORT_SECRET_KEY");
+        String googleClientSecret = dotenv.get("GOOGLE_CLIENT_SECRET");
+
+        if (iamportApiKey == null || iamportSecretKey == null || googleClientSecret == null) {
+            throw new IllegalArgumentException("환경 변수가 설정되지 않았습니다. .env 파일을 확인하세요.");
+        }
+
+        System.setProperty("IAMPORT_API_KEY", iamportApiKey);
+        System.setProperty("IAMPORT_SECRET_KEY", iamportSecretKey);
+        System.setProperty("GOOGLE_CLIENT_SECRET", googleClientSecret);
         SpringApplication.run(MoviematesApplication.class, args);
     }
 
