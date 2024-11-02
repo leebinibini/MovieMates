@@ -38,6 +38,10 @@ spring:
       init-mode: always
   server:
     port: 8080
+    servlet:
+      session:
+        persistent: false
+
 #naver:
 #  storage:
 #    accessKey: 32C6E2545595B9B2A738
