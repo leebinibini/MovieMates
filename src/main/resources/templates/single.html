@@ -29,10 +29,15 @@
         .heart-button {
             background-color: transparent;
             border: 2px solid #ccc;
-            border-radius: 5px;
             padding: 10px 15px;
             cursor: pointer;
             transition: border-color 0.3s ease, background-color 0.3s ease;
+            border-radius: 0; /* 네모 모양으로 변경 */
+            width: 50px; /* 버튼의 너비 */
+            height: 50px; /* 버튼의 높이 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .heart-button .fa-solid {
@@ -56,10 +61,12 @@
         .heart-button:hover .fa-regular {
             color: #ff4d4d;
         }
+
         #header .container {
             display: flex;
             align-items: center;
         }
+
         #header a {
             color: white;
         }
@@ -80,7 +87,7 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
+
 <body class="sticky-menu">
 <div id="loader">
     <div class="loader-ring">
@@ -90,33 +97,39 @@
 </div>
 <div class="wrapper">
 
-    <!-- Header Section -->
     <header id="header" class="menu-top-left">
         <div class="container">
-            <div class="row">
+            <div class="row" style="display: flex; align-items: center;">
                 <div class="col-md-6 col-sm-6 col-xs-4">
-                    <a th:href="@{/}" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
+                    <a href="/" id="logo" title="Moviemates" class="logo-image"
+                       th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
                 </div>
-                <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
-                    <div class="header_ticket"  th:if="${session.loginUser != null}">
-                        <a th:text="${userData.nickname + '님'}" class="header_nickname">User</a>
-                        <img th:src="${userData.profileImageUrl}" class="user" alt="user"
-                             style="width: 40px; height: 40px; border-radius: 50%;">
+                <div class="col-md-6 col-sm-6 col-xs-8 phl0" style="display: flex; align-items: center; justify-content: flex-end;">
+                    <div th:if="${session.loginUser != null}" style="display: flex; align-items: center;">
+                        <div class="header_author" style="margin-right: 15px;">
+                            <span th:text="${userData.nickname + '님'}" style="color: white;">User</span>
+                            <img th:src="${userData.profileImageUrl}" class="user" alt="user"
+                                 style="width: 40px; height: 40px; border-radius: 50%; margin-left: 5px;">
+                        </div>
+                        <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}" style="color: white; margin-right: 15px;">Mypage</a>
+                        <span class="divider"></span>
+                        <div class="header_ticket" style="margin-left: 15px;">
+                            <a th:href="@{/logout}" style="margin-right: 15px;">Logout</a>
+                        </div>
+                        <span class="divider"></span>
                     </div>
-                    <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}" style="margin-right: 20px;">Mypage</a>
-                    <div class="header_ticket">
-                        <a th:href="@{/logout}" class="order_btn">Logout</a>
+                    <div class="header_ticket" th:if="${session.loginUser == null}" style="margin-right: 15px;">
+                        <a th:href="@{/api/user/login}">Login</a>
                     </div>
-                    <div th:if="${session.loginUser == null}" class="header_ticket">
-                        <a th:href="@{/api/user/login}" class="btn btn-primary">Login</a>
-                    </div>
+                    <a href="javascript:;" id="header-search">
+                        <i class="fa fa-search"></i>
+                    </a>
                 </div>
-                <a href="javascript:;" id="header-search">
-                    <i class="fa fa-search"></i>
-                </a>
             </div>
         </div>
     </header>
+
+
 
     <!-- Single Page Section -->
     <section class="section-content pv12 bg-cover" th:data-bg-image="${movie.widthPosterUrl}">
@@ -135,20 +148,13 @@
                                         th:text="${movie != null ? movie.title : '영화 정보를 찾을 수 없습니다'}"></h2>
 
                                     <!-- Wishlist Heart Icon -->
+                                    <!-- 하트 버튼 부분 -->
                                     <span class="wishlist-icon">
-    <div th:if="${userData != null}">
-        <!-- 로그인한 경우에만 하트 아이콘 표시 -->
+    <div>
         <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
             <button class="heart-button">
-                <i class="fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
-            </button>
-        </a>
-    </div>
-    <div th:if="${userData == null}">
-        <!-- 로그인하지 않은 경우 로그인 안내 메시지 또는 로그인 버튼 표시 -->
-        <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
-            <button class="heart-button">
-                <i class="fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+                <i class="fa fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"
+                   th:style="${isWishlisted ? 'color: #ff4d4d;' : 'color: #ccc;'}"></i>
             </button>
         </a>
     </div>
@@ -541,7 +547,6 @@
 
         // 하트 아이콘 클릭 이벤트
         $('.wishlist-heart').on('click', function () {
-
             if (!isLoggedIn) {
                 alert("로그인이 필요합니다.");
                 window.location.href = '/api/user/login'; // 로그인 페이지로 이동
@@ -552,11 +557,15 @@
             var movieId = [[${movie.id}]]
             var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
 
+            // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
             if (isWishlisted) {
                 $icon.removeClass('fa-solid').addClass('fa-regular');  // 비어있는 하트로 변경
+                $icon.css("color", "#ccc");  // 색상 회색으로 변경
             } else {
                 $icon.removeClass('fa-regular').addClass('fa-solid');  // 채워진 하트로 변경
+                $icon.css("color", "#ff4d4d");  // 색상 빨간색으로 변경
             }
+
 
             // AJAX 요청을 통해 위시리스트에 추가/삭제
             $.ajax({
@@ -580,13 +589,13 @@
 
 <script>
     // 별점 클릭 시 선택된 값 저장
-    document.querySelectorAll('.star').forEach(function (star) {
+    document.querySelectorAll('.star').forEach(function (별) {
         star.addEventListener('click', function () {
             let ratingValue = this.getAttribute('data-value');
             document.getElementById('rating').value = ratingValue;
 
             // 별 색상을 선택된 별까지 변경
-            document.querySelectorAll('.star').forEach(function (star) {
+            document.querySelectorAll('.star').forEach(function (별) {
                 if (star.getAttribute('data-value') <= ratingValue) {
                     star.style.color = 'gold';
                 } else {
