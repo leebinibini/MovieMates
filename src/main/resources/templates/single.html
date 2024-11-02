@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+<head th:insert="~{fragments/head.html::headFragment}">
     <title>MovieMates - Single</title>
-    <meta name="keywords" content="HTML5,CSS3,HTML,Template,Themeton">
-    <meta name="description" content="Tenguu Cinema - Movie Theater Template">
-    <meta name="author" content="Themeton">
-
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/movieLogo.jpg}"/>
 
@@ -63,16 +57,13 @@
         .heart-button:hover .fa-regular {
             color: #ff4d4d;
         }
-
         #header .container {
             display: flex;
             align-items: center;
         }
-
         #header a {
             color: white;
         }
-
         #header .header_author {
             color: white;
             display: flex;
@@ -104,11 +95,9 @@
     <header id="header" class="menu-top-left">
         <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
             <div class="logo-container" style="flex: 1;">
-                <a href="/" id="logo" title="Moviemates" class="logo-image"
-                   th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
+                <a th:href="@{/}" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
             </div>
-            <div class="menu-container"
-                 style="display: flex; align-items: center; justify-content: flex-end; gap: 15px; flex: 1;">
+            <div class="menu-container" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px; flex: 1;">
                 <div th:if="${session.loginUser != null}" style="display: flex; align-items: center;">
                     <div class="header_author" style="display: flex; align-items: center; gap: 5px;">
                         <span th:text="${userData.nickname + '님'}">User</span>
@@ -120,9 +109,9 @@
                     <div th:if="${session.loginUser == null}" class="header_ticket">
                         <a th:href="@{/logout}" class="order_btn">Logout</a>
                     </div>
-                </div>
-                <div th:if="${session.loginUser == null}" class="header_ticket">
-                    <a th:href="@{/api/user/login}">Login</a>
+                    <div th:if="${session.loginUser == null}" class="header_ticket">
+                        <a th:href="@{/api/user/login}" class="btn btn-primary">Login</a>
+                    </div>
                 </div>
                 <a href="javascript:;" id="header-search">
                     <i class="fa fa-search"></i>
@@ -150,23 +139,23 @@
 
                                     <!-- Wishlist Heart Icon -->
                                     <span class="wishlist-icon">
-                                        <div th:if="${userData != null}">
+    <div th:if="${userData != null}">
         <!-- 로그인한 경우에만 하트 아이콘 표시 -->
-                                            <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
-                                                <button class="heart-button">
-                                            <i class="fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
-                                                </button>
-                                            </a>
-                                        </div>
-                                        <div th:if="${userData == null}">
+        <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
+            <button class="heart-button">
+                <i class="fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+            </button>
+        </a>
+    </div>
+    <div th:if="${userData == null}">
         <!-- 로그인하지 않은 경우 로그인 안내 메시지 또는 로그인 버튼 표시 -->
-                                             <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
-                                                <button class="heart-button">
-                                                    <i class="fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
-                                                </button>
-                                            </a>
-                                         </div>
-                                    </span>
+        <a href="javascript:void(0);" class="wishlist-heart" data-movie-id="${movie.id}">
+            <button class="heart-button">
+                <i class="fa-heart" th:classappend="${isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+            </button>
+        </a>
+    </div>
+</span>
                                     <div class="social-links">
                                         <a href="javascript:;"><i class="fa fa-facebook"></i></a>
                                         <a href="javascript:;"><i class="fa fa-twitter"></i></a>
@@ -206,7 +195,6 @@
                     </article>
                 </div>
             </div>
-        </div>
             <div class="row">
                 <div class="col-md-12 mt4">
                     <div class="single-slider">
@@ -248,6 +236,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     <div class="section-content pvb0">
         <div class="container  pv8">
@@ -324,98 +313,98 @@
         </div>
     </div>
 
-<!-- Google Maps Section -->
-<div class="fullscreen-section">
-    <div id="tt-google-map" class="tt-google-map" data-lat="47.919311" data-lng="106.917643" data-zoom="16"
-         data-saturation="-100" data-color="#333" th:data-marker="@{/images/marker.png}">
-        <div id="gmap_content">
-            <div class="gmap-item">
-                <label class="label-title">Keep in Touch</label>
-            </div>
-            <div class="gmap-item">
-                <label><i class="fa fa-map-marker"></i></label>
-                <span>Address: 86 New Design Street, Melbourne 105</span>
-            </div>
-            <div class="gmap-item">
-                <label><i class="fa fa-phone"></i></label>
-                <span>Phone: (01) 200 123 544</span>
-            </div>
-            <div class="gmap-item">
-                <label><i class="fa fa-envelope"></i></label>
-                <span>Email: info@example.com</span>
+    <!-- Google Maps Section -->
+    <div class="fullscreen-section">
+        <div id="tt-google-map" class="tt-google-map" data-lat="47.919311" data-lng="106.917643" data-zoom="16"
+             data-saturation="-100" data-color="#333" th:data-marker="@{/images/marker.png}">
+            <div id="gmap_content">
+                <div class="gmap-item">
+                    <label class="label-title">Keep in Touch</label>
+                </div>
+                <div class="gmap-item">
+                    <label><i class="fa fa-map-marker"></i></label>
+                    <span>Address: 86 New Design Street, Melbourne 105</span>
+                </div>
+                <div class="gmap-item">
+                    <label><i class="fa fa-phone"></i></label>
+                    <span>Phone: (01) 200 123 544</span>
+                </div>
+                <div class="gmap-item">
+                    <label><i class="fa fa-envelope"></i></label>
+                    <span>Email: info@example.com</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<footer id="footer">
-    <div class="container footer-container">
-        <div class="row">
-            <div class="col-md-2 col-sm-6">
-                <div class="widget">
-                    <h5 class="widget-title">Menu</h5>
-                    <ul class="menu">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Coming soon</a></li>
-                        <li><a href="#">Order</a></li>
-                        <li><a href="#">Terms of service</a></li>
-                        <li><a href="#">Pricing</a></li>
-                    </ul>
+    <footer id="footer">
+        <div class="container footer-container">
+            <div class="row">
+                <div class="col-md-2 col-sm-6">
+                    <div class="widget">
+                        <h5 class="widget-title">Menu</h5>
+                        <ul class="menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Coming soon</a></li>
+                            <li><a href="#">Order</a></li>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget">
+                        <div class="social-links">
+                            <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                            <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                            <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="widget">
-                    <div class="social-links">
-                        <a href="javascript:;"><i class="fa fa-facebook"></i></a>
-                        <a href="javascript:;"><i class="fa fa-twitter"></i></a>
-                        <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h5 class="widget-title">Address information</h5>
+                        <p>
+                            California. AMC Dine-In Theatres Marina,
+                            Street 26, Distritc 543 #108
+                        </p>
+                        <p>
+                            <i class="fa fa-mail"></i>Example@mail.com<br>
+                            <i class="fa fa-phone"></i> + 123 456 7890
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
+                    <div class="widget">
+                        <h5 class="widget-title">Leave a message</h5>
+                        <form class="contact_form transparent">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="text" class="inputValidation" name="name" placeholder="Name *">
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" class="inputValidation" name="email" placeholder="Email *">
+                                </div>
+                                <div class="col-sm-12 ">
+                                    <textarea class="inputValidation" placeholder="Message *"></textarea>
+                                    <button type="submit" class="button fill rectangle">Send to us</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="errorMessage"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="widget">
-                    <h5 class="widget-title">Address information</h5>
-                    <p>
-                        California. AMC Dine-In Theatres Marina,
-                        Street 26, Distritc 543 #108
-                    </p>
-                    <p>
-                        <i class="fa fa-mail"></i>Example@mail.com<br>
-                        <i class="fa fa-phone"></i> + 123 456 7890
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-6">
-                <div class="widget">
-                    <h5 class="widget-title">Leave a message</h5>
-                    <form class="contact_form transparent">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <input type="text" class="inputValidation" name="name" placeholder="Name *">
-                            </div>
-                            <div class="col-sm-12">
-                                <input type="text" class="inputValidation" name="email" placeholder="Email *">
-                            </div>
-                            <div class="col-sm-12 ">
-                                <textarea class="inputValidation" placeholder="Message *"></textarea>
-                                <button type="submit" class="button fill rectangle">Send to us</button>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="errorMessage"></div>
+        </div>
+        <div class="sub-footer">
+            <div class="container">
+                <div class="row copyright-text">
+                    <div class="col-sm-12 text-center">
+                        <p class="mv3 mvt0">&copy; Copyrights 2017 Tenguu. All rights reserved</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="sub-footer">
-        <div class="container">
-            <div class="row copyright-text">
-                <div class="col-sm-12 text-center">
-                    <p class="mv3 mvt0">&copy; Copyrights 2017 Tenguu. All rights reserved</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 </div>
 <!-- Overlay Search -->
 <div id="overlay-search">
@@ -502,6 +491,7 @@
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/packages.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+<script type="text/javascript" th:src="@{/js/scripts.min.js}"></script>
 
 <!-- Google Maps API -->
 <script async defer
@@ -565,7 +555,6 @@
             var movieId = [[${movie.id}]]
             var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
 
-            // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
             if (isWishlisted) {
                 $icon.removeClass('fa-solid').addClass('fa-regular');  // 비어있는 하트로 변경
             } else {

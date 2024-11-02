@@ -36,5 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-# application.yaml 제외
-application.yaml
+# .gitignore 파일
+.env
