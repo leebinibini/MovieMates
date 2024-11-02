@@ -9,6 +9,8 @@
     <meta name="author" content="Themeton">
 
     <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/movieLogo.jpg}"/>
+
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900'
           rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
@@ -113,9 +115,9 @@
                     <div class="header_ticket">
                         <a th:href="@{/logout}" class="order_btn">Logout</a>
                     </div>
-                </div>
-                <div th:if="${session.loginUser == null}" class="header_ticket">
-                    <a th:href="@{/api/user/login}">Login</a>
+                    <div th:if="${session.loginUser == null}" class="header_ticket">
+                        <a th:href="@{/api/user/login}" class="btn btn-primary">Login</a>
+                    </div>
                 </div>
                 <a href="javascript:;" id="header-search">
                     <i class="fa fa-search"></i>
@@ -123,7 +125,6 @@
             </div>
         </div>
     </header>
-
 
     <!-- Single Page Section -->
     <section class="section-content pv12 bg-cover" th:data-bg-image="${movie.widthPosterUrl}">
@@ -555,6 +556,7 @@
             }
 
             var $icon = $(this).find('i');
+            var userId = [[${userData.id}]]
             var movieId = [[${movie.id}]]
             var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
 
