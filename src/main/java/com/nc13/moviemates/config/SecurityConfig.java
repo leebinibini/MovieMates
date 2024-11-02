@@ -43,6 +43,7 @@ public class SecurityConfig {
                                 "/api/images/**",
                                 "/api/chart/**",
                                 "/api/movie/**",
+                                "api/movie/single/{movieId}",
                                 "/api/payments/**",
                                 "/api/poster/**",
                                 "/api/reservation/**",

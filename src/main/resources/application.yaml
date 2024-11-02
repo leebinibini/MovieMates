@@ -26,8 +26,8 @@ spring:
         registration:
           google:
             client-id: 57356930204-dusjt6grmleqhi0tk8lsaeo0d3plglh3.apps.googleusercontent.com
-            client-secret: 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
-            redirect-uri: https://localhost:8080
+            client-secret: ${GOOGLE_CLIENT_SECRETY}
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
             scope:
               - profile
               - email
@@ -60,5 +60,7 @@ application:
     name: moviemates-bucket
 
 iamport:
-  apiKey: '2518023361718300'
-  secretKey: 'IDbZ0iVylgvocP8iBjE5l2Mzg34JRvtY4IiStSxBWk0K5f1NejlIbEu1YeBkOwQhGJDM840JHDZMlg7C'
+  apiKey: ${IAMPORT_API_KEY}
+  secretKey: ${IAMPORT_SECRET_KEY}
+
+
