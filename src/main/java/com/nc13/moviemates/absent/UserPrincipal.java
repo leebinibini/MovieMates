@@ -25,10 +25,19 @@ public class UserPrincipal implements UserDetails, OAuth2User {
         this.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getKey()));
     }
 
+
     public UserPrincipal(UserEntity user, Map<String, Object> attributes) {
         this.user = user;
         this.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getKey()));
         this.attributes = attributes;
+
+        // 구글 로그인 시 attributes에서 값 추출하여 UserEntity에 매핑
+        /*if (attributes != null) {
+            user.setNickname((String) attributes.get("name"));  // 구글에서는 'name' 키를 사용
+            user.setEmail((String) attributes.get("email"));
+            // 추가적인 프로필 이미지 URL이 있다면 설정 가능
+            user.setProfileImageUrl((String) attributes.get("picture"));
+        }*/
     }
 
     /**

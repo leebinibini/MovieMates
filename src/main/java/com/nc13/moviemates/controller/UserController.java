@@ -97,7 +97,7 @@ public class UserController {
             } else {
                 response.put("redirectUrl", "/");
                 Role role = loginUser.getRole();
-                String key= loginUser.getRole().getKey();
+               String key= loginUser.getRole().getKey();
                 System.out.println(key);
                 System.out.println(role);// 일반 사용자는 메인 페이지로 리다이렉트
             }
@@ -106,7 +106,7 @@ public class UserController {
         } else {
             // 로그인 실패 처리
             response.put("status", "error");
-            response.put("message", "로그인 실패: 잘못된 사용자 정보입니다.");
+            response.put("message", "로그인 실패! 아이디와 비밀번호를 다시 확인해주세요.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);  // 401 Unauthorized 응답
         }
     }
@@ -153,7 +153,7 @@ public class UserController {
         if (isRegistered) {
             // 세션에 새 사용자 설정
             HttpSession session = request.getSession();
-            session.setAttribute("loginUser", user);
+            session.setAttribute("loginUser", savedUser);
         }
         System.out.println("savedUser:"+savedUser);
         return ResponseEntity.ok(isRegistered);  // true/false 반환

@@ -61,11 +61,3 @@ iamport:
   secretKey: 'IDbZ0iVylgvocP8iBjE5l2Mzg34JRvtY4IiStSxBWk0K5f1NejlIbEu1YeBkOwQhGJDM840JHDZMlg7C'
 
 
-#naver:
-#  storage:
-#    accessKey: 32C6E2545595B9B2A738
-#    secretKey: 31568AFBC27617FD1700410F779DFC6967015A14
-#    bucket: moviemates-storage
-#    region: kr-standard
-#    endPoint: https://kr.object.ncloudstorage.com
-#    uploadPath: uploads/movies

@@ -101,8 +101,7 @@
     <header id="header" class="menu-top-left">
         <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
             <div class="logo-container" style="flex: 1;">
-                <a th:href="@{/}" id="logo" title="Moviemates" class="logo-image"
-                   th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
+                <a th:href="@{/}" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
             </div>
             <div class="menu-container" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px; flex: 1;">
                 <div th:if="${session.loginUser != null}" style="display: flex; align-items: center;">
@@ -556,11 +555,9 @@
             }
 
             var $icon = $(this).find('i');
-            var userId = [[${userData.id}]]
             var movieId = [[${movie.id}]]
             var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
 
-            // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
             if (isWishlisted) {
                 $icon.removeClass('fa-solid').addClass('fa-regular');  // 비어있는 하트로 변경
             } else {
