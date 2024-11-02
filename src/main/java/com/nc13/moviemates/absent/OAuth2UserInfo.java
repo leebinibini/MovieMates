@@ -25,9 +25,12 @@ public record OAuth2UserInfo(
     }
 
     private static OAuth2UserInfo ofGoogle(Map<String, Object> attributes) {
+        System.out.println("구글에서 받아온 속성:" + attributes);
         return OAuth2UserInfo.builder()
                 .nickname((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
+                .profileImageUrl((String) attributes.get("picture"))
+                .provider(Provider.GOOGLE)
                 .build();
     }
 
@@ -46,6 +49,7 @@ public record OAuth2UserInfo(
                 .nickname(nickname)
                 .email(email)
                 .role(Role.ROLE_USER)
+                .profileImageUrl(profileImageUrl)
                 .build();
     }
 }

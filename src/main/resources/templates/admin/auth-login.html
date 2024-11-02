@@ -139,7 +139,7 @@
 
             // 입력 값 검증
             if (email === "" || password === "") {
-                alert("Please fill in both email and password fields.");
+                alert("아이디와 비밀번호를 모두 기입해주세요!");
             } else {
                 // 폼 데이터 생성
                 const formData = {
@@ -158,10 +158,11 @@
                 })
                     .then(response => {
                         if (!response.ok) {
-                            throw new Error('Network response was not ok');
+                            return response.json().then(data => {
+                                throw new Error(data.message);
+                            });
                         }
-                        return response.json();  // 서버 응답을 JSON으로 파싱
-                    })
+                        return response.json()})
                     .then(data => {
                         console.log(data);  // 서버 응답 데이터 확인
 
@@ -175,10 +176,12 @@
                                 window.location.href = data.redirectUrl;  // 서버에서 전달된 리다이렉트 URL로 이동
                             }
                         } else {
-                            alert("로그인을 다시 시도해주세요!");
+                            alert(data.message)
                         }
                     })
                     .catch(error => {
+                        // 서버에서 보낸 메시지나 네트워크 에러 메시지를 alert로 표시
+                        alert(error.message);
                         console.error('There was a problem with the fetch operation:', error);
                     });
             }

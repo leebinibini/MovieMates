@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     IMP.init('imp01544136');
     var theaterId = 0;
-    var movieId = 184;
     var sc = {
         find: function (status) {
             // 'selected' 좌석을 하드코딩된 형태로 반환
@@ -130,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         sessionStorage.setItem('selectedMovie', selectedMovie);
                         sessionStorage.setItem('selectedDate', selectedDate);
                         sessionStorage.setItem('selectedTime', selectedTime);
-                        alert('선택한 시간: ' + dateTimeText);
+                        alert('선택한 시간: '+ dateTimeText);
                     });
                 }
             })
@@ -138,6 +137,61 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log("error data:", error);
             });
     });
+    $(document).ready(function () {
+        $('.submit').on('click', async function () {
+            var selectedLocation = "gangnam";        // 영화관
+            var selectedMovie = "대도시의 사랑법";  // 영화 제목
+            var selectedDate = "2024-11-29";         // 상영 날짜
+            var selectedTime = "12:30";              // 상영 시간
+            var totalPrice = 26000;                  // 총 결제 금액
+            var seats = [
+                {row: 1, column: 1},
+                {row: 1, column: 2}
+            ];  // 선택된 좌석 (하드코딩)
+            var scheduleId = 1; // 스케줄 ID (하드코딩)
+            var userId = 29;
+            var seatId = 2;
+
+            if (totalPrice === 0) {
+                alert("결제 금액이 0원입니다. 좌석을 선택해주세요.");
+                return;  // 결제 금액이 0원이면 결제를 중지
+            }
+
+            IMP.request_pay({
+                pg: "danal_tpay",          // PG사 설정
+                pay_method: "card",        // 결제 방법
+                name: selectedMovie,       // 상품 이름 (영화 제목)
+                amount: totalPrice,        // 결제 금액 (총 티켓 가격)
+                custom_data: {             // 커스텀 데이터
+                    location: selectedLocation,
+                    movie: selectedMovie,
+                    date: selectedDate,
+                    time: selectedTime,
+                    seatId: seatId,
+                    scheduleId: scheduleId
+                }
+            }, async function (res) {
+                if (res.success) {
+                    try {
+                        var {location, movie, date, time, seatId, scheduleId} = res.custom_data;
+                        var response = await axios.post(`/api/payments/validation/${res.imp_uid}`, {
+                            location, movie, userId, seatId, scheduleId
+                        });
+                        alert("결제가 되었습니다! 마이페이지가서 확인해주세요:)")
+                    } catch (error) {
+                        alert("결제에 실패하였습니다, 다시 시도해주세요!");
+                        console.error("Payment validation failed:", error.response.data);
+                    }
+                    // 예약과 결제 저장은 나중에 처리
+                } else {
+                    // 결제가 실패했을 때
+                    alert("결제에 실패했습니다. 다시 시도해주세요!");
+                    console.error("Payment failed:", res.error_msg);
+                }
+            });
+        })
+    })
+
 
 
 

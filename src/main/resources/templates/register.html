@@ -106,9 +106,18 @@
             alert("모든 필드를 채워주세요.");
             return;
         }
+        if (password.length < 6) {
+            alert("비밀번호는 최소 6글자 이상이어야 합니다.");
+            return;
+        }
 
         if (password !== confirmPassword) {
             alert("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+        const phonePattern = /^[0-9]{10,11}$/; // 10~11자리 숫자 형식
+        if (!phonePattern.test(phone)) {
+            alert("올바른 전화번호를 입력해주세요. (10~11자리 숫자만)");
             return;
         }
 

@@ -20,11 +20,8 @@ public class ImageEntity {
     private String uploadPath;
     private String uploadURL;
 
-    private String movieId;
+    private Long movieId;
 
-    public void setMovie(MovieEntity movieEntity) {
-        this.movieId = String.valueOf(movieEntity.getId());
-    }
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "post_id")
