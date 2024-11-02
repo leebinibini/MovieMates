@@ -26,6 +26,10 @@ public class MoviematesApplication {
         System.setProperty("IAMPORT_API_KEY", iamportApiKey);
         System.setProperty("IAMPORT_SECRET_KEY", iamportSecretKey);
         System.setProperty("GOOGLE_CLIENT_SECRET", googleClientSecret);
+
+        // .env 파일 로드
+        System.setProperty("AWS_ACCESS_KEY", dotenv.get("AWS_ACCESS_KEY"));
+        System.setProperty("AWS_SECRET_KEY", dotenv.get("AWS_SECRET_KEY"));
         SpringApplication.run(MoviematesApplication.class, args);
     }
 
