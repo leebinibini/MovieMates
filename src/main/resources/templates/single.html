@@ -85,9 +85,10 @@
         #header #header-search {
             font-size: 18px;
         }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+</head>
 <body class="sticky-menu">
 <div id="loader">
     <div class="loader-ring">
@@ -142,8 +143,16 @@
                             <a href="https://vimeo.com/28177848" class="video-player"><i class="fa fa-play"></i></a>
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12 ph0">
-                            <div class="post-content bg-cover" th:data-bg-image="${movie.widthPosterUrl}">
-                                <div class="content-meta">
+                            <div class="post-content bg-cover" th:data-bg-image="${movie.widthPosterUrl}" style="position: relative; overflow: hidden;">
+                                <div th:data-bg-image="${movie.widthPosterUrl}" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                background-size: cover; background-position: center;
+                filter: blur(8px); z-index: 1;"></div>
+
+                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5); /* 어두운 반투명 오버레이 */
+                z-index: 2;"></div>
+
+                                <div class="content-meta" style="position: relative; z-index: 2;">
                                     <h2 class="entry-title"
                                         th:text="${movie != null ? movie.title : '영화 정보를 찾을 수 없습니다'}"></h2>
 
@@ -166,9 +175,9 @@
                                     </div>
                                 </div>
 
-                                <p class="entry-text" th:text="${movie.plot}"></p>
+                                <p class="entry-text" th:text="${movie.plot}" style="position: relative; z-index: 2;"></p>
 
-                                <div class="info-content">
+                                <div class="info-content" style="position: relative; z-index: 2;">
                                     <ul class="item-info">
                                         <li><span>Running Time:</span>
                                             <p th:text="${movie != null ? movie.runningTime + '분' : '영화 정보를 찾을 수 없습니다'}"></p>
@@ -186,7 +195,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="content-footer">
+                                <div class="content-footer" style="z-index: 2;">
                                     <span>Available time:</span>
                                     <ul class="mdate" th:each="schedule: ${scheduleList}">
                                         <li><a href="javascript:;"><i th:text="${schedule.getShowTime()}"></i></a></li>
@@ -198,7 +207,7 @@
                     </article>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="position: relative; z-index: 2;">
                 <div class="col-md-12 mt4">
                     <div class="single-slider">
                         <div class="swiper-container movie-images" id="singleslider" data-col="5">

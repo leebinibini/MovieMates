@@ -78,7 +78,7 @@ public class ReservationController {
         model.addAttribute("reservationMovie", service.findReservationWithMovieByUserId(userId));
         model.addAttribute("reservationSchedule", service.findReservationWithScheduleByUserId(userId));
         return "profile/reservation";
-        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<ReservationEntity>> getById(@PathVariable("id") Long id) {
