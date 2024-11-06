@@ -24,8 +24,17 @@ public class AdminController {
     private final UserService userService;
 
     @GetMapping()
-    public String showAdmin() {
-        return "admin/home";
+    public String showAdmin(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/home";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
+
     }
 
     @GetMapping("/logout")
@@ -39,49 +48,82 @@ public class AdminController {
         return "redirect:/";
     }
 
-    @GetMapping("/pages-starter")
-    public String adminToStarter() {
-        return "admin/pages-starter";
-    }
-
-    @GetMapping("register")
-    public String adminregister() {
-        return "admin/register";
-    }
-
-    @GetMapping("password")
-    public String adminpassword() {
-        return "admin/password";
-    }
-
     @GetMapping("/movie")
-    public String adminToMovie() {
-        return "admin/movie/list";
+    public String adminToMovie(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/movie/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/theater")
-    public String adminToTheater(){
-        return "admin/theater/list";
+    public String adminToTheater(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/theater/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/schedule")
-    public String adminToSchedule(){
-        return "admin/schedule/list";
+    public String adminToSchedule(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/schedule/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/user")
-    public String adminToUser() {
-        return "admin/user/list";
+    public String adminToUser(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/user/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/reservation")
-    public String adminToReservation() {
-        return "admin/reservation/list";
+    public String adminToReservation(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/reservation/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/review")
-    public String adminToReview() {
-        return "admin/review/list";
+    public String adminToReview(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/review/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
 

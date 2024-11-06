@@ -91,17 +91,10 @@ public class UserController {
             response.put("user", loginUser);
             System.out.println("역할출력" + loginUser.getRole());
             if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
-               Role role = loginUser.getRole();
-                System.out.println(role);
                 response.put("redirectUrl", "/api/admin");  // 관리자 로그인 페이지로 리다이렉트
             } else {
                 response.put("redirectUrl", "/");
-                Role role = loginUser.getRole();
-               String key= loginUser.getRole().getKey();
-                System.out.println(key);
-                System.out.println(role);// 일반 사용자는 메인 페이지로 리다이렉트
             }
-
             return ResponseEntity.ok(response);  // 200 OK와 함께 성공 응답
         } else {
             // 로그인 실패 처리

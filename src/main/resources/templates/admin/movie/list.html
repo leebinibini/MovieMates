@@ -611,14 +611,10 @@
                                     <button class="btn btn-outline-danger" id="delete-btn">Delete Selected</button>
                                 </div>
                             </div>
-                            <div id="responseText" class="mt-3"></div> <!-- jspreadsheet 데이터가 이 영역에 삽입됩니다 -->
+                            <div id="responseText" class="mt-3"></div>
                         </div>
                     </div>
                 </div>
-
-                <!-- 차트를 그리기 위한 canvas 요소 -->
-                <canvas id="reservationChart" width="400" height="200"></canvas>
-
 
                 <!-- Footer Start -->
                 <footer class="footer">
@@ -974,63 +970,8 @@
                         console.log('Error:', error);
                     });
 
-                // 2. Chart.js 차트 초기화
-                const movieReservations = [
-                    { "title": "Inception", "reservations": 150 },
-                    { "title": "Avatar", "reservations": 200 },
-                    { "title": "Interstellar", "reservations": 100 },
-                    { "title": "The Dark Knight", "reservations": 180 }
-                ];
-
-                const movieTitles = movieReservations.map(movie => movie.title);
-                const reservationCounts = movieReservations.map(movie => movie.reservations);
-
-                const ctx = document.getElementById('reservationChart').getContext('2d');
-                const reservationChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: movieTitles,
-                        datasets: [{
-                            label: '예매 횟수',
-                            data: reservationCounts,
-                            backgroundColor: [
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(153, 102, 255, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(153, 102, 255, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 50
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                position: 'top'
-                            }
-                        }
-                    }
-                });
             });
         </script>
-        });
-        });
-        </script>
-
 
     </body>
 </html>

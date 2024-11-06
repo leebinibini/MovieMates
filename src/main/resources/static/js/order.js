@@ -118,6 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         var selectedTime = $(this).data('time');
                         var selectedDate = $('.datetime').val();
                         var dateTimeText = selectedDate + ' ' + selectedTime;
+                        var selectedSeats = $("#selected-seats").val();
+                        alert(selectedSeats)
 
                         $('#timep').text(dateTimeText);
                         $('.order-date a').removeClass('selected');
@@ -139,18 +141,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     $(document).ready(function () {
         $('.submit').on('click', async function () {
-            var selectedLocation = "gangnam";        // 영화관
-            var selectedMovie = "대도시의 사랑법";  // 영화 제목
-            var selectedDate = "2024-11-29";         // 상영 날짜
-            var selectedTime = "12:30";              // 상영 시간
-            var totalPrice = 26000;                  // 총 결제 금액
-            var seats = [
-                {row: 1, column: 1},
-                {row: 1, column: 2}
-            ];  // 선택된 좌석 (하드코딩)
-            var scheduleId = 1; // 스케줄 ID (하드코딩)
-            var userId = 29;
-            var seatId = 2;
+
+
+            // var selectedLocation = "gangnam";        // 영화관
+            // var selectedMovie = "대도시의 사랑법";  // 영화 제목
+            // var selectedDate = "2024-11-29";         // 상영 날짜
+            // var selectedTime = "12:30";              // 상영 시간
+            // var totalPrice = 26000;                  // 총 결제 금액
+            // var seats = [
+            //     {row: 1, column: 1},
+            //     {row: 1, column: 2}
+            // ];  // 선택된 좌석 (하드코딩)
+            // var scheduleId = 1; // 스케줄 ID (하드코딩)
+            // var userId = 29;
+            // var seatId = 2;
 
             if (totalPrice === 0) {
                 alert("결제 금액이 0원입니다. 좌석을 선택해주세요.");

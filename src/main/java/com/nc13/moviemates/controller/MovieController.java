@@ -106,15 +106,24 @@ public class MovieController {
     }
 
     @GetMapping("/register")
-    public String toMovieRegister(Model model){
-        model.addAttribute("movieList", service.findAll());
-        model.addAttribute("theaterList", theaterService.findAll());
-        return "admin/movie/register";
+    public String toMovieRegister(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            model.addAttribute("movieList", service.findAll());
+            model.addAttribute("theaterList", theaterService.findAll());
+            return "admin/movie/register";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
+
         System.out.println("입력 영화 정보 확인 :  " + movie);
         return ResponseEntity.ok(service.save(movie));
     }
