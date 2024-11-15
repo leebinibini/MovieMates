@@ -62,13 +62,13 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 )
                 .oauth2Login(oauth2 -> oauth2
-                            .loginPage("/api/user/login")
+                        .loginPage("/api/user/login")
                         .successHandler((request, response, authentication) -> {
-                                UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-                                UserEntity userEntity = userPrincipal.getUser();
-                                // 사용자 정보를 세션에 저장
-                                HttpSession session = request.getSession();
-                                session.setAttribute("loginUser", userEntity);
+                            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+                            UserEntity userEntity = userPrincipal.getUser();
+                            // 사용자 정보를 세션에 저장
+                            HttpSession session = request.getSession();
+                            session.setAttribute("loginUser", userEntity);
                             // 로그인한 사용자 정보 가져오기
                             String role = authentication.getAuthorities().stream()
                                     .map(grantedAuthority -> grantedAuthority.getAuthority())
