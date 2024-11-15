@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +41,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public String getFileName(String fileName) {
         String ext = fileName.substring(fileName.indexOf("."));
-        return System.currentTimeMillis() + ext;
+        return UUID.randomUUID().toString() + "_" + System.currentTimeMillis() + ext;
     }
 
     @Override
