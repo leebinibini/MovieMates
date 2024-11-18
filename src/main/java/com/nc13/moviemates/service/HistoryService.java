@@ -25,4 +25,6 @@ public interface HistoryService {
     Optional<MovieEntity> findMovieForReview(Long userId, Long movieId);
 
     List<HistoryEntity> findByUserId(Long id);
+
+    boolean hasWatchedMovie(Long userId, Long movieId);
 }

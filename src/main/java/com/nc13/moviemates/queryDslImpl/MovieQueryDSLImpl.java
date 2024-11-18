@@ -37,14 +37,21 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
 
     @Override
     public void update(MovieModel movie) {
+        QMovieEntity qMovie = QMovieEntity.movieEntity;
 
         JPAUpdateClause updateClause = new JPAUpdateClause(entityManager, qMovie);
         updateClause
                 .where(qMovie.id.eq(movie.getId()))
                 .set(qMovie.title, movie.getTitle())
                 .set(qMovie.director, movie.getDirector())
-                .set(qMovie.posterUrl, movie.getPosterUrl())
+                .set(qMovie.widthPosterUrl, movie.getWidthPosterUrl())
+                .set(qMovie.lengthPosterUrl, movie.getLengthPosterUrl())
                 .set(qMovie.genre, movie.getGenre())
+                .set(qMovie.actors, movie.getActors())
+                .set(qMovie.ageClass, movie.getAgeClass())
+                .set(qMovie.plot, movie.getPlot())
+                .set(qMovie.rate, movie.getRate())
+                .set(qMovie.runningTime, movie.getRunningTime())
                 .execute();
     }
 
@@ -94,6 +101,15 @@ public class MovieQueryDSLImpl implements MovieQueryDSL {
                 .from(qMovie)
                 .where(qMovie.title.eq(name))
                 .fetchOne();
+    }
+
+    @Override
+    public List<MovieEntity> getListBySearch(String searchStr) {
+        return jpaQueryFactory
+                .selectFrom(qMovie)
+                .where(qMovie.director.contains(searchStr).or(qMovie.title.contains(searchStr)))
+                .orderBy(qMovie.id.desc())
+                .fetch();
     }
 
     @Override

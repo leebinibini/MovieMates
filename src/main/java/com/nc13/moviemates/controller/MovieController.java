@@ -3,9 +3,18 @@ package com.nc13.moviemates.controller;
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.component.model.WishModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import com.nc13.moviemates.entity.QMovieEntity;
+import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.entity.WishEntity;
 import com.nc13.moviemates.service.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import com.nc13.moviemates.util.WebCrawlerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.JsonPath;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,6 +33,8 @@ public class MovieController {
     private final ScheduleService scheduleService;
     private final ReviewService reviewService;
     private final WishService wishService;
+    private final WebCrawlerService webCrawlerService;
+    private final UserService userService;
 
     @GetMapping("/list")
     public ResponseEntity<List<MovieEntity>> getList() {
@@ -42,8 +53,8 @@ public class MovieController {
         Map<String, Object> map = new HashMap<>();
         System.out.println(movieId);
         String title = service.findById(movieId)
-                        .orElseThrow(()-> new RuntimeException("Movie not found"))
-                                .getTitle();
+                .orElseThrow(()-> new RuntimeException("Movie not found"))
+                .getTitle();
 
         map.put("theater", theaterService.findByMovieId(movieId));
         map.put("schedule", scheduleService.findByMovieId(movieId));
@@ -53,27 +64,37 @@ public class MovieController {
     }
 
     @GetMapping("/single/{movieId}")
-    public String getSingle(@PathVariable("movieId") Long movieId, Model model) {
+    public String getSingle(@PathVariable("movieId") Long movieId,
+                            Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if (loginUser != null) {
+            Optional<UserEntity> user = userService.findById(loginUser.getId());
+            user.ifPresentOrElse(
+                    value -> model.addAttribute("userData", value),
+                    () -> model.addAttribute("userData", null)
+            );
+
+            model.addAttribute("isWishlisted", wishService.existsByMovieIdandUserId(movieId, loginUser.getId()));
+        } else {
+            model.addAttribute("userData", null);
+            model.addAttribute("isWishlisted", false);
+        }
+
         Optional<MovieModel> movie = service.findById(movieId);
         if (movie.isPresent()) {
             model.addAttribute("movie", movie.get());
         } else {
-            // 영화가 없을 경우 처리
-            return "index";
+            // 영화가 없을 경우 index 페이지로 리다이렉트
+            return "redirect:/index";
         }
 
         // Theater, Schedule, Review 리스트 추가
         model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
         model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
-       // model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
         model.addAttribute("movieList", service.findIsShowingMovie());
         model.addAttribute("reviewList", reviewService.findReviewsWithUserImage(movieId));
-        System.out.println(movie.get());
-
-        // 위시리스트 여부 확인
-        boolean isWishlisted = wishService.existsByMovieIdandUserId(movieId, 1L);
-        System.out.println("isWishlisted 값: " + isWishlisted);
-        model.addAttribute("isWishlisted", isWishlisted);
 
         return "single";
     }
@@ -85,29 +106,27 @@ public class MovieController {
     }
 
     @GetMapping("/register")
-    public String toMovieRegister(Model model){
-        model.addAttribute("movieList", service.findAll());
-        model.addAttribute("theaterList", theaterService.findAll());
-        return "admin/movie/register";
-    }
+    public String toMovieRegister(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
 
-    @GetMapping("/register2")
-    public String toMovieRegister2(Model model){
-        model.addAttribute("movieList", service.findAll());
-        model.addAttribute("theaterList", theaterService.findAll());
-        return "admin/movie/register2";
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            model.addAttribute("movieList", service.findAll());
+            model.addAttribute("theaterList", theaterService.findAll());
+            return "admin/movie/register";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
+
+        System.out.println("입력 영화 정보 확인 :  " + movie);
         return ResponseEntity.ok(service.save(movie));
     }
-
-//    @PutMapping
-//    public ResponseEntity<Boolean> update(@RequestBody MovieModel movie){
-//        return ResponseEntity.ok(service.save(movie));
-//    }
 
     @ResponseBody
     @PostMapping("/updateMany")
@@ -144,15 +163,23 @@ public class MovieController {
     public long count() {
         return service.count();}
 
-    /*@GetMapping("/crawl")
-    public String crawlMovies() {
-        try {
-            service.crawlMovies();
-            return "Crawling complete!";
-        } catch (Exception e) {
-            return "Error occurred: " + e.getMessage();
-        }
-    }*/
+
+    @GetMapping("/search")
+    public String getSearchList(@RequestParam String searchStr, Model model) {
+        model.addAttribute("searchMovieList", service.findSearchList(searchStr));
+
+        return "/search";
+    }
+
+//    @GetMapping("/crawl")
+//    public String crawlMovies() {
+//        try {
+//            webCrawlerService.crawl();
+//            return "Crawling complete!";
+//        } catch (Exception e) {
+//            return "Error occurred: " + e.getMessage();
+//        }
+//    }
 
 }
 

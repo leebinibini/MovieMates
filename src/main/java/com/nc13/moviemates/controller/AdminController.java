@@ -1,16 +1,21 @@
 package com.nc13.moviemates.controller;
 
+import com.nc13.moviemates.entity.UserEntity;
 import com.nc13.moviemates.repository.UserRepository;
 import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.service.UserService;
 import com.nc13.moviemates.serviceImpl.UserServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Controller
 @CrossOrigin
 @RequestMapping("/api/admin")
@@ -19,92 +24,106 @@ public class AdminController {
     private final UserService userService;
 
     @GetMapping()
-    public String showAdmin() {
-        return "admin/home";
-    }
+    public String showAdmin(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
 
-//    @GetMapping("/login")
-//    public String adminLogin() {
-//        return "admin/home";
-//    }
-
-    @ResponseBody
-    @PostMapping("/login")
-    public String adminAuth(@RequestBody Map<String, String> loginTry) {
-        System.out.println("adminAuth 컨트롤러 진입!!!");
-        String email = loginTry.get("email");
-        String password = loginTry.get("password");
-
-        boolean isAuthenticated = userService.authenticate(email, password);
-
-        if (isAuthenticated ) {
-            System.out.println("인증완료!");
-            return "true"; // 인증 성공 시 home 페이지로 이동
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/home";
         } else {
-            System.out.println("인증실패!");
-            return "false"; // 인증 실패 시 에러 메시지 반환
+            session.invalidate();
+            return "redirect:/";
         }
+
     }
 
-    @GetMapping("/")
-    public String adminLogout() {
+    @GetMapping("/logout")
+    public String adminLogout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        log.info("관리자 로그아웃 전: {}", session);
+        if (session != null) {
+            session.invalidate();
+        }
+        log.info("관리자 로그아웃 후:{}" , session);
         return "redirect:/";
     }
 
-    @GetMapping("/pages-starter")
-    public String adminToStarter() {
-        return "admin/pages-starter";
-    }
-
-    @GetMapping("register")
-    public String adminregister() {
-        return "admin/register";
-    }
-
-    @GetMapping("password")
-    public String adminpassword() {
-        return "admin/password";
-    }
-
     @GetMapping("/movie")
-    public String adminToMovie() {
-        return "admin/movie/list";
+    public String adminToMovie(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/movie/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/theater")
-    public String adminToTheater(){
-        return "admin/theater/list";
+    public String adminToTheater(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/theater/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/schedule")
-    public String adminToSchedule(){
-        return "admin/schedule/list";
+    public String adminToSchedule(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/schedule/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/user")
-    public String adminToUser() {
-        return "admin/user/list";
+    public String adminToUser(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/user/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/reservation")
-    public String adminToReservation() {
-        return "admin/reservation/list";
+    public String adminToReservation(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/reservation/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/review")
-    public String adminToReview() {
-        return "admin/review/list";
-    }
+    public String adminToReview(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
 
-
-    @GetMapping("layout-static")
-    public String adminLayoutStatic() {
-        return "admin/layout-static";
-    }
-
-    @GetMapping("layout-sidenav-light")
-    public String adminLayoutsidenavStatic() {
-        return "admin/layout-sidenav-light";
+        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
+            return "admin/review/list";
+        } else {
+            session.invalidate();
+            return "redirect:/";
+        }
     }
 
 
@@ -117,22 +136,6 @@ public class AdminController {
     public String admintables() {
         return "admin/tables";
     }
-
-    @GetMapping("401")
-    public String show401() {
-        return"admin/401";
-    }
-
-    @GetMapping("404")
-    public String show404() {
-        return"admin/404";
-    }
-
-    @GetMapping("500")
-    public String show500() {
-        return"admin/500";
-    }
-
 
 
 }

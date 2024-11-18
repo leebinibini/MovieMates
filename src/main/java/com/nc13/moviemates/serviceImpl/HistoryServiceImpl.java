@@ -62,4 +62,9 @@ public class HistoryServiceImpl implements HistoryService {
     public List<HistoryEntity> findByUserId(Long id) {
         return repository.findByUserId(id);
     }
+
+    @Override
+    public boolean hasWatchedMovie(Long userId, Long movieId) {
+        return repository.hasWatchedMovie(userId, movieId);
+    }
 }

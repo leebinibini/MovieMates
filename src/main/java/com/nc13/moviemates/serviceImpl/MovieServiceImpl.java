@@ -36,13 +36,18 @@ public class MovieServiceImpl implements MovieService {
         MovieEntity ent = MovieEntity.builder()
                 .title(movie.getTitle())
                 .widthPosterUrl(movie.getWidthPosterUrl())
-                .lengthPosterUrl(movie.getPosterUrl())
-                .posterUrl(movie.getPosterUrl())
+                .lengthPosterUrl(movie.getLengthPosterUrl())
                 .genre(movie.getGenre())
                 .director(movie.getDirector())
+                .actors(movie.getActors())
                 .plot(movie.getPlot())
                 .runningTime(movie.getRunningTime())
                 .rate(movie.getRate())
+                .ageClass(movie.getAgeClass())
+                .releaseDate(movie.getReleaseDate())
+                .booking(movie.getBooking())
+                .isShowing(movie.getIsShowing())
+                .booking(movie.getBooking())
                 .build();
 
         MovieEntity savedEntity = repository.save(ent);
@@ -69,6 +74,7 @@ public class MovieServiceImpl implements MovieService {
                     .widthPosterUrl(movieModel.getWidthPosterUrl())
                     .rate(movieModel.getRate())
                     .ageClass(movieModel.getAgeClass())
+                    .booking(movieModel.getBooking())
                     .build(); // 변환 메서드 호출
             repository.save(movieEntity);
         });
@@ -98,11 +104,13 @@ public class MovieServiceImpl implements MovieService {
                 .genre(movieEntity.getGenre())
                 .title(movieEntity.getTitle())
                 .director(movieEntity.getDirector())
+                .actors(movieEntity.getActors())
                 .rate(movieEntity.getRate())
                 .runningTime(movieEntity.getRunningTime())
-                .posterUrl(movieEntity.getPosterUrl())
                 .lengthPosterUrl(movieEntity.getLengthPosterUrl())
                 .widthPosterUrl(movieEntity.getWidthPosterUrl())
+                .booking(movieEntity.getBooking())
+                .ageClass(movieEntity.getAgeClass())
                 .build());
     }
 
@@ -134,6 +142,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<MovieEntity> findSearchList(String searchStr) {
+        return repository.getListBySearch(searchStr);
+    }
+
+    @Override
     public List<MovieEntity> findIsShowingMovie() {
         return repository.findIsShowingMovie();
     }
@@ -149,15 +162,6 @@ public class MovieServiceImpl implements MovieService {
                 .orElseThrow(()-> new RuntimeException("Movie not Found with id: " +id));
     }
 
-    // 변환 메서드
-    private MovieEntity modelToEntity(MovieModel movieModel) {
-        return MovieEntity.builder()
-                .id(movieModel.getId())
-                .title(movieModel.getTitle())
-                .genre(movieModel.getGenre())
-                // 필요한 필드를 변환
-                .build();
-    }
 
    /* @Override
     public void crawlMovies() throws IOException {

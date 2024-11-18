@@ -7,6 +7,9 @@ import com.nc13.moviemates.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -41,7 +44,8 @@ public class ReviewController {
 
     @GetMapping("/register")
     public String getMoviesByUserId(@RequestParam("movieId") Long movieId,
-                                    Model model, HttpSession session) {
+                                    Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         UserEntity loginUser  = (UserEntity) session.getAttribute("loginUser");
         Long userId = loginUser.getId();
         System.out.println(userId);
@@ -49,7 +53,6 @@ public class ReviewController {
         if (movie.isPresent()) {
             boolean isWishlisted = wishService.existsByMovieIdandUserId(movieId, userId);
             System.out.println("isWishlisted 값: " + isWishlisted);
-
             model.addAttribute("isWishlisted", isWishlisted);
             model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
             model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
@@ -67,19 +70,37 @@ public class ReviewController {
 
     @GetMapping("/history/register")
     public String getMoviesByHistoryUserId(@RequestParam("movieId") Long movieId,
-                                    Model model, HttpSession session) {
+                                           @RequestParam(value = "page", required = false) Optional<Integer> page,
+                                           @RequestParam(value = "size", required = false) Optional<Integer> size,
+                                    Model model, HttpServletRequest quest
+    ) {
+
+
+        HttpSession session = quest.getSession();
         UserEntity loginUser  = (UserEntity) session.getAttribute("loginUser");
         Long userId = loginUser.getId();
-        System.out.println(userId);
         Optional<MovieEntity> movie = historyService.findMovieForReview(userId, movieId);
 
             model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
             model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
            // model.addAttribute("reviewList", service.findAllByMovieId(movieId));
             model.addAttribute("movieList", movieService.findAll());
-            model.addAttribute("movie", movie.get());  // 영화 정보를 모델에 추가
+            model.addAttribute("movie", movie.orElse(null));  // 영화 정보를 모델에 추가
+            model.addAttribute("userData", userService.findById(userId).orElse(null));
             model.addAttribute("userId", userId);// 유저 아이디도 모델에 추가
             model.addAttribute("reviewList", service.findReviewsWithUserImage(movieId));
+
+
+        // 페이지네이션 처리된 리뷰 목록 추가
+
+        int currentPage = page.orElse(0); // 기본값 0
+        int pageSize = size.orElse(10);   // 기본값 10
+
+        Pageable pageable = PageRequest.of(currentPage, pageSize);
+        Page<ReviewEntity> reviewPage = service.findAllPageByMovieId(movieId, pageable);
+        model.addAttribute("reviewList2", reviewPage.getContent()); // 페이지네이션된 리뷰 리스트
+        model.addAttribute("totalPages", reviewPage.getTotalPages());
+        model.addAttribute("currentPage", page);
         System.out.println(service.findReviewsWithUserImage(movieId));
             return  "review";  // 리뷰 작성 페이지로 이동
 
@@ -99,12 +120,15 @@ public class ReviewController {
 
         Long userId = loginUser.getId();
         review.setWriterId(userId); // 리뷰 작성자 정보 설정
-
+        boolean hasWatched = historyService.hasWatchedMovie(userId, review.getMovieId());
         System.out.println("리뷰 등록 컨트롤러 진입");
         System.out.println("리뷰 정보: " + review);
+        if (!hasWatched) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("영화를 본 사용자만 리뷰를 작성할 수 있습니다.");
+        }
 
-        // 리뷰 저장
         boolean result = service.save(review);
+        // 리뷰 저장
         if (result) {
             return ResponseEntity.ok("리뷰가 성공적으로 등록되었습니다.");
         } else {

@@ -49,7 +49,7 @@ services:
       - moviemates-network
 
 networks:
-  moviemate-network:
+  moviemates-network:
     driver: bridge
   default:
     external: true

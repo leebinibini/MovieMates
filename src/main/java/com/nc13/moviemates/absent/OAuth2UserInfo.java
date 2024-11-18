@@ -28,6 +28,8 @@ public record OAuth2UserInfo(
         return OAuth2UserInfo.builder()
                 .nickname((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
+                .profileImageUrl((String) attributes.get("picture"))
+                .provider(Provider.GOOGLE)
                 .build();
     }
 
@@ -45,7 +47,8 @@ public record OAuth2UserInfo(
         return UserEntity.builder()
                 .nickname(nickname)
                 .email(email)
-                .role(Role.USER)
+                .role(Role.ROLE_USER)
+                .profileImageUrl(profileImageUrl)
                 .build();
     }
 }

@@ -63,7 +63,8 @@
                 <div class="text-content">
                     <div class="heading2 text-center">My Profile</div>
                     <div class="link flex items-center justify-center gap-1 caption1 mt-3">
-                        <a th:href="@{/}">Homepage</a>
+                        <a th:href="@{/}">Homepage |</a>
+                        <a th:href="@{/logout}"> Logout</a>
                         <i class="ph ph-caret-right text-sm text-secondary2"></i>
                         <!--<div class="text-secondary2 capitalize">My Account</div>-->
                     </div>
@@ -131,7 +132,7 @@
                                 <span class="wishlist-icon">
                                         <a href="javascript:void(0);" class="wishlist-heart" th:data-movie-id="${wishMovie['movieId']}">
                                             <button class="heart-button" th:data-movie-id="${wishMovie['movieId']}">
-                                                <i class="fa-heart" th:classappend="${isWishlisted != null and isWishlisted ? 'fa-solid' : 'fa-regular'}"></i>
+                                                <i class="fa-heart" th:classappend="${isWishlisted != null and isWishlisted ? 'fa-regular' : 'fa-solid'}"></i>
                                             </button>
                                         </a>
                                     </span>
@@ -191,7 +192,9 @@
         $('.wishlist-heart').on('click', function() {
             var $icon = $(this).find('i');
             var movieId = $(this).data('movie-id');
-            var isWishlisted = $icon.hasClass('fa-solid');  // 이미 위시리스트에 있는지 확인
+            var isWishlisted = $icon.hasClass('fa-solid');
+            var userId = [[${session.loginUser.id}]]
+            // 이미 위시리스트에 있는지 확인
 
             // 하트 아이콘 토글 (비어있는 하트 ↔ 채워진 하트)
             if (isWishlisted) {
@@ -207,7 +210,7 @@
                 contentType: "application/json",
                 data: JSON.stringify({
                     movieId: movieId,
-                    userId: 1
+                    userId: userId
                 }),
                 success: function(response) {
                     console.log('위시리스트 업데이트 성공', response);

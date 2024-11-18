@@ -1,3 +1,5 @@
+import {aw} from "../admin/assets/vendor/chart.js/chunks/helpers.segment";
+
 (function ($) {
     "use strict";
 
@@ -23,7 +25,7 @@
 
 
     //order popup
-    $('.entry-order-content').each(function(){
+   /* $('.entry-order-content').each(function(){
         var selectedLocation = sessionStorage.getItem('selectedLocation');
         var selectedMovie = sessionStorage.getItem('selectedMovie');
         var selectedDate = sessionStorage.getItem('selectedDate');
@@ -127,62 +129,12 @@
             });
         }
     });
+*/
 
-    $('.submit').on('click', function () {
-        var selectedLocation = "gangnam";        // 영화관
-        var selectedMovie = "대도시의 사랑법";  // 영화 제목
-        var selectedDate = "2024-11-29";         // 상영 날짜
-        var selectedTime = "12:30";              // 상영 시간
-        var totalPrice = 26000;                  // 총 결제 금액
-        var seats = [
-            { row: 1, column: 1 },
-            { row: 1, column: 2 }
-        ];  // 선택된 좌석 (하드코딩)
 
-        var scheduleId = 1; // 스케줄 ID (하드코딩)
-        var userId = 31;
-        var seatId = 2;
 
-        if (totalPrice === 0) {
-            alert("결제 금액이 0원입니다. 좌석을 선택해주세요.");
-            return;  // 결제 금액이 0원이면 결제를 중지
-        }
 
-        axios.post(`/api/payments/validation/{imp_uid}`)
-            .then(function (response) {
-                var buyerName = response.data.nickname;
-                IMP.request_pay({
-                    pg: "danal_tpay",          // PG사 설정
-                    pay_method: "card",        // 결제 방법
-                    name: selectedMovie,       // 상품 이름 (영화 제목)
-                    amount: totalPrice,        // 결제 금액 (총 티켓 가격)
-                    buyer_name: buyerName,
-                    custom_data: {             // 커스텀 데이터
-                        location: selectedLocation,
-                        movie: selectedMovie,
-                        date: selectedDate,
-                        time: selectedTime,
-                        seatId: seatId,
-                        scheduleId: scheduleId
-                    }
-                }, function (res) {
-                    if (res.success) {
-                        var impUid = res.imp_uid;
-                        var merchantUid = res.merchant_uid;
-                        // 결제가 성공했을 때
-                        alert("결제가 성공적으로 완료되었습니다!");
-                        // 예약과 결제 저장은 나중에 처리
-                    } else {
-                        // 결제가 실패했을 때
-                        alert("결제에 실패했습니다. 다시 시도해주세요!");
-                        console.error("Payment failed:", res.error_msg);
-                    }
-                });
-            })
-            .catch(function (error) {
-                console.error("닉네임 조회 실패:", error);
-            });
-    });
+
 
 
     // Circle chart
@@ -209,6 +161,7 @@
     });
 
     // header search action
+    // header search action
     $('#header-search').on('click', function () {
         $('#overlay-search').addClass('active');
 
@@ -220,6 +173,19 @@
         $('#overlay-search').removeClass('active');
 
     });
+    $('#overlay-search').find('.fa-search').on('click', () => {
+        const searchStr = document.getElementById('searchStr');
+        axios.get({
+            url: '/api/movie/search',
+            params: {searchStr}
+        })
+            .then(response => {
+                const movieList = response.data.searchMovieList;
+            })
+            .catch(error => {
+                console.log("error: " + error);
+            })
+    })
 
 
     /* Modal video player */

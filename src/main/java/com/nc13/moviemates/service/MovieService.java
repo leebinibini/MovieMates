@@ -2,6 +2,7 @@ package com.nc13.moviemates.service;
 
 import com.nc13.moviemates.component.model.MovieModel;
 import com.nc13.moviemates.entity.MovieEntity;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,9 +34,10 @@ public interface MovieService {
 
     Boolean deleteById(Long id);
 
-   Long findMovieIdByName(String name);
+    Long findMovieIdByName(String name);
 
     List<MovieEntity> findIsShowingMovie();
+    List<MovieEntity> findSearchList(String searchStr);
 
 
     // void crawlMovies() throws IOException;

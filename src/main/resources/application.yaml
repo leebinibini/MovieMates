@@ -26,8 +26,8 @@ spring:
         registration:
           google:
             client-id: 57356930204-dusjt6grmleqhi0tk8lsaeo0d3plglh3.apps.googleusercontent.com
-            client-secret: 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
-            redirect-uri: https://localhost:8080
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
             scope:
               - profile
               - email
@@ -38,8 +38,28 @@ spring:
       init-mode: always
   server:
     port: 8080
-naver:
-  storage:
-    accessKey: D5C89E2205CAE7D4830F
-    secretKey: 77E98C140672BEF42A6BFED104A4550C6885C9CB
-    bucketName: moviemates.storage
+    servlet:
+      session:
+        tracking-modes: cookie
+
+cloud:
+  aws:
+    s3:
+      bucket: moviemates-bucket
+    credentials:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: moviemates-bucket
+
+iamport:
+  apiKey: ${IAMPORT_API_KEY}
+  secretKey: ${IAMPORT_SECRET_KEY}
+

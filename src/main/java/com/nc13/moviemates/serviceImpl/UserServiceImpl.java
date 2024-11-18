@@ -26,15 +26,6 @@ public class UserServiceImpl implements UserService {
     private final AmazonS3 amazonS3;
     private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public boolean authenticate(String email, String password) {
-        System.out.println("서비스 진입 완료!");
-        UserEntity user = repository.findByEmail(email);
-        if (user != null && password.equals(user.getPassword())) {
-            return true;
-        }
-        return false;
-    }
 
 
     @Transactional
@@ -91,15 +82,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean insert(UserEntity user){
+    public UserEntity insert(UserEntity user){
 
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
-        UserEntity ent = repository.save(user);
-        System.out.println("서비스 진입, ent: " + ent);
-        Long id = ent.getId();
-        return repository.existsById(id);
+        if (user.getProfileImageUrl() == null) {
+            user.setProfileImageUrl("https://moviemates-bucket.s3.ap-northeast-2.amazonaws.com/uploads/users/default_profile.png");
+        }
+
+        UserEntity savedUser = repository.save(user);
+        System.out.println("회원가입 서비스 진입, ent: " + savedUser);
+        Long id = savedUser.getId();
+        if (id == null || !repository.existsById(id)) {
+            throw new IllegalStateException("사용자 저장에 실패했습니다.");
+        }
+
+        return savedUser;
     }
 
     @Override
@@ -174,6 +173,11 @@ public class UserServiceImpl implements UserService {
             return foundUser;  // 로그인 성공
         }
         return null;  // 로그인 실패
+    }
+
+    @Override
+    public UserEntity findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 
     // 파일 이름 생성 메서드

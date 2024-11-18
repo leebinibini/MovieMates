@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head.html::headFragment}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search | MovieMates</title>
+    <link rel="shortcut icon" th:href="@{/images/movieLogo.jpg}" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/assets/css/swiper-bundle.min.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/dist/output-scss.css}" />
+    <link rel="stylesheet" th:href="@{/dist/output-tailwind.css}"/>
+</head>
+<body class="sticky-menu">
+<div id="loader">
+    <div class="loader-ring">
+        <div class="loader-ring-light"></div>
+        <div class="loader-ring-track"></div>
+    </div>
+</div>
+<div class="wrapper">
+
+    <header id="header" class="menu-top-left">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-4">
+                    <a th:href="@{/}" id="logo" title="Moviemates" class="logo-image" th:data-bg-image="@{/images/movieLogo.jpg}">Moviemates</a>
+                </div>
+                <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-8 phl0">
+                    <div class="header_ticket" th:if="${session.loginUser != null}">
+                        <a th:href="@{/logout}">Logout</a>
+                    </div>
+                    <div class="header_ticket" th:if="${session.loginUser == null}">
+                        <a th:href="@{/api/user/login}">Login</a>
+                    </div>
+                    <div class="header_ticket" th:if="${session.loginUser != null}">
+                        <a th:href="@{/api/user/mypage/{id}(id=${session.loginUser.id})}">Mypage</a>
+                    </div>
+                    <a href="javascript:;" id="header-search">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="section-content pv12 bg-cover" th:data-bg-image="@{/images/coming-bg.jpg}">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 page-title mt5 mb5">
+                <h2 class="blog-title">Search Result</h2>
+                <ol class="breadcrumb">
+                    <li><a th:href="@{/}" class="active">Home</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="container mt4">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 pl0">
+                <div class="blog-container" >
+                    <article class="blog-item" th:each="movie: ${searchMovieList}">
+                        <div class="col-sm-4 col-xs-12 " >
+                            <div class="post-image" th:data-bg-image="${movie.widthPosterUrl}"></div>
+                        </div>
+                        <div class="col-sm-8 ml-r-15">
+                            <div class="overlay bg-cover"  th:data-bg-image="${movie.widthPosterUrl}"> </div>
+                            <div class="post-content">
+                                <div class="entry-meta">
+                                    <ul class="category">
+                                        <li><a href="javascript:;" th:text="${movie.director}">Admin</a></li>
+                                        <li><a href="javascript:;" th:text="${movie.releaseDate}">15 march 2016</a></li>
+                                        <li><a href="javascript:;" th:text="${movie.genre}">Movie news</a></li>
+                                    </ul>
+                                    <div class="social-links">
+                                        <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                        <a href="javascript:;"><i class="fa fa-twitter"></i></a>
+                                        <a href="javascript:;"><i class="fa fa-user"></i></a>
+                                    </div>
+                                </div>
+                                <h2 class="entry-title" th:text="${movie.title}"><a href="javascript:;">Leonardo DiCaprio doesn't
+                                    just talk about climate change.</a></h2>
+                                <p class="entry-excepts" th:text="${movie.plot}">Interactively re-engineer resource maximizing methods of empowerment via granular markets. Objectively seize emerging content vis-a-vis holistic benefits. Distinctively incubate enterprise-wide niche markets rather.</p>
+                                <a th:href="@{/api/movie/single/{movieId}(movieId=${movie.id})}" class="btn more mt1"> Read more</a>
+                                <div class="social-icon mt1">
+                                    <span><i class="fa fa-thumbs-o-up"></i>14</span>
+                                    <span><i class="fa fa-comment-o"></i>11</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="post-navigation mv3">
+                    <ul>
+                        <li><a href="javascript:;">1</a></li>
+                        <li><a href="javascript:;">2</a></li>
+                        <li><a href="javascript:;">3</a></li>
+                        <li><a href="javascript:;">4</a></li>
+                        <li><a href="javascript:;" class="arrow">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <footer id="footer">
+        <div class="container footer-container">
+            <div class="row">
+                <div class="col-md-2 col-sm-6">
+                    <div class="widget">
+                        <h5 class="widget-title">Menu</h5>
+                        <ul class="menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Coming soon</a></li>
+                            <li><a href="#">Order</a></li>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget">
+                        <div class="social-links">
+                            <a href="javascript:"><i class="fa fa-facebook"></i></a>
+                            <a href="javascript:"><i class="fa fa-twitter"></i></a>
+                            <a href="javascript:"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h5 class="widget-title">Address information</h5>
+                        <p>
+                            California. AMC Dine-In Theatres Marina,
+                            Street 26, Distritc 543 #108
+                        </p>
+                        <p>
+                            <i class="fa fa-mail"></i>Example@mail.com<br>
+                            <i class="fa fa-phone"></i> + 123 456 7890
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
+                    <div class="widget">
+                        <h5 class="widget-title">Leave a message</h5>
+                        <form class="contact_form transparent">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="text" class="inputValidation" name="name" placeholder="Name *">
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" class="inputValidation" name="email" placeholder="Email *">
+                                </div>
+                                <div class="col-sm-12 ">
+                                    <textarea class="inputValidation" placeholder="Message *"></textarea>
+                                    <button type="submit" class="button fill rectangle">Send to us</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="errorMessage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sub-footer">
+            <div class="container">
+                <div class="row copyright-text">
+                    <div class="col-sm-12 text-center">
+                        <p class="mv3 mvt0">&copy; Copyrights 2017 Tenguu. All rights reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+<!-- Overlay Search -->
+<div id="overlay-search">
+    <form method="get" action="/api/movie/search">
+        <label>
+            <input type="text" name="searchStr" placeholder="Search..." autocomplete="off" style="color: black" id="searchStr">
+            <button type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </label>
+    </form>
+    <a href="javascript:" class="close-window"></a>
+</div>
+
+<!-- Include jQuery and Scripts -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/packages.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/scripts.min.js}"></script>
+<!-- jQuery easing plugin -->
+
+</body>
+</html>

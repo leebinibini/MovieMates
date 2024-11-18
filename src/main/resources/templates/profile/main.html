@@ -19,7 +19,8 @@
                 <div class="text-content">
                     <div class="heading2 text-center">My Profile</div>
                     <div class="link flex items-center justify-center gap-1 caption1 mt-3">
-                        <a th:href="@{/}">Homepage</a>
+                        <a th:href="@{/}">Homepage |</a>
+                        <a th:href="@{/logout}"> Logout</a>
                         <i class="ph ph-caret-right text-sm text-secondary2"></i>
                         <!--<div class="text-secondary2 capitalize">My Account</div>-->
                     </div>
@@ -758,10 +759,8 @@
                                 </div>
                             </div>
                             <div class="product-img w-full h-full aspect-[3/4]">
-                                <img class="w-full h-full object-cover duration-700"
-                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
-                                <img class="w-full h-full object-cover duration-700"
-                                     th:src="@{/profile/images/robot.jpg}" alt="img"/>
+                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
+                                <img class="w-full h-full object-cover duration-700" th:src="@{/profile/images/robot.jpg}" alt="img" />
                             </div>
                             <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
                                 <div class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
@@ -959,9 +958,7 @@
                             <div class="product-name text-title duration-300">Off-the-Shoulder Blouse</div>
                             <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
                                 <div class="color-item bg-red w-8 h-8 rounded-full duration-300 relative">
-                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">
-                                        Red
-                                    </div>
+                                    <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">Red</div>
                                 </div>
                                 <div class="color-item bg-yellow w-8 h-8 rounded-full duration-300 relative">
                                     <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">

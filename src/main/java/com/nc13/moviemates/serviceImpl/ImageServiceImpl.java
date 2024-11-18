@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +41,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public String getFileName(String fileName) {
         String ext = fileName.substring(fileName.indexOf("."));
-        return System.currentTimeMillis() + ext;
+        return UUID.randomUUID().toString() + "_" + System.currentTimeMillis() + ext;
     }
 
     @Override
@@ -93,7 +94,6 @@ public class ImageServiceImpl implements ImageService {
                     .build();
 
             ImageEntity imageEntity = convertToEntity(imageModel);
-            imageEntity.setMovie(movieEntity);
 
             ImageEntity savedEntity = repository.save(imageEntity);
             imageModel.setId(savedEntity.getId());
@@ -102,7 +102,6 @@ public class ImageServiceImpl implements ImageService {
             // Update movie's posterUrl and prepare MovieModel for update
             movieEntity.setWidthPosterUrl(uploadURL);
             movieEntity.setLengthPosterUrl(uploadURL);
-            movieEntity.setPosterUrl(uploadURL);
 
             // Convert MovieEntity to MovieModel
             MovieModel movieModel = convertEntityToModel(movieEntity);
@@ -118,6 +117,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     private ImageEntity convertToEntity(ImageModel model) {
+        System.out.println("convertToEntity 진입" + model + "model.getMovieId" + model.getMovieId());
         MovieEntity movieEntity = movieService.findEntityById(model.getMovieId());
         System.out.println("convertToEntity의 movieEntity : " + movieEntity);
 
@@ -127,6 +127,7 @@ public class ImageServiceImpl implements ImageService {
                 .extension(model.getExtension())
                 .uploadPath(model.getUploadPath())
                 .uploadURL(model.getUploadURL())
+                .movieId(movieEntity.getId())
                 .build();
     }
 
@@ -134,11 +135,18 @@ public class ImageServiceImpl implements ImageService {
         return MovieModel.builder()
                 .id(movieEntity.getId())
                 .title(movieEntity.getTitle())
+                .director(movieEntity.getDirector())
+                .actors(movieEntity.getActors())
+                .rate(movieEntity.getRate())
+                .releaseDate(movieEntity.getReleaseDate())
+                .runningTime(movieEntity.getRunningTime())
+                .ageClass(movieEntity.getAgeClass())
                 .plot(movieEntity.getPlot())
                 .genre(movieEntity.getGenre())
                 .widthPosterUrl(movieEntity.getWidthPosterUrl())
                 .lengthPosterUrl(movieEntity.getLengthPosterUrl())
-                .posterUrl(movieEntity.getPosterUrl())
+                .isShowing(movieEntity.getIsShowing())
+                .booking(movieEntity.getBooking())
                 .build();
     }
 }

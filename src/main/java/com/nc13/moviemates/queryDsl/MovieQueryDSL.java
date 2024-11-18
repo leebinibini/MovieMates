@@ -13,9 +13,13 @@ public interface MovieQueryDSL {
     List<String> getNowPlayingList();
     Long deleteMany(List<Long> movieIdList);
     void update(MovieModel movieModel);
+
     List<MovieEntity> findWatchedMoviesByUserId(Long userId);
+
     List<MovieEntity> findChart();
     Long findMovieIdByName(String name);
+
+    List<MovieEntity> getListBySearch(String searchStr);
 
     List<MovieEntity> findIsShowingMovie();
 }
