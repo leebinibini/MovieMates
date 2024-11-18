@@ -67,35 +67,33 @@ public class MovieController {
     public String getSingle(@PathVariable("movieId") Long movieId,
                             Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+        UserEntity loginUser  = (UserEntity) session.getAttribute("loginUser");
 
         if (loginUser != null) {
             Optional<UserEntity> user = userService.findById(loginUser.getId());
-            user.ifPresentOrElse(
-                    value -> model.addAttribute("userData", value),
-                    () -> model.addAttribute("userData", null)
-            );
-
+            user.ifPresent(value -> model.addAttribute("userData", value));
             model.addAttribute("isWishlisted", wishService.existsByMovieIdandUserId(movieId, loginUser.getId()));
         } else {
             model.addAttribute("userData", null);
-            model.addAttribute("isWishlisted", false);
+            model.addAttribute("isWishlisted", false); // 로그인하지 않은 경우 기본값 설정
         }
+
 
         Optional<MovieModel> movie = service.findById(movieId);
         if (movie.isPresent()) {
             model.addAttribute("movie", movie.get());
         } else {
-            // 영화가 없을 경우 index 페이지로 리다이렉트
-            return "redirect:/index";
+            // 영화가 없을 경우 처리
+            return "index";
         }
 
         // Theater, Schedule, Review 리스트 추가
         model.addAttribute("theaterList", theaterService.findByMovieId(movieId));
         model.addAttribute("scheduleList", scheduleService.findByMovieId(movieId));
+       // model.addAttribute("reviewList", reviewService.findAllByMovieId(movieId));
         model.addAttribute("movieList", service.findIsShowingMovie());
         model.addAttribute("reviewList", reviewService.findReviewsWithUserImage(movieId));
-
+        System.out.println(movie.get());
         return "single";
     }
 
@@ -106,25 +104,15 @@ public class MovieController {
     }
 
     @GetMapping("/register")
-    public String toMovieRegister(Model model, HttpServletRequest request){
-        HttpSession session = request.getSession();
-        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
-
-        if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
-            model.addAttribute("movieList", service.findAll());
-            model.addAttribute("theaterList", theaterService.findAll());
-            return "admin/movie/register";
-        } else {
-            session.invalidate();
-            return "redirect:/";
-        }
+    public String toMovieRegister(Model model){
+        model.addAttribute("movieList", service.findAll());
+        model.addAttribute("theaterList", theaterService.findAll());
+        return "admin/movie/register";
     }
 
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Long> insert (@RequestBody MovieModel movie){
-
-        System.out.println("입력 영화 정보 확인 :  " + movie);
         return ResponseEntity.ok(service.save(movie));
     }
 

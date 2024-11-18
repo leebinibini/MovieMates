@@ -54,15 +54,16 @@ public class SecurityConfig {
                                 "/api/user/**",
                                 "/api/crawl/**",
                                 "/api/wish/**",
+                                "/loginForm",
                                 "/api/user/login",
                                 "/api/user/register"
                         ).permitAll()
                         .requestMatchers("/**").authenticated()
-                            .requestMatchers("/api/user/**").hasRole("USER")
+                        .requestMatchers("/api/user/**").hasRole("USER")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/api/user/login")
+                        .loginPage("/api/user/login")  // Custom login page URL
                         .successHandler((request, response, authentication) -> {
                             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
                             UserEntity userEntity = userPrincipal.getUser();
