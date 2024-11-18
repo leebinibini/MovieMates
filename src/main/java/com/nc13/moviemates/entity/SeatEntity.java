@@ -20,6 +20,7 @@ public class SeatEntity {
     private Long scheduleId;
     private int row_index;
     private int column_index;
+    private Long theaterId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

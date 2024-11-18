@@ -15,4 +15,5 @@ public class SeatModel {
     private Long scheduleId;
     private int row_index;
     private int column_index;
+    private Long theaterId;
 }

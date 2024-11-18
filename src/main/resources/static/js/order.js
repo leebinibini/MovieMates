@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
     IMP.init('imp01544136');
-    var theaterId = 0;
+    var theaterId = 1;
     var movieId = 184;
     var sc = {
         find: function (status) {
             // 'selected' 좌석을 하드코딩된 형태로 반환
-            return [
+           /* return [
                 { row: 1, column: 1, price: 13000 },
                 { row: 1, column: 2, price: 13000 }
-            ];
+            ];*/
         }
     };;
     var selectedSeats = [];
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         var selectedDate = $('.datetime').val();
                         var dateTimeText = selectedDate + ' ' + selectedTime;
                         var selectedSeats = $("#selected-seats").val();
-                        alert(selectedSeats)
+
 
                         $('#timep').text(dateTimeText);
                         $('.order-date a').removeClass('selected');
@@ -133,6 +133,19 @@ document.addEventListener("DOMContentLoaded", function () {
                         sessionStorage.setItem('selectedDate', selectedDate);
                         sessionStorage.setItem('selectedTime', selectedTime);
                         alert('선택한 시간: '+ dateTimeText);
+
+                        // 선택된 극장 ID와 스케줄 ID를 가져옵니다.
+                        var scheduleId = $(this).data('schedule-id'); // 선택한 스케줄 ID
+                        theaterId = $("select[name='location']").val(); // 극장 ID
+
+                        // 좌석 정보를 요청합니다.
+                        fetchSeats(theaterId, scheduleId).then(seats => {
+                            // 좌석 정보를 업데이트하는 함수 호출
+                            updateSeatMap(seats);
+                        }).catch(error => {
+                            console.error("좌석 정보를 가져오는 데 실패했습니다:", error);
+                        });
+
                     });
                 }
             })

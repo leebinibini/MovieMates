@@ -13,7 +13,7 @@ public interface SeatQueryDSL {
     Optional <SeatEntity> findById(Long id);
     Boolean exists(Long id);
     Long getRowCount();
-    List<SeatEntity> findSeatsByScheduleId(Long scheduleId);
+    List<SeatEntity> findSeatsByTheaterAndSchedule(Long theaterId, Long scheduleId);
 
 
 

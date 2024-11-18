@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -56,7 +57,7 @@ public class UserController {
         }
         List<HistoryEntity> histories = historyService.findByUserId(id);
 
-            model.addAttribute("histories", histories);  // 값이 있으면 ReviewEntity를 넘김
+        model.addAttribute("histories", histories);  // 값이 있으면 ReviewEntity를 넘김
 
         System.out.println(histories);
         System.out.println(userOptional.get());
@@ -68,9 +69,6 @@ public class UserController {
         return "profile/main";
     }
 
-
-
-
     @GetMapping("/login")
     public String login() {
         return "admin/auth-login";
@@ -78,9 +76,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user, HttpServletRequest request) {
-
-
-        System.out.println("유저는!!" + user);
         Map<String, Object> response = new HashMap<>();
         UserEntity loginUser = service.login(user);
         log.info("##### 로그인 사용자 정보 : {}", loginUser);
@@ -96,13 +91,13 @@ public class UserController {
             response.put("user", loginUser);
             System.out.println("역할출력" + loginUser.getRole());
             if ("ROLE_ADMIN".equals(loginUser.getRole().getKey())) {
-               Role role = loginUser.getRole();
+                Role role = loginUser.getRole();
                 System.out.println(role);
                 response.put("redirectUrl", "/api/admin");  // 관리자 로그인 페이지로 리다이렉트
             } else {
                 response.put("redirectUrl", "/");
                 Role role = loginUser.getRole();
-               String key= loginUser.getRole().getKey();
+                String key= loginUser.getRole().getKey();
                 System.out.println(key);
                 System.out.println(role);// 일반 사용자는 메인 페이지로 리다이렉트
             }
@@ -111,7 +106,7 @@ public class UserController {
         } else {
             // 로그인 실패 처리
             response.put("status", "error");
-            response.put("message", "로그인 실패: 잘못된 사용자 정보입니다.");
+            response.put("message", "로그인 실패! 아이디와 비밀번호를 다시 확인해주세요.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);  // 401 Unauthorized 응답
         }
     }
@@ -151,18 +146,13 @@ public class UserController {
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<Boolean> insert(@RequestBody UserEntity user, HttpServletRequest request) {
-        System.out.println("등록 컨트롤러 진입!:"+user);
-        String encodePassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodePassword);
         UserEntity savedUser = service.insert(user);  // 서비스 호출
         Boolean isRegistered = (savedUser != null && savedUser.getId() != null);
-
         if (isRegistered) {
             // 세션에 새 사용자 설정
             HttpSession session = request.getSession();
-            session.setAttribute("loginUser", user);
+            session.setAttribute("loginUser", savedUser);
         }
-        System.out.println("savedUser:"+savedUser);
         return ResponseEntity.ok(isRegistered);  // true/false 반환
     }
 

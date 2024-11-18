@@ -11,5 +11,5 @@ public interface SeatService {
     SeatEntity getById();
     Boolean exists(Long id);
     Long getRowCount (Long id);
-    List<SeatEntity> findSeatsByScheduleId(Long scheduleId);
+    List<SeatEntity> getSeatsByTheaterAndSchedule(Long theaterID, Long scheduleId);
 }

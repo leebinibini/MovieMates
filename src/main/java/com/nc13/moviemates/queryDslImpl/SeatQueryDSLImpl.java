@@ -39,13 +39,15 @@ public class SeatQueryDSLImpl implements SeatQueryDSL {
         return jpaQueryFactory.select(qSeat.id.count()).fetchOne();
     }
 
+
+
     @Override
-    public List<SeatEntity> findSeatsByScheduleId(Long scheduleId) {
+    public List<SeatEntity> findSeatsByTheaterAndSchedule(Long theaterId, Long scheduleId) {
         return jpaQueryFactory.selectFrom(qSeat)
-                .where(qSeat.scheduleId.eq(scheduleId))
+                .where(qSeat.theaterId.eq(theaterId)
+                        .and(qSeat.scheduleId.eq(scheduleId)))
                 .fetch();
     }
-
 
 }
 

@@ -15,13 +15,13 @@ public enum Role {
     private final String key;
     private final String title;
 
-    @JsonValue
+    /*@JsonValue
     public String getKey() {
         // JSON으로 직렬화될 때 "ROLE_USER" 대신 "USER" 형식으로 반환
         return key.replace("ROLE_", "");
-    }
+    }*/
 
-    @JsonCreator
+   /* @JsonCreator
     public static Role fromValue(String value) {
         // "USER" 또는 "ADMIN" 등의 값으로 Enum을 역직렬화
         String formattedValue = "ROLE_" + value.toUpperCase();
@@ -31,5 +31,5 @@ public enum Role {
             }
         }
         throw new IllegalArgumentException("Unknown enum type " + value);
-    }
+    }*/
 }

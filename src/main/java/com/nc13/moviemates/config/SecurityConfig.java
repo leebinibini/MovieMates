@@ -43,7 +43,7 @@ public class SecurityConfig {
                                 "/api/images/**",
                                 "/api/chart/**",
                                 "/api/movie/**",
-                                "/api/movie/single/{movieId}",
+                                "api/movie/single/{movieId}",
                                 "/api/payments/**",
                                 "/api/poster/**",
                                 "/api/reservation/**",
@@ -54,7 +54,6 @@ public class SecurityConfig {
                                 "/api/user/**",
                                 "/api/crawl/**",
                                 "/api/wish/**",
-                                "/loginForm",
                                 "/api/user/login",
                                 "/api/user/register"
                         ).permitAll()
@@ -70,6 +69,11 @@ public class SecurityConfig {
                             // 사용자 정보를 세션에 저장
                             HttpSession session = request.getSession();
                             session.setAttribute("loginUser", userEntity);
+                            log.info("오어스 로그인 세션 ID: {}", session.getId());
+                            log.info("세션에 저장된 사용자 이메일: {}", userEntity.getEmail());
+                            log.info("세션에 저장된 사용자 닉네임: {}", userEntity.getNickname());
+
+
                             // 로그인한 사용자 정보 가져오기
                             String role = authentication.getAuthorities().stream()
                                     .map(grantedAuthority -> grantedAuthority.getAuthority())
@@ -91,6 +95,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
+
                 )
                 .userDetailsService(userDetailsServiceImpl)
                 .exceptionHandling(exception -> exception

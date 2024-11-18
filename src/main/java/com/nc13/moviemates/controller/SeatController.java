@@ -23,19 +23,13 @@ public class SeatController {
     private final SeatService service;
     private final ScheduleService scheduleService;
 
-    @PostMapping("/")
-    public ResponseEntity<?> getSeats(@RequestBody ScheduleModel scheduleModel){
-        Long theaterId = scheduleModel.getTheaterId();
-        Long movieId = scheduleModel.getMovieId();
-        LocalDate showDate = scheduleModel.getShowDate();
-        LocalTime showTime = LocalTime.from(scheduleModel.getShowTime());
+    @GetMapping("/{theaterId}/{scheduleId}")
+    public ResponseEntity<List<SeatEntity>> getSeats(@PathVariable("theaterId") Long theaterId,
+                                                     @PathVariable("scheduleId") Long scheduleId){
 
-        ScheduleEntity schedule = scheduleService.findSchedule(theaterId, movieId, showDate, showTime);
-        if (schedule == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 상영 일정을 찾을 수 없습니다.");
-        }
-        List<SeatEntity> seats = service.findSeatsByScheduleId(schedule.getId());
-        System.out.println("해당 영화 좌석 가져가기 성공!:" + seats);
+        List<SeatEntity> seats = service.getSeatsByTheaterAndSchedule(theaterId, scheduleId);
+        System.out.println("w좌석 가져간닝"+seats);
         return ResponseEntity.ok(seats);
+
     }
 }

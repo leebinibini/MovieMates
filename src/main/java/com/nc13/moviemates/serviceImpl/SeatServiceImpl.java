@@ -37,9 +37,11 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<SeatEntity> findSeatsByScheduleId(Long scheduleId) {
-        return repository.findSeatsByScheduleId(scheduleId);
+    public List<SeatEntity> getSeatsByTheaterAndSchedule(Long theaterId, Long scheduleId) {
+        return repository.findSeatsByTheaterAndSchedule(theaterId, scheduleId);
     }
+
+
 
 
 }
