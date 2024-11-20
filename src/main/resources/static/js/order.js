@@ -2,18 +2,53 @@ document.addEventListener("DOMContentLoaded", function () {
     IMP.init('imp01544136');
     var theaterId = 1;
     var movieId = 184;
-    var sc = {
-        find: function (status) {
-            // 'selected' 좌석을 하드코딩된 형태로 반환
-           /* return [
-                { row: 1, column: 1, price: 13000 },
-                { row: 1, column: 2, price: 13000 }
-            ];*/
+    var sc = $("#seat-map").seatCharts({
+        map: [
+            "aaaaaaa_aaaaaaa_aaaaaaa",
+            "aaaaaaa_aaaaaaa_aaaaaaa",
+            "aaaaaaa_aaaaaaa_aaaaaaa",
+            "aaaaaaa_aaaaaaa_aaaaaaa",
+            "aaaaaaa_aaaaaaa_aaaaaaa"
+        ],
+        naming: {
+            top: false, // 열 번호 숨김
+            getLabel: function (character, row, column) {
+                return column; // 좌석 번호로 라벨 지정
+            }
+        },
+        legend: {
+            node: $("#legend"), // 범례를 추가할 DOM 요소
+            items: [
+                ["a", "available", "Available"],
+                ["a", "unavailable", "Unavailable"],
+                ["a", "selected", "Selected"]
+            ]
+        },
+        click: function () {
+            return "available" == this.status() ? (a("<li>R" + (this.settings.row + 1) + " S" + this.settings.label + "</li>").attr("id", "cart-item-" + this.settings.id).data("seatId", this.settings.id).appendTo(c), d.text(g.find("selected").length + 1), f.text(b(g) + e), "selected") : "selected" == this.status() ? (d.text(g.find("selected").length - 1), f.text(b(g) - e), a("#cart-item-" + this.settings.id).remove(), "available") : "unavailable" == this.status() ? "unavailable" : this.style()
         }
-    };;
+    });
     var selectedSeats = [];
 
+    // 서버에서 좌석 정보를 가져오는 함수
+    function fetchSeats(theaterId, scheduleId) {
+        return axios.get(`/api/seats?theaterId=${theaterId}&scheduleId=${scheduleId}`)
+            .then(response => response.data)
+            .catch(error => {
+                console.error("좌석 정보를 가져오는 데 실패했습니다:", error);
+                throw error;
+            });
+    }
 
+    // 좌석 정보를 seatCharts에 반영하는 함수
+    function updateSeatMap(seats) {
+        seats.forEach(seat => {
+            let seatObj = g.get([seat.seatId]);
+            if (seatObj) {
+                seatObj.status(seat.status); // 좌석 상태를 업데이트
+            }
+        });
+    }
 
     function recalculateTotal(sc) {
         var total = 0;
@@ -138,9 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         var scheduleId = $(this).data('schedule-id'); // 선택한 스케줄 ID
                         theaterId = $("select[name='location']").val(); // 극장 ID
 
-                        // 좌석 정보를 요청합니다.
                         fetchSeats(theaterId, scheduleId).then(seats => {
-                            // 좌석 정보를 업데이트하는 함수 호출
                             updateSeatMap(seats);
                         }).catch(error => {
                             console.error("좌석 정보를 가져오는 데 실패했습니다:", error);
