@@ -2,41 +2,66 @@ document.addEventListener("DOMContentLoaded", function () {
     IMP.init('imp01544136');
     var theaterId = 1;
     var movieId = 184;
-    var sc = $("#seat-map").seatCharts({
-        map: [
-            "aaaaaaa_aaaaaaa_aaaaaaa",
-            "aaaaaaa_aaaaaaa_aaaaaaa",
-            "aaaaaaa_aaaaaaa_aaaaaaa",
-            "aaaaaaa_aaaaaaa_aaaaaaa",
-            "aaaaaaa_aaaaaaa_aaaaaaa"
-        ],
-        naming: {
-            top: false, // 열 번호 숨김
-            getLabel: function (character, row, column) {
-                return column; // 좌석 번호로 라벨 지정
+
+    // 좌석 차트 초기화
+    var c = $("#selected-seats"),
+        d = $("#counter"),
+        f = $("#total"),
+        g = $("#seat-map").seatCharts({
+            map: [
+                "aaaaaaa_aaaaaaa_aaaaaaa",
+                "aaaaaaa_aaaaaaa_aaaaaaa",
+                "aaaaaaa_aaaaaaa_aaaaaaa",
+                "aaaaaaa_aaaaaaa_aaaaaaa",
+                "aaaaaaa_aaaaaaa_aaaaaaa"
+            ],
+            naming: {
+                top: false, // 열 번호 숨김
+                getLabel: function (character, row, column) {
+                    return column; // 좌석 번호로 라벨 지정
+                }
+            },
+            legend: {
+                node: $("#legend"), // 범례를 추가할 DOM 요소
+                items: [
+                    ["a", "available", "Available"],
+                    ["a", "unavailable", "Unavailable"],
+                    ["a", "selected", "Selected"]
+                ]
+            },
+            click: function () {
+                // 클릭 이벤트 처리
+                if (this.status() === "available") {
+                    $("<li>R" + (this.settings.row + 1) + " S" + this.settings.label + "</li>")
+                        .attr("id", "cart-item-" + this.settings.id)
+                        .data("seatId", this.settings.id)
+                        .appendTo(c);
+                    d.text(g.find("selected").length + 1);
+                    f.text(recalculateTotal(g));
+                    return "selected";
+                } else if (this.status() === "selected") {
+                    d.text(g.find("selected").length - 1);
+                    f.text(recalculateTotal(g));
+                    $("#cart-item-" + this.settings.id).remove();
+                    return "available";
+                }
+                return this.style();
             }
-        },
-        legend: {
-            node: $("#legend"), // 범례를 추가할 DOM 요소
-            items: [
-                ["a", "available", "Available"],
-                ["a", "unavailable", "Unavailable"],
-                ["a", "selected", "Selected"]
-            ]
-        },
-        click: function () {
-            return "available" == this.status() ? (a("<li>R" + (this.settings.row + 1) + " S" + this.settings.label + "</li>").attr("id", "cart-item-" + this.settings.id).data("seatId", this.settings.id).appendTo(c), d.text(g.find("selected").length + 1), f.text(b(g) + e), "selected") : "selected" == this.status() ? (d.text(g.find("selected").length - 1), f.text(b(g) - e), a("#cart-item-" + this.settings.id).remove(), "available") : "unavailable" == this.status() ? "unavailable" : this.style()
-        }
-    });
+        });
+
     var selectedSeats = [];
 
     // 서버에서 좌석 정보를 가져오는 함수
     function fetchSeats(theaterId, scheduleId) {
-        return axios.get(`/api/seats?theaterId=${theaterId}&scheduleId=${scheduleId}`)
-            .then(response => response.data)
-            .catch(error => {
-                console.error("좌석 정보를 가져오는 데 실패했습니다:", error);
-                throw error;
+        return axios.get(`/api/seat/${theaterId}/${scheduleId}`)
+            .then(response => {
+                console.log("응답 데이터:", response.data);
+                if (Array.isArray(response.data)) {
+                    return response.data; // 배열이면 반환
+                } else {
+                    console.error("좌석 정보가 배열이 아닙니다:", response.data);
+                    throw new Error("좌석 정보가 배열이 아닙니다.");
+                }
             });
     }
 
@@ -45,7 +70,10 @@ document.addEventListener("DOMContentLoaded", function () {
         seats.forEach(seat => {
             let seatObj = g.get([seat.seatId]);
             if (seatObj) {
-                seatObj.status(seat.status); // 좌석 상태를 업데이트
+                seatObj.status(seat.status.toLowerCase()); // 좌석 상태를 업데이트
+                console.log(`Seat ID: ${seat.seatId}, Status: ${seat.status}`); // 상태 확인
+            }else {
+                console.error(`좌석 ID ${seat.seatId}를 찾을 수 없습니다.`);
             }
         });
     }
@@ -56,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (sc && sc.find) {
             // 'selected' 좌석의 가격을 합산
             sc.find('selected').forEach(function (seat) {
-                total += seat.price;
+                total += seat.price; // 가격을 적절히 설정해야 함
             });
         } else {
             console.error("sc가 정의되지 않았거나, 'find' 메서드를 사용할 수 없습니다.");
@@ -66,11 +94,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     $(".btn-ticket").on('click', function (e) {
+        console.log($(this).data('id'));
         movieId = $(this).data('id');  // 여기서 movieId 값을 저장
         if (!movieId) {
             console.error("movieId가 설정되지 않았습니다.");
             return;
         }
+
         axios.get(`/api/movie/order/${movieId}`)
             .then(function (res) {
                 console.log(res.data);
@@ -120,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     dateInput.addEventListener('change', function () {
                         var selectedDate = new Date(this.value).toISOString().split('T')[0];
-                        $('#datep').text(selectedDate);
+                        $('#date').text(selectedDate);
 
                         if (availableDates.includes(selectedDate)) {
                             renderTimesForSelectedDate(theaterId, selectedDate, scheduleList);
@@ -154,31 +184,19 @@ document.addEventListener("DOMContentLoaded", function () {
                         var selectedTime = $(this).data('time');
                         var selectedDate = $('.datetime').val();
                         var dateTimeText = selectedDate + ' ' + selectedTime;
-                        var selectedSeats = $("#selected-seats").val();
-
 
                         $('#timep').text(dateTimeText);
                         $('.order-date a').removeClass('selected');
                         $(this).addClass('selected');
 
-                        var selectedLocation = $('select[name="location"]').val();
-                        var selectedMovie = $('#movie-selection').val();
-                        sessionStorage.setItem('selectedLocation', selectedLocation);
-                        sessionStorage.setItem('selectedMovie', selectedMovie);
-                        sessionStorage.setItem('selectedDate', selectedDate);
-                        sessionStorage.setItem('selectedTime', selectedTime);
-                        alert('선택한 시간: '+ dateTimeText);
-
                         // 선택된 극장 ID와 스케줄 ID를 가져옵니다.
                         var scheduleId = $(this).data('schedule-id'); // 선택한 스케줄 ID
-                        theaterId = $("select[name='location']").val(); // 극장 ID
 
                         fetchSeats(theaterId, scheduleId).then(seats => {
                             updateSeatMap(seats);
                         }).catch(error => {
                             console.error("좌석 정보를 가져오는 데 실패했습니다:", error);
                         });
-
                     });
                 }
             })
@@ -186,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log("error data:", error);
             });
     });
-    $(document).ready(function () {
+$(document).ready(function () {
         $('.submit').on('click', async function () {
             var selectedLocation = "gangnam";        // 영화관
             var selectedMovie = "대도시의 사랑법";  // 영화 제목
