@@ -184,6 +184,7 @@ public class UserController {
     public ResponseEntity<Boolean> update(@RequestBody UserEntity user) {
         return ResponseEntity.ok(service.save(user));
     }
+
     @ResponseBody
     @PostMapping("/update/{userId}")
     public ResponseEntity<Boolean> update(@RequestPart("userData") UserModel userData, @RequestPart("password") String password,

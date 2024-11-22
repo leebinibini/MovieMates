@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{/admin/head :: headContent}">
+<head th:insert="~{admin/head :: headContent}">
     <title>Movie List | MovieMates Administor Page </title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspreadsheet-ce/dist/jspreadsheet.min.css" type="text/css" />
@@ -897,7 +897,7 @@
                             search: true,
                             pagination: 10,
                             freezeColumns: 1,
-                            minDimensions: [9, 10],
+                            minDimensions: [12, 10],
                             tableOverflow: true,
                             tableHeight: '500px',
                             tableWidth: '100%',
@@ -924,8 +924,7 @@
                                             runningTime: row[8],
                                             ageClass: row[9],
                                             rate: row[10],
-                                            booking: row[11],
-                                            delete: row[12]
+                                            booking: row[11]
                                         };
 
                                     });
@@ -940,14 +939,14 @@
                                     const data = table.getData();
 
                                     data.forEach((row, index) => {
-                                        const isChecked = table.getValueFromCoords(11, index);
+                                        const isChecked = table.getValueFromCoords(12, index);
                                         const movieId = table.getValueFromCoords(0, index);
 
                                         if (isChecked === true) {
                                             checkedRows.push(movieId);
                                         }
                                     });
-
+                                    console.log("영화 삭제 정보 확인용: " +  checkedRows);
                                     if (checkedRows.length > 0 && confirm('정말 삭제하시겠습니까?')) {
                                         axios.post(`/api/movie/deleteMany`, checkedRows)
                                             .then(res => {

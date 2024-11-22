@@ -87,7 +87,6 @@ public class MovieController {
             System.out.println(movie);
             model.addAttribute("movie", movie.get());
         } else {
-            // 영화가 없을 경우 index 페이지로 리다이렉트
             return "redirect:/index";
         }
 
@@ -139,6 +138,7 @@ public class MovieController {
     @ResponseBody
     @PostMapping("/deleteMany")
     public ResponseEntity<Long> deleteMany(@RequestBody List<Long> movieIdList){
+        System.out.println("영화 삭제 컨트롤러 진입 성공!");
         return ResponseEntity.ok(service.deleteMany(movieIdList));
     }
 
