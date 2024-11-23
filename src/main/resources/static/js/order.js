@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     IMP.init('imp01544136');
     var theaterId = 1;
@@ -68,9 +69,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // 좌석 정보를 seatCharts에 반영하는 함수
     function updateSeatMap(seats) {
         seats.forEach(seat => {
-            let seatObj = g.get([seat.seatId]);
+            let seatObj = g.get([seat.row_index, seat.column_index]);
             if (seatObj) {
-                seatObj.status(seat.status.toLowerCase()); // 좌석 상태를 업데이트
+                seatObj.status(seat.status); // 좌석 상태를 업데이트
                 console.log(`Seat ID: ${seat.seatId}, Status: ${seat.status}`); // 상태 확인
             }else {
                 console.error(`좌석 ID ${seat.seatId}를 찾을 수 없습니다.`);
@@ -185,13 +186,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         var selectedDate = $('.datetime').val();
                         var dateTimeText = selectedDate + ' ' + selectedTime;
 
-                        $('#timep').text(dateTimeText);
+                        $('#time').text(dateTimeText);
                         $('.order-date a').removeClass('selected');
                         $(this).addClass('selected');
 
                         // 선택된 극장 ID와 스케줄 ID를 가져옵니다.
                         var scheduleId = $(this).data('schedule-id'); // 선택한 스케줄 ID
-
+console.log(theaterId,scheduleId);
                         fetchSeats(theaterId, scheduleId).then(seats => {
                             updateSeatMap(seats);
                         }).catch(error => {

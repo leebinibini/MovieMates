@@ -28,6 +28,7 @@ public class SeatController {
                                                      @PathVariable("scheduleId") Long scheduleId){
 
         List<SeatEntity> seats = service.getSeatsByTheaterAndSchedule(theaterId, scheduleId);
+
         System.out.println("w좌석 가져간닝"+seats);
         return ResponseEntity.ok(seats);
 
